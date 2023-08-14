@@ -1954,7 +1954,7 @@ class App {
 
 
 /*----------------------------------------------------------------------------------------------------------------------
-	printf metodunda f format karakteri ile ondalık kısmın kaç basamak olarak formatlanacağı aşağıdaki bibi % ve f
+	printf metodunda f format karakteri ile ondalık kısmın kaç basamak olarak formatlanacağı aşağıdaki gibi % ve f
 	arasında . ve sayı yazılarak yapılabilir. Geri kalan basamaklar bilimsel olarak yuvarlanır
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
