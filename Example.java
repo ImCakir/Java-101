@@ -7,6 +7,7 @@
 ----------------------------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------------
 	26.11.2022
+	Blue
 -----------------------------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------------
 	Java Ortamının Temel Özellikleri:
@@ -53,6 +54,7 @@
 
 /*----------------------------------------------------------------------------------------------------------------------
 	27.11.2022
+	Blue
 -----------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------
@@ -142,6 +144,7 @@
 
 /*----------------------------------------------------------------------------------------------------------------------
 	03.12.2022	
+	Blue
 -----------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------
@@ -274,6 +277,7 @@ class App {
 
 /*----------------------------------------------------------------------------------------------------------------------
 	04.12.2022
+	Blue
 -----------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------
@@ -528,6 +532,7 @@ class Mample {
 
 /*----------------------------------------------------------------------------------------------------------------------
 	10.12.2022
+	Blue
 -----------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------
@@ -581,7 +586,7 @@ class App {
 }
 
 /*----------------------------------------------------------------------------------------------------------------------
-	Aşağı örneği çalıştırıp yuvarlama hatasını gözlemleyiniz. Örneğin detaylarını şu an önemsemeyiniz. İleride hepsi
+	Aşağıdaki örneği çalıştırıp yuvarlama hatasını gözlemleyiniz. Örneğin detaylarını şu an önemsemeyiniz. İleride hepsi
 	ele alınacaktır
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
@@ -1127,6 +1132,7 @@ class NumberUtil {
 
 /*----------------------------------------------------------------------------------------------------------------------
 	11.12.2022	
+	Blue
 -----------------------------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------------
 	Geri dönüş değeri olan metotlarda (void olmayan metotlarda) return tek kullanılamaz
@@ -1752,6 +1758,7 @@ class NumberUtil {
 
 /*----------------------------------------------------------------------------------------------------------------------
 	17.12.2022	
+	Blue
 -----------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------
@@ -2333,3 +2340,787 @@ class PointUtil {
 
 
 
+/*----------------------------------------------------------------------------------------------------------------------
+	18.12.2022
+	Blue
+-----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	Math sınıfının PI ve E elemanları
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		System.out.println(Math.PI);
+		System.out.println(Math.E);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Math sınıfının trigonometrik işlem yapan metotlar radyan ölçü birimi ile çalışır. Radyan ve derece arasındaki
+	dönüşümler için toRadians ve toDegrees metotları kullanılabilir
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Derece bilgisini giriniz:");
+		double val = kb.nextDouble();
+		
+		System.out.printf("sin(%f) = %f%n", val, Math.sin(Math.toRadians(val)));
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Math sınıfının min ve max metotları
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("İki sayı giriniz:");
+		int a = kb.nextInt();
+		int b = kb.nextInt();
+		
+		System.out.printf("max(%d, %d) = %d%n", a, b, Math.max(a, b));
+		System.out.printf("min(%d, %d) = %d%n", a, b, Math.min(a, b));
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Math sınıfının min ve max metotları ile 3 tane sayının en büyüğünün ve en küçüğünün bulunması
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Üç sayı giriniz:");
+		int a = kb.nextInt();
+		int b = kb.nextInt();
+		int c = kb.nextInt();
+		
+		System.out.printf("max(%d, %d, %d) = %d%n", a, b, c, Math.max(Math.max(a, b), c));
+		System.out.printf("min(%d, %d, %d) = %d%n", a, b, c, Math.min(Math.min(a, b), c));
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte Math sınıfının min ve max metotları kullanılarak 3 tane sayının en büyüğünü ve en küçüğünü
+	bulan max ve min metotları yazılmıştır
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Üç sayı giriniz:");
+		int a = kb.nextInt();
+		int b = kb.nextInt();
+		int c = kb.nextInt();
+		
+		System.out.printf("max(%d, %d, %d) = %d%n", a, b, c, MathUtil.max(a, b, c));
+		System.out.printf("min(%d, %d, %d) = %d%n", a, b, c, MathUtil.min(a, b, c));
+	}
+}
+
+class MathUtil {
+	public static int min(int a, int b, int c)
+	{
+		return Math.min(Math.min(a, b), c);
+	}
+	
+	public static int max(int a, int b, int c)
+	{
+		return Math.max(Math.max(a, b), c);
+	}
+	
+	//...
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Math sınıfının logXXX metotları(log için 3 tane method vardır.)
+
+	***
+	log(double a) : e tabanına göre alınan log
+	log10(double a) : 10 tabanına göre log
+	log1p(double x) : log x + 1 dir. bunun sebebi de log0= tanımsızdır. ama sıfır girildiğinde +1 yaparak tanımsız olması
+	nı engeller.log1 = 0.
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Bir sayı giriniz:");
+		double a = kb.nextDouble();
+		
+		System.out.printf("log(%f) = %f%n", a, Math.log(a));
+		System.out.printf("log10(%f) = %f%n", a, Math.log10(a));
+		System.out.printf("log1p(%f) = %f%n", a, Math.log1p(a));
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte Math sınıfında olmayan bir metot Math sınıfının metotları kullanılarak yazılmıştır
+
+	***
+	  logb(b, a) = b : taban a: o tabanda istenilen ifade/değer
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Bir sayı giriniz:");
+		double a = kb.nextDouble();
+		
+		System.out.printf("log2(%f) = %f%n", a, MathUtil.log(2, a));		
+	}
+}
+
+class MathUtil {
+	public static double log(double a, double b)
+	{
+		return Math.log(b) / Math.log(a);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Math sınıfının yuvarlama işlemi yapan bazı önemli metotları
+
+	***
+	round : girilen double ifadenin yuvarlanmadan tam kısmını basar.
+	ceil :  girilen double ifadeyi bir üst sayıya yuvarlar.
+	floor : ceil in aksine girilen ifadeyi bir alt sayıya yuvarlar.
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Bir sayı giriniz:");
+		double a = kb.nextDouble();
+		
+		System.out.printf("round(%f) = %d%n", a, Math.round(a));
+		System.out.printf("ceil(%f) = %f%n", a, Math.ceil(a));
+		System.out.printf("floor(%f) = %f%n", a, Math.floor(a));
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sabitler (literals, constants):
+	Program içerisinde doğrudan yazılan sayılara denir. Sabitlerin de türleri vardır. Derleyici sabitlerin türlerini
+	tespit ederek işlem yapar:
+	
+	Sabitlerin türlerinin tespitine ilişkin detaylar:
+	- Sayı nokta içermiyorsa, sonuna herhangi bir ek almamışsa ve int türü sınırları içerisindeyse int türdendir. Sayı 
+	int türü sınırları içerisinde değilse error oluşur.
+	Örneğin: 100, 300, 2456
+	
+	- Sayı nokta içermiyorsa ve sonuna L (küçük ya da büyük) ekini almışsa long türdendir. Sayı long türü sınırları
+	dışındaysa error oluşur.
+	Örneğin: 10L, 4000000000L
+	
+	Anahtar Notlar: Küçük harf L kullanımı 1(bir) rakamına benzemesinden dolayı programlamada tercih edilmez.
+	
+	- Java'da byte ve short türden sabitler yoktur.
+	
+	- Sayı nokta içeriyorsa ve sonuna bir ek almamışsa double türdendir. Sayı double olarak ifade edilemiyor ise error
+	oluşur.
+	Örneğin: 3.4, 5.6
+	
+	- Sayı nokta içersin ya da içermesin sonunda D (küçük veya büyük) eki varsa double türdendir.
+	Örneğin: 10D, 3.4D
+	
+	- Sayı nokta içersin ya da içermesin sonunda F (küçük veya büyük) eki varsa float türdendir. Değer float ile temsil
+	edilemiyorsa en yakın temsil edilebilen sayıya yuvarlanır.
+	Örneğin: 10F, 3.4F
+	
+	- boolean türden iki tane sabit vardır: true, false
+	
+	- char türden sabitler: İki tane tek tırnak arasında ytazılan bir karakter, karakter tablosunda sıra numarası belirtir.
+	Bu şekilde yazılan sabitlere "karakter sabitleri (character literals)" denir ve bu sabitler char türdendir. İki tek
+	tırnak arasına özel durumlar dışında birden fazla karakter yazımı gerçersizdir. 
+	
+	Bazı karakterlerin klavyeden basılması doğrudan derleyici tarafından karakter olarak algılanmaz. Hatta bazı karakterler
+	"non-printable"'dır. Örneğin bir sonraki satıra geçme karakterinin karakter sabiti doğrudan yazılamaz. Bu tarz 
+	karakterlerin karakter sabitleri iki tane tek tırnak içerisinde ters bölü karakteri ile onu takip eden özel karakterler
+	biçiminde yazılır. Bu şekilde yazılan karakterlere "escape sequence" karakterler denir. Hatta bazı karakterler
+	hem normal hem de ters bölü ile yazılabilirler:
+	Java'da desteklenen escape sequence karakterler şunlardır:
+	'\n' -> line feed (LF)
+	'\r' -> carriage return (CR)
+	'\t' -> horizontal tab
+	'\b' -> backspace
+	'\f' -> form feed
+	'\0' -> null karakter
+	'\"' -> double quote (optional)
+	'\'' -> single quote
+	'\\' -> back slash 
+-----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	char türden sabitler	
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		char c = 'D';
+		
+		System.out.printf("c = %c%n", c);
+		
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte iki tane karakter yazımı dolayısıyla error oluşur	
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		char c = 'De'; //error
+		
+		
+		
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Line feed karakter sabiti	
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		char c = '\n';
+		
+		System.out.print("Hello");
+		System.out.print(c);
+		System.out.println("World");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Carriage Return karakter sabiti: Aşağıdaki kodu işletim sisteminin komut yorumlayıcı/terminal programında 
+	çalıştırarak sonucu gözlemleyiniz. Eclipse IDE'sinin console'unda beklenen sonucu elde edemeyebilirsiniz 	
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		char c = '\r';
+		
+		System.out.print("Hello");
+		System.out.print(c);
+		System.out.println("Hi");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Horizontal tab karakter sabiti 	
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		char c = '\t';
+		
+		System.out.print("Hello");
+		System.out.print(c);
+		System.out.println("Hi");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Escape sequence karakterler "String literal" içerisinde kendi anlamındadır 	
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		System.out.println("Hello,\nHow are you?\nAre you ok?");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Escape sequence karakterler "String literal" içerisinde kendi anlamındadır 	
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		System.out.println("Hello, How are you?\rAre you ok?");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Tek tırnak karakter sabiti String literal içerisinde doğrudan ya da ters bölü ile kullanılabilir  	
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		System.out.println("'C ve Sistem Programcıları Derneği\'");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Tek tırnak karakter sabiti ters bölü ile yazılmalıdır  	
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		char c = '\'';
+		System.out.printf("c = %c%n", c);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	İki tırnak karakter sabiti iki şekilde de yazılabilir  	
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		char c1 = '\"';
+		char c2 = '"';
+		
+		System.out.printf("c1 = %c%n", c1);
+		System.out.printf("c2 = %c%n", c2);
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	İki tırnak karakter sabiti String literal içerisinde ters bölü ile yazılmalıdır  	
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		System.out.println("\"C ve Sistem Programcıları Derneği\"");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Ters bölü karakter sabiti ters bölü ile yazılmalıdır  	
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		char c = '\\';
+		System.out.printf("c = %c%n", c);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte escape sequence karakterlerden dolayı istenilen sonuç elde edilemez. 	
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		System.out.println("C:\todo\numbers.txt");
+	}
+}
+/*----------------------------------------------------------------------------------------------------------------------
+	Yukarıdaki problem aşağıdaki gibi çözülebilir  	
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		System.out.println("C:\\todo\\numbers.txt");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Ters bölü karakterinde sonra özel karakterler dışında yazılan bir karakter error oluşturur  	
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		System.out.println("C:\company\staff.dat"); //error
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	\\192.168.1.111\todo\numbers.txt yol ifadesinin string literal içerisinde yazılması
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		System.out.println("\\\\192.168.1.111\\todo\\numbers.txt");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki karakter tek tırnak karakteri değildir (backtick)  	
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		char c = '`';
+		
+		System.out.printf("c = %c%n", c);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki karakter tek tırnak karakteri değildir (backtick)  	
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		System.out.println("`C ve Sistem Programcıları Derneği`");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+ 	Ters bölü ve u karakteri ile bir karakterin sıra numarası hezadecimal olarak tek tırnak içerisinde yazıldığında 
+ 	o karaktere ilişkin karakter sabiti basılmış olur. Burada hexadecimal sayı kesinlikle iki byte yani 4 tane hex digit 
+ 	olarak yazılmaldır
+
+ 	***
+ 	4 hex digit = 1 nibble
+
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		char c = '\u00D8';
+		
+		System.out.printf("c = %c%n", c);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+ 	Ters bölü u ile yazılan karakter sabitleri string literal içerisinde de kullanılabilir
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{			
+		System.out.println("Latin Capital Letter O with stroke:\u00D8");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+ 	Ters bölü u ile yazılan karakterler değişken isimlendirmede xe kullanılabilir. Şüphesiz hem pratik değildir hem de
+ 	pratikte anlamlı değil. Çünkü zaten biz İngilizce alfabedeki karakterler dışındaki alfabetik karakterleri değişken
+ 	isimlendirmede tercih etmeyiz. Örnek durumu göstermek için yazılmıştır.
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{			
+		int \u0041\u0042\u00CB = 20;
+		
+		System.out.println(AB\u00CB);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+ 	Bir tamsayı sabitinin öneki yoksa bu durumda sabit "decimal" olarak ele alınır.
+
+ 	***
+ 	decimal: 10 luk sayı sistemi.
+ 	10'luk sistemden 2'lik sisteme geçişte her digit 1 bit.
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{			
+		int a = 10;
+		
+		System.out.println(a);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+ 	Bir tamsayı önüne bitişik olarak sıfır ve x (büyük veya küçük) yazıldığında bu ekten sonra gelen basamaklar 
+ 	"hexadecimal" olarak ele alınır.
+
+ 	***
+ 	0x__ --> hexedecimal!!!!
+ 	hexe (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F)
+ 	16'lık sistemden 2'lik sisteme dönüşte her digit 4 bittir. = 1 nibble
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{			
+		int a = 0xA;
+		
+		System.out.println(a);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+ 	Bir tamsayı önüne bitişik olarak sıfır ve x (büyük veya küçük) yazıldığında bu ekten sonra gelen basamaklar 
+ 	"hexadecimal" olarak ele alınır.
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{			
+		int a = 0x1FC0;
+	
+		System.out.println(a);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+ 	Bir tamsayı önüne bitişik olarak sıfır yazıldığında bu ekten sonra gelen basamaklar "octal" olarak ele alınır.
+
+ 	***
+ 	octal: 8 lik sayı sistemi.(0,1,2,3,4,5,6,7)
+ 	0__ --> octal
+ 	8’lik sayı sisteminin her bir digiti 2’lik sistemde 3 bit ile ifade edilir.
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{			
+		int a = 012;
+	
+		System.out.println(a);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+ 	Bir tamsayı önüne bitişik olarak sıfır ve b (küçük veya büyük) yazıldığında bu ekten sonra gelen basamaklar
+ 	"binary" olarak ele alınır. İkilik sistemde sabit yazımı Java 7 ile birlikte eklenmiştir.
+
+ 	***
+ 	0b__ --> sonraki basamaklar binary (0,1)
+    her digit 1 bit
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{			
+		int a = 0b1010;
+	
+		System.out.println(a);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+ 	Gerçek sayıların üstel (bilimsel) gösterilişi. Bu gösterişte sabitler double türdendir.
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{			
+		double avogadroNumber = 6.02E23;
+		
+		System.out.println(avogadroNumber);
+		System.out.printf("%f%n", avogadroNumber);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+ 	Java 7 ile birlikte tamsayı ve gerçek sayı sabitlerinin basamakları arasında alttire karakteri kullanılabilmektedir.
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{			
+		int a;
+		
+		a = 0xAB_BC_DE;
+		
+		System.out.println(a);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+ 	Java 7 ile birlikte tamsayı ve gerçek sayı sabitlerinin basamakları arasında alttire karakteri kullanılabilmektedir
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{			
+		long a;
+		
+		a = 5_000_000_000L;
+		
+		System.out.println(a);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+ 	Alttire karakteri kullanılabildiği her yerde istenildiği kadar yazılabilir
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{			
+		int a;
+		
+		a = 1____________________________________________0;
+		
+		System.out.println(a);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+ 	Alttire karakteri kullanılabildiği her yerde istenildiği kadar yazılabilir
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{			
+		int a;
+		
+		a = 0b10000101_00001010__00001010_11111011;
+		
+		System.out.println(a);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+ 	Alttire karakteri bir tane istisna dışında yalnızca basamaklar arasında kullanılabilir
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{			
+		int a = 123_; //error
+		int b = _123; //error
+		double c = 345_.45; //error
+		
+		//...
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+ 	Alttire karakteri octal sabitler için örnek (sıfır) ile ilk basamak arasında geçerlidir. Bu durum yalnızca octal
+ 	sabitler için vardır. Geri kalan tüm sabitlerde alttire karakteri basamaklar arasında olmalıdır.
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{			
+		int a = 0_12;
+		
+		System.out.println(a);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+ 	Bir gerçek sayı sabitinin tamsayı kısmının değeri sıfır ise noktadan önce sıfır yazılmayabilir. Benzer şekilde
+ 	sayının noktadan sonraki kısmının değeri sıfır ise yine noktadan sonra sıfır yazılmayabilir
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{			
+		double a, b;
+		
+		a = .3;
+		b = 3.;
+		
+		System.out.printf("a = %f%n", a);
+		System.out.printf("b = %f%n", b);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+ 	Yalnızca sabitlerden ve operatörlerden oluşan yani içerisinde değişken olmayan ifadelere "sabit ifadesi (constant expression)"
+ 	denir. Bu anlamda tek başına bir sabit de sabit ifadesidir.
+ 	
+ 	Anahtar Notlar: İleride aslında sabit ifadesi olarak kullanılabilen değişkenler de göreceğiz. Bu tarz değişkenler de 
+ 	bir ifade içerisinde sabit olarak ele alınırlar.
+ 	
+ 	Derleyiciler sabit ifadelerinin değerlerini hesaplayarak sonucu "byte code"'a yazarlar. Bu optimizasyona 
+ 	"constant folding optimization" denir. Bu sebeple aşağıdaki örnekte çarpmanın sonucu arakoda yazılır. Örnekteki
+ 	bazı detaylar ileride ele alınacaktır
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{			
+		long divider = 1000L * 60 * 60 * 24 * 365; //byte code -> 31536000000
+		
+		System.out.println(divider);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+ 	Yalnızca sabitlerden ve operatörlerden oluşan yani içerisinde değişken olmayan ifadelere "sabit ifadesi (constant expression)"
+ 	denir. Bu anlamda tek başına bir sabit de sabit ifadesidir.
+ 	
+ 	Anahtar Notlar: İleride aslında sabit ifadesi olarak kullanılabilen değişkenler de göreceğiz. Bu tarz değişkenler de 
+ 	bir ifade içerisinde sabit olarak ele alınırlar
+ 	
+ 	Derleyiciler sabit ifadelerinin değerlerini hesaplayarak sonucu "byte code"'a yazarlar. Bu optimizasyona 
+ 	"constant folding optimization" denir. Bu sebeple aşağıdaki örnekteki çarpma sonucu arakoda yazılır. Örnekteki
+ 	bazı detaylar ileride ele alınacaktır
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{			
+		long divider = 1000L * 60 * 60 * 24 * 365; //byte code -> 31536000000
+		
+		System.out.println(divider);
+	}
+}
