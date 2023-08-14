@@ -1230,7 +1230,9 @@ class NumberUtil {
 		 
 		 result = temp * 2;
 	Yani aslında geri dönüş değeri geçici değişkene yapılan bir atama işlemidir. Geçici değişkenin türü geri dönüş değerinin
-	türü ile aynıdır
+	türü ile aynıdır.
+
+	Eflatun
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -1266,6 +1268,7 @@ class NumberUtil {
 		 result = temp;
 	Yani aslında geri dönüş değeri geçici değişkene yapılan bir atama işlemidir. Geçici değişkenin türü geri dönüş değerinin
 	türü ile aynıdır
+	Eflatun
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -1298,6 +1301,10 @@ class NumberUtil {
 	tasarımı bu kullanım için anlamlı olmalıdır. Aşağıdaki örnekte add metodu klavyeden alınan değerlerin toplamını
 	ekrana basıp bu değeri de geri dönmektedir. Programcı kodda metodun sadece ekrana basması ile ilgilenmiş ve geri
 	dönüş değerini kullanmamıştır. Şüphesiz başka bir çağrıda kullanabilir.
+
+	***
+	Burada programcı metodu çağırıp bir işlem yapmıyor. Mesela bir result değişkenine geri dönüş değerini  atamıyor.
+	MEtodda ekrana basan kodu bize verir. Geri dönüş değerini kullanmadı.Sadece metodu çağırdı.
 	
 	Metot ekrana toplam değerini basmasaydı bu şekilde çağırma işimize yarar mıydı?
 -----------------------------------------------------------------------------------------------------------------------*/
@@ -1581,7 +1588,11 @@ class NumberUtil {
 /*----------------------------------------------------------------------------------------------------------------------
 	 Metodun paramaetre değişkenlerine değer metot çağrılırken verilir. Metot çağrılırken bir parametreye verilen 
 	 ifadeye "argüman" denir. Bir metodun kaç tane parametresi varsa o kadar sayıda sayıda argüman ile çağrılmalıdır.
-	 Argümanlardan parametrelere aktarım da bir atama işlemidir
+	 Argümanlardan parametrelere aktarım da bir atama işlemidir.
+    
+     ***
+	 Metod çağırılırken parametrelere verilen ifadeler. ARGÜMAN...
+	 Eflatun
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -1593,11 +1604,11 @@ class App {
 		int x = kb.nextInt();
 		int y = kb.nextInt();
 		
-		NumberUtil.printTotal(x, y);
-		int result = NumberUtil.multiply(x, y);
+		NumberUtil.printTotal(x, y); // Argumanlar..
+		int result = NumberUtil.multiply(x, y); // Argumanlar..
 		
 		System.out.println(result);
-		result = NumberUtil.square(y);
+		result = NumberUtil.square(y); // Argumanlar..
 		System.out.println(result);
 	}
 }
@@ -1670,19 +1681,21 @@ class App {
 	{	
 		java.util.Scanner kb = new java.util.Scanner(System.in);
 		System.out.print("İki sayı giriniz:");
-		int a = kb.nextInt();
-		int b = kb.nextInt();
+		int a = kb.nextInt(); // 4
+		int b = kb.nextInt(); // 4
 		
-		System.out.println(NumberUtil.multiply(a * 2, b - 4));
+		System.out.println(NumberUtil.multiply(a * 2, b - 4)); // a ve b değerleri hesaplanır.
+		                                                           // a = 8, b = 0
 	}
 }
 
 
 class NumberUtil {
-	
-	public static int multiply(int a, int b)
+	                          //int 8, int 0
+	public static int multiply(int a, int b) // a ve b değerleri bu parametreye argüman olarak geçer..
+
 	{
-		return a * b;
+		return a * b; // geri dönüş değeri hesapanır.. (8 * 0 = 0)
 	}
 
 	//..
