@@ -3866,3 +3866,475 @@ class Sample {
 		return false;
 	}
 }
+
+/*----------------------------------------------------------------------------------------------------------------------
+	25.12.2022	
+	Blue
+-----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 & ve | operatörleri tamsayılar ile kullanıldığında karşılıklı bit değerlerini işleme sokarlar. Aşağıdaki örnek
+	 durumu anlatmak için yazılmıştır. Bitsel operatörlerin ayrıntıları burada ele alınmayacaktır
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{			
+		int a = 10; //00000000000000000000000000001010
+		int b = 11; //00000000000000000000000000001011
+		int c;
+		
+		c = a & b; //00000000000000000000000000001010
+		
+		System.out.printf("c = %d%n", c);
+		
+		c = a | b; //00000000000000000000000000001011
+		
+		System.out.printf("c = %d%n", c);
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 & ve | operatörleri boolean ifadeler ile kullanıldıklarında kısa devre davranışı olmayan AND ve OR operatörleri
+	 olarak düşünülmelidir. Yine bu operatörler için de en soldaki ifade önce yapılır. 
+	 
+	 Aşağıdaki örnekte && ve || operatörleri kullanıldığında elde edilen sonucun  aynıs üretilir. Ancak tüm metotlar
+	 çağrılır  
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{			
+		boolean result;
+		
+		result = Sample.foo() | Sample.bar() & Sample.tar();
+		
+		System.out.printf("result = %b%n", result);
+	}
+}
+
+class Sample {
+	public static boolean foo()
+	{
+		System.out.println("foo");
+		
+		return true;
+	}
+	
+	public static boolean bar()
+	{
+		System.out.println("bar");
+		
+		return false;
+	}
+	
+	public static boolean tar()
+	{
+		System.out.println("tar");
+		
+		return false;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 Logical NOT (!) operatörünün doğruluk tablosu:
+	 
+	 op			!op
+	 T			F
+	 F			T
+-----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	 ! operatörü flag değişkenlerle aşağıdaki gibi kullanılabilir. Kod sadece durumu göstermek için yazılmıştır
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		boolean flag = true;
+		
+		//...
+		
+		flag = !flag;
+		
+		System.out.printf("flag = %b%n", flag);
+			
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 Atama (=) operatörü iki operandlı araek durumunda bir operatördür. Bu operatörün birinci operandı değişken olmalıdır.
+	 Operatörün şüphesiz yan etkisi vardır. Bu operatör sağdan sola öncelikli (right assocaitive) gruptadır. Bu 
+	 operatörün ürettiği değer ikinci opernadına ilişkin değer yani atanan değerdir
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		int a, b, c;
+		
+		a = b = c = 10;
+		
+		System.out.printf("a = %d%n", a);
+		System.out.printf("b = %d%n", b);
+		System.out.printf("c = %d%n", c);		
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 Aşağıdaki örnekte atama operatörünün birinci operandının değişken olmamasından dolayı error oluşur
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		int a = 45, b = 20, c = 10;
+		
+		(a = b) = c = 10; //error
+		
+		System.out.printf("a = %d%n", a);
+		System.out.printf("b = %d%n", b);
+		System.out.printf("c = %d%n", c);		
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 Aşağıdaki örnekte atama operatörünün birinci operandının değişken olmamasından dolayı error oluşur
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		int a = 45, b = 20, c = 10;
+		
+		a = (b = c) = 10; //error
+		
+		System.out.printf("a = %d%n", a);
+		System.out.printf("b = %d%n", b);
+		System.out.printf("c = %d%n", c);		
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 Aşağıdaki örnekte parantezin konmasu ve konmaması aynı anlamdadır. Çünkü atama operatörü sağdan sola önceliklidir
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		int a = 45, b = 20, c = 10;
+		
+		a = b = (c = 10);
+		
+		System.out.printf("a = %d%n", a);
+		System.out.printf("b = %d%n", b);
+		System.out.printf("c = %d%n", c);		
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 İşlemli atama operatörlerinin (compound assignment operator) genel biçimi:
+	 	<ifade1> <op>= <ifade2>
+	 	
+	 	<ifade1> = <ifade1> <op> <ifade2>
+	 	
+	 	a += b; => a = a + b;
+	 	a -= b; => a = a - b;
+	 	a *= b; => a = a * b;
+	 	a /= b; => a = a / b;
+	 	a %= b; => a = a % b;
+	 	
+	 İşlemli atama operatörlerinin ürettiği değer yine birinci operandına atanan değerdir
+	 
+	 Anahtar Notlar: Aslında işlemli atama operatörlerinin genel biçimi tam olarak yukarıdaki gibi değildir. Bu konu ileride
+	 ele alınacaktır
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		int a = 10, b = 20;
+		
+		a += b;
+		
+		System.out.printf("a = %d%n", a);
+		System.out.printf("b = %d%n", b);		
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 İşlemli atama operatörleri bazı ifadeleri daha basit yazmak için tercih edilir
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		int a = 2, b = 3, c = 5;
+		
+		a *= b + c; //a = a * (b + c); // önce b + c yapılacak.sonra a ile çarpılıp a ya tekrar atanacak..
+		
+		System.out.printf("a = %d%n", a);
+		System.out.printf("b = %d%n", b);
+		System.out.printf("c = %d%n", c);
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 Aşağıdaki örnekte aynı seviye de olan *= ve += operatörleri "right associative" olduğundan işlem sağdan sola
+	 yapılır
+
+	 Eflatun
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		int a = 2, b = 3, c = 5;
+		
+		a *= b += c; // a = a * (b = b + c) // işlem sağdan sol doğru yapılıyor!!!!
+		
+		System.out.printf("a = %d%n", a);
+		System.out.printf("b = %d%n", b);
+		System.out.printf("c = %d%n", c);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Java'da etkisiz ifadeler genel olarak error oluşturur..
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		int a = 10;
+		
+		a + 2; //error: code has no effect
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte error oluşmaz 
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		Sample.foo();
+	}
+}
+
+class Sample {
+	public static void foo()
+	{
+		
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 Noktalı virgül (;) sonlandırıcıdır (terminator). Genel olarak ifadeleri ayırmak için kullanılır.
+	  Java'da noktalı virgülden başka sonlandırıcı karakter yoktur!!
+
+	  Eflatun
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		int a = 10;
+		
+		++a;System.out.printf("a = %d%n", a);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte ++ operatörünün ürettiği değer artırılmamış değer olduğundan a sonuçta 10 olur
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		int a = 10;
+		
+		a = a++;
+		System.out.printf("a = %d%n", a);
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte ++ operatörünün ürettiği değer artırılmış değer olduğundan a sonuçta 11 olur. Doğrudan ++ uygulandığındaki
+	durumla aynı sonuç elde edilir. Bu anlamda aşağıdaki atama işleminin etkisi yoktur..
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		int a = 10;
+		
+		a = ++a;
+		System.out.printf("a = %d%n", a);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Deyimler (statements):
+	Bir programın çalıştırılan bir parçasına deyim denir. Bir program deyimlerin çalıştırılmasıyla çalışır. Java'da 
+	deyimler 5 gruba ayrılır:
+	
+	1. Basit deyimler (simple statements): Bir ifadenin sonuna noktalı virgül konduğunda basit deyim olur. Basit deyim
+	çalışırıldığında deyime ilişkin ifade hesaplanır
+	
+	2. Bileşik deyimler (compound statements): Bir bloğun tamamı bileşik deyimdir. Bileşik deyim çalıştırıldığında
+	blok içerisinde deyimler sırasıyla çalıştırılır
+	  
+	3. Bildirim deyimleri (declaration statements): Bir değişkenin bildirildiği deyimlerdir. Bildirim deyimi çalıştırıldığında
+	bellekte yer ayrılır
+	
+	4. Kontrol deyimleri (control statements): Akışa yön veren deyimlerdir. Her bir kontrol deyiminin kendine özgü çalışma
+	biçimi vardır.
+	
+	5. Boş deyim (null/empty statement): Noktalı virgülün tek başına kullanımına denir. Boş deyim çalıştırıldığında hiç bir
+	şey olmaz
+-----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	if deyiminin genel biçimi:
+	
+	if (<boolean türden ifade>)
+		<deyim> -> koşul doğru olduğunda çalıştırılır
+	[
+	else
+		<deyim> -> koşul yanlış olduğunda varsa çalıştırılır
+	]
+	
+	if deyimi, varsa else kısmı ile birlikte tek bir deyimdir
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Bir sayı giriniz:");
+		int val = kb.nextInt();
+		
+		if (val % 2 == 0)
+			System.out.println("Çift sayı girdiniz");
+		else
+			System.out.println("Tek sayı girdiniz");
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	if deyiminde bileşk deyim kullanımı
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Bir sayı giriniz:");
+		int val = kb.nextInt();
+		
+		if (val % 2 == 0) {
+			System.out.println("Çift sayı girdiniz");
+			val /= 2;
+		}
+		else {
+			System.out.println("Tek sayı girdiniz");
+			val *= 2;
+		}	
+		
+		System.out.printf("val = %d%n", val);
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	else kısmı olmayan if deyimi
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Bir sayı giriniz:");
+		int val = kb.nextInt();
+		
+		if (val % 2 == 0)
+			val /= 2;
+			
+		System.out.printf("val = %d%n", val);
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	if deyiminin parantezinden sonra yanlışlıkla noktalı virgül konması durumu
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Bir sayı giriniz:");
+		int val = kb.nextInt();
+		
+		if (val % 2 == 0);
+			val /= 2;
+			
+		System.out.printf("val = %d%n", val);
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte else bir if deyimine ait olmadığından error oluşur
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Bir sayı giriniz:");
+		int val = kb.nextInt();
+		
+		if (val % 2 == 0);
+			val /= 2;
+		else //error
+			val *= 2;
+			
+		System.out.printf("val = %d%n", val);
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
