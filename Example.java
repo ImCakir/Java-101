@@ -4,6 +4,15 @@
 											   Eğitmen: Oğuz KARAN
 
 										C ve Sistem Programcıları Derneği
+
+
+
+
+										Blue --> Ders Başlangıçları..
+										Aqua --> Konuya ilişkin kendimin eklediği detaylar..
+										Eflatun --> Kendimce önemli gördüğüm noktalar..
+										Violance --> Tekrar bakabileceğimi düşündüğüm konu başlıkları..
+
 ----------------------------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------------
 	26.11.2022
@@ -1302,7 +1311,8 @@ class NumberUtil {
 	ekrana basıp bu değeri de geri dönmektedir. Programcı kodda metodun sadece ekrana basması ile ilgilenmiş ve geri
 	dönüş değerini kullanmamıştır. Şüphesiz başka bir çağrıda kullanabilir.
 
-	***
+	Aqua
+
 	Burada programcı metodu çağırıp bir işlem yapmıyor. Mesela bir result değişkenine geri dönüş değerini  atamıyor.
 	MEtodda ekrana basan kodu bize verir. Geri dönüş değerini kullanmadı.Sadece metodu çağırdı.
 	
@@ -1547,7 +1557,7 @@ class NumberUtil {
 }
 
 /*----------------------------------------------------------------------------------------------------------------------
-	Bir metodun parametre değişkenleri aynı türden olsa bile tür bilgisi yazılmalıdır. Aksi durumunda error oluşur
+	Bir metodun parametre değişkenleri aynı türden olsa bile tür bilgisi yazılmalıdır. Aksi durumda error oluşur
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -1586,13 +1596,14 @@ class NumberUtil {
 }
 
 /*----------------------------------------------------------------------------------------------------------------------
-	 Metodun paramaetre değişkenlerine değer metot çağrılırken verilir. Metot çağrılırken bir parametreye verilen 
-	 ifadeye "argüman" denir. Bir metodun kaç tane parametresi varsa o kadar sayıda sayıda argüman ile çağrılmalıdır.
+	 Metodun parametre değişkenlerine değer metot çağrılırken verilir. Metot çağrılırken bir parametreye verilen 
+	 ifadeye "argüman" denir. Bir metodun kaç tane parametresi varsa o kadar sayıda argüman ile çağrılmalıdır.
 	 Argümanlardan parametrelere aktarım da bir atama işlemidir.
     
-     ***
+     Aqua
 	 Metod çağırılırken parametrelere verilen ifadeler. ARGÜMAN...
-	 Eflatun
+	 Argümanlardan parametrelere aktarım da bir atama işlemidir
+	 
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -1604,7 +1615,7 @@ class App {
 		int x = kb.nextInt();
 		int y = kb.nextInt();
 		
-		NumberUtil.printTotal(x, y); // Argumanlar..
+		NumberUtil.printTotal(x, y); // Argumanlar.. bu metodun geri dönüş değeri yok : "void"
 		int result = NumberUtil.multiply(x, y); // Argumanlar..
 		
 		System.out.println(result);
@@ -1702,9 +1713,9 @@ class NumberUtil {
 }
 
 /*----------------------------------------------------------------------------------------------------------------------
-	Aşağıdaki örnekte iki multiply çağrısı arasında argmanlarda bir değişiklik olmamasına karşın programcı iki kere multiply
+	Aşağıdaki örnekte iki multiply çağrısı arasında argümanlarda bir değişiklik olmamasına karşın programcı iki kere multiply
 	metodunu çağırmıştır. Bu durumda kod hem iki defa çağırmanın gereksizliğiğ hem de okunabilirlik algılanabilirlik
-	açısından kötü yazılmıştır. Yani aslında koda okuyan bir programcı için bu metotların iki defa çağrıldığını gördüğünde
+	açısından kötü yazılmıştır. Yani aslında kodu okuyan bir programcı için bu metotların iki defa çağrıldığını gördüğünde
 	akış içerisinde a veya b'nin değiştiği algısı oluşur
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
@@ -1782,12 +1793,12 @@ class NumberUtil {
 	kod tekrarı yapılmamalıdır (do not repeat yourself)" şeklindedir. Bu durumda programcı önreğin bir metot yazar
 	ve ilgili yerlerde çağırır.
 	
-	- Bir problemin çözümü metot çağırma yerine her yerde kodun yazılması biçiminde gerçekleştirimişse (implementation),
+	- Bir problemin çözümü metot çağırma yerine her yerde kodun yazılması biçiminde gerçekleştirilmişse (implementation),
 	bu durumda programcı problem için algoritmasında bir değişiklik yapmak isterse veya bir hata olduğunu anlayıp düzeltmek
 	isterse her yerde bu değişiklikleri yapmak zorunda kalır. Bu da çoğu zaman zor olabilir. Halbuki programcı bu problemin
 	çözümü için bir metot yazarsa değişikliği daha kolay yapabilir.
 	
-	- Bir problemin çözümü metot çağırma yerine her yerde kodun yazılması biçiminde gerçekleştirimişse (implementation),
+	- Bir problemin çözümü metot çağırma yerine her yerde kodun yazılması biçiminde gerçekleştirilmişse (implementation),
 	bu durumda kodun okunabilirliği/algılanabilirliği de azalabilir. Yani bu durumda metot çağırarak kodun okunabilirliği/algılanabilirliği
 	artırılmış olur.
 	
@@ -1800,6 +1811,8 @@ class NumberUtil {
 	kavramlar ile kodun yönetilmesi anlamında örneğin parçalara ayırma kavramı metotlar
 	ile birlikte daha yüksek seviyede başka elemanlar ile de yapılabilecektir. Yani kabaca 
 	programlamanın temelinde metotlar vardır  
+
+	Violanca (Metodlar)
 -----------------------------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------------
 	System.out.printf metodunun ilk argümanı String olmalıdır. Metot bu argüman dışında istenilen sayıda ve istenilen
@@ -1914,6 +1927,8 @@ class App {
 /*----------------------------------------------------------------------------------------------------------------------
 	printf metodunda tamsayılar için hizalama (alignment) yapılabilir. Aşağıdaki örnekte %08X yer tutucusu için yazılan
 	karakter sayısı 8'den azsa geri kalanlar sıfır ile beslenir 
+
+	Aqua
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -1976,6 +1991,8 @@ class App {
 /*----------------------------------------------------------------------------------------------------------------------
 	printf metodunda f format karakteri ile ondalık kısmın kaç basamak olarak formatlanacağı aşağıdaki gibi % ve f
 	arasında . ve sayı yazılarak yapılabilir. Geri kalan basamaklar bilimsel olarak yuvarlanır
+
+	Aqua
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -2114,7 +2131,7 @@ class App {
 	Sınıf Çalışması: Klavyeden girilen arasınav ve final notlarına ilişkin double türden değerlerin geçme notunu hesaplayan
 	programı aşağıdaki açıklamalara göre yazınız.
 	Açıklamalar:
-	- Geçme notu arasınavın % 40'ı ile final notunun %60'ının toplamında elde medilecektir
+	- Geçme notu arasınavın % 40'ı ile final notunun %60'ının toplamından elde edilecektir
 	- Geçti veya kaldı bilgisi yazdırılmayacaktır
 	- Ekran çıktısı aşağıdaki biçimde tek bir printf kullanılarak yapılmalıdır:
 	 	Arasınav: 50
@@ -2155,14 +2172,16 @@ class FindGradeApp {
 }
 
 /*----------------------------------------------------------------------------------------------------------------------
-	Bölme işlemi tamsayılar ile yapıldığınmda sonuç her zaman tamsayı çıkar. İşlem sonucunda eldeedilen değerin noktadan
+	Bölme işlemi tamsayılar ile yapıldığında sonuç her zaman tamsayı çıkar. İşlem sonucunda elde edilen değerin noktadan
 	sonraki kısmı yuvarlanmadan atılır. 
 	
-	Tamsayılar ile bölme işleminde paydanın sıfır olması durumunda exception oluşur
+	Tamsayılar ile bölme işleminde paydanın sıfır olması durumunda exception oluşur.
 	
-	Bu durumların ayrıntıları ileride ele alınacaktır
+	Bu durumların ayrıntıları ileride ele alınacaktır.
 	
 	Aşağıdaki örneği çeşitli değer ile çalıştırıp sonuçları gözlemleyiniz
+
+	Aqua
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -2183,12 +2202,14 @@ class App {
 
 /*----------------------------------------------------------------------------------------------------------------------
 	Gerçek sayılar ile bölme işleminde payda sıfır olsa bile işlem yapılır. Yani exception oluşmaz. Gerçek sayılar
-	içerisinde genel olarak Matematik'teki "belirsizlik" için kullanılan "Not a Number (NaN)" değeri vardır. Ayrıca genel 
-	olarak sonsuzluk (Matematik'teki tanımsız) için kullanbılan -Infinity ve +Infinity değerleri de vardır. Bu değerler
+	içerisinde genel olarak Matematikteki "belirsizlik" için kullanılan "Not a Number (NaN)" değeri vardır. Ayrıca genel 
+	olarak sonsuzluk (Matematik'teki tanımsız) için kullanılan -Infinity ve +Infinity değerleri de vardır. Bu değerler
 	dışında da başka özel değerler vardır. Bu durumda gerçek sayılar ile bölme işleminde pay sıfırdan farklı, payda sıfır
-	ise payın işaretine göre + veya - Infinity, pay ve paydanın her ikisi birden sıfır ise NaN sonucu elde edilir
+	ise payın işaretine göre + veya - Infinity, pay ve paydanın her ikisi birden sıfır ise NaN sonucu elde edilir.
 	
 	Aşağıdaki örneği çeşitli değer ile çalıştırıp sonuçları gözlemleyiniz
+
+	Aqua
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -2316,7 +2337,7 @@ class PointUtil {
 /*----------------------------------------------------------------------------------------------------------------------
 	Sınıf Çalışması: Parametresi ile aldığı double türden x1, y1, x2, y2 koordinat bilgilerine göre iki nokta arasındaki
 	((x1, y1) ve (x2, y2) noktaları) Euclid uzaklığına geri dönen distance isimli metodu PointUtil isimli sınıf 
-	içerisinde yazını ve aşağıdaki kod ile test ediniz 
+	içerisinde yazınız ve aşağıdaki kod ile test ediniz 
 	
 	Not: İleride daha iyisi yazılacaktır
 -----------------------------------------------------------------------------------------------------------------------*/
@@ -2461,7 +2482,8 @@ class MathUtil {
 /*----------------------------------------------------------------------------------------------------------------------
 	Math sınıfının logXXX metotları(log için 3 tane method vardır.)
 
-	***
+	Aqua
+
 	log(double a) : e tabanına göre alınan log
 	log10(double a) : 10 tabanına göre log
 	log1p(double x) : log x + 1 dir. bunun sebebi de log0= tanımsızdır. ama sıfır girildiğinde +1 yaparak tanımsız olması
@@ -2485,7 +2507,8 @@ class App {
 /*----------------------------------------------------------------------------------------------------------------------
 	Aşağıdaki örnekte Math sınıfında olmayan bir metot Math sınıfının metotları kullanılarak yazılmıştır
 
-	***
+	Aqua
+
 	  logb(b, a) = b : taban a: o tabanda istenilen ifade/değer
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
@@ -2511,7 +2534,8 @@ class MathUtil {
 /*----------------------------------------------------------------------------------------------------------------------
 	Math sınıfının yuvarlama işlemi yapan bazı önemli metotları
 
-	***
+	Aqua
+
 	round : girilen double ifadenin yuvarlanmadan tam kısmını basar.
 	ceil :  girilen double ifadeyi bir üst sayıya yuvarlar.
 	floor : ceil in aksine girilen ifadeyi bir alt sayıya yuvarlar.
@@ -2562,7 +2586,7 @@ class App {
 	
 	- boolean türden iki tane sabit vardır: true, false
 	
-	- char türden sabitler: İki tane tek tırnak arasında ytazılan bir karakter, karakter tablosunda sıra numarası belirtir.
+	- char türden sabitler: İki tane tek tırnak arasında yazılan bir karakter, karakter tablosunda sıra numarası belirtir.
 	Bu şekilde yazılan sabitlere "karakter sabitleri (character literals)" denir ve bu sabitler char türdendir. İki tek
 	tırnak arasına özel durumlar dışında birden fazla karakter yazımı gerçersizdir. 
 	
@@ -2580,7 +2604,9 @@ class App {
 	'\0' -> null karakter
 	'\"' -> double quote (optional)
 	'\'' -> single quote
-	'\\' -> back slash 
+	'\\' -> back slash
+
+	Violance (Sabitler) 
 -----------------------------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------------
 	char türden sabitler	
@@ -2826,11 +2852,12 @@ class App {
 }
 
 /*----------------------------------------------------------------------------------------------------------------------
- 	Ters bölü ve u karakteri ile bir karakterin sıra numarası hezadecimal olarak tek tırnak içerisinde yazıldığında 
+ 	Ters bölü ve u karakteri ile bir karakterin sıra numarası hexadecimal olarak tek tırnak içerisinde yazıldığında 
  	o karaktere ilişkin karakter sabiti basılmış olur. Burada hexadecimal sayı kesinlikle iki byte yani 4 tane hex digit 
  	olarak yazılmaldır
 
- 	***
+ 	Aqua
+
  	4 hex digit = 1 nibble
 
 -----------------------------------------------------------------------------------------------------------------------*/
@@ -2876,7 +2903,8 @@ class App {
 /*----------------------------------------------------------------------------------------------------------------------
  	Bir tamsayı sabitinin öneki yoksa bu durumda sabit "decimal" olarak ele alınır.
 
- 	***
+ 	Aqua
+
  	decimal: 10 luk sayı sistemi.
  	10'luk sistemden 2'lik sisteme geçişte her digit 1 bit.
 -----------------------------------------------------------------------------------------------------------------------*/
@@ -2895,7 +2923,8 @@ class App {
  	Bir tamsayı önüne bitişik olarak sıfır ve x (büyük veya küçük) yazıldığında bu ekten sonra gelen basamaklar 
  	"hexadecimal" olarak ele alınır.
 
- 	***
+ 	Aqua
+
  	0x__ --> hexedecimal!!!!
  	hexe (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F)
  	16'lık sistemden 2'lik sisteme dönüşte her digit 4 bittir. = 1 nibble
@@ -2929,7 +2958,8 @@ class App {
 /*----------------------------------------------------------------------------------------------------------------------
  	Bir tamsayı önüne bitişik olarak sıfır yazıldığında bu ekten sonra gelen basamaklar "octal" olarak ele alınır.
 
- 	***
+ 	Aqua
+
  	octal: 8 lik sayı sistemi.(0,1,2,3,4,5,6,7)
  	0__ --> octal
  	8’lik sayı sisteminin her bir digiti 2’lik sistemde 3 bit ile ifade edilir.
@@ -2949,7 +2979,8 @@ class App {
  	Bir tamsayı önüne bitişik olarak sıfır ve b (küçük veya büyük) yazıldığında bu ekten sonra gelen basamaklar
  	"binary" olarak ele alınır. İkilik sistemde sabit yazımı Java 7 ile birlikte eklenmiştir.
 
- 	***
+ 	Aqua
+
  	0b__ --> sonraki basamaklar binary (0,1)
     her digit 1 bit
 -----------------------------------------------------------------------------------------------------------------------*/
@@ -3103,7 +3134,9 @@ class App {
  	
  	Derleyiciler sabit ifadelerinin değerlerini hesaplayarak sonucu "byte code"'a yazarlar. Bu optimizasyona 
  	"constant folding optimization" denir. Bu sebeple aşağıdaki örnekte çarpmanın sonucu arakoda yazılır. Örnekteki
- 	bazı detaylar ileride ele alınacaktır
+ 	bazı detaylar ileride ele alınacaktır.
+
+ 	(onur)
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -3187,13 +3220,15 @@ class App {
  	Anahtar Notlar: Java programcısı bir operatör için yukarıdaki durumları bilmelidir. Yani bir operatörün öğrenilmesi
  	o operatör için yukarıdaki durumların bilinmesi anlamına gelir
  	
- 	Anahtar Notlar: Bazı operatörler öcelik kuralına uymazlar. Yani işlem önce yapılması gerekirken, yapılmayabilir. Bu 
+ 	Anahtar Notlar: Bazı operatörler öncelik kuralına uymazlar. Yani işlem önce yapılması gerekirken, yapılmayabilir. Bu 
  	tarz operatörlerin de uymadıkları durum için nasıl çalıştığının bilinmesi gerekir. Şüphesiz bu operatörlerin neden
  	öncelik kurallarına uymadıklarının da gerekçeleri (rationale) vardır.
  	
  	Anahtar Notlar: Notlardaki operatör öncelik tablosu gruplandırma olarak düşünülmelidir. Yani operatör öncelik
  	tablosundaki öncelik durumlarının işlemin yapılışına göre değişiklik gösterdiği durumlar vardır. Şüphesiz bunların da
- 	bilinmesi gerekir. Operatör öncelik tablosu algısal bakımdan kolaylaştırmak için vardır ve önemlidir
+ 	bilinmesi gerekir. Operatör öncelik tablosu algısal bakımdan kolaylaştırmak için vardır ve önemlidir.
+
+ 	Violance (Operatörler)
 -----------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------
@@ -3227,7 +3262,7 @@ class App {
  	***
  	a + b = c olsun. + burada bir operatördür. a ve b nin değerini değiştirmez,yani bir yan etkisi yoktur. Ama operatör bir
  	değer üretir.
- 	Eflatun
+ 	
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -3356,7 +3391,7 @@ class App {
  	Aşağıdaki örnekte ifade, işaret - operatörünün seviyesinde bulunan operatörlerin sağdan sola (right associative) 
  	ele alınmasından dolayı geçerlidir.
 
- 	***
+ 	Aqua
  	Negatif sabit diye bir şey yoktur. Pozitif bir sabite eksi işaret operatörü eklendiğinde oluşan sabit değer vardır 
  	derleyici açısından.
 -----------------------------------------------------------------------------------------------------------------------*/
@@ -3566,12 +3601,12 @@ class App {
 	işlemini yapar. Bu yönteme "maximal/maximum munch" denir. Aşağıdaki örnek bu kuraldır dolayısıyla geçerlidir.
 
 
- ***
  Anahtar Notlar: Okunabilirlik/algılanabilirlik açısından tek operandlı operatörleri genel olarak operandına bitişik 
  olarak yazıcaz. İki operandlı operatörleri de özel ama önemli bazı operatörler dışında operandları arasına "bir ve yalnız bir tane"
  space karakteri olacak şekilde yazacağız.
  a = 2; gibi. bunu a=2; şeklinde yazmayız
  c = a * b + 2; şeklinde. c=a*b+2; değil..
+ Eflatun
 -------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -3827,9 +3862,9 @@ class Sample {
 	 Aşağıdaki örnekte işlem sırası ile operatörlerin öncelik sırası aynıdır. Yine en soldaki önce yapılır. Yani yine
 	 Matematiksel olarak doğru sonuca en kısa yoldan ulaşılır
 
-	 ***
-	 burada da önce bar a bakar. ve operatörü var. bar'ın sonucu false tur. foo'ya bakmasına gerek yok. ama bar'a bakması gerekıyor.
-	 Çünkü bar eğer true ise sonuc True çıkar. Değilse False sonucunu üretir....
+	 Aqua
+	 burada da önce bar a bakar. ve operatörü var. bar'ın sonucu false tur. foo'ya bakmasına gerek yok. ama tar'a bakması gerekıyor.
+	 Çünkü tar eğer true ise sonuc True çıkar. Değilse False sonucunu üretir....
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -3874,7 +3909,7 @@ class Sample {
 
 /*----------------------------------------------------------------------------------------------------------------------
 	 & ve | operatörleri tamsayılar ile kullanıldığında karşılıklı bit değerlerini işleme sokarlar. Aşağıdaki örnek
-	 durumu anlatmak için yazılmıştır. Bitsel operatörlerin ayrıntıları burada ele alınmayacaktır
+	 durumu anlatmak için yazılmıştır. Bitsel operatörlerin ayrıntıları burada ele alınmayacaktır.
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -3900,8 +3935,9 @@ class App {
 	 & ve | operatörleri boolean ifadeler ile kullanıldıklarında kısa devre davranışı olmayan AND ve OR operatörleri
 	 olarak düşünülmelidir. Yine bu operatörler için de en soldaki ifade önce yapılır. 
 	 
-	 Aşağıdaki örnekte && ve || operatörleri kullanıldığında elde edilen sonucun  aynıs üretilir. Ancak tüm metotlar
+	 Aşağıdaki örnekte && ve || operatörleri kullanıldığında elde edilen sonucun  aynısı üretilir. Ancak tüm metotlar
 	 çağrılır  
+	 (onur)
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -3968,7 +4004,7 @@ class App {
 /*----------------------------------------------------------------------------------------------------------------------
 	 Atama (=) operatörü iki operandlı araek durumunda bir operatördür. Bu operatörün birinci operandı değişken olmalıdır.
 	 Operatörün şüphesiz yan etkisi vardır. Bu operatör sağdan sola öncelikli (right assocaitive) gruptadır. Bu 
-	 operatörün ürettiği değer ikinci opernadına ilişkin değer yani atanan değerdir
+	 operatörün ürettiği değer ikinci operandına ilişkin değer yani atanan değerdir
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -3996,7 +4032,7 @@ class App {
 	{		
 		int a = 45, b = 20, c = 10;
 		
-		(a = b) = c = 10; //error
+		(a = b) = c = 10; //error: sol taraf değişken olmalı!!!
 		
 		System.out.printf("a = %d%n", a);
 		System.out.printf("b = %d%n", b);
@@ -4014,7 +4050,7 @@ class App {
 	{		
 		int a = 45, b = 20, c = 10;
 		
-		a = (b = c) = 10; //error
+		a = (b = c) = 10; //error: atamanın sol tarafı değişken olmalı!!!
 		
 		System.out.printf("a = %d%n", a);
 		System.out.printf("b = %d%n", b);
@@ -4024,7 +4060,7 @@ class App {
 
 
 /*----------------------------------------------------------------------------------------------------------------------
-	 Aşağıdaki örnekte parantezin konmasu ve konmaması aynı anlamdadır. Çünkü atama operatörü sağdan sola önceliklidir
+	 Aşağıdaki örnekte parantezin konması ve konmaması aynı anlamdadır. Çünkü atama operatörü sağdan sola önceliklidir
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -4106,9 +4142,9 @@ class App {
 		
 		a *= b += c; // a = a * (b = b + c) // işlem sağdan sol doğru yapılıyor!!!!
 		
-		System.out.printf("a = %d%n", a);
-		System.out.printf("b = %d%n", b);
-		System.out.printf("c = %d%n", c);
+		System.out.printf("a = %d%n", a); //16
+		System.out.printf("b = %d%n", b); //8
+		System.out.printf("c = %d%n", c); //5
 	}
 }
 
@@ -4213,6 +4249,8 @@ class App {
 	
 	5. Boş deyim (null/empty statement): Noktalı virgülün tek başına kullanımına denir. Boş deyim çalıştırıldığında hiç bir
 	şey olmaz
+
+	Violance (Deyimler -Statements)
 -----------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------
@@ -4226,6 +4264,8 @@ class App {
 	]
 	
 	if deyimi, varsa else kısmı ile birlikte tek bir deyimdir
+
+	Violance
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -4246,7 +4286,7 @@ class App {
 }
 
 /*----------------------------------------------------------------------------------------------------------------------
-	if deyiminde bileşk deyim kullanımı
+	if deyiminde bileşik deyim kullanımı
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -4297,6 +4337,7 @@ class App {
 
 /*----------------------------------------------------------------------------------------------------------------------
 	if deyiminin parantezinden sonra yanlışlıkla noktalı virgül konması durumu
+	(onur)
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -4340,6 +4381,8 @@ class App {
 
 /*----------------------------------------------------------------------------------------------------------------------
 	Aşağıdaki örnekte else kısmı içteki if'e ilişkindir (dangling else) 
+
+	Aqua
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -4558,7 +4601,7 @@ class Util {
 class NumberUtil {
 	public static boolean isEven(int a)
 	{
-		return a % 2 == 0; // 0 ya da 1 çıkar. parametre olarak boolean even' a gider.
+		return a % 2 == 0; // çift ya da tek çıkar. parametre olarak boolean even' a gider.
 	}
 }
 
