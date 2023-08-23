@@ -1,1 +1,41 @@
+/*----------------------------------------------------------------------------------------------------------------------
+Klavyeden alınan int türden üç sayı arasındaki büyüklük-küçüklük ilişkisini küçükten büyüğe doğru < ve =
+sembolleriyle gösteren programı yazınız:
+---------------------------------------------------------------------------------------------------------------------------*/
 
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{			
+		SortTheNumbersTest.run(); 
+	}
+}
+class SortTheNumbersTest {
+	public static void run ()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.println("3 Sayı Giriniz: ");
+		int a = kb.nextInt();
+		int b = kb.nextInt();
+		int c = kb.nextInt();
+		
+		NumberUtil.sortTheNumber(a, b, c);
+	}
+}
+class NumberUtil {
+	public static void sortTheNumber(int a, int b, int c)
+	{
+	if (a < b && b < c)
+		System.out.printf("%d < %d < %d%n", a, b, c);
+	else if ( b < c && c < a)
+		System.out.printf("%d < %d < %d%n", b, c, a);
+		
+	else if ( a == b && b < c)
+		System.out.printf("%d = %d < %d%n ", a, b, c);
+		
+	else 
+		System.out.printf("%d < %d = %d%n", a, b, c);
+		
+	}
+}
