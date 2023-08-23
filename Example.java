@@ -3136,7 +3136,7 @@ class App {
  	"constant folding optimization" denir. Bu sebeple aşağıdaki örnekte çarpmanın sonucu arakoda yazılır. Örnekteki
  	bazı detaylar ileride ele alınacaktır.
 
- 	(onur)
+ 	
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -3340,6 +3340,7 @@ class NumberUtil {
 		return Math.abs(a + b + c);
 	}
 }
+
 
 /*----------------------------------------------------------------------------------------------------------------------
  	İşaret - operatörü tek operandlı (unary) ve önek (prefix) durumunda bir operatördür. Operatörün yan etkisi yoktur.
@@ -3937,7 +3938,7 @@ class App {
 	 
 	 Aşağıdaki örnekte && ve || operatörleri kullanıldığında elde edilen sonucun  aynısı üretilir. Ancak tüm metotlar
 	 çağrılır  
-	 (onur)
+	 
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -4337,7 +4338,7 @@ class App {
 
 /*----------------------------------------------------------------------------------------------------------------------
 	if deyiminin parantezinden sonra yanlışlıkla noktalı virgül konması durumu
-	(onur)
+	
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -4798,7 +4799,6 @@ class App {
 }
 
 
-
 /*----------------------------------------------------------------------------------------------------------------------
 	Sınıf Çalışması: Katsayıları klavyeden alınan ikinci dereceden bir denklemin köklerini bulup ekrana yazdıran
 	programı yazınz.
@@ -4928,4 +4928,9 @@ class QuadraticEquationSolver {
 		
 	}
 }
+
+
+
+
+
 
