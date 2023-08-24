@@ -39,3 +39,53 @@ class NumberUtil {
 		
 	}
 }
+/*----------------------------------------------------------------------------------------------------------------------
+Parametresi ile aldığı int türden 3 sayıdan ortancasına geri dönen mid isimli metodu NumberUtil isimli sınıf
+içerisinde yazınız ve test ediniz. Metot sayıların aynı olması durumunda da ortanca değere geri dönecektir.
+Örneğin sayılar 10, 10, 20 ise ortanca değer 10 olacaktır.
+
+Açıklama: Üç tane sayının ortancası sayıların toplamından sayıların en küçüğünün ve en büyüğünün toplamını
+çıkartmakla bulunabilir. Metot bu şekilde yazılmayacaktır. Yani metot içerisinde sayıların en büyüğünün ve en
+küçüğünün bulunmasına gerek yoktur.
+
+---------------------------------------------------------------------------------------------------------------------------*/
+
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{			
+		NumberUtilTest.run(); 
+	}
+}
+class NumberUtilTest {
+	public static void run ()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.println("3 Sayı Giriniz: ");
+		int a = kb.nextInt();
+		int b = kb.nextInt();
+		int c = kb.nextInt();
+		
+		int median = NumberUtil.mid(a, b, c);
+		System.out.println("Ortanca: " + median);
+	}
+}
+class NumberUtil {
+	public static int mid(int a, int b, int c)
+	{
+	if (a <= b & b < c)
+		return b;
+	else if ( b <= a & a < c)
+		return a;
+		
+	else if ( b <= c & c < a)
+		return c;
+	
+	return c;
+		
+   
+
+		
+	}
+}
