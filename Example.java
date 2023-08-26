@@ -5420,7 +5420,7 @@ class NumberUtil {
 	okunabilirliği/algılanabilirliği artırmak ve algoritmayı sadeleştirmek için tercih edilebilir. Ancak bu döngü deyimi
 	gereksiz kullanıldığında okunabilirliği/algınabilirliği azaltır. Buna dikkat edilmelidir.
 
-	Violance
+	
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -5439,11 +5439,466 @@ class App {
 			++i;
 		} while (i < n);
 		
-		System.out.printf("Döngü sonrası n = %d%n", n);
+		System.out.printf("Döngü sonrası i = %d%n", i);
+	}
+}
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı int türden bir sayının basamak sayısını döndüren countDigits isimli metodu
+	NumberUtil isimli sınıf içerisinde yazınız ve aşağıdaki kod ile test ediniz
+	Not: İleride daha iyisi yazılacaktır
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		CountDigitsTest.run();
 	}
 }
 
-(onur)
+class CountDigitsTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		
+		int a;
+		
+		while ((a = Integer.parseInt(kb.nextLine())) != 0) {
+			System.out.printf("%d sayısının basamak sayısı:%d%n", a, NumberUtil.countDigits(a));
+			System.out.print("Bir sayı giriniz:");
+		}
+		
+		System.out.printf("0 sayısının basamak sayısı:%d%n", NumberUtil.countDigits(0));
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+class NumberUtil {
+	public static int countDigits(int a)
+	{
+		int count = 0;
+		
+		do {
+			++count;
+			a /= 10;
+		} while (a != 0); 
+		
+		return count;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	do-while döngü deyimi içerisinde bildirilen bir değişken faaliyet alanı (scope) kuralları gereği koşul ifadesi
+	içerisinde kullanılamaz
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		do  {
+			System.out.print("Bir sayı giriniz:");
+			int a = Integer.parseInt(kb.nextLine());
+			
+			System.out.printf("%d * %d = %d%n", a, a, a * a);
+		} while (a != 0); //error
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Yukarıdaki problem aşağıdaki gibi çözülebilir
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		int a;
+		
+		do  {
+			System.out.print("Bir sayı giriniz:");
+			a = Integer.parseInt(kb.nextLine());
+			
+			System.out.printf("%d * %d = %d%n", a, a, a * a);
+		} while (a != 0);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sonsuz Döngü (inifinite loop): Koşul ifadesinden dolayı sonlanmayan döngülere denir. Bu durumda hiç sonlanmayan bir 
+	döngü de sonsuz döngüdür. Tersine sonsuz döngü olarak tasarlanmış bir döngü sonlanabilecek şekilde yazılabilir
+-----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	while döngüsü ile sonsuz döngü aşağıdaki gibi oluşturulabilir
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		while (true) {
+			//...
+		}
+	}
+}
+
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		CountDigitsTest.run();
+	}
+}
+
+class CountDigitsTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+				
+		while (true) {
+			System.out.print("Bir sayı giriniz:");
+			int a = Integer.parseInt(kb.nextLine());
+			System.out.printf("%d sayısının basamak sayısı:%d%n", a, NumberUtil.countDigits(a));
+			
+			if (a == 0) {
+				System.out.println("Tekrar yapıyor musunuz?");
+				return; // metodu sonlandırıyor...
+			}		
+		}
+	}
+}
+
+class NumberUtil {
+	public static int countDigits(int a)
+	{
+		int count = 0;
+		
+		do {
+			++count;
+			a /= 10;
+		} while (a != 0); 
+		
+		return count;
+	}
+}
+/*----------------------------------------------------------------------------------------------------------------------
+	for döngü deyiminin deyiminin genel biçimi:
+	
+	for ([1. kısım]; [2.kısım]; [3.kısım])
+		<deyim>
+		
+	1.kısım: Akış for döngü deyimine geldiğinde yalnızca bir kez yapılacak kısımdır.
+	
+	2.kısım: Koşul ifadesine ilişkin kısımdır. Burada yazılacak ifasdenin boolean türden olması gerekir. Akış for döngü
+	deyimine geldiğinde 1.kısım yapıldıktan sonra kontrol yapılır
+	
+	3.kısım: Döngünün bir adımı tamamlandığında bir sonraki adıma geçmek için yapılacak kontrolden hemen önce yapılır.
+
+	Violance
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		
+		int n = kb.nextInt();
+		int i;
+		
+		for (i = 0; i < n; ++i)
+			System.out.printf("%d ", i);
+		
+		System.out.printf("%ni = %d%n", i);
+		
+	}
+}
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki döngüde ++ kullanımının prefix ve postfix olmasının bir farkı yoktur. Çünkü ++ operatörü her iki kullanımda da
+	operandının değerini değiştirir
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		
+		int n = kb.nextInt();
+		int i;
+		
+		for (i = 0; i < n; i++)
+			System.out.printf("%d ", i);
+		
+		System.out.printf("%ni = %d%n", i);
+		
+	}
+}
+/*----------------------------------------------------------------------------------------------------------------------
+	for döngü deyimi
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		
+		int n = kb.nextInt();
+		int i;
+		
+		for (i = 0; i < n; i += 2)
+			System.out.printf("%d ", i);
+		
+		System.out.printf("%ni = %d%n", i);
+		
+	}
+}
+/*----------------------------------------------------------------------------------------------------------------------
+	for döngü deyimi
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		
+		int n = kb.nextInt();
+		int i;
+		
+		for (i = n - 1; i >= 0; --i)
+			System.out.printf("%d ", i);
+		
+		System.out.printf("%ni = %d%n", i);
+		
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	for döngü deyiminin birinci kısmında değişken bildirimi yapılabilir. Buna genel olarak döngü değişkeni de denir
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		
+		int n = kb.nextInt();
+		
+		for (int i = 0; i < n; ++i)
+			System.out.printf("%d ", i);
+	
+	}
+}
+/*----------------------------------------------------------------------------------------------------------------------
+	for döngü deyiminin birinci kısmında bildirilen değişken for döngü deyimi boyunca görülebilirdir (scope)
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		
+		int n = kb.nextInt();
+		
+		for (int i = 0; i < n; ++i)
+			System.out.printf("%d ", i);
+		
+		
+		System.out.printf("%ni = %d%n", i); //error
+	
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki for döngüsünde "aynı faaliyet alanı içerisinde aynı isimde yerel değişken bildirimi geçersizdir" kuralı
+	dolayısıyla error oluşur
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		
+		int n = kb.nextInt();
+		int i; //ERROR
+		
+		for (int i = 0; i < n; ++i) //ERROR
+			System.out.printf("%d ", i);
+	
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki for döngüsü "farklı faaliyet alanları içerisinde aynı isimde yerel değişken bildirimi geçerlidir" kuralı
+	dolayısıyla geçerlidir
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		
+		int n = kb.nextInt();
+		
+		
+		for (int i = 0; i < n; ++i)
+			System.out.printf("%d ", i);
+		
+		System.out.println();
+		
+		for (int i = 0; i < n; ++i)
+			System.out.printf("%d ", i);
+	
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Döngü değişkeninin döngüden çıktıktan sonraki değeri kullanılmayacaksa değişken bildiriminin döngü içerisinde (yani 1.kısımda)
+	yapılması daha iyi bir tekniktir. Bu durumda döngü değişkeninin döngüden önce bildirilmesi döngüden sonra değişkenin 
+	değerinin kullanıldığı algısını yaratır. Yani okunabilirlik/algınabilirlik artırılmış olur
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		
+		int n = kb.nextInt();
+		int i;
+		
+		for (i = 0; i < n; ++i)
+			System.out.printf("%d ", i);
+		
+		System.out.printf("%ni = %d%n", i);
+		
+		for (i = n - 1; i >= 0; --i)
+			System.out.printf("%d ", i);
+	
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	for döngü deyiminde yanlışlıkla noktalı virgülün konması durumu. Aşağıdaki örnekte error oluşmaz
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		
+		int n = kb.nextInt();
+		int i;
+		
+		for (i = 0; i < n; ++i);
+			System.out.printf("%d ", i);
+	
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	for döngü deyiminde yanlışlıkla noktalı virgülün konması durumu. Aşağıdaki örnekte neden error oluşur?
+	onur
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		
+		int n = kb.nextInt();
+		
+		for (int i = 0; i < n; ++i);// for 'un scope alanı içerisinde geçerli.; ' burada for'u sonlandırıyor sonra diğer deyime geçiyor.
+			System.out.printf("%d ", i); //error
+	
+	}
+}
+/*----------------------------------------------------------------------------------------------------------------------
+	for döngü deyimi ile n-kez dönen döngü 
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		
+		int n = kb.nextInt();
+		
+		for (int i = 0; i < n; ++i)
+			System.out.printf("%d ", i);
+	
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	for döngü deyimi ile n-kez dönen döngü 
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		
+		int n = kb.nextInt();
+		
+		for (int i = n - 1; i >= 0; --i)
+			System.out.printf("%d ", i);
+	
+	}
+}
+
+
+
+
+
+
+
 
 
 
