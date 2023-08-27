@@ -5038,8 +5038,6 @@ class App {
 	ediniz. Bu kalıp kullanılacaksa ve döngüden sonra n-nin eski değeri gerekirse döngü öncesinde n değeri saklanmalıdır.
 	Bu kalıbın zorunlu olarak kullanıldığı bir durum yoktur. Ancak bazı programcılar bu kalıbı kullanabilirler. Böyle
 	bir kodun anlaşılması açısından bu döngü kalıbı bilinmelidir
-
-	(bakılacak)
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -5545,7 +5543,7 @@ package csd;
 class App {
 	public static void main(String [] args)	
 	{	
-		while (true) {
+		while (true) { // Sonsuz Döngü..
 			//...
 		}
 	}
@@ -5572,7 +5570,7 @@ class CountDigitsTest {
 			
 			if (a == 0) {
 				System.out.println("Tekrar yapıyor musunuz?");
-				return; // metodu sonlandırıyor...
+				return; // metodu sonlandırıyor...Döngüde sonlanır.
 			}		
 		}
 	}
@@ -5835,7 +5833,7 @@ class App {
 
 /*----------------------------------------------------------------------------------------------------------------------
 	for döngü deyiminde yanlışlıkla noktalı virgülün konması durumu. Aşağıdaki örnekte neden error oluşur?
-	onur
+	for boyunca geçerli olan isi for dışında kullanılmış olundu. Boş deyimle birlikte i nin ismi artık görülemez durumu gelmiştir.
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -5848,7 +5846,7 @@ class App {
 		
 		int n = kb.nextInt();
 		
-		for (int i = 0; i < n; ++i);// for 'un scope alanı içerisinde geçerli.; ' burada for'u sonlandırıyor sonra diğer deyime geçiyor.
+		for (int i = 0; i < n; ++i);
 			System.out.printf("%d ", i); //error
 	
 	}
@@ -5896,20 +5894,680 @@ class App {
 	08.01.2023
 	Blue
 -----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	for döngüsünün birinci ve üçüncü kısmında virgül ayracı ile birden fazla ifade yazılabilir 
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		for (int i = 0, k = 10; i <= 5 && k >= 2; ++i, --k)
+			System.out.printf("(%02d, %02d)%n", i, k);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	for döngüsünün birinci kısmında değişken bildirimi yapılmışsa başka bir ifade yazılamaz  
+	 
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		for (System.out.println("Birinci kısım"), int i = 0, k = 10; i <= 5 && k >= 2; ++i, --k) //error
+			System.out.printf("(%02d, %02d)%n", i, k);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örneği inceleyiniz
+
+	for içerisinde değişken bildirildiğinde birden fazla değişken olacaksa bunların türleri aynı olmak zorunda. Eğer farklı 
+	olacaksa for dışında aşağıdaki gibi tanımlanmalıdır..
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		int i;
+		double k;
+		
+		
+		for (i = 0, k = 3.456; i <= 5 && k >= 2; ++i, --k) // i ve k sınırlarına dikkat. ve arada && operatörü vardır.
+
+			System.out.printf("(%02d, %f)%n", i, k);
+	}
+}
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte klavyeden sıfır girilene kadar alınan sayıların toplamı bulunmuştur. Aslında for döngü deyimi
+	güçlü bir deyimdir
+
+	
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		int sum = 0;
+		int a;
+		
+		for (System.out.println("Sayıları girmeye başlayınız:"), System.out.print("Bir sayı giriniz:"); 
+				(a = Integer.parseInt(kb.nextLine())) != 0; sum += a, System.out.print("Bir sayı giriniz:"))
+			;
+			
+		System.out.printf("Toplam:%d%n", sum);
+		
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Hiç sonlanmayacak sanılan ancak öyle olmayan bir döngü örneği. Örnekte i değeri azalarak -2147483648 değerine
+	yani int türünün en küçük değerine geldiğinde artık bir azaltıldığında 2147483647 değeri yani int türünün en büyük
+	değeri elde edilir ve döngüden çıkılmış olur
+
+	int in en küçük sınırına geldiğinde bunu 1 azaltırsa int in en büyük sınırına gelir.
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		int i;
+		
+		for (i = 0; i < 10; --i)
+			; //System.out.println(i);
+		
+		System.out.printf("i = %d%n", i);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte i değeri döngü dışında kaç olur?
+
+ int in en küçük sınırı görülür.
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		int i;
+		
+		for (i = 10; i >= 0; ++i)
+			; //System.out.println(i);
+		
+		System.out.printf("i = %d%n", i);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	for döngüsünde birinci kısmın boş bırakılması durumu
+	
+	Akış for deyimine geldiğinde 1. kısımda hiçbir şey yapmamış olur. n-kez döner..
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		int n = Integer.parseInt(kb.nextLine());
+		
+		int i = 0;
+		
+		
+		for (; i < n; ++i)
+			System.out.printf("%d ", i);
+		
+		System.out.println();
+		
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	for döngüsünde üçüncü kısmın boş bırakılması durumu
+
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		int n = Integer.parseInt(kb.nextLine());
+				
+		
+		for (int i = 0; i < n;) {
+			System.out.printf("%d ", i);
+			++i;
+		}
+		
+		System.out.println();
+		
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	for döngüsünde birinci ve üçüncü kısmın boş bırakılması durumu while döngüsüne benzetilebilir
+
+	kontrolün başta yapıldığı while döngüsü anlaşılır...
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		int n = Integer.parseInt(kb.nextLine());
+			
+		int i = 0;
+		
+		for (; i < n;) {
+			System.out.printf("%d ", i);
+			++i;
+		}
+		
+		System.out.println();
+		
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	for döngüsünde ikinci kısmın boş bırakılması durumunda sonsuz döngü oluşur. Yani koşul her zaman geçerli olur
+	Sonsuz döngünün hiç sonlanmayanı..return deyimiyle sonlandırılabılir.
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		for (int i = 0; ; ++i)
+			System.out.printf("%d%n", i);		
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	for döngüsü ile sonsuz döngü oluşturmak için genelde programcılar 3 kısmı da boş bırakmayı tercih ederler. Bu aslında 
+	iyi bir tekniktir
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		for (;;) {    //While(true)' dan hiç farkı yoktur. ikisinden birisi kullanılabilir.
+			//...
+		}		
+	}
+}
+
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		CountDigitsTest.run();
+	}
+}
+
+class CountDigitsTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+				
+		for (;;) {
+			System.out.print("Bir sayı giriniz:");
+			int a = Integer.parseInt(kb.nextLine());
+			System.out.printf("%d sayısının basamak sayısı:%d%n", a, NumberUtil.countDigits(a));
+			
+			if (a == 0) {
+				System.out.println("Tekrar yapıyor musunuz?");
+				return;
+			}		
+		}
+	}
+}
+
+class NumberUtil {
+	public static int countDigits(int a)
+	{
+		int count = 0;
+		
+		do {
+			++count;
+			a /= 10;
+		} while (a != 0); 
+		
+		return count;
+	}
+}
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı int türden a ve b değerleri için a'nın b-inci kuvvetini döndüren pow isimli
+	metodu NumberUtil sınıf içerisinde yazınız ve aşağıdaki kod ile test ediniz:
+	
+	Açıklamalar:
+	- Math sınıfının pow metodu kullanılmayacaktır
+	- Metot negatif b değerleri için 1 değerine dönecektir
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		PowTest.run();
+	}
+}
+
+class PowTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+				
+		for (;;) {
+			System.out.print("Tabanı giriniz:");
+			int a = Integer.parseInt(kb.nextLine());
+			
+			System.out.print("Üssü giriniz:");
+			int b = Integer.parseInt(kb.nextLine());
+			System.out.printf("pow(%d, %d) = %d%n", a, b, NumberUtil.pow(a, b));
+			
+			if (a == 0) {
+				System.out.println("Tekrar yapıyor musunuz?");
+				return;
+			}		
+		}
+	}
+}
+
+class NumberUtil {
+	public static int pow(int a, int b)
+	{
+		int result = 1;
+		
+		for (int i = 0; i < b; ++i) //i yi tekrar kullanmayacağız. o yüzden for içinde bildirdik.
+			result *= a; // a'yı b kez çarpıcaz.
+		
+		return result;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı int türden a ve b değerleri için a'nın b-inci kuvvetini döndüren pow isimli
+	metodu NumberUtil sınıf içerisinde yazınız ve aşağıdaki kod ile test ediniz:
+	
+	Açıklamalar:
+	- Math sınıfının pow metodu kullanılmayacaktır
+	- Metot negatif b değerleri için 1 değerine dönecektir
+-----------------------------------------------------------------------------------------------------------------------*/
+
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		PowTest.run();
+	}
+}
+
+class PowTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+				
+		for (;;) {
+			System.out.print("Tabanı giriniz:");
+			int a = Integer.parseInt(kb.nextLine());
+			
+			System.out.print("Üssü giriniz:");
+			int b = Integer.parseInt(kb.nextLine());
+			System.out.printf("pow(%d, %d) = %d%n", a, b, NumberUtil.pow(a, b));
+			
+			if (a == 0) {
+				System.out.println("Tekrar yapıyor musunuz?");
+				return;
+			}		
+		}
+	}
+}
+
+class NumberUtil {
+	public static int pow(int a, int b)
+	{
+		int result = 1;
+		
+		while (b-- > 0) // Özel Kalıptır. b-- : azaltılmamış değerdir.
+			result *= a;
+		
+		return result;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı int türden bir sayının Armstrong sayısı olup olmadığını test eden isArmstrong
+	isimli metodu NumberUtil sınıfı içerisinde yazınız ve aşağıdaki kod ile test ediniz.
+	
+	Bu tarz metodlar boolean a geri döner. predicket metodlarda denir..
+
+	Açıklamalar:
+		- Bir sayının her basamağının basamak sayıncı kuvvetleri toplandığında sayının kendisine eşitse bu sayıya 
+		Armstrong sayısı denir. Örneğin:
+			153 -> 1  * 1 * 1 + 5 * 5 * 5 + 3 * 3 * 3 = 153
+			
+		- Kuvvet alma işlemi için yazılmış pow metodunu kullanınız
+		
+		- Sayı negatif ise Armstrong sayıaı kabul etmeyiniz
+
+		Eflatun
+-----------------------------------------------------------------------------------------------------------------------*/
 
 
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		IsArmstrongTest.run();
+	}
+}
+
+class IsArmstrongTest {
+	public static void run()
+	{
+		for (int a = -10; a <= 99999; ++a) // -10 dan 6 basamağa kadar ilerliyoruz.
+			if (NumberUtil.isArmstrong(a))
+				System.out.println(a);
+	}
+}
+
+class NumberUtil {
+	public static boolean isArmstrong(int a) // sadece bu kısmı yazdık...
+	{
+		return a >= 0 && calculateDigitsPowSum(a) == a; // a sıfırdan büyük ya da eşit ve basamak toplamı a ya eşitse return yap.
+	}
+	
+	public static int calculateDigitsPowSum(int a)
+	{
+		int n = countDigits(a);
+		int total = 0;
+		
+		while (a != 0) {
+			total += pow(a % 10, n);
+			a /= 10;
+		}
+		
+		return total;
+	}
+	
+	public static int countDigits(int a) //burayı önceden yazıp test ettik o yüzden burayı tekrar yazmadık.
+	{
+		int count = 0;
+		
+		do {
+			++count;
+			a /= 10;
+		} while (a != 0); 
+		
+		return count;
+	}
+	public static int pow(int a, int b)
+	{
+		int result = 1;
+		
+		while (b-- > 0)
+			result *= a;
+		
+		return result;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı long türden bir sayının asal olup olmadığını test eden isPrime isimli metodu
+	NumberUtil sınıfı içerisinde yazınız ve aşağıdakş kod ile test ediniz
+	(Yavaş versiyon)
+-----------------------------------------------------------------------------------------------------------------------*/
+
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		IsPrimeTest.run();
+	}
+}
+
+class IsPrimeTest {
+	public static void run()
+	{
+		for (int i = 0; i <= 100; ++i)
+			if (NumberUtil.isPrime(i))
+				System.out.printf("%d ", i);
+		
+		System.out.println();
+		
+		System.out.println( NumberUtil.isPrime(1_000_003)); // bu sayının asal olup olmadığı test edilsin..
+	}
+}
+
+class NumberUtil {
+	public static boolean isPrime(long a)
+	{
+		if (a <= 1) // asal olmayan kısım
+			return false;
+		
+		for (long i = 2; i <= a / 2; ++i) // girilen sayının yarısına gidiyoruz ve en az bir tane bile bölen varsa asaldır.
+			if (a % i == 0) // asal değil
+				return false;
+		
+		return true; // 1_000_003 sayısı için true döner..
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı long türden bir sayının asal olup olmadığını test eden isPrime isimli metodu
+	NumberUtil sınıfı içerisinde yazınız ve aşağıdakş kod ile test ediniz
+	
+	Kural: Bir sayı karekökünden daha küçük olan asal sayıların hiç bir tanesine bölünmüyorsa asaldır
+	(Hızlı versiyon)
+
+	9 Sayısının karekörü = 3 tür. kök 9 = 3 veya 3 * 3 = 9.
+	1000003 sayısı için karekökünden (karekökü yaklaşık 1000 dir.) daha küçük olan asallarda en fazla 500 tanedir.
+
+	Eratosthenes Algoritması
+
+	Eflatun
+-----------------------------------------------------------------------------------------------------------------------*/
 
 
+package csd;
 
+class App {
+	public static void main(String [] args)	
+	{	
+		IsPrimeTest.run();
+	}
+}
 
+class IsPrimeTest {
+	public static void run()
+	{
+		for (int i = 0; i <= 100; ++i)
+			if (NumberUtil.isPrime(i))
+				System.out.printf("%d ", i);
+		
+		System.out.println();
+		
+		System.out.println( NumberUtil.isPrime(1_000_003));
+	}
+}
 
+class NumberUtil {
+	public static boolean isPrime(long a)
+	{
+		if (a <= 1)
+			return false;
+		
+		if (a % 2 == 0)
+			return a == 2; // 2 ise true. 2 dışındaki çift sayılardurumundada false
+		
+		if (a % 3 == 0)
+			return a == 3; // 3 e bölünenleri de attık
+		
+		if (a % 5 == 0)
+			return a == 5; // 5 e bölünenleri de attık
+		
+		if (a % 7 == 0)
+			return a == 7; // 7 ye bölünenleri de attık. Sonra ara açılıyor. 11, 19, 23....
+		
+		for (long i = 11; i * i <= a; i += 2) // 7 den sonraki ilk asal sayı 11 dir.
+												// karekökünden daha küçüklere bakıyoruz..
+			if (a % i == 0) // tekleri alıyoruz. 
+				return false; // asal değildir
+		
+		return true; // asal
+		
+	}
+}
 
+/*----------------------------------------------------------------------------------------------------------------------
+	Yukarıda yazılan isPrime metotlarının basit bir karşılaştırması. isPrime metotlarına sayaçlar durumu göstermek için
+	eklenmiştir. iki kod karşılaştırılmıştır. isprime ime isprimeslow
+	aşağıdaki kod tamemen görmek için yazılmıştır.(Count kısmı)
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
 
+class App {
+	public static void main(String [] args)	
+	{	
+		IsPrimeTest.run();
+	}
+}
 
+class IsPrimeTest {
+	public static void run()
+	{	
+		System.out.println( NumberUtil.isPrime(1_000_003));
+		System.out.println( NumberUtil.isPrimeSlow(1_000_003));
+	}
+}
 
+class NumberUtil {
+	public static boolean isPrimeSlow(long a)
+	{
+		if (a <= 1)
+			return false;
+		
+		int count = 0;
+		
+		for (long i = 2; i <= a / 2; ++i) {
+			++count;
+			if (a % i == 0)
+				return false;
+		}
+		
+		
+		System.out.printf("isPrimeSlow count:%d%n", count);
+		
+		return true;
+	}
+	
+	public static boolean isPrime(long a)
+	{
+		if (a <= 1)
+			return false;
+		
+		if (a % 2 == 0)
+			return a == 2;
+		
+		if (a % 3 == 0)
+			return a == 3;
+		
+		if (a % 5 == 0)
+			return a == 5;
+		
+		if (a % 7 == 0)
+			return a == 7;
+		
+		int count = 0;
+		
+		for (long i = 11; i * i <= a; i += 2) {
+			++count;
+			if (a % i == 0)
+				return false;
+		}
+		
+		System.out.printf("isPrime count:%d%n", count);
+		
+		return true;
+		
+	}
+}
 
+/*----------------------------------------------------------------------------------------------------------------------
+	Test için kullanabileceğiniz çeşitli yeterince büyük asal sayılar:
+	6750161072220585911
+	1603318868174368979
+	6584583408148485263
+	6245098347044246839
+	6285871677077738093
+	5697859706174583067
+	710584055392819667
+	4935060337471977161
+	3728803592870153407
+	4331452335614730577
+	1386437196678024971
+	1677990107453991593
+	4765603950744460867
+	4498306523077899307
+	4434895834573449257
+	Kullanırken sayıların sonuna L koymayı unutma...
+-----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı int türden bir sayının faktoriyel değerine geri dönen factorial isimli metodu
+	yazınız ve aşağıdaki kod ile test ediniz
+	Açıklamalar:
+	 0! = 1 ve 1! = 1 olmak üzere
+	 n! = 1 * 2 * ... * n - 1 * n
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
 
+class App {
+	public static void main(String [] args)	
+	{	
+		IsPrimeTest.run();
+	}
+}
 
+class IsPrimeTest {
+	public static void run()
+	{	
+		for (int n = 0; n < 13; ++n)
+			System.out.printf("%d! = %d%n", n, NumberUtil.factorial(n));
+	}
+}
+
+class NumberUtil {
+	public static int factorial(int n)
+	{
+		int result = 1;
+		
+		for (int i = 2; i <= n; ++i)
+			result *= i;
+		
+		return result;
+	}
+}
 
 
 
