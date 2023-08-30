@@ -6586,7 +6586,7 @@ package csd;
 
 class App {
 	public static void main(String [] args)	
-	{	
+	{	 
 		GetPrimeTest.run();
 	}
 }
@@ -6660,6 +6660,8 @@ class NumberUtil {
 	Açıklamalar:
 	- iPrime metodunun hızlı versiyonunu kullanınız
 	- n değerinin poziitf olmaması durumu metot içerisinde kontrol edilmeyecektir
+
+	onur
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -6691,19 +6693,19 @@ class GetPrimeTest {
 
 
 class NumberUtil {
-	public static int getPrime(int n)
+	public static int getPrime(int n) //1. asal sayıyı istediğimizde n = 1
 	{
 		int val = 2;
 		int count = 0;
 		
 		for (;;) {
-			if (isPrime(val))
-				++count;
+			if (isPrime(val)) //val = 2
+				++count; // 1 arttı
 			
-			if (count == n)
-				return val;
+			if (count == n) // count: 1 ==  n: 1 oldu
+				return val; // return val; den 2 geri döndü
 			
-			++val;
+			++val; //burada val 3 mü oldu?
 		}
 	}
 	
