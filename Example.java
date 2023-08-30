@@ -6569,6 +6569,1211 @@ class NumberUtil {
 	}
 }
 
+/*----------------------------------------------------------------------------------------------------------------------
+	14.01.2023	
+	Blue
+-----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı int türden bir n değeri için n-inci asal sayıyı döndüren getPrime isimli
+	metodu NumberUtil sınıfı içerisinde yazınız ve test ediniz
+	
+	Açıklamalar:
+	- iPrime metodunun hızlı versiyonunu kullanınız
+	- n değerinin poziitf olmaması durumu metot içerisinde kontrol edilmeyecektir
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		GetPrimeTest.run();
+	}
+}
+
+class GetPrimeTest {
+	public static void run()
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		for (;;) {
+			System.out.print("Bir sayı giriniz:");
+			int n = Integer.parseInt(kb.nextLine());
+			
+			if (n <= 0) {
+				System.out.println("Tekrar yapıyor musunuz?");
+				return;
+			}
+			
+			System.out.printf("%d.asal sayı:%d%n", n, NumberUtil.getPrime(n));
+		}
+				
+	}
+}
+
+
+class NumberUtil {
+	public static int getPrime(int n)
+	{
+		int val = 2;
+		
+		for (int i = 0, count = 0; count < n; ++i)
+			if (isPrime(i)) {
+				++count;
+				val = i;
+			}
+		
+		return val;
+	}
+	
+	public static boolean isPrime(long a)
+	{
+		if (a <= 1)
+			return false;
+		
+		if (a % 2 == 0)
+			return a == 2;
+		
+		if (a % 3 == 0)
+			return a == 3;
+		
+		if (a % 5 == 0)
+			return a == 5;
+		
+		if (a % 7 == 0)
+			return a == 7;
+		
+		for (long i = 11; i * i <= a; i += 2)
+			if (a % i == 0)
+				return false;
+		
+		return true;
+		
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı int türden bir n değeri için n-inci asal sayıyı döndüren getPrime isimli
+	metodu NumberUtil sınıfı içerisinde yazınız ve test ediniz
+	
+	Açıklamalar:
+	- iPrime metodunun hızlı versiyonunu kullanınız
+	- n değerinin poziitf olmaması durumu metot içerisinde kontrol edilmeyecektir
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		GetPrimeTest.run();
+	}
+}
+
+class GetPrimeTest {
+	public static void run()
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		for (;;) {
+			System.out.print("Bir sayı giriniz:");
+			int n = Integer.parseInt(kb.nextLine());
+			
+			if (n <= 0) {
+				System.out.println("Tekrar yapıyor musunuz?");
+				return;
+			}
+			
+			System.out.printf("%d.asal sayı:%d%n", n, NumberUtil.getPrime(n));
+		}				
+	}
+}
+
+
+class NumberUtil {
+	public static int getPrime(int n)
+	{
+		int val = 2;
+		int count = 0;
+		
+		for (;;) {
+			if (isPrime(val))
+				++count;
+			
+			if (count == n)
+				return val;
+			
+			++val;
+		}
+	}
+	
+	public static boolean isPrime(long a)
+	{
+		if (a <= 1)
+			return false;
+		
+		if (a % 2 == 0)
+			return a == 2;
+		
+		if (a % 3 == 0)
+			return a == 3;
+		
+		if (a % 5 == 0)
+			return a == 5;
+		
+		if (a % 7 == 0)
+			return a == 7;
+		
+		for (long i = 11; i * i <= a; i += 2)
+			if (a % i == 0)
+				return false;
+		
+		return true;
+		
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	İçiçe döngüler (nested loops)
+	Bir döngü deyimi içerisinde başka bir döngü deyiminin bulunması durumudur. Bu durumda dıştaki döngünün her bir adımı
+	için içteki döngünün her adımı tamamlanır.
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		for (int i = 0; i < 5; ++i)
+			for (int k = 7; k >= 0; --k)
+				System.out.printf("(%d, %d)%n", i, k);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Programcılar bazen tek bir döngü yazsalar da o döngü içerisinde çağrılan bir metot veye metotlar da döngüye girebilirler.
+	Bu durumda yine içiçe döngü oluşur.
+/*----------------------------------------------------------------------------------------------------------------------
+	break deyimi döngüyü, döngünün koşul ifadesinden bağımsız olarak sonlandırmak (kırmak) için kullanılır. break deyimi
+	döngü deyimlerinin dışında ileride göreceğimiz "switch" deyiminde de kullanılabilir. Bunlar dışında kullanımı error
+	oluşturur. 
+	break deyiminin genel biçimi:
+		break [etiket ismi];
+
+		Violance
+-----------------------------------------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		for (int i = 0; i < 5; ++i)
+			Util.print(i);
+	}
+}
+
+
+class Util {
+	public static void print(int i)
+	{
+		for (int k = 7; k >= 0; --k)
+			System.out.printf("(%d, %d)%n", i, k);
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	3 basamaklı Armstrong sayılarının iç içe döngü ile bulunması
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		for (int a = 1; a <= 9; ++a)
+			for (int b = 0; b <= 9; ++b)
+				for (int c = 0; c <= 9; ++c)
+					if (a * a * a + b * b * b + c * c * c == 100 * a + 10 * b + c)
+						System.out.printf("%d%d%d%n", a, b, c);
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	break deyimi break deyiminin etiketsiz kullanımında akış break deyimine geldiğinde döngü sonlandırılır. Döngüden sonraki
+	koddan devam edilir. break hangi döngü içerisinde etiketsiz kullanılmışsa o döngü sonlandırılır.  
+	
+	Aşağdaki örnekte klavyeden sıfır girilene kadar alınan sayıların toplamı bulunmuştur. Sıfır girildiğinde break deyimi
+	döngü sonlandırılmıştır.
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.println("Sayıları girmeye başlayınız:");
+		
+		int sum = 0;
+		
+		for (;;) {
+			System.out.print("Bir sayı giriniz:");
+			int val = Integer.parseInt(kb.nextLine());
+			
+			if (val == 0)
+				break;
+			
+			sum += val;
+		}
+		
+		System.out.printf("Toplam:%d%n", sum);
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı int türden bir n değeri için n-inci asal sayıyı döndüren getPrime isimli
+	metodu NumberUtil sınıfı içerisinde yazınız ve test ediniz.
+	
+	Açıklamalar:
+	- iPrime metodunun hızlı versiyonunu kullanınız.
+	- n değerinin poziitf olmaması durumu metot içerisinde kontrol edilmeyecektir.
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		GetPrimeTest.run();
+	}
+}
+
+class GetPrimeTest {
+	public static void run()
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		for (;;) {
+			System.out.print("Bir sayı giriniz:");
+			int n = Integer.parseInt(kb.nextLine());
+			
+			if (n <= 0) 
+				break;
+			
+			System.out.printf("%d.asal sayı:%d%n", n, NumberUtil.getPrime(n));
+		}		
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+
+class NumberUtil {
+	public static int getPrime(int n)
+	{
+		int val = 2;
+		int count = 0;
+		
+		for (;;) {
+			if (isPrime(val))
+				++count;
+			
+			if (count == n)
+				return val;
+			
+			++val;
+		}
+	}
+	
+	public static boolean isPrime(long a)
+	{
+		if (a <= 1)
+			return false;
+		
+		if (a % 2 == 0)
+			return a == 2;
+		
+		if (a % 3 == 0)
+			return a == 3;
+		
+		if (a % 5 == 0)
+			return a == 5;
+		
+		if (a % 7 == 0)
+			return a == 7;
+		
+		for (long i = 11; i * i <= a; i += 2)
+			if (a % i == 0)
+				return false;
+		
+		return true;
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	break deyiminin etiketsiz kullanımı yalnızca kullanıldığı döngüyü sonlandırır. Aşağıdaki örnekte içteki döngüde bir 
+	koşul gerçekleştiğinde dıştaki döngünün de sonlandırılması flag değişken kullanılarak yapılmıştır. Ancak dikkat edilirse
+	kodun karmaşıklığı artmıştır. Örnek durumu göstermek için yazılmıştır.
+
+	onur
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{
+		boolean exitFlag = false;
+		
+		for (int i = 0; i < 10; ++i) {
+			for (int k = 15; k >= 0; --k) {
+				System.out.printf("(%d, %d)%n", i, k);
+				
+				if ((i + k) % 6 == 0) {
+					exitFlag = true;
+					break;
+				}
+			}
+			
+			if (exitFlag)
+				break;
+		}
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+		
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Etiketli break (labeled break) deyiminde gerektiğinde sonlandırılacak döngü deyiminin başında bir etiket bildirimi 
+	yapılır. Etiket bildiriminin genel biçimi şu şekildedir:
+		<etiket ismi>:
+	Etiket ismi değişken isimlendirme kurallarına uygun herhangi bir isim olabilir. Genellikle programcılar etiket isminin
+	tamamını büyük harfle, birden fazla kelimeden oluşuyorsa da araya alttire karakterini koyarak isimlendirirler. Yukarıdaki
+	program aşağıdaki gibi yazılabilir.
+
+	Violance
+
+
+ Aqua
+ -> Etiket bildirildiği döngüyü sonlandırır.Bu örnekte dıştaki döngünün etiketi vardır. Dolayısıyla o döngü sonlanır..
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		EXIT_LOOP:
+		for (int i = 0; i < 10; ++i) 
+			for (int k = 15; k >= 0; --k) {
+				System.out.printf("(%d, %d)%n", i, k);
+				
+				if ((i + k) % 6 == 0) 
+					break EXIT_LOOP;
+			}
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+		
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Etiketli break deyiminin bir kullanımı. Örnek durumu göstermek için yazılmıştır.
+
+	Aqua
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		EXIT_LOOP: // Dıştaki for' un etiketi..
+		for (int i = 0; i < 10; ++i)
+			EXIT_INNER_LOOP: // İçteki for'un etiketi..
+			for (int j = 0; j < 10; ++j)
+				for (int k = 15; k >= 0; --k) {
+					System.out.printf("(%d, %d)%n", i, k);
+					
+					if ((i + j + k) % 10 == 0) 
+						break EXIT_LOOP;
+					
+					if ((i + j + k) % 6 == 0) 
+						break EXIT_INNER_LOOP;
+					
+					if ((i + j + k) % 11 == 0)
+						break; // En içteki for için etiket gerekmez. Çünkü onun için break kullanımı tek başına yeterlidir..
+				}
+		
+		
+		System.out.println("Tekrar yapıyor musunuz?");		
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	continue deyimi döngüyü değil, döngünün o anki adımını sonlandırmak için kullanılır. continue deyiminin de etiketli
+	biçimi vardır. Ancak yapısal programlama ve nesne yönelimli porogramlama tekniği açısından kullanımı tavsiye edilmez.
+	continue deyiminin etiketsiz biçimi break deyimi kadar sık kullanılmaz. Ancak bazı durumlarda okunabilirliği artırabilir.
+	continue deyimi yalnızca döngü içerisinde kullanılabilir. 
+
+	Violance
+	
+	Aşağıdaki örnekte 1 ile klavyeden girilen sayı arasındaki çift sayılar ekrana bastırılmıştır. Şüphesiz daha kolay
+	yazılabilir. Sadece continue deyiminin çalışma prensibinin anlaşılması için bu şekilde yazılmıştır.
+
+	onur -> continue olmasaydı 2 ye bölünmeyen sayıları da basar mıydı?
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Bir sayı giriniz:");
+		int n = kb.nextInt();
+		
+		for (int i = 1; i <= n; ++i) {
+			if (i % 2 != 0)
+				continue;
+			
+			System.out.printf("%d ", i);
+		}
+		
+		System.out.println("\nTekrar yapıyor musunuz?");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Demo menü uygulaması
+	(İleride daha iyisi yazılacaktır) 
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		MenuApp.run();
+	}
+}
+
+
+class MenuApp {
+	public static void run()
+	{
+		Menu.run();
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+class Menu {
+	public static void printMenu()
+	{
+		System.out.println("1.Ekle");
+		System.out.println("2.Sil");
+		System.out.println("3.Güncelle");
+		System.out.println("4.Listele");
+		System.out.println("5.Çıkış");
+		System.out.print("Seçenek:");
+	}
+	
+	public static void doInsert()
+	{
+		System.out.println("---------------------------------");
+		System.out.println("Ekle seçildi");
+		System.out.println("---------------------------------");
+	}
+	
+	public static void doDelete()
+	{
+		System.out.println("---------------------------------");
+		System.out.println("Sil seçildi");
+		System.out.println("---------------------------------");
+	}
+	
+	public static void doUpdate()
+	{
+		System.out.println("---------------------------------");
+		System.out.println("Güncelle seçildi");
+		System.out.println("---------------------------------");
+	}
+	
+	public static void doList()
+	{
+		System.out.println("---------------------------------");
+		System.out.println("Listele seçildi");
+		System.out.println("---------------------------------");
+	}
+	
+	public static void doOption(int option)
+	{
+		if (option == 1)
+			doInsert();
+		else if (option == 2)
+			doDelete();
+		else if (option == 3)
+			doUpdate();
+		else
+			doList();
+	}
+	
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		for (;;) {
+			printMenu();
+			int option = Integer.parseInt(kb.nextLine());
+			
+			if (option < 1 || option > 5) {
+				System.out.println("Geçersiz Seçenek!...");
+				continue;
+			}
+			
+			if (option == 5)
+				break;
+			
+			doOption(option);
+		
+		}
+		
+		System.out.println("Teşekkürler");
+		System.out.println("C ve Sistem Programcıları Derneği");	
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Demo menü uygulaması
+	(İleride daha iyisi yazılacaktır) 
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		MenuApp.run();
+	}
+}
+
+
+class MenuApp {
+	public static void run()
+	{
+		Menu.run();
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+class Menu {
+	public static void printMenu()
+	{
+		System.out.println("1.Ekle");
+		System.out.println("2.Sil");
+		System.out.println("3.Güncelle");
+		System.out.println("4.Listele");
+		System.out.println("5.Çıkış");
+		System.out.print("Seçenek:");
+	}
+	
+	public static void doInsert()
+	{
+		System.out.println("---------------------------------");
+		System.out.println("Ekle seçildi");
+		System.out.println("---------------------------------");
+	}
+	
+	public static void doDelete()
+	{
+		System.out.println("---------------------------------");
+		System.out.println("Sil seçildi");
+		System.out.println("---------------------------------");
+	}
+	
+	public static void doUpdate()
+	{
+		System.out.println("---------------------------------");
+		System.out.println("Güncelle seçildi");
+		System.out.println("---------------------------------");
+	}
+	
+	public static void doList()
+	{
+		System.out.println("---------------------------------");
+		System.out.println("Listele seçildi");
+		System.out.println("---------------------------------");
+	}
+	
+	public static void doOption(int option)
+	{
+		if (option == 1)
+			doInsert();
+		else if (option == 2)
+			doDelete();
+		else if (option == 3)
+			doUpdate();
+		else
+			doList();
+	}
+	
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		for (;;) {
+			printMenu();
+			int option = Integer.parseInt(kb.nextLine());
+			
+			if (1 <= option && option <= 5) {
+				if (option == 5)
+					break;
+				
+				doOption(option);
+			}
+			else
+				System.out.println("Geçersiz Seçenek!...");
+		}
+		
+		System.out.println("Teşekkürler");
+		System.out.println("C ve Sistem Programcıları Derneği");	
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı n sayısı için n-inci Fibonacci sayısını döndüren fibonacciNumber isimli
+	metodu NumberUtil sınıfı içerisinde yazınız ve aşağıdaki kod ile test ediniz.
+	Açıklama:
+		- Fibonacci serisi
+			0 1 1 2 3 5 8 13 ...
+		- Metot pozitif olmayan değerler için kontrol yapmayacaktır
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		FibaonnaciNumberTest.run();
+	}
+}
+
+
+class FibaonnaciNumberTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		for (;;) {
+			System.out.print("Bir sayı giriniz:");
+			int n = Integer.parseInt(kb.nextLine());
+			
+			if (n < 1)
+				break;
+			System.out.printf("%d.Fibonacci sayısı:%d%n", n, NumberUtil.fibonacciNumber(n));
+		}
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+class NumberUtil {
+	public static int fibonacciNumber(int n)
+	{
+		if (n <= 2)
+			return n - 1;
+		
+		int prev1 = 1, prev2 = 0, val = 0;
+		
+		for (int i = 2; i < n; ++i) {
+			val = prev1 + prev2;
+			prev2 = prev1;
+			prev1 = val;
+		}
+		
+		return val;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı int türden bir sayıdan büyük ilk Fibonacci sayısını döndüren nextFibonacciNumber
+	metodunu NumberUtil sınıfı içerisinde yazınız ve test ediniz.
+	
+	Dikkat: Kodda, bir önceki örnekte yazdığımız fibonacciNumber metodunu çağırsaydık içiçe döngü oluşurdu. Bu da göreceli
+	yavaş olurdu.
+	onur
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		NextFibaonnaciNumberTest.run();
+	}
+}
+
+
+class NextFibaonnaciNumberTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		for (;;) {
+			System.out.print("Bir sayı giriniz:");
+			int val = Integer.parseInt(kb.nextLine());
+			
+			System.out.printf("%d sayısından büyük ilk Fibonacci sayısı:%d%n", val, NumberUtil.nextFibonacciNumber(val));
+			
+			if (val == 0)
+				break;
+		}
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+class NumberUtil {
+	public static int nextFibonacciNumber(int val) // buradan 1 gelmiş olsaydı
+	{
+		if (val < 0)
+			return 0;
+		
+		int prev1 = 1, prev2 = 0, next;
+		
+		for (;;) {
+			next = prev1 + prev2; // next = 1 olacaktı. 
+			
+			if (next > val) // 1 < 1 yanlıs olacaktı. Ancak program çalıştırıldığında 1 için 1 den en buyuk fib. num. 2 sonucu vermekte..
+				return next; // bir de returnden sonra akış durması lazım değil miydi?
+			
+			prev2 = prev1;
+			prev1 = next;
+		}
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	switch deyiminin genel biçimi:
+	
+	switch (<ifade>) {
+		case <sabit ifadesi>:
+			<deyim>
+		case <sabit ifadesi>:
+			<deyim>
+			
+		...
+		[
+		default:
+			<deyim>
+		]
+	}
+	
+	Bu deyimde parantez içerisindeki ifade temel türler için tamsayı türlerinden biri veya char türünden olabilir. Temel
+	türler dışında  String ve enum class türlerinden de olabilir. Bu türler ileride ele alınacaktır. switch deyiminin 
+	default kısmı zorunlu değildir.
+	
+	Anahtar Notlar: switch Java 12'den itibaren ifade (expression) olarak da kullanılabilmektedir. Bu tarz deyimlere/ifadelere
+	programlamada "ifadesel deyim (expression statement)" da denir. switch'in ifade olarak kullanımına yönelik sentaks ve 
+	semantik eklentiler yapılmıştır. İleride ele alınacaktır.
+
+	Violance
+-----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki switch deyiminin if deyimi karşılığı:
+	
+	if (code == 34387)
+		System.out.println("Mecidiyeköy, İstanbul");
+	else if (code == 67100)
+		System.out.println("Bahçelievler Mahallesi, ZOnguldak");
+	else
+		System.out.println("Geçersiz posta kodu");
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Posta kodunu giriniz:");
+		int code = kb.nextInt();
+		
+		switch (code) {
+		case 34387:
+			System.out.println("Mecidiyeköy, İstanbul");
+			break;
+		case 67100:
+			System.out.println("Bahçelievler Mahallesi, ZOnguldak");
+			break;
+		default:
+			System.out.println("Geçersiz posta kodu");
+		}
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	switch deyiminde default kısım olmak zorunda değildir. Aşağıdaki switch deyiminin if deyimi karşılığı:
+	
+	if (code == 34387)
+		System.out.println("Mecidiyeköy, İstanbul");
+	else if (code == 67100)
+		System.out.println("Bahçelievler Mahallesi, ZOnguldak");
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Posta kodunu giriniz:");
+		int code = kb.nextInt();
+		
+		switch (code) {
+		case 34387:
+			System.out.println("Mecidiyeköy, İstanbul");
+			break;
+		case 67100:
+			System.out.println("Bahçelievler Mahallesi, ZOnguldak");
+			break;
+		}
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	switch deyiminde default bölümün yerinin önemi yoktur. Şüphesiz sona koymak iyi bir tekniktir.
+	Aşağıdaki switch deyiminin if deyimi karşılığı:
+	
+	if (code == 34387)
+		System.out.println("Mecidiyeköy, İstanbul");
+	else if (code == 67100)
+		System.out.println("Bahçelievler Mahallesi, ZOnguldak");
+	else
+		System.out.println("Geçersiz posta kodu");
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Posta kodunu giriniz:");
+		int code = kb.nextInt();
+		
+		switch (code) {
+		default:
+			System.out.println("Geçersiz posta kodu");
+			break;
+		case 34387:
+			System.out.println("Mecidiyeköy, İstanbul");
+			break;
+		case 67100:
+			System.out.println("Bahçelievler Mahallesi, ZOnguldak");
+			break;
+		}
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Anahtar Notlar: switch deyiminin bölümleri içerisinde (case ve default) çok fazla işlem yapılması okunabililik/algılanabilirlik
+	açısından iyi bir teknik değildir. Bu durumda metot yazıp ilgili bölümlerde çağırmak gerekir. Bunun için net bir sınır
+	olmasa da 3-4 satırı geçen kodların yazılmaması iyi bir tekniktir.
+-----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	switch deyiminde case ifadelerinin sabit ifadesi olması gerekir.
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Posta kodunu giriniz:");
+		int code = kb.nextInt();
+		
+		int c = 67100;
+		
+		switch (code) {
+		case 34387:
+			System.out.println("Mecidiyeköy, İstanbul");
+			break;
+		case c: //error
+			System.out.println("Bahçelievler Mahallesi, ZOnguldak");
+			break;
+		default:
+			System.out.println("Geçersiz posta kodu");
+			break;
+		}
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	switch deyiminde aynı değere sahip 1'den fazla case bölümü geçersizdir.
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Posta kodunu giriniz:");
+		int code = kb.nextInt();
+	
+		
+		switch (code) {
+		case 34387: //error
+			System.out.println("Mecidiyeköy, İstanbul");
+			break;
+		case 34386 + 1: //error
+			System.out.println("Mecidiyeköy, İstanbul");
+			break;
+		case 67102: 
+			System.out.println("Bahçelievler Mahallesi, ZOnguldak");
+			break;
+		default:
+			System.out.println("Geçersiz posta kodu");
+			break;
+		}
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	switch deyiminde parantez içerisindeki ifade ve case bölümlerine ilişkin sabit ifadeleri temel türler için tamsayı
+	türlerinden biri veya char türünden olabibilir.
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Posta kodunu giriniz:");
+		double code = kb.nextDouble(); //double olamaz. Bu sebepten error vermiştir.
+	
+		
+		switch (code) { //error
+		case 34387:
+			System.out.println("Mecidiyeköy, İstanbul");
+			break;
+		case 67102: 
+			System.out.println("Bahçelievler Mahallesi, ZOnguldak");
+			break;
+		default:
+			System.out.println("Geçersiz posta kodu");
+			break;
+		}
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	switch deyiminde "aşağı düşme (fall through)" özelli vardır. Bir case bölümü veya default bölüm yakalandığında aşağıya 
+	doğru engelleyen herhangi bir deyim görülünceye kadar her deyim çalıştırılır. break deyimi switch deyimi sonlandırmak
+	için kullanılır. Sonsuz döngü, return deyimi vb. başka aşağı düşmeyi engelleyici deyimler de olabilir. Aşağıdaki 
+	kod inceleyiniz.
+
+	onur 
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Posta kodunu giriniz:");
+		int code = kb.nextInt();
+
+		switch (code) {
+		case 34387:
+			System.out.println("Mecidiyeköy, İstanbul");
+		case 67102: 
+			System.out.println("Bahçelievler Mahallesi, Zonguldak");
+		default:
+			System.out.println("Geçersiz posta kodu");
+		}
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte switch deyiminin aşağı düşme özelliğinden yararlanılmıştır. Örnekte 212 ve 216 kodları için switch 
+	dışında daha kısa yapma yöntemi yoktur.
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Telefon kodunu giriniz:");
+		int code = kb.nextInt();
+
+		switch (code) {
+		case 212:
+		case 216:
+			System.out.println("İstanbul");
+			break;
+		case 372: 
+			System.out.println("Zonguldak");
+			break;
+		default:
+			System.out.println("Geçersiz telefon kodu");
+		}
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte switch deyiminin aşağı düşme özelliğinden yararlanılmıştır.
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Telefon kodunu giriniz:");
+		int code = kb.nextInt();
+
+		switch (code) {
+		case 212:
+			System.out.print("Avrupa, ");
+		case 216:
+			System.out.println("İstanbul");
+			break;
+		case 372: 
+			System.out.println("Zonguldak");
+			break;
+		default:
+			System.out.println("Geçersiz telefon kodu");
+		}
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Demo menü uygulaması
+	(İleride daha iyisi yazılacaktır) 
+ Aqua
+ -> Menu uygulamasının switch deyimiyle yapılmış versiyonudur...
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		MenuApp.run();
+	}
+}
+
+
+class MenuApp {
+	public static void run()
+	{
+		Menu.run();
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+class Menu {
+	public static void printMenu()
+	{
+		System.out.println("1.Ekle");
+		System.out.println("2.Sil");
+		System.out.println("3.Güncelle");
+		System.out.println("4.Listele");
+		System.out.println("5.Çıkış");
+		System.out.print("Seçenek:");
+	}
+	
+	public static void doInsert()
+	{
+		System.out.println("---------------------------------");
+		System.out.println("Ekle seçildi");
+		System.out.println("---------------------------------");
+	}
+	
+	public static void doDelete()
+	{
+		System.out.println("---------------------------------");
+		System.out.println("Sil seçildi");
+		System.out.println("---------------------------------");
+	}
+	
+	public static void doUpdate()
+	{
+		System.out.println("---------------------------------");
+		System.out.println("Güncelle seçildi");
+		System.out.println("---------------------------------");
+	}
+	
+	public static void doList()
+	{
+		System.out.println("---------------------------------");
+		System.out.println("Listele seçildi");
+		System.out.println("---------------------------------");
+	}
+	
+	public static void doOption(int option)
+	{
+		switch (option) {
+		case 1:
+			doInsert();
+			break;
+		case 2:
+			doDelete();
+			break;
+		case 3:
+			doUpdate();
+			break;
+		default:
+			doList();	
+		}
+	}
+	
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		for (;;) {
+			printMenu();
+			int option = Integer.parseInt(kb.nextLine());
+			
+			if (1 <= option && option <= 5) {
+				if (option == 5)
+					break;
+				
+				doOption(option);
+			}
+			else
+				System.out.println("Geçersiz Seçenek!...");
+		}
+		
+		System.out.println("Teşekkürler");
+		System.out.println("C ve Sistem Programcıları Derneği");	
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	15.01.2023
+	Blue
+-----------------------------------------------------------------------------------------------------------------------*/
+
+
+
 
 
 
