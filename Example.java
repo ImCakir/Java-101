@@ -6920,7 +6920,6 @@ class NumberUtil {
 	koşul gerçekleştiğinde dıştaki döngünün de sonlandırılması flag değişken kullanılarak yapılmıştır. Ancak dikkat edilirse
 	kodun karmaşıklığı artmıştır. Örnek durumu göstermek için yazılmıştır.
 
-	onur
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -6958,6 +6957,8 @@ class App {
 	program aşağıdaki gibi yazılabilir.
 
 	Violance
+
+	onur
 
 
  Aqua
@@ -7774,7 +7775,612 @@ class Menu {
 	Blue
 -----------------------------------------------------------------------------------------------------------------------*/
 
+/*----------------------------------------------------------------------------------------------------------------------
+	Hangi metot içersinde olusak olalım programı sonlandırmak için System sınıfının exit isimli metodu çağrılabilir. Bu
+	metot parametre olarak int türden ismine "çıkış kodu (exit code)" denilen ve JVM ve oradan da işletim sistemine iletilen
+	bir değer alır. Bu değerin çoğu zaman önemi olmaz. Bazı durumlarda okunabilirliği artırmak için başarı veya başarısızlığa
+	yönelik belirlenen değerler argüman olarak verilir. main metodu normal olarak sonlandığında JVM ve oradan da işletim
+	sistemine sıfır çıkış kodu iletilir. Çıkış kodunun nerede kullanılabileceği burada ele alınmayacaktır.
+	
+	Aşağıdaki örmnekte geçersiz giriş durumunda program sonlandırılmıştır. Örnek exit metodunu göstemek için bu şekilde 
+	yazılmıştır.
 
+	onur
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		LogApp.run();
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+
+class LogApp {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		double val = kb.nextDouble();
+		
+		if (val <= 0) {
+			System.out.println("Geçersiz giriş!...");
+			System.exit(1);
+		}
+		
+		System.out.printf("log(%f) = %f%n", val, Math.log(val));
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Demo menü uygulaması
+	(İleride daha iyisi yazılacaktır) 
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		MenuApp.run();
+	}
+}
+
+
+class MenuApp {
+	public static void run()
+	{
+		Menu.run();
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+class Menu {
+	public static void printMenu()
+	{
+		System.out.println("1.Ekle");
+		System.out.println("2.Sil");
+		System.out.println("3.Güncelle");
+		System.out.println("4.Listele");
+		System.out.println("5.Çıkış");
+		System.out.print("Seçenek:");
+	}
+	
+	public static void doInsert()
+	{
+		System.out.println("---------------------------------");
+		System.out.println("Ekle seçildi");
+		System.out.println("---------------------------------");
+	}
+	
+	public static void doDelete()
+	{
+		System.out.println("---------------------------------");
+		System.out.println("Sil seçildi");
+		System.out.println("---------------------------------");
+	}
+	
+	public static void doUpdate()
+	{
+		System.out.println("---------------------------------");
+		System.out.println("Güncelle seçildi");
+		System.out.println("---------------------------------");
+	}
+	
+	public static void doList()
+	{
+		System.out.println("---------------------------------");
+		System.out.println("Listele seçildi");
+		System.out.println("---------------------------------");
+	}
+	
+	public static void doExit()
+	{
+		System.out.println("Teşekkürler");
+		System.out.println("C ve Sistem Programcıları Derneği");
+		System.exit(0);
+	}
+	
+	public static void doInvalidOption()
+	{
+		System.out.println("Geçersiz Seçenek!...");
+	}
+	
+	public static void doOption(int option)
+	{
+		switch (option) {
+		case 1:
+			doInsert();
+			break;
+		case 2:
+			doDelete();
+			break;
+		case 3:
+			doUpdate();
+			break;
+		case 4:
+			doList();
+			break;
+		case 5:
+			doExit();
+		default:
+			doInvalidOption();	
+		}
+	}
+	
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		for (;;) {
+			printMenu();
+			doOption(Integer.parseInt(kb.nextLine()));
+		}			
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı int türden yıl değerinin artık yıl olup olmadığını test eden isLeapYear
+	isimli metodu yazınız ve aşağıdaki kod ile test ediniz. 
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		IsLeapYearTest.run();
+	}
+}
+
+class IsLeapYearTest {
+	public static void run()
+	{
+		for (int y = 1996; y <= 2104; ++y)
+			if (DateUtil.isLeapYear(y))
+				System.out.println(y);
+	}
+}
+
+class DateUtil {
+	public static boolean isLeapYear(int year)
+	{
+		return year % 4 == 0 && year % 100 != 0 || year % 400 == 0;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı int türden gün ay ve yıl bilgisine ilişkin tarihin geçerli olup olmadığını
+	test eden isValidDate isimli metodu yazınız ve aşağıdaki kod ile test ediniz  
+	(İleride daha iyisi yazılacaktır)
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		IsValidDateTest.run();
+	}
+}
+
+class IsValidDateTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		for (;;) {
+			System.out.print("Gün ay ve yıl bilgilerini giriniz:");
+			int day = kb.nextInt();
+			int month = kb.nextInt();
+			int year = kb.nextInt();
+			
+			if (day == 0)
+				break;
+			
+			if (DateUtil.isValidDate(day, month, year))
+				System.out.printf("%02d/%02d/%04d tarihi geçerlidir%n", day, month, year);
+			else
+				System.out.println("Geçersiz tarih!...");
+			
+		}
+	}
+}
+
+class DateUtil {
+	public static boolean isValidDate(int day, int month, int year)
+	{
+		return 1 <= day && day <= 31 && 1 <= month && month <= 12 && day <= getDays(month, year);
+	}
+	
+	public static int getDays(int month, int year)
+	{
+		int days = 31;
+		
+		switch (month) {
+		case 4:
+		case 6:
+		case 9:
+		case 11:
+			days = 30;
+			break;
+		case 2:
+			days = 28;
+			if (isLeapYear(year))
+				++days;
+		}
+		
+		return days;
+	}
+	
+	public static boolean isLeapYear(int year)
+	{
+		return year % 4 == 0 && year % 100 != 0 || year % 400 == 0;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı int türden gün ay ve yıl bilgisine ilişkin tarihin geçerli olup olmadığını
+	test eden isValidDate isimli metodu yazınız ve aşağıdaki kod ile test ediniz  
+	(İleride daha iyisi yazılacaktır)
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		IsValidDateTest.run();
+	}
+}
+
+class IsValidDateTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		for (;;) {
+			System.out.print("Gün ay ve yıl bilgilerini giriniz:");
+			int day = kb.nextInt();
+			int month = kb.nextInt();
+			int year = kb.nextInt();
+			
+			if (day == 0)
+				break;
+			
+			if (DateUtil.isValidDate(day, month, year))
+				System.out.printf("%02d/%02d/%04d tarihi geçerlidir%n", day, month, year);
+			else
+				System.out.println("Geçersiz tarih!...");
+			
+		}
+	}
+}
+
+class DateUtil {
+	public static boolean isValidDate(int day, int month, int year)
+	{
+		return 1 <= day && day <= 31 && 1 <= month && month <= 12 && day <= getDays(month, year);
+	}
+	
+	public static int getDays(int month, int year)
+	{
+		int days;
+		
+		switch (month) {
+		case 4:
+		case 6:
+		case 9:
+		case 11:
+			days = 30;
+			break;
+		case 2:
+			days = 28;
+			if (isLeapYear(year))
+				++days;
+			break;
+		default:
+			days = 31;
+		}
+		
+		return days;
+	}
+	
+	public static boolean isLeapYear(int year)
+	{
+		return year % 4 == 0 && year % 100 != 0 || year % 400 == 0;
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı int türden gün ay ve yıl bilgisine ilişkin tarihin yılın kaçıncı günü 
+	olduğunu döndüren getDayOfYear metodunu yazınız ve aşağıdaki kod ile test ediniz.
+	Açıklamalar:
+	  - Metot geçersiz bir tarih için -1 değerine geri dönecektir
+	  - Yılın kaçıncı günü olduğuna ilişkin algoritma için aşağıdaki örnekleri inceleyiniz:
+	  	01.03.2020 -> 1 + 29 + 31 = 61
+	  	01.03.2023 -> 1 + 28 + 31 = 60
+	  	31.12.2020 -> 31 + 30 + ... + 29 + 31 = 366
+	  	31.12.2023 -> 31 + 30 + ... + 28 + 31 = 365
+	  	 
+	(İleride daha iyisi yazılacaktır)
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		GetDayOfYearTest.run();
+	}
+}
+
+class GetDayOfYearTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		for (;;) {
+			System.out.print("Gün ay ve yıl bilgilerini giriniz:");
+			int day = kb.nextInt();
+			int month = kb.nextInt();
+			int year = kb.nextInt();
+			
+			if (day == 0)
+				break;
+			
+			int dayOfYear = DateUtil.getDayOfYear(day, month, year);
+			
+			if (dayOfYear != -1)
+				System.out.printf("%02d/%02d/%04d tarihi yılın %d. günüdür%n", day, month, year, dayOfYear);
+			else
+				System.out.println("Geçersiz tarih!...");
+			
+		}
+	}
+}
+
+class DateUtil {
+	public static int getDayOfYear(int day, int month, int year)
+	{
+		if (!isValidDate(day, month, year))
+			return -1;
+		
+		int totalDays = day;
+		
+		switch (month - 1) {    //12. ayı niçin yazmadık?
+		case 11:
+			totalDays += 30;
+		case 10:
+			totalDays += 31;
+		case 9:
+			totalDays += 30;
+		case 8:
+			totalDays += 31;
+		case 7:
+			totalDays += 31;
+		case 6:
+			totalDays += 30;
+		case 5:
+			totalDays += 31;
+		case 4:
+			totalDays += 30;
+		case 3:
+			totalDays += 31;
+		case 2:
+			totalDays += 28;
+			if (isLeapYear(year))
+				++totalDays;
+		case 1:
+			totalDays += 31;
+		}
+		
+		return totalDays;
+		
+	}
+	
+	public static boolean isValidDate(int day, int month, int year)
+	{
+		return 1 <= day && day <= 31 && 1 <= month && month <= 12 && day <= getDays(month, year);
+	}
+	
+	public static int getDays(int month, int year)
+	{
+		int days = 31;
+		
+		switch (month) {
+		case 4:
+		case 6:
+		case 9:
+		case 11:
+			days = 30;
+			break;
+		case 2:
+			days = 28;
+			if (isLeapYear(year))
+				++days;
+		}
+		
+		return days;
+	}
+	
+	public static boolean isLeapYear(int year)
+	{
+		return year % 4 == 0 && year % 100 != 0 || year % 400 == 0;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı int türden gün ay ve yıl bilgisine ilişkin tarihin haftanın hangi gününe 
+	geldiği bilgisini aşağıdaki açıklamalara göre dmndüren getDayOfWeek isimli metodu yazınız ve test ediniz
+	Açıklamalar:
+		- Metot geçersiz bir tarih durumunda -1 değerine geri dönecektir
+		- Haftanın günü 01.01.1900 ile verilen tarih arasındaki (verilen tarih dahil) gün sayısının 7 ile bölümünden
+		elde edilen kalan ile belirlenebilir. Buna göre sıfır "pazar, 1 "pazartesi", 2 "salı" ... 6 "cumartesi" günlerine
+		kaşılık gelir
+		
+		- 01.01.1900 öncesindeki tarihler geçersiz sayılacaktır
+	  	 
+	(İleride daha iyisi yazılacaktır)
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		GetDayOfYearTest.run();
+	}
+}
+
+class GetDayOfYearTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		for (;;) {
+			System.out.print("Gün ay ve yıl bilgilerini giriniz:");
+			int day = kb.nextInt();
+			int month = kb.nextInt();
+			int year = kb.nextInt();
+			
+			if (day == 0)
+				break;
+			
+			DateUtil.printDateTR(day, month, year);
+		}
+	}
+}
+
+class DateUtil {
+	public static void printDateTR(int day, int month, int year)
+	{
+		int dayOfWeek = getDayOfWeek(day, month, year);
+		
+		if (dayOfWeek == -1) {
+			System.out.println("Geçeriz tarih!...");
+			return;
+		}
+		
+		switch (dayOfWeek) {
+		case 0:
+			System.out.printf("%02d/%02d/%04d Pazar%n", day, month, year);
+			break;
+		case 1:
+			System.out.printf("%02d/%02d/%04d Pazartesi%n", day, month, year);
+			break;
+		case 2:
+			System.out.printf("%02d/%02d/%04d Salı%n", day, month, year);
+			break;
+		case 3:
+			System.out.printf("%02d/%02d/%04d Çarşamba%n", day, month, year);
+			break;
+		case 4:
+			System.out.printf("%02d/%02d/%04d Perşembe%n", day, month, year);
+			break;
+		case 5:
+			System.out.printf("%02d/%02d/%04d Cuma%n", day, month, year);
+			break;
+		case 6:
+			System.out.printf("%02d/%02d/%04d Cumartesi%n", day, month, year);
+			break;
+		}
+	}
+	
+	public static int getDayOfWeek(int day, int month, int year)
+	{
+		int totalDays;
+		
+		if (year < 1900 || (totalDays = getDayOfYear(day, month, year)) == -1)
+			return -1;
+		
+		return (totalDays + getTotalDays(year)) % 7;
+		
+	}
+	
+	public static int getTotalDays(int year)
+	{
+		int totalDays = 0;
+		
+		for (int y = 1900; y < year; ++y) {
+			totalDays += 365;
+			if (isLeapYear(y))
+				++totalDays;
+		}
+		
+		return totalDays;
+	}
+	
+	public static int getDayOfYear(int day, int month, int year)
+	{
+		if (!isValidDate(day, month, year))
+			return -1;
+		
+		int totalDays = day;
+		
+		switch (month - 1) {
+		case 11:
+			totalDays += 30;
+		case 10:
+			totalDays += 31;
+		case 9:
+			totalDays += 30;
+		case 8:
+			totalDays += 31;
+		case 7:
+			totalDays += 31;
+		case 6:
+			totalDays += 30;
+		case 5:
+			totalDays += 31;
+		case 4:
+			totalDays += 30;
+		case 3:
+			totalDays += 31;
+		case 2:
+			totalDays += 28;
+			if (isLeapYear(year))
+				++totalDays;
+		case 1:
+			totalDays += 31;
+		}
+		
+		return totalDays;
+		
+	}
+	
+	public static boolean isValidDate(int day, int month, int year)
+	{
+		return 1 <= day && day <= 31 && 1 <= month && month <= 12 && day <= getDays(month, year);
+	}
+	
+	public static int getDays(int month, int year)
+	{
+		int days = 31;
+		
+		switch (month) {
+		case 4:
+		case 6:
+		case 9:
+		case 11:
+			days = 30;
+			break;
+		case 2:
+			days = 28;
+			if (isLeapYear(year))
+				++days;
+		}
+		
+		return days;
+	}
+	
+	public static boolean isLeapYear(int year)
+	{
+		return year % 4 == 0 && year % 100 != 0 || year % 400 == 0;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	21.01.2023
+-----------------------------------------------------------------------------------------------------------------------*/
 
 
 
