@@ -6661,7 +6661,6 @@ class NumberUtil {
 	- iPrime metodunun hızlı versiyonunu kullanınız
 	- n değerinin poziitf olmaması durumu metot içerisinde kontrol edilmeyecektir
 
-	onur
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -6958,8 +6957,6 @@ class App {
 
 	Violance
 
-	onur
-
 
  Aqua
  -> Etiket bildirildiği döngüyü sonlandırır.Bu örnekte dıştaki döngünün etiketi vardır. Dolayısıyla o döngü sonlanır..
@@ -6986,7 +6983,7 @@ class App {
 /*----------------------------------------------------------------------------------------------------------------------
 	Etiketli break deyiminin bir kullanımı. Örnek durumu göstermek için yazılmıştır.
 
-	Aqua
+	Eflatun
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -7026,7 +7023,7 @@ class App {
 	Aşağıdaki örnekte 1 ile klavyeden girilen sayı arasındaki çift sayılar ekrana bastırılmıştır. Şüphesiz daha kolay
 	yazılabilir. Sadece continue deyiminin çalışma prensibinin anlaşılması için bu şekilde yazılmıştır.
 
-	onur -> continue olmasaydı 2 ye bölünmeyen sayıları da basar mıydı?
+	Eflatun
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -7302,7 +7299,6 @@ class NumberUtil {
 	
 	Dikkat: Kodda, bir önceki örnekte yazdığımız fibonacciNumber metodunu çağırsaydık içiçe döngü oluşurdu. Bu da göreceli
 	yavaş olurdu.
-	onur
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -7334,7 +7330,7 @@ class NextFibaonnaciNumberTest {
 }
 
 class NumberUtil {
-	public static int nextFibonacciNumber(int val) // buradan 1 gelmiş olsaydı
+	public static int nextFibonacciNumber(int val)
 	{
 		if (val < 0)
 			return 0;
@@ -7342,10 +7338,10 @@ class NumberUtil {
 		int prev1 = 1, prev2 = 0, next;
 		
 		for (;;) {
-			next = prev1 + prev2; // next = 1 olacaktı. 
+			next = prev1 + prev2; 
 			
-			if (next > val) // 1 < 1 yanlıs olacaktı. Ancak program çalıştırıldığında 1 için 1 den en buyuk fib. num. 2 sonucu vermekte..
-				return next; // bir de returnden sonra akış durması lazım değil miydi?
+			if (next > val)  
+				return next; 
 			
 			prev2 = prev1;
 			prev1 = next;
@@ -7585,7 +7581,7 @@ class App {
 	için kullanılır. Sonsuz döngü, return deyimi vb. başka aşağı düşmeyi engelleyici deyimler de olabilir. Aşağıdaki 
 	kod inceleyiniz.
 
-	onur 
+	Eflatun
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -7785,7 +7781,7 @@ class Menu {
 	Aşağıdaki örmnekte geçersiz giriş durumunda program sonlandırılmıştır. Örnek exit metodunu göstemek için bu şekilde 
 	yazılmıştır.
 
-	onur
+	
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -8153,7 +8149,7 @@ class DateUtil {
 		case 10:
 			totalDays += 31;
 		case 9:
-			totalDays += 30;
+			totalDays += 30; 									
 		case 8:
 			totalDays += 31;
 		case 7:
@@ -8380,7 +8376,1116 @@ class DateUtil {
 
 /*----------------------------------------------------------------------------------------------------------------------
 	21.01.2023
+	Blue
 -----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	switch expression:
+	Java 12 ile birlikte "preview" olarak "switch expression" dile dahil edilmiştir. Bu durumda switch deyimi artık ifade
+	biçiminde de kullanılacak şekilde sentaks semantik olarak geliştirilmiştir. switch deyiminin bu kullanımına 
+	"switch expression statement" da denebilir. Yani kabaca switch expression semantiği switch statement biçiminde de 
+	kullanılabilir. Hatta klasik switch deyimi de belirli koşullar altında switch expression gibi kullanılabilmektedir.
+	
+	Anahtar Notlar: Java dünyasında Oracle firmasının JRE'leri için Java 8, Java 11 ve Java 17 LTS (Long Term support) olarak 
+	kullanılmaktadır. Burada LTS terimi desteğin uzun süreceği anlamına gelir. Burada "destek" terimi sürümün güncellenmesi,
+	sürümdeki bazı "böceklerin (bugs)" giderilmesi vb. durumlar için düşünülebilir.  Bu durumda ara sürümler profesyonel
+	ürün geliştirmede pek tercih edilmez.
+	
+	Buna göre switch expression profesyonel ürün geliştirmede Java 17 ile birlikte kullanılır. Bu sebeple yeni yeni yaygınlaşmaktadır.
+	Çünkü halen en çok kullanılan sürümler Java 8 ve Java 11 sürümleridir. Programcının özellikle anlatılan tarihte buna
+	dikkat etmesi gerekir.
+	
+	Aşağıda switch expression'a özgü olarak anlatılanlar dışında kalan durumlar switch statement ile aynıdır.
+
+	Violance
+-----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte switch expression, statement biçiminde kullanılmıştır. Klasik switch statement karşılığı şu
+	şekildedir: 
+	
+	switch (code) {
+		case 34387:
+			System.out.println("Mecidiyeköy, İstanbul");
+			break;
+		case 67100:
+			System.out.println("Bahçelievler Mahallesi, ZOnguldak");
+			break;
+		default:
+			System.out.println("Geçersiz posta kodu");
+	}
+	
+		Dikkat edilirse switch expression'da aşağı düşme özelliği yoktur..
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Posta kodunu giriniz:");
+		int code = kb.nextInt();
+		
+		switch (code) {
+		case 34387 -> System.out.println("Mecidiyeköy, İstanbul");
+		case 67100 -> System.out.println("Bahçelievler Mahallesi, Zonguldak");
+		default -> System.out.println("Geçersiz posta kodu");
+		}
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte switch expression, statement biçiminde kullanılmıştır. Klasik switch statement karşılığı şu
+	şekildedir:
+	
+	switch (code) { // Aqua
+		case 212:
+		case 216: // burada ise ayrı ayrı yazılmak zorunda...
+			System.out.println("İstanbul");
+			break;
+		case 372: 
+			System.out.println("Zonguldak");
+			break;
+		default:
+			System.out.println("Geçersiz telefon kodu");
+	}
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Telefon kodunu giriniz:");
+		int code = kb.nextInt();
+
+		switch (code) {										// Aqua
+		case 212, 216 -> System.out.println("İstanbul"); // Burada virgül ile ayırarak, tek bir case ile yazılabiliyor..
+		case 372 -> System.out.println("Zonguldak");
+		default -> System.out.println("Geçersiz telefon kodu");
+		}
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte switch expression'ın ürettiği değer bir değişkene atanmıştır. Eşdeğer kod:
+	şekildedir:
+	
+	switch (code) {
+		case 212:
+		case 216:
+			plate = 34;
+			break;
+		case 372:
+			plate = 67;
+			break;
+		case 312:
+			plate = 6;
+			break;
+		default:
+			plate = -1;
+		}
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Telefon kodunu giriniz:");
+		int code = kb.nextInt();
+		int plate;
+		
+		plate = switch (code) {			// Aqua
+				case 212, 216 -> 34; // expression da bir ok ile üretilen değer yazılabilir..
+				case 372 -> 67;
+				case 312 -> 6;
+				default -> -1;
+		};
+		
+		if (plate != -1)
+			System.out.printf("Plaka Numarası:%d%n", plate);
+		else
+			System.out.println("Geçersiz plaka numarası!...");
+		
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+/*----------------------------------------------------------------------------------------------------------------------
+	switch expression bir değer üretirse default kısmı olmak zorundadır
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Telefon kodunu giriniz:");
+		int code = kb.nextInt();
+		int plate;
+		
+		plate = switch (code) { //error -> default kısmı yok..
+				case 212, 216 -> 34;
+				case 372 -> 67;
+				case 312 -> 6;
+				
+		};
+		
+		if (plate != -1)
+			System.out.printf("Plaka Numarası:%d%n", plate);
+		else
+			System.out.println("Geçersiz plaka numarası!...");
+		
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte switch expression'ın ürettiği değer metoda argüman olarak geçilmiştir
+
+	Eflatun
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Telefon kodunu giriniz:");
+		int code = kb.nextInt();
+										 // Aqua
+		Util.doForPlate(switch (code) { // metod çağrılmış. ve ifade metoda arguman olarak gelmiş
+				case 212, 216 -> 34;
+				case 372 -> 67;
+				case 312 -> 6;
+				default -> -1;
+		});
+
+		
+	
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+
+class Util {								 // Aqua
+	public static void doForPlate(int plate) // metod patametresi
+	{
+		if (plate != -1)
+			System.out.printf("Plaka Numarası:%d%n", plate);
+		else
+			System.out.println("Geçersiz plaka numarası!...");	
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örneği inceleyiniz
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Telefon kodunu giriniz:");
+		int code = kb.nextInt();
+		
+		Util.doForPlate(Util.getPlateByCode(code));
+	
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+
+class Util {
+	public static int getPlateByCode(int code)
+	{
+		return switch (code) {
+				case 212, 216 -> 34;
+				case 372 -> 67;
+				case 312 -> 6;
+				default -> -1;
+		};
+	}
+	public static void doForPlate(int plate)
+	{
+		if (plate != -1)
+			System.out.printf("Plaka Numarası:%d%n", plate);
+		else
+			System.out.println("Geçersiz plaka numarası!...");	
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Klasik switch deyimi yield anahtar sözcüğü ile beraber değer üretebildiğinden expression olarak kullanılabilir. Bu da
+	yine Java 12 ile birlikte dile eklenmiştir. yield kullanıldığında akış aşağı düşmez.
+
+	Eflatun
+
+	Aqua
+	yield kullanım 1.
+-----------------------------------------------------------------------------------------------------------------------*/
+
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Telefon kodunu giriniz:");
+		int code = kb.nextInt();
+		
+		Util.doForPlate(Util.getPlateByCode(code));
+	
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+
+class Util {
+	public static int getPlateByCode(int code)
+	{
+		return switch (code) {
+				case 212:
+				case 216: yield 34;
+				case 372: yield 67;
+				case 312: yield 6;
+				default: yield -1;
+		};
+	}
+	public static void doForPlate(int plate)
+	{
+		if (plate != -1)
+			System.out.printf("Plaka Numarası:%d%n", plate);
+		else
+			System.out.println("Geçersiz plaka numarası!...");	
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	switch expression'da bir case bölümüne deyim yazılacaksa bileşik deyim olarak yazılmalıdır. Bu durumda 
+	switch expression bir değer üretecekse bileşik deyim içerisinde yield kullanılmalıdır. 
+
+	Eflatun
+
+	Aqua
+	yield kullanımı 2.
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Telefon kodunu giriniz:");
+		int code = kb.nextInt();
+		
+		Util.doForPlate(Util.getPlateByCode(code));
+	
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+
+class Util {
+	public static int getPlateByCode(int code)
+	{
+		return switch (code) {
+				case 212, 216 -> {
+					System.out.println("İstanbul");
+					yield 34;
+				}
+				case 372 -> 67;
+				case 312 -> 6;
+				default -> -1;
+		};
+	}
+	public static void doForPlate(int plate)
+	{
+		if (plate != -1)
+			System.out.printf("Plaka Numarası:%d%n", plate);
+		else
+			System.out.println("Geçersiz plaka numarası!...");	
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Demo menü uygulaması
+	(İleride daha iyisi yazılacaktır) 
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		MenuApp.run();
+	}
+}
+
+
+class MenuApp {
+	public static void run()
+	{
+		Menu.run();
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+class Menu {
+	public static void printMenu()
+	{
+		System.out.println("1.Ekle");
+		System.out.println("2.Sil");
+		System.out.println("3.Güncelle");
+		System.out.println("4.Listele");
+		System.out.println("5.Çıkış");
+		System.out.print("Seçenek:");
+	}
+	
+	public static void doInsert()
+	{
+		System.out.println("---------------------------------");
+		System.out.println("Ekle seçildi");
+		System.out.println("---------------------------------");
+	}
+	
+	public static void doDelete()
+	{
+		System.out.println("---------------------------------");
+		System.out.println("Sil seçildi");
+		System.out.println("---------------------------------");
+	}
+	
+	public static void doUpdate()
+	{
+		System.out.println("---------------------------------");
+		System.out.println("Güncelle seçildi");
+		System.out.println("---------------------------------");
+	}
+	
+	public static void doList()
+	{
+		System.out.println("---------------------------------");
+		System.out.println("Listele seçildi");
+		System.out.println("---------------------------------");
+	}
+	
+	public static void doExit()
+	{
+		System.out.println("Teşekkürler");
+		System.out.println("C ve Sistem Programcıları Derneği");
+		System.exit(0);
+	}
+	
+	public static void doInvalidOption()
+	{
+		System.out.println("Geçersiz Seçenek!...");
+	}
+	
+	public static void doOption(int option)
+	{
+		switch (option) {
+		case 1-> doInsert();
+		case 2 -> doDelete();
+		case 3 -> doUpdate();
+		case 4 -> doList();
+		case 5 -> doExit();
+		default -> doInvalidOption();	
+		}
+	}
+	
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		for (;;) {
+			printMenu();
+			doOption(Integer.parseInt(kb.nextLine()));
+		}			
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı int türden gün ay ve yıl bilgisine ilişkin tarihin haftanın hangi gününe 
+	geldiği bilgisini aşağıdaki açıklamalara göre dmndüren getDayOfWeek isimli metodu yazınız ve test ediniz
+	Açıklamalar:
+		- Metot geçersiz bir tarih durumunda -1 değerine geri dönecektir
+		- Haftanın günü 01.01.1900 ile verilen tarih arasındaki (bverilen tarih dahil) gün sayısının 7 ilem bölümünden
+		elde edilen kalan ile belirlenebilir. Buna göre sıfır "pazar, 1 "pazartesi", 2 "salı" ... 6 "cumartesi" günlerine
+		kaşılık gelir
+		
+		- 01.01.1900 öncesindeki tarihler geçersiz sayılacaktır
+	  	 
+	(İleride daha iyisi yazılacaktır)
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		GetDayOfYearTest.run();
+	}
+}
+
+class GetDayOfYearTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		for (;;) {
+			System.out.print("Gün ay ve yıl bilgilerini giriniz:");
+			int day = kb.nextInt();
+			int month = kb.nextInt();
+			int year = kb.nextInt();
+			
+			if (day == 0)
+				break;
+			
+			DateUtil.printDateTR(day, month, year);
+		}
+	}
+}
+
+class DateUtil {
+	public static void printDateTR(int day, int month, int year)
+	{
+		int dayOfWeek = getDayOfWeek(day, month, year);
+		
+		if (dayOfWeek == -1) {
+			System.out.println("Geçeriz tarih!...");
+			return;
+		}
+		
+		switch (dayOfWeek) { // ifade olarak kullanım
+		case 0 -> System.out.printf("%02d/%02d/%04d Pazar%n", day, month, year);
+		case 1 -> System.out.printf("%02d/%02d/%04d Pazartesi%n", day, month, year);
+		case 2 -> System.out.printf("%02d/%02d/%04d Salı%n", day, month, year);
+		case 3 -> System.out.printf("%02d/%02d/%04d Çarşamba%n", day, month, year);
+		case 4 -> System.out.printf("%02d/%02d/%04d Perşembe%n", day, month, year);
+		case 5 -> System.out.printf("%02d/%02d/%04d Cuma%n", day, month, year);
+		case 6 -> System.out.printf("%02d/%02d/%04d Cumartesi%n", day, month, year);
+		}
+	}
+	
+	public static int getDayOfWeek(int day, int month, int year)
+	{
+		int totalDays;
+		
+		if (year < 1900 || (totalDays = getDayOfYear(day, month, year)) == -1)
+			return -1;
+		
+		return (totalDays + getTotalDays(year)) % 7;
+		
+	}
+	
+	public static int getTotalDays(int year)
+	{
+		int totalDays = 0;
+		
+		for (int y = 1900; y < year; ++y) {
+			totalDays += 365;
+			if (isLeapYear(y))
+				++totalDays;
+		}
+		
+		return totalDays;
+	}
+	
+	public static int getDayOfYear(int day, int month, int year)
+	{
+		if (!isValidDate(day, month, year))
+			return -1;
+		
+		int totalDays = day;
+		
+		switch (month - 1) {  // deyim olarak kullanım
+		case 11:
+			totalDays += 30;
+		case 10:
+			totalDays += 31;
+		case 9:
+			totalDays += 30;
+		case 8:
+			totalDays += 31;
+		case 7:
+			totalDays += 31;
+		case 6:
+			totalDays += 30;
+		case 5:
+			totalDays += 31;
+		case 4:
+			totalDays += 30;
+		case 3:
+			totalDays += 31;
+		case 2:
+			totalDays += 28;
+			if (isLeapYear(year))
+				++totalDays;
+		case 1:
+			totalDays += 31;
+		}
+		
+		return totalDays;
+		
+	}
+	
+	public static boolean isValidDate(int day, int month, int year)
+	{
+		return 1 <= day && day <= 31 && 1 <= month && month <= 12 && day <= getDays(month, year);
+	}
+	
+	public static int getDays(int month, int year)
+	{
+		return switch (month) {  // ifade olarak kullanım
+				case 4, 6, 9, 11 -> 30;
+				case 2 -> {if (isLeapYear(year)) yield 29; yield 28;} //yıeld kulllanımına dikkat
+				default -> 31;
+		};
+	}
+	
+	public static boolean isLeapYear(int year)
+	{
+		return year % 4 == 0 && year % 100 != 0 || year % 400 == 0;
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Programcı ne zaman switch expression, ne zaman klasik switch deyimi kullanmalıdır? 
+	Programcı Java 12 öncesinde çalışıyorsa zaten switch expression kullanamaz. Bu durumda programcının zaten tercih hakkı yoktur. 
+	Java 12 ve sonrasında çalışıyorsa zorunlu olmadıkça ve okunabilirlik/algılanabilirlik açısından bir problem de yoksa switch expression
+	tercih etmelidir.	
+-----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Farklı Türlerin Birbirine Atanması (Dönüşümü) (Tür dönüşümleri - Type conversions):
+	T1 ve T2 birer tür ismi olmak üzere T1 türünden, T2 türüne yapılan doğrudan atama işlemine T1 türünden T2 türüne
+	"doğrudan dönüşüm (implicit conversion)" denir. Dolayısıyla atama işlemi de bir dönüşümdür. "Conversion" terimi
+	tek başına kullanıldığında genel olarak "implicit conversion" anlaşılır. Örneğin bu işlem (implicit conversion, doğrudan atama)
+		T1 a;
+		T2 b;
+	
+		 
+		b = a;
+		
+	şeklinde belirtilebilir. Konu içerisinde anlatılacak olan istisna durumlar dışında kalan kurallar tüm atama işlemleri
+	için geçerlidir. İstisna durumlar ayrıca ele alınacaktır. 
+	
+	Yukarıdaki atama işleminde T1 türüne kaynak tür (source type), T2 türüne de hedef tür (target type) denir. Java'da 
+	kaynak türden hedef türe implicit conversion işleminin geçerli olup olmadığı derleme zamanında belirlenir. Bu dönüşüme
+	çalışma zamanında karar verilmez. Yani derleyici açısından hangi türlerin hangi türlere doğrudan atanabileceği bellidir.
+	
+	Genel kural şudur: Java'da bilgi kaybına yol açmayacak doğrudan dönüşümler geçerlidir. 
+	
+	Anahtar Notlar: "Java Language Specification"'da temel türler arasında, uzunluk (size) olarak büyük olan türden,
+	size olarak küçük olan türe yapılan dönüşüme "daraltma dönüşümü (narrowing conversion)", uzunluk olarak küçük olan
+	türden büyük olan türe yapılan dönüşüme "genişletme dönüşümü (widening conversion)" denir.
+	
+	Doğrudan dönüşüme ilişkin ayrıntılar aşağıda anlatılmıştır..
+
+	Violance
+	Eflatun
+-----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdak örnekte long türüne ilişkin değer çalışma zamanında belirlenir. Dolayısıyla derleyici istese de bu değeri bilemez.
+	Derleyici açısından kural "long türünden int türüne doğrudan dönüşüm geçersizdir" biçimindedir. Dolayısıyla error
+	oluşur..
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		long a = kb.nextLong();
+		int b;
+		
+		b = a; //error
+		
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte long türüne ilişkin değer belli olsa da derleyici açısından a bir değişkendir ve 
+	"long türünden int türüne doğrudan dönüşüm geçersizdir" kuralı uygulanır
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		long a;
+		int b;
+		
+		a = 23;
+		b = a; //error
+			
+	
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Küçük tamsayı türünden büyük tamsayı türüne doğrudan dönüşüm geçerlidir. Bu dönüşümde sayı pozitif veya sıfırsa 
+	yüksek anlamlı yeni bit değerleri sıfır ile beslenir. Eğer sayı negatifse işaretinin korunabilmesi için yüksek
+	anlamlı bit değerleri 1 ile beslenir.
+
+	onur
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		short a = kb.nextShort();
+		int b;
+		
+		b = a;
+		
+		System.out.printf("a = %d%n", a);
+		System.out.printf("a = %04X%n", a);
+		System.out.printf("b = %d%n", b);
+		System.out.printf("b = %08X%n", b);
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Hiç bir türden char türüne doğrudan dönüşüm yapılamaz
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		byte a = 68;
+		char c;
+		
+		c = a; //error
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Hiç bir türden char türüne doğrudan dönüşüm yapılamaz
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		int a = 68;
+		char c;
+		
+		c = a; //error
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Yukarıdaki kurala istisna olarak "char türü sınırları içerisinde kalan VE int türden bir sabit char türüne doğrudan
+	atanabilir" 
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{
+		char c;
+		
+		c = 68;
+		
+		System.out.printf("c = %c%n", c);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	char türü sınırları içerisinde kalan VE int türden bir sabit char türüne doğrudan atanabilir  
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{
+		char c;
+		
+		c = 68L; //error
+		c = -12; //error
+		
+		
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Anımsanacağı gibi Java'da byte ve short türden sabit yoktur. Ancak sınırlar içerisinde kalması koşuluyla int türden
+	bir sabit byte/short türüne doğrudan atanabilir.
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{
+		byte a;
+		short b;
+		
+		a = 100;
+		b = 3000;
+		//...
+		
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Yukarıda anlatılan byte, short ve char türüne ilişkin istisna kurallar geri dönüş değerinin geçici değişkene yapılan
+	atama işlemi için de geçerlidir.
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+
+class Sample {
+	public static short foo()
+	{
+		//...
+		
+		return 10;
+	}
+	
+	public static byte bar()
+	{
+		//...
+		
+		return 34;
+	}
+	
+	public static char tar()
+	{
+		//...
+		
+		return 68;
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Yukarıda anlatılan byte, short ve char türüne ilişkin istisna kurallar metot çağrısında argümanlardan parametrelere
+	yapılan atama işleminde geçersizdir. Bu durumun nedeni ileride anlaşılacaktır..
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{
+		Sample.foo(10); //error
+		Sample.bar(56); //error
+		Sample.tar(68); //error
+	}
+}
+
+
+class Sample {
+	public static void foo(short a)
+	{
+		//...
+	}
+	
+	public static void bar(byte a)
+	{
+		//...
+	}
+	
+	public static void tar(char c)
+	{
+		//...
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	char türünden kendisinden uzunluk olarak büyük tüm türlere doğrudan dönüşüm geçerlidir.
+
+	onur
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{
+		char c = 'D';
+		int a;
+		double b;
+		
+		a = c;
+		b = c;
+		
+		//...
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Bütün tamsayı türlerinden gerçek sayı türlerine doğrudan atama geçerlidir.
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)
+	{
+		long a = 4_000_000_000L;
+		float b;
+		
+		b = a;
+		
+		System.out.printf("b = %f%n", b);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Gerçek sayı türlerinden tamsayı türlerine doğrudan atama geçersizdir.
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)
+	{
+		float a = 12;
+		long b;
+		
+		b = a; //error
+	
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	float türünden double türüne doğrudan atama geçerlidir
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)
+	{
+		float a = 12;
+		double b;
+		
+		b = a; 
+	
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	double türünden float türüne doğrudan atama geçersizdir
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)
+	{
+		double a = 12;
+		float b;
+		
+		b = a; //error 
+	
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte sabitin sonunda F veya f konmazsa sabit double türden olduğundan atama geçersiz olur. Örneği
+	çalıştırarak yuvarlama hatasını gözlemleyiniz
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)
+	{
+		float a;
+		
+		a = 3.4F;
+		
+		System.out.printf("a = %.20f%n", a);	
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örneği inceleyiniz
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		float a = kb.nextFloat();
+		
+		System.out.printf("a = %.20f%n", a);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	boolean türünden herhangi bir türe doğrudan dönüşüm geçersizdir
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)
+	{
+		boolean a = false;
+		int b;
+		
+		b = a; //error
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Herhangi bir türden boolean türüne doğrudan dönüşüm geçersizdir 
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)
+	{
+		int a = 0;
+		boolean b;
+		
+		b = a; //error
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 Temel türler için doğrudan dönüşüm (implicit conversion) tablosu:
+	 byte 	-> short, int, long, float, double
+	 short 	-> int, long, float, double
+	 int 	-> long, float, double
+	 long 	-> float, double
+	 float 	-> double
+	 char 	-> int, long, float, double  onur
+-----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	22.01.2023
+	Blue
+-----------------------------------------------------------------------------------------------------------------------*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
