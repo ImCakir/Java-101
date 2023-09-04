@@ -9372,6 +9372,1478 @@ class App {
 	22.01.2023
 	Blue
 -----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	 İşlem Öncesi Otomatik Tür Dönüşümü:
+	 İki operandlı bir operatör için derleyici önce operandların türüne bakar. Operandlar farklı türdense ve işlem 
+	 geçerliyse, ortak bir türe dönüştürerek işlem yapılır. Hatta bazı durumlarda iki tür aynı olsa bile ikisini de 
+	 farklı bir türe dönüştürür. Yani derleyici buna yönelik kodlar üretir. Bu dönüştürmeye "işlem önce öncesi otomatik
+	 tür dönüşümü" denir. 
+	 
+	 Bu dönüşümler, yukarıda anlatılan "implicit conversion" kurallarına göre gerçekleşir. 
+-----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	 Aşağıdaki örnekteki toplama işleminde int türüne ilişkin değer yani a'nın değeri long türüne dönüştürülerek işlem
+	 yapılır ve sonuç long türünden çıkar.
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)
+	{
+		int a;
+		long b;
+		long c;
+		
+		a = 10; 
+		b = 20;
+		
+		c = a + b; // a int ve b long. long bir değere atanıyor toplamı. o halde a long olur
+		
+		System.out.printf("c = %d%n", c);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 Her iki operand da byte, short veya char türlerindense ikisi birden int türüne dönüştürülür ve sonuç int türden 
+	 çıkar. Buna "integral/integer promotion" denir.
+
+	 INTEGER PROMOTION -> byte, short, char 
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)
+	{
+		short a = 10;
+		short b = 20;
+		short c;
+		
+		c = a + b; //error
+		
+		System.out.printf("c = %d%n", c);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 Her iki operand da byte, short veya char türlerindense iki birden int türüne dönüştürülür ve sonuç int türden 
+	 çıkar. Buna "integral/integer promotion" denir 
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)
+	{
+		short a = 10;
+		short b = 20;
+		int c;
+		
+		c = a + b;
+		
+		System.out.printf("c = %d%n", c);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 Her iki operand da byte, short veya char türlerindense iki birden int türüne dönüştürülür ve sonuç int türden 
+	 çıkar. Buna "integral/integer promotion" denir 
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)
+	{
+		short a = 10;
+		byte b = 20;
+		int c;
+		
+		c = a + b;
+		
+		System.out.printf("c = %d%n", c);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 Bölme işleminde her iki operand da tamsayı türlerine ilişkinse sonuç tamsayı türünden çıkar. Bölme işlemi yapılır, 
+	 elde edilen değerin noktadan sonraki kısmı atılır. 
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)
+	{
+		int a = 10;
+		int b = 3;
+		double c;
+		
+		c = a / b;
+		
+		System.out.printf("c = %f%n", c);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 Bir gerçek sayı türü ile bir tamsayı türü işleme sokulduğunda dönüşüm gerçek sayı türüne doğrudur. Yani tamsayı türüne 
+	 ilişkin değer gerçek sayı türüne dönüştürülür. Sonuç o gerçek sayı türünden elde edilir 
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)
+	{
+		float a = 3.4F; // gerçek sayı
+		long b = 100;  // tamsayı türü --> long float a dönüşür.
+		float c;
+		
+		c = a + b; // float + long işleme sokuluyor. dönüşüm gerçek sayı türünedir. 
+		
+		System.out.printf("c = %f%n", c);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 Küçük tamsayı türü ile büyük tamsayı türü işleme sokulduğunda dönüşüm büyük tamsayı türüne doğrudur. Sonuç büyük
+	 tamsayı türünden çıkar. 
+	 Dikkat: Integral promotim bu kuralın dışındadır..
+
+	 Aqua: integral promotin
+	  byte, short, char , bunlar direkt int e yükseliyorr...
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)
+	{
+		int a = 3; // long a yükseltilir
+		long b = 100;
+		long c;
+		
+		c = a + b;
+		
+		System.out.printf("c = %d%n", c);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 boolean türü hiçbir tür ile işleme sokulamaz !!
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)
+	{
+		boolean a = false;
+		int b = 10;
+		int c;
+		
+		c = a + b; //error
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 char türü herhangi bir tür ile işleme sokulabilir. Bu durumda char türüne ilişkin değer diğer türe dönüştürülür
+	 Dikkat: Yine integral promotion bu durumun dışındadır...
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)
+	{
+		int a = 32; 
+		char c = 'D';  // D nin sayısal karşılığı: 68
+		int result;
+		
+		result = a + c;
+		
+		System.out.printf("result = %d%n", result);
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 İşlem öncesinde otomatik tür dönüşümü geçici değişken yaratılarak yapılır. Yani derleyici geçici değişken yaratan
+	 kodu üretir. Örnekte *** ile belirtilen işlem için derleyici aşağıdakine benzer bir kod üretir: 
+	 
+	 	long temp = a;
+	 	
+	 	c = temp + b;
+
+	 	Eflatun
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)
+	{
+		int a = 32;
+		long b = 30;
+		long c;
+		
+		c = a + b; //***
+		
+		System.out.printf("c = %d%n", c);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 İşlem öncesinde otomatik tür dönüşümü geçici değişken yaratılarak yapılır. Yani derleyici geçici değişken yaratan
+	 kodu üretir. Örnekte *** ile belirtilen işlem için derleyici aşağıdakine benzer bir kod üretir: 
+	 
+	 	int temp1 = a;
+	 	int temp2 = b;
+	 	
+	 	
+	 	c = temp1 + temp2;
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)
+	{
+		short a = 32;
+		byte b = 30;
+		int c;
+		
+		c = a + b; //***
+		
+		System.out.printf("c = %d%n", c);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 Tür dönüştürme (type cast) operatörü:
+	 Tür dönüştürme operatörü özel amaçlı, tek operandlı (unary) ve önek (prefix) durumunda bir operatördür. Tür dönüştürme
+	 operatörünün kullanımının genel biçimi şu şekildedir:
+	 
+	  (<hedef tür>)<ifade>
+	 
+	 Bu operatör operandına ilişkin ifadenin hedef türe dönüştürüldükten sonra elde edilen değeri üretir. Tür dönüştürme
+	 operatörü ile yapılan dönüşüme "explicit conversion" ya da "cast" denir. Implicit olarak geçersiz dönüşümler 
+	 genel olarak tür dönüştürme operatörü ile yapılabilir. Şüphesiz bu durumda bilgi kaybı olaşabilir. Bu bilgi kayıplarının da
+	 nasıl olacağı bellidir ve bu konu içerisinde nele alınacaktır. 
+	 
+	 implicit olarak geçerli olan dönüşümler için de tür dönüştürme operatörü kullanılabilir. Gerekli olabileceği durumlar
+	 vardır.
+	 
+	 Anahtar Notlar: Tür dönüştürme operatörünün sentaks olarak zorunlu olması durumu genel olarak "işlem doğrudan 
+	 yapılsaydı problem olabilirdi. Bu sebeple derleyici bunu doğrudan yapmamızı istemiyor. Biz yapmak istersek tür 
+	 dönüştürme operatörünü kullanarak derleyiciye durumun farkındayım bana izin ver" anlamına gelir.
+
+	 Violance
+
+	 Eflatun
+-----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 Aşağıdaki örnekte tür dönüştürme oparatörü ile işlemin double olarak yapılması sağlanmıştır. İşlem öncesi
+	 otomatik tür dönüşümüne dikkat ediniz.
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)
+	{
+		int a = 10; // operatör yardımıyla double oldu..
+		int b = 3; // otomatil double oldu
+		double c;
+		
+		c = (double)a / b;
+		
+		System.out.printf("c = %f%n", c);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 Tür dönüştürme operatörü
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)
+	{
+		long a = 10;
+		int b;
+		
+		b = (int)a;
+		
+		System.out.printf("b = %d%n", b);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 implicit olarak geçerli olan dönüşümler için de tür dönüşütürme operatörü kullanılabilr. Aşağıdaki örnek özelinde
+	 bunun bir anlamı yoktur..
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)
+	{
+		int a = 10;
+		long b;
+		
+		b = (long)a;
+		
+		System.out.printf("b = %d%n", b);
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 Büyük tamsayı türünden küçük tamsayı türüne yapılan explicit dönüşümde kaynak türe ilişkin değer hedef türün 
+	 sınırları içerisindeyse bilgi kaybı oluşmaz. Aslında bu dönüşüm yüksek anlamlı byte değerleri atılarak yapılır.
+	 Dolayısıyla sınırlar içerisindeki değerler için yüksek anlamlı byte değerleri sıfır olduğundan problem oluşmaz.
+	 Ancak sayı hedef türün sınırları dışındaysa bilgi kaybı oluşur.
+	 
+	 Aşağıdaki örneği çeşitli değerler ile çalıştırarak sonucu gözlemleyiniz.
+
+	 onur..
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		long a = kb.nextLong();
+		int b;
+		
+		b = (int)a;
+		
+		System.out.printf("a = %d%n", a);
+		System.out.printf("a = %016X%n", a);
+		System.out.printf("b = %d%n", b);
+		System.out.printf("b = %08X%n", b);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 short türünden char türüne yapılan explicit dönüşümde sayının bit kalıbı değişmez. Sayının yorumlanışı değişir.
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		short a = kb.nextShort(); 
+		char c;
+		
+		c = (char)a; 
+		
+		System.out.printf("a = %d%n", a); // decimal karşılığı
+		System.out.printf("a = %04X%n", a); //hexedecimal karşılığını verir sayının
+		System.out.printf("(int)c = %04X%n", (int)c); // hexedecimal karşılığı verir
+		System.out.printf("c = %c%n", c); // character karşılığını verir
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 char türünden short türüne yapılan explicit dönüşümde sayının bit kalıbı değişmez. Sayının yorumlanışı değişir.
+	 onur
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)
+	{
+		char a = '\uFFAC';
+		short b;
+		
+		b = (short)a;
+		
+		System.out.printf("(int)a = %X%n", (int)a);
+		System.out.printf("(int)a = %d%n", (int)a);
+		System.out.printf("a = %c%n", a);
+		System.out.printf("b = %X%n", b);
+		System.out.printf("b = %d%n", b);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 boolean türünden herhangi bir türe explicit dönüşüm geçersizdir
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)
+	{
+		boolean a = true;
+		int b;
+		
+		b = (int)a; //error
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 herhangi bir türden boolean türüne explicit dönüşüm geçersizdir
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)
+	{
+		int a = 10;
+		boolean b;
+		
+		b = (boolean)a; //error
+	}
+}
+/*----------------------------------------------------------------------------------------------------------------------
+	 byte türünden char türüne explicit dönüşüm iki aşamada gerçekleşir. Birinci aşamada değer int türüne yükseltilir. 
+	 İkinci aşamada yüksek anlamlı 2 byte atılarak char türüne dönüştürülür (widening and narraowing conversion).
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)
+	{
+		byte a = 99;
+		char c;
+		
+		c = (char)a;
+		
+		System.out.printf("a = %X%n", a); // 99 un hexe karşılığı 63
+		System.out.printf("(int)a = %08X%n", (int)a);
+		System.out.printf("(int)c = %04X%n", (int)c);
+		System.out.printf("c = %c%n", c);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 byte türünden char türüne explicit dönüşüm iki aşamada gerçekleşir. Birinci aşamada değer int türüne yükseltilir. 
+	 İkinci aşamada yüksek anlamlı 2 byte atılarak char türüne dönüştürülür (widening and narrowing conversion).
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)
+	{
+		byte a = -99;
+		char c;
+		
+		c = (char)a;
+		
+		System.out.printf("a = %X%n", a);
+		System.out.printf("(int)a = %08X%n", (int)a);
+		System.out.printf("(int)c = %04X%n", (int)c);
+		System.out.printf("c = %c%n", c);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 double türünden float türüne yapılan explicit dönüşümde bilgi kaybı olabilir. Bu durumda IEEE 754 standardına göre 
+	 yuvarlama hataları oluşabilir ve değer float türü ile temsil edilebilecek en yakın değer olarak elde edilir. Ayrıca sayı 
+	 float türü sınırları dışındaysa da aynı şekilde yapılır.
+
+	 Eflatun
+
+	 Aqua
+
+	 double --> float yapılırken ; float ile temsıl edilebiecek en yakın değer olarak elde edilir.
+	 sayı float ın sınırları dışındaysa yine aynı şekıdle en yakın değer olarak ele alınır...
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)
+	{
+		double a = 3.77;
+		float b;
+		
+		b = (float)a;
+		
+		System.out.printf("a = %.20f%n", a);
+		System.out.printf("b = %.20f%n", b);
+	}
+}
+/*----------------------------------------------------------------------------------------------------------------------
+	04.02.2023
+	Blue
+-----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	Gerçek sayı türünden tamsayı türüne (veya char türüne) yapılan explicit dönüşüm şu şekilde gerçekleşir:
+	- Sayının noktadan sonraki kısmı atılır:
+		- Elde edilen sayı hedef türün sınırları içerisinde kalıyorsa hedef türe atanır
+		- Elde edilen sayı hedef türün sınırları içerisinde kalmıyorsa
+			- Hedef tür byte, short, int ve char türlerinden biriyse
+				- Elde edilen değer int türü sınırları içerisinde kalıyorsa int türüne dönüştürülür. Buradan elde edilen
+				değer tamsayılar arasındaki tür dönüşümü kurallarına göre hedef türe atanır.
+				- Elde edilen değer int türü sınırları içerisinde kalmıyorsa değerin pozitif ya da negatif olması 
+				durumuna göre int türünün en büyük ya da en küçük değeri alınır ve hedef türe dönüştürülür
+			- Hedef tür long türüyse
+				- Elde edilen değer long türü sınırları içerisinde kalıyorsa doğrudan atanır
+				Elde edilen değer long türü sınırları içerisinde kalmıyorsa sayının pozitif ya da negatif olması
+				durumuna göre long türünün en büyük ya da en küçük değeri alınır ve atanır
+
+
+				Eflatun
+				
+-----------------------------------------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------------------------------------
+
+- Elde edilen sayı hedef türün sınırları içerisinde kalıyorsa hedef türe atanır
+-----------------------------------------------------------------------------------------------------------------------*/
+
+package csd;
+
+class App {
+	public static void main(String [] args)
+	{
+		double a = 3.77;
+		byte b;
+		
+		b = (byte)a;
+		
+		System.out.printf("a = %.20f%n", a);
+		System.out.printf("b = %d%n", b);
+	}
+}
+
+
+package csd;
+
+class App {
+	public static void main(String [] args)
+	{
+		double a = 3.77;
+		byte b;
+		
+		b = (byte)a;
+		
+		System.out.printf("a = %.20f%n", a);
+		System.out.printf("b = %d%n", b);
+	}
+}
+/*-----------------------------------------------------------------------------------------------------------------------
+
+Elde edilen sayı hedef türün sınırları içerisinde kalmıyorsa;
+			- Hedef tür byte, short, int ve char türlerinden biriyse
+				- Elde edilen değer int türü sınırları içerisinde kalıyorsa int türüne dönüştürülür. Buradan elde edilen
+				değer tamsayılar arasındaki tür dönüşümü kurallarına göre hedef türe atanır.
+-----------------------------------------------------------------------------------------------------------------------*/
+
+
+package csd;
+
+class App {
+	public static void main(String [] args)
+	{
+		double a = -200.77;
+		byte b;  // -200 byte sınırının dışında kalıyor. int' e dönüşürken yüksek anlamlı byte değerleri atılır. 
+		
+		b = (byte)a;
+		
+		System.out.printf("a = %.20f%n", a);
+		System.out.printf("-200 = %08X%n", -200);
+		System.out.printf("b = %02X%n", b);
+		System.out.printf("b = %d%n", b);
+	}
+}
+
+
+
+package csd;
+
+class App {
+	public static void main(String [] args)
+	{
+		double a = -200.77;
+		short b;
+		
+		b = (short)a; // burada çıktı -200 olur.
+		
+		System.out.printf("a = %.20f%n", a);
+		System.out.printf("-200 = %08X%n", -200);
+		System.out.printf("b = %04X%n", b);
+		System.out.printf("b = %d%n", b);
+	}
+}
+
+/*-----------------------------------------------------------------------------------------------------------------------
+- Elde edilen değer int türü sınırları içerisinde kalmıyorsa değerin pozitif ya da negatif olması 
+				durumuna göre int türünün en büyük ya da en küçük değeri alınır ve hedef türe dönüştürülür
+
+-----------------------------------------------------------------------------------------------------------------------*/
+
+
+package csd;
+
+class App {
+	public static void main(String [] args)
+	{
+		double a = 5_000_000_000.77;
+		int b;
+		
+		b = (int)a; // atama işlemi gerçekleşirken int' in en yüksek değeri olan 2147483648 değeri elde edilir.
+		
+		System.out.printf("a = %.20f%n", a);
+		System.out.printf("5_000_000_000 = %08X%n", (int)5_000_000_000L);
+		System.out.printf("b = %08X%n", b);
+		System.out.printf("b = %d%n", b); 
+	}
+}
+
+
+package csd;
+
+class App {
+	public static void main(String [] args)
+	{
+		double a = -5_000_000_000.77;
+		int b;
+		
+		b = (int)a;  // atama işlemi gerçekleşirken int' in en düşük değeri olan -2147483648 değeri elde edilir.
+		
+		System.out.printf("a = %.20f%n", a);
+		System.out.printf("-5_000_000_000 = %08X%n", (int)-5_000_000_000L);
+		System.out.printf("b = %08X%n", b);
+		System.out.printf("b = %d%n", b);
+	}
+}
+
+//onur: asagıdakı ornek
+package csd;
+
+class App {
+	public static void main(String [] args)
+	{
+		double a = 5_000_000_000.77;
+		byte b;
+		
+		b = (byte)a;
+		
+		System.out.printf("a = %.20f%n", a);
+		System.out.printf("-5_000_000_000 = %08X%n", (int)-5_000_000_000L);
+		System.out.printf("b = %X%n", b);
+		System.out.printf("b = %d%n", b);
+	}
+}
+
+package csd;
+
+class App {
+	public static void main(String [] args)
+	{
+		double a = 5_000_000_000.77;
+		byte b;
+		
+		b = (byte)a;
+		
+		System.out.printf("a = %.20f%n", a);
+		System.out.printf("-5_000_000_000 = %08X%n", (int)-5_000_000_000L);
+		System.out.printf("b = %X%n", b);
+		System.out.printf("b = %d%n", b);
+	}
+}
+
+
+package csd;
+
+class App {
+	public static void main(String [] args)
+	{
+		double a = 5_000_000_000.77;
+		short b;
+		
+		b = (short)a;
+		
+		System.out.printf("a = %.20f%n", a);
+		System.out.printf("5_000_000_000 = %08X%n", (int)5_000_000_000L);
+		System.out.printf("b = %X%n", b);
+		System.out.printf("b = %d%n", b);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Klavyeden sıfır girilene kadar alınan int türden sayıların ortalamasını bulan programı yazınız.
+	Açıklamalar: Toplamın biriktirildiği değişken ve giriilen değerler int türden olacaktır
+
+	Aşağıdaki örnekte tür dönüştürme operatörü kullanılmazsa bilgi kaybı oluşabilir
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)
+	{
+		FindAverageApp.run();
+	}
+}
+
+class FindAverageApp {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.println("Sayıları girmeye başlayınız:");
+		int sum = 0, count = 0;
+		int val;
+		
+		
+		while ((val = Integer.parseInt(kb.nextLine())) != 0) {
+			sum += val;
+			++count;
+		}
+		
+		double average = (double)sum / count;
+		
+		System.out.printf("Ortalama:%f%n", average);
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte double türden sabit kullanıldığından işlem double olarak yapılır
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)
+	{
+		FindTotalApp.run();
+	}
+}
+
+class FindTotalApp {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		int sum = 0;
+		
+		for (int i = 0; i < 3; ++i) {
+			System.out.print("Bir sayı giriniz:");
+			int a = Integer.parseInt(kb.nextLine());
+			
+			sum += a;
+		}
+		
+		double average = sum / 3.;
+		
+		System.out.printf("Ortalama:%f%n", average);
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte double türden sabit kullanıldığından işlem double olarak yapılır
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)
+	{
+		FindTotalApp.run();
+	}
+}
+
+class FindTotalApp {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		int sum = 0;
+		
+		for (int i = 0; i < 3; ++i) {
+			System.out.print("Bir sayı giriniz:");
+			int a = Integer.parseInt(kb.nextLine());
+			
+			sum += a;
+		}
+		
+		double average = sum / 3D;
+		
+		System.out.printf("Ortalama:%f%n", average);
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	İşlemli atama operatörlerinin genel biçimi:
+		T1 a;
+		T2 b;
+		
+		a op= b => a = (T1)(a op b)
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)
+	{
+		int a = 10;
+		int b = 20;
+		
+		a += Math.sqrt(b); //a = (int)(a + Math.sqrt(b));
+		
+		//..
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Bir sayının basamak sayısının log10 ile bulunması
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Bir sayı giriniz:");
+		int a = kb.nextInt();
+		
+		int count = 1;
+		
+		if (a != 0)
+			count = (int)Math.log10(Math.abs(a)) + 1;
+		
+		System.out.printf("%d sayısının basamak sayısı:%d%n", a, count);
+	}
+}
+
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı int türden bir sayının Armstrong sayısı olup olmadığını test eden isArmstrong
+	isimli metodu NumberUtil sınıfı içerisinde yazınız ve aşağıdaki kod ile test ediniz.
+	
+	Açıklamalar:
+		- Bir sayının her basamağının basamak sayıncı kuvvetleri toplandığında sayının kendisine eşitse bu sayıya 
+		Armstrong sayısı denir. Örneğin:
+			153 -> 1  * 1 * 1 + 5 * 5 * 5 + 3 * 3 * 3 = 153
+			
+		- Kuvvet alma işlemi için yazılmış pow metodunu kullanınız
+		
+		- Sayı negatif ise Armstrong sayıaı kabul etmeyiniz
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		IsArmstrongTest.run();
+	}
+}
+
+class IsArmstrongTest {
+	public static void run()
+	{
+		for (int a = -10; a <= 99999; ++a)
+			if (NumberUtil.isArmstrong(a))
+				System.out.println(a);
+	}
+}
+
+class NumberUtil {
+	public static boolean isArmstrong(int a)
+	{
+		return a >= 0 && calculateDigitsPowSum(a) == a;
+	}
+	
+	public static int calculateDigitsPowSum(int a)
+	{
+		int n = countDigits(a);
+		int total = 0;
+		
+		while (a != 0) {
+			total += Math.pow(a % 10, n);
+			a /= 10;
+		}
+		
+		return total;
+	}
+	
+	public static int countDigits(int a)
+	{
+		if (a == 0)
+			return 1;
+		
+		return (int)Math.log10(Math.abs(a)) + 1; // basamak sayısını hesaplayan ifade..
+	}	
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Koşul operatörü (conditional operator, ternary operator): Koşul operatörü özel amaçlı, üç operandlı (ternary)
+	ve araek (infix) durumda bir operatördür. Operatörün genel biçimi:
+	
+		<operand1> ? <operand2> : <operand3>
+	operand1'e ilişkin ifadenin boolean türden olması gerekir. Bu operatör, operand1'e ilişkin ifadenin değeri
+	true ise ikinci operandına ilişkin ifadenin değerini, false ise üçüncü operandına ilişkin ifadenin değerini
+	üretir. Aşağıdaki koşul operatörüne ilişkin ifadenin if deyimi karşılığı:
+	
+		if (a < b)
+			max = b;
+		else
+			max = a;
+-----------------------------------------------------------------------------------------------------------------------*/
+
+
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("İki sayı giriniz:");
+		int a = kb.nextInt();
+		int b = kb.nextInt();
+		
+		int max;
+		
+		max = a > b ? a : b;
+		
+		System.out.printf("max(%d, %d) = %d%n", a, b, max);	
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte b - 200 ifadesi koşul operatörünün üçüncü operandıdır
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("İki sayı giriniz:");
+		int a = kb.nextInt();
+		int b = kb.nextInt();
+		
+		int result;
+		
+		result = a > b ? a : b - 200;
+		
+		System.out.printf("result = %d%n", result);	
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte koşul operatörünün ürettiği değerden 200 değeri çıkartılacaktır. Parantez ile bu sağlanmıştır
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("İki sayı giriniz:");
+		int a = kb.nextInt();
+		int b = kb.nextInt();
+		
+		int result;
+		
+		result = (a > b ? a : b) - 200;
+		
+		System.out.printf("result = %d%n", result);	
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte koşul operatörünün birinci operandı = ile ? arasıdır
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("İki sayı giriniz:");
+		int a = kb.nextInt();
+		int b = kb.nextInt();
+		
+		int result;
+		
+		result = a > 0 && a > b ? a : b;
+		
+		System.out.printf("result = %d%n", result);	
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte koşul operatörünün birinci operandı = ile ? arasıdır
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("İki sayı giriniz:");
+		int a = kb.nextInt();
+		int b = kb.nextInt();
+		
+		int result;
+		
+		result = a + a > b ? a : b;
+		
+		System.out.printf("result = %d%n", result);	
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örneği inceleyiniz
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("İki sayı giriniz:");
+		int a = kb.nextInt();
+		int b = kb.nextInt();
+		
+		int result;
+		
+		result = a + (a > b ? a : b);
+		
+		System.out.printf("result = %d%n", result);	
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Koşul operatörünün ürettiği değerin bir değişkene atanması durumunda kullanılması if deyimine göre daha 
+	okunabilirdir.
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("İki sayı giriniz:");
+		int a = kb.nextInt();
+		int b = kb.nextInt();
+		
+		int result;
+		
+		result = a > b ? a : b;
+		
+		System.out.printf("result = %d%n", result);	
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Koşul operatörünün ürettiği değerin bir değişkene atanması durumunda kullanılması if deyimine göre daha 
+	okunabilirdir 
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("İki sayı giriniz:");
+		int a = kb.nextInt();
+		int b = kb.nextInt();
+		
+		int result;
+		
+		result = a > b ? a : b;
+		
+		System.out.printf("result = %d%n", result);	
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Koşul operatörünün ürettiği değerin metot çağrısında argüman olarak metoda verilmesi okunabililiği artırır.
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("İki sayı giriniz:");
+		int a = kb.nextInt();
+		int b = kb.nextInt();
+		
+		System.out.printf("result = %d%n", a > b ? a : b);	
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Koşul operatörünün ürettiği değerin return deyiminde kullanımı okunabilirliği artırır
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("İki sayı giriniz:");
+		int a = kb.nextInt();
+		int b = kb.nextInt();
+		
+		System.out.printf("result = %d%n", Util.max(a, b));	
+	}
+}
+
+class Util {
+	public static int max(int a, int b)
+	{
+		return a > b ? a : b;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı int türden bir sayının Armstrong sayısı olup olmadığını test eden isArmstrong
+	isimli metodu NumberUtil sınıfı içerisinde yazınız ve aşağıdaki kod ile test ediniz.
+	
+	Açıklamalar:
+		- Bir sayının her basamağının basamak sayıncı kuvvetleri toplandığında sayının kendisine eşitse bu sayıya 
+		Armstrong sayısı denir. Örneğin:
+			153 -> 1  * 1 * 1 + 5 * 5 * 5 + 3 * 3 * 3 = 153
+			
+		- Kuvvet alma işlemi için yazılmış pow metodunu kullanınız
+		
+		- Sayı negatif ise Armstrong sayıaı kabul etmeyiniz
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		IsArmstrongTest.run();
+	}
+}
+
+class IsArmstrongTest {
+	public static void run()
+	{
+		for (int a = -10; a <= 99999; ++a)
+			if (NumberUtil.isArmstrong(a))
+				System.out.println(a);
+	}
+}
+
+class NumberUtil {
+	public static boolean isArmstrong(int a)
+	{
+		return a >= 0 && calculateDigitsPowSum(a) == a;
+	}
+	
+	public static int calculateDigitsPowSum(int a)
+	{
+		int n = countDigits(a);
+		int total = 0;
+		
+		while (a != 0) {
+			total += Math.pow(a % 10, n);
+			a /= 10;
+		}
+		
+		return total;
+	}
+	
+	public static int countDigits(int a)
+	{	
+		return a == 0 ? 1 : (int)Math.log10(Math.abs(a)) + 1;
+	}	
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı int türden gün ay ve yıl bilgisine ilişkin tarihin haftanın hangi gününe 
+	geldiği bilgisini aşağıdaki açıklamalara göre dmndüren getDayOfWeek isimli metodu yazınız ve test ediniz
+	Açıklamalar:
+		- Metot geçersiz bir tarih durumunda -1 değerine geri dönecektir
+		- Haftanın günü 01.01.1900 ile verilen tarih arasındaki (bverilen tarih dahil) gün sayısının 7 ilem bölümünden
+		elde edilen kalan ile belirlenebilir. Buna göre sıfır "pazar, 1 "pazartesi", 2 "salı" ... 6 "cumartesi" günlerine
+		kaşılık gelir
+		
+		- 01.01.1900 öncesindeki tarihler geçersiz sayılacaktır
+	  	 
+	(İleride daha iyisi yazılacaktır)
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		GetDayOfYearTest.run();
+	}
+}
+
+class GetDayOfYearTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		for (;;) {
+			System.out.print("Gün ay ve yıl bilgilerini giriniz:");
+			int day = kb.nextInt();
+			int month = kb.nextInt();
+			int year = kb.nextInt();
+			
+			if (day == 0)
+				break;
+			
+			DateUtil.printDateTR(day, month, year);
+		}
+	}
+}
+
+class DateUtil {
+	public static void printDateTR(int day, int month, int year)
+	{
+		int dayOfWeek = getDayOfWeek(day, month, year);
+		
+		if (dayOfWeek == -1) {
+			System.out.println("Geçeriz tarih!...");
+			return;
+		}
+		
+		switch (dayOfWeek) {
+		case 0 -> System.out.printf("%02d/%02d/%04d Pazar%n", day, month, year);
+		case 1 -> System.out.printf("%02d/%02d/%04d Pazartesi%n", day, month, year);
+		case 2 -> System.out.printf("%02d/%02d/%04d Salı%n", day, month, year);
+		case 3 -> System.out.printf("%02d/%02d/%04d Çarşamba%n", day, month, year);
+		case 4 -> System.out.printf("%02d/%02d/%04d Perşembe%n", day, month, year);
+		case 5 -> System.out.printf("%02d/%02d/%04d Cuma%n", day, month, year);
+		case 6 -> System.out.printf("%02d/%02d/%04d Cumartesi%n", day, month, year);
+		}
+	}
+	
+	public static int getDayOfWeek(int day, int month, int year)
+	{
+		int totalDays;
+		
+		if (year < 1900 || (totalDays = getDayOfYear(day, month, year)) == -1)
+			return -1;
+		
+		return (totalDays + getTotalDays(year)) % 7;
+		
+	}
+	
+	public static int getTotalDays(int year)
+	{
+		int totalDays = 0;
+		
+		for (int y = 1900; y < year; ++y)
+			totalDays += isLeapYear(y) ? 366 : 365;
+		
+		return totalDays;
+	}
+	
+	public static int getDayOfYear(int day, int month, int year)
+	{
+		if (!isValidDate(day, month, year))
+			return -1;
+		
+		int totalDays = day;
+		
+		switch (month - 1) {
+		case 11:
+			totalDays += 30;
+		case 10:
+			totalDays += 31;
+		case 9:
+			totalDays += 30;
+		case 8:
+			totalDays += 31;
+		case 7:
+			totalDays += 31;
+		case 6:
+			totalDays += 30;
+		case 5:
+			totalDays += 31;
+		case 4:
+			totalDays += 30;
+		case 3:
+			totalDays += 31;
+		case 2:
+			totalDays += isLeapYear(year) ? 29 : 28;
+		case 1:
+			totalDays += 31;
+		}
+		
+		return totalDays;
+		
+	}
+	
+	public static boolean isValidDate(int day, int month, int year)
+	{
+		return 1 <= day && day <= 31 && 1 <= month && month <= 12 && day <= getDays(month, year);
+	}
+	
+	public static int getDays(int month, int year)
+	{
+		return switch (month) {
+				case 4, 6, 9, 11 -> 30;
+				case 2 -> {if (isLeapYear(year)) yield 29; yield 28;}
+				default -> 31;
+		};
+	}
+	
+	public static boolean isLeapYear(int year)
+	{
+		return year % 4 == 0 && year % 100 != 0 || year % 400 == 0;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Koşul operatörünün ikinci ve üçüncü operandları void bir ifade olamaz. 
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("İki sayı giriniz:");
+		int a = kb.nextInt();
+		int b = kb.nextInt();
+		
+		a < b ? Sample.foo() : Sample.bar(); //error
+	}
+}
+
+
+class Sample {
+	public static void foo()
+	{
+		System.out.println("foo");
+	}
+	
+	public static void bar()
+	{
+		System.out.println("bar");
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Yukarıdaki örnek aşağıdaki gibi if deyimi ile yapılabilir 
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("İki sayı giriniz:");
+		int a = kb.nextInt();
+		int b = kb.nextInt();
+		
+		if (a < b)
+			Sample.foo();
+		else
+			Sample.bar();
+	}
+}
+
+
+class Sample {
+	public static void foo()
+	{
+		System.out.println("foo");
+	}
+	
+	public static void bar()
+	{
+		System.out.println("bar");
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Koşul operatörünün operatörünün bir kullanımı. Örnekte parantez kullanmaya gerek yoktur
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("İki sayı giriniz:");
+		int a = kb.nextInt();
+		int b = kb.nextInt();
+		int c = kb.nextInt();
+		
+		int result;
+		
+		result = a > b ? a > c ? a : c : b > c ? b : c;
+		
+		System.out.printf("result = %d%n", result);	
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Yukarıdaki örnekte koşul operatörünün opernadlarını parantez içerisine okunabilirliği artırır
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("İki sayı giriniz:");
+		int a = kb.nextInt();
+		int b = kb.nextInt();
+		int c = kb.nextInt();
+		int d = kb.nextInt();
+		
+		int max;
+		
+		max = (a > b) ? (a > c ? a : c) : (b > c ? b : c);
+		
+		System.out.printf("result = %d%n", max);	
+	}
+}
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
