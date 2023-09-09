@@ -10822,7 +10822,719 @@ class App {
 	}
 }
   
+/*----------------------------------------------------------------------------------------------------------------------
+	05.02.2023
+	Blue
+-----------------------------------------------------------------------------------------------------------------------*/
 
+/*----------------------------------------------------------------------------------------------------------------------
+	Method Overloading: Bir sınıf içerisinde aynı isimde birden fazla metot yazılması durumuna "method overloading"
+	denir. Bu kavram aynı isimde fakat farklı sınıflarda olan metotlar için geçerli değildir
+
+	violance
+-----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki durum "method overloading" değildir. Çünkü aynı isimdeki metotlar farklı sınıflardadır
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		Sample.foo();
+		Mample.foo();
+	}
+}
+
+class Sample {
+	public static void foo()
+	{
+		System.out.println("Sample.foo");
+	}
+}
+
+class Mample {
+	public static void foo()
+	{
+		System.out.println("Mample.foo");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Anahtar Notlar: Bir sınıf içerisinde AYNI metottan birden fazla olamaz. Bu durumda bir metodun "overload" edilebilmesi
+	için kendisiyle aynı isimde olan diğer metotlardan FARKLI olması gerekir. Aşağıdaki maddelerde metodun AYNI ya da 
+	FARKLı olmasına ilişkin detaylar anltılmaktadır
+-----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Bir metodun erişim belirleyicisinin "overload" işlemine etkisi yoktur. Yani erişim belirleyicilerin farklı 
+	olması metodu farklı yapmaz
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class Sample {
+	public static void foo() //error
+	{
+		//...
+	}
+	
+	private static void foo() //error
+	{
+		//...
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Bir metodun static olup olmamasının da overload'a etkisi yoktur
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+
+class Sample {
+	public static void foo() //error
+	{
+		//...
+	}
+	
+	public void foo() //error
+	{
+		//...
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Bir metodun geri dönüş değeri bilgisinin de overload işlemine etkisi yoktur
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+
+class Sample {
+	public static void foo() //error
+	{
+		//...
+	}
+	
+	public static int foo() //error
+	{
+		//...
+		return 10;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Bir metodun parametre değişken isimlerinin de overload'a etkisi yoktur
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		Sample.foo();
+		Mample.foo();
+	}
+}
+
+class Sample {
+	public static void foo(int a) //error
+	{
+		//...
+	}
+	
+	public static void foo(int b) //error
+	{
+		//...
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Bir metodun "overload" edilebilmesi için metodun parametre tür bilgisi ve parameterelerinin diziliminin farklı
+	olması gerekir. Buna genel olarak "parametrik yapı" diyebiliriz
+-----------------------------------------------------------------------------------------------------------------------*/
+
+package csd;
+
+class Sample {
+	public static void foo() 
+	{
+		//...
+	}
+	
+	public static void foo(int a)
+	{
+		//...
+	}
+	
+	public static void foo(int a, double b)
+	{
+		//...
+	}
+	
+	public static void foo(double b, int a)
+	{
+		//...
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Bir sınıf içerisinde metodun ismi ve parametrik yapısının ikisine birden metodun "imzası (signature)" diyelim.
+	
+	Kural: Bir sınıf içerisinde aynı imzaya sahip birden fazla metot bildirimi geçersizdir.
+
+	Eflatun
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class Sample {
+	public static void foo() //imza: foo
+	{
+		//...
+	}
+	
+	public static void foo(int a) //imza: foo, int
+	{
+		//...
+	}
+	
+	public static void foo(int a, double b) //imza: foo, int, double
+	{
+		//...
+	}
+	
+	public static void foo(double b, int a) //imza: foo, double, int
+	{
+		//...
+	}
+	
+	public static void bar(int a) //imza: bar, int
+	{
+		//...
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Bir metot çağrısında derleyicinin hangi metodun çağrılacağına karak vermesi sürecine "method overload resolution"
+	ya da kısaca "overload resolution" denir
+
+	Eflatun
+-----------------------------------------------------------------------------------------------------------------------*/
+
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{
+		int a = 10;
+		double b = 20.3;
+		
+		Sample.foo(a, b);
+	}
+}
+
+class Sample {
+	public static void foo() //imza: foo
+	{
+		System.out.println("foo");
+	}
+	
+	public static void foo(int a) //imza: foo, int
+	{
+		System.out.println("foo, int");
+	}
+	
+	public static void foo(int a, double b) //imza: foo, int, double --> best match. because a and b both they same with type of method arguman.
+	{
+		System.out.println("foo, int, double");
+	}
+	
+	public static void foo(double b, int a) //imza: foo, double, int
+	{
+		System.out.println("foo, double, int");
+	}
+	
+	public static void bar(int a) //imza: bar, int
+	{
+		System.out.println("bar, int");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Tam uyum (best match) yoksa overload resolution işlemi aşağıdaki gibi yapılır:
+	1. Aday metotlar (candidate methods) belirlenir: Çağrılan metot ile aynı isimde olan tüm metotlardır.
+	
+	2. Uygun metotlar (applicable methods) belirlenir: Aday metotlar içerisindeki, parametre sayısı çağrıdaki
+	argüman sayısı ile aynı olan VE argümanlardan parametrelere otomatik (implicit) tür dönüşümünün geçerli
+	olduğu metotlardır. 
+	 
+	3. En uygun metot (the most applicable method) belirlenir: Uygun metotlar içerisinde daha kaliteli olan ya da 
+	daha kalitesiz olmayan dönüşümü sunan metotlardır. Ya da başka bir deyişle "en uygun metot öyle bir metottur ki
+	argümanlardan parametrelere yapılan dönüşümler kalite olarak yarışa sokulduğunda daha iyi ya da daha kötü olmayan
+	dönüşümü sunar".
+	
+	Dönüşümün kalitesi aşağıdaki kurallara göre belirlenir:
+	T1 argümanın türü, T2 ve T3 yarıştırılan uygun metotların T1 türden argümana karşılık gelen parametrelerin türleri
+	olsun:
+	1.T1 -> T2, T1 -> T3 otomatik dönüşümlerinde T2 veya T3'den biri T1 ile aynı ise aynı olan dönüşüm daha kalitelidir.
+	Örneğin:
+	int -> int *
+	int -> double
+	
+	2.T1 -> T2, T1 -> T3 otomatik dönüşümlerinde T2'den T3'e otomatik tür dönüşümü var, T3'den T2'ye yoksa T2 daha kaltelidir.
+	Örneğin:
+	int -> long *
+	int -> float
+	ya da örneğin:
+	
+	char -> int *
+	char -> double
+	
+	Burada aday metotlar bulunamazsa VEYA aday metotlar var ancak uygun metotlar bulunamazsa VEYA uygun nmetotlar var ancak
+	en uygun metot bulunamazsa error oluşur.
+	
+	Anahtar Notlar: Bu anlatım "overload resolution" kavramının basitleştirilmiş bir anlatımıdır.
+-----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	1.Aday metotlar: 1, 2, 3, 4, 5, 6
+	2.Uygun metotlar: 3, 4, 5
+	3.En uygun metotlar: 3
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{
+		int a = 10;
+		short b = 20;
+		
+		Sample.foo(a, b);
+	}
+}
+
+class Sample {
+	public static void foo() //1
+	{
+		System.out.println("foo");
+	}
+	
+	public static void foo(int a) //2
+	{
+		System.out.println("foo, int");
+	}
+	
+	public static void foo(int a, int b) //3
+	{
+		System.out.println("foo, int, int");
+	}
+	
+	public static void foo(int a, long b) //4
+	{
+		System.out.println("foo, int, long");
+	}
+	
+	public static void foo(double b, int a) //5
+	{
+		System.out.println("foo, double, int");
+	}
+	
+	public static void foo(double b, char a) //6
+	{
+		System.out.println("foo, double, char");
+	}
+	
+	public static void bar(int a) //7
+	{
+		System.out.println("bar, int");
+	}
+}  // onur
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	1.Aday metotlar: 1, 2, 3, 4, 5
+	2.Uygun metotlar: 3, 4
+	3.En uygun metotlar: Yok
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{
+		int a = 10;
+		short b = 20;
+		
+		Sample.foo(a, b); //error: ambiguity
+	}
+}
+
+class Sample {
+	public static void foo() //1
+	{
+		System.out.println("foo");
+	}
+	
+	public static void foo(int a) //2
+	{
+		System.out.println("foo, int");
+	}
+	
+	
+	public static void foo(int a, long b) //3
+	{
+		System.out.println("foo, int, long");
+	}
+	
+	public static void foo(double b, int a) //4
+	{
+		System.out.println("foo, double, int");
+	}
+	
+	public static void foo(double b, char a) //5
+	{
+		System.out.println("foo, double, char");
+	}
+	
+	public static void bar(int a) //6
+	{
+		System.out.println("bar, int");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	1.Aday metotlar: 1, 2, 3
+	2.Uygun metotlar: Yok
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{
+		int a = 10;
+		short b = 20;
+		
+		Sample.foo(a, b); //error
+	}
+}
+
+class Sample {
+	public static void foo() //1
+	{
+		System.out.println("foo");
+	}
+	
+	public static void foo(int a) //2
+	{
+		System.out.println("foo, int");
+	}
+
+	
+	public static void foo(double b, char a) //3
+	{
+		System.out.println("foo, double, char");
+	}
+	
+	public static void bar(int a) //4
+	{
+		System.out.println("bar, int");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	1.Aday metotlar: Yok
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{
+		int a = 10;
+		short b = 20;
+		
+		Sample.fo(a, b); //error
+	}
+}
+
+class Sample {
+	public static void foo() //1
+	{
+		System.out.println("foo");
+	}
+	
+	public static void foo(int a) //2
+	{
+		System.out.println("foo, int");
+	}
+
+	
+	public static void foo(double b, char a) //3
+	{
+		System.out.println("foo, double, char");
+	}
+	
+	public static void bar(int a) //4
+	{
+		System.out.println("bar, int");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	1.Aday metotlar: 1, 2, 3, 4, 5, 6
+	2.Uygun metotlar: 3, 4, 5, 6
+	3.En uygun metotlar: yok
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{
+		short a = 10;
+		char b = 20;
+		
+		Sample.foo(a, b); //error: ambiguity
+	}
+}
+
+class Sample {
+	public static void foo() //1
+	{
+		System.out.println("foo");
+	}
+	
+	public static void foo(int a) //2
+	{
+		System.out.println("foo, int");
+	}
+	
+	public static void foo(int a, int b) //3
+	{
+		System.out.println("foo, int, int");
+	}
+	
+	public static void foo(int a, long b) //4
+	{
+		System.out.println("foo, int, long");
+	}
+	
+	public static void foo(double b, int a) //5
+	{
+		System.out.println("foo, double, int");
+	}
+	
+	public static void foo(double b, char a) //6
+	{
+		System.out.println("foo, double, char");
+	}
+	
+	public static void bar(int a) //7
+	{
+		System.out.println("bar, int");
+	}
+}
+
+// onur
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte tam uyum vadır
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{
+		short a = 10;
+		char b = 20;
+		
+		Sample.foo((double)a, b); //6
+	}
+}
+
+class Sample {
+	public static void foo() //1
+	{
+		System.out.println("foo");
+	}
+	
+	public static void foo(int a) //2
+	{
+		System.out.println("foo, int");
+	}
+
+	public static void foo(int a, int b) //3
+	{
+		System.out.println("foo, int, int");
+	}
+	
+	public static void foo(int a, long b) //4
+	{
+		System.out.println("foo, int, long");
+	}
+	
+	public static void foo(double b, int a) //5
+	{
+		System.out.println("foo, double, int");
+	}
+	
+	public static void foo(double b, char a) //6
+	{
+		System.out.println("foo, double, char");
+	}
+	
+	public static void bar(int a) //7
+	{
+		System.out.println("bar, int");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	1.Aday metotlar: 1, 2, 3, 4, 5, 6
+	2.Uygun metotlar: 5, 6
+	3.En uygun metotlar: 6
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{
+		float a = 10;
+		char b = 20;
+		
+		Sample.foo(a, b); //6
+	}
+}
+
+class Sample {
+	public static void foo() //1
+	{
+		System.out.println("foo");
+	}
+	
+	public static void foo(int a) //2
+	{
+		System.out.println("foo, int");
+	}
+
+	public static void foo(int a, int b) //3
+	{
+		System.out.println("foo, int, int");
+	}
+	
+	public static void foo(int a, long b) //4
+	{
+		System.out.println("foo, int, long");
+	}
+	
+	public static void foo(double b, int a) //5
+	{
+		System.out.println("foo, double, int");
+	}
+	
+	public static void foo(double b, char a) //6
+	{
+		System.out.println("foo, double, char");
+	}
+	
+	public static void bar(int a) //7
+	{
+		System.out.println("bar, int");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	1.Aday metotlar: 1, 2, 3, 4
+	2.Uygun metotlar: 1, 2, 3, 4
+	3.En uygun metotlar: 1
+	
+	Aşağıdaki örnekte Math sınıfının abs metodu simüle edilmiştir
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{
+		short a = -10;
+		
+		MyMath.abs(a);
+	}
+}
+
+class MyMath {
+	public static int abs(int a) //1
+	{
+		System.out.println("abs, int");
+		
+		return a > 0 ? a : -a;
+	}
+	
+	public static double abs(double a)  //2
+	{
+		System.out.println("abs, double");
+		
+		return a > 0 ? a : -a;
+	}
+	
+	public static long abs(long a)  //3
+	{
+		System.out.println("abs, long");
+		
+		return a > 0 ? a : -a;
+	}
+	
+	public static float abs(float a)  //4
+	{
+		System.out.println("abs, float");
+		
+		return a > 0 ? a : -a;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	1.Aday metotlar: 1, 2, 3, 4
+	2.Uygun metotlar: yok
+	
+	Aşağıdaki örnekte Math sınıfının abs metodu simüle edilmiştir
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{
+		boolean a = true;
+		
+		MyMath.abs(a);
+	}
+}
+
+class MyMath {
+	public static int abs(int a) //1
+	{
+		System.out.println("abs, int");
+		
+		return a > 0 ? a : -a;
+	}
+	
+	public static double abs(double a)  //2
+	{
+		System.out.println("abs, double");
+		
+		return a > 0 ? a : -a;
+	}
+	
+	public static long abs(long a)  //3
+	{
+		System.out.println("abs, long");
+		
+		return a > 0 ? a : -a;
+	}
+	
+	public static float abs(float a)  //4
+	{
+		System.out.println("abs, float");
+		
+		return a > 0 ? a : -a;
+	}
+}
 
 
 
