@@ -17,6 +17,7 @@
 /*----------------------------------------------------------------------------------------------------------------------
 	26.11.2022
 	Blue
+	- 1 -
 -----------------------------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------------
 	Java Ortamının Temel Özellikleri:
@@ -9864,6 +9865,7 @@ class App {
 /*----------------------------------------------------------------------------------------------------------------------
 	04.02.2023
 	Blue
+	- 2 -
 -----------------------------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------------
 	Gerçek sayı türünden tamsayı türüne (veya char türüne) yapılan explicit dönüşüm şu şekilde gerçekleşir:
@@ -11536,120 +11538,1971 @@ class MyMath {
 	}
 }
 
+/*----------------------------------------------------------------------------------------------------------------------
+	18.02.2023
+	Blue
+-----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Nesne Yönelimli Programlama Tekniği (NYPT): Bu tekniği tek bir cümle ilem anlatmak pek mümkün değildir. Ancak bu
+	tekniği bilen birisine "sınıflar kullanarak program yazma tekniğidir" şeklinde bir cümle kurulabilir. Aslında
+	NYPT anahtar kavramların birleşiminde oluşur. Bu anahtar kavramlar birbirlerinden tamamen ayrık değildir.
+	Bu kavramlar içiçe geçmiş daireler gibi düşünülmelidir. Tüm bu anahtar kavramların temelinde kodun daha iyi
+	algılanabilir olması ve daha iyi yönetilmesi vardır. Örneğin benzer işi yapan metotlara aynı ismi vermek iyi bir
+	tekniktir. Çünkü bu durumda bu metotları kullanan kişiler "çok şey var" algısından uzaklaşıp "az şey var" gibi bir
+	algı oluştururlar. Bu da hatırlamayı kolaylaştırır. 
+	
+	NYPT insanın doğayı algılayış biçimini model almıştır. İnsanlar herşeyi nesne biçiminde ele alıp onu kullanırlar. 
+	Örneğin, elimizdeki telefonlar farklı bile olsa konuşurken bizim için hepsi telefondur. Gerekirse onların başka özellikleri
+	ayrıca söylenebilir.
+	
+	NYPT'de artık ağırlıklı olarak fonksiyonlarla (Java'da metot) değil, sınıflarla konuşulur. Böylece yine "çok şey var"
+	algısından uzaklaştırılıp "az şey var" algısı oluşturulur. Bu anlamda aslında kullanan programcı açısından detaylar
+	metotların detayları gizlemesinden daha falzla gizlenebilir. Böylelikle kullanım kolaylaşır. Burada anlatılar kurs içerisinde
+	detaylandırılacaktır  
+-----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Değişkenlerin Ömürleri (Storage Duration):
+	Bir değişkenin bellekte kalma süresine denir. Yani bir değişkenin ömrü o değişkenin bellekte yaratılmasıyla 
+	yok edilmesi arasında geçen zaman aralığıdır. Anımsanacağı gibi faaliyet alanı (scope) derleme zamanına ilişkindir.
+	Ömür ise çalışma zamanına ilişkindir.
+-----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Bir Java programı için çalışma zamanında "stack" ve "heap" denilen iki ayrı bellak alanı yaratılır. Her uygulama 
+	için bu alanlar ayrı olarak yaratılırlar. Aşağı seviyede beşka alanlar da bulunur. Stack ve heap RAM'de organize
+	edilirler. Stack ve heap'in yeri (yani adresten başladığı) ve uzunluğu sistemden sisteme değişebilmektedir. İstenirse
+	program çalıştırılırken bu alanların uzunlukları belirlenebilir. Belirlenmezse default değerler kullanılır. İşte bu
+	default değerler sistemden sisteme değişebilmektedir.
+	
+	Stack alanında  yaratma ve yok etme işlemi birer makine komutuyla çok hızlı bir biçimde gerçekleşir. Stack alamında değişken
+	yaratılması ve yok edilmesi "stack veri yapısı (stack data structure)" biçiminde gerçekleşir.
+-----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	Veri Yapısı (Data Structure): Verileri belli bir algoritmaya göre tutan ve verilere istenildiği zaman erişilebilen
+	yapılara denir. 
+	
+	Stack veri yapısına eleman ekleme işlemine "push", eleman silme işlemine de "pop" denir. 
+	
+	Anahtar Notlar: Stack veri yapısı "LIFO (Last In First Out)" kuyruk sistemine göre çalışan veri yapısıdır. LIFO'da
+	ekleme sona yapılır. Eleman elde etme (ve silme) sondan yapılır. Yani son eklenen eleman elde edilir. Örneğin, 
+	pişti oyununda ortada biriken kağıtlar için bu veri yapısı kullanılabilir. Ya da örneğin editör programın 
+	"undo-redo" işlemleri de stack veri yapısı ile gerçekleştirilebilir 
+-----------------------------------------------------------------------------------------------------------------------*/
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 Yerel değişkenler stack alanında yaratılırlar. Yerel bir değişken, akış bakımında bildirim noktasına gelindiğinde
+	 yaratılır, bildirildiği bloğun sonuna gelindiğinde yok edilir. Zaten yerel değiilkenlere faaliyet alnı bakımından
+	 bildirildikleri bloğun sonuna gelindiğinde erişilememesinin nedeni budur. Parametre değişkenleri de stack'te 
+	 metot çağrıldığında yaratılır, metot çağrısı bittiğinde yok edilir.
+	 
+	 Anahtar Notlar: Her ne kadar faaliyet alanı ve ömür farklı zamanlara ilişkin kavramlar olsa da aralarında mantıksal bir
+	 bağ söz konusudurç. Yani aralarında dolaylı da olsa bir ilişki bulunur
+-----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 Sınıf içerisindeki bildirimlere sınıfın elemanları (members) denir. Sınıfın elemanı bir alt programsa buna 
+	 metot denir. Sınıfın elemanı bir değişken ise veri elemanı (member field/variable ya da yalnızca field) denir.
+	 Sınıfın başka elemanları da olabilir. Bunlar konular içerisinde ele alınacaktır 
+-----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 Sınıf içerisinde tüm metotların dışında herhangi bir yerde bildirilen değişklenlere sınfın veri elemanları denir.
+	 Sınıf veri elemanları da metotlarda olduğu gibi erişim belirleyiciye sahiptir. Veri elemanları da static veya
+	 non-static olabilirler. Sınıfın veri elemanları için de ilgili konuya gelene kadar public erişim belirleyiciisini
+	 kullanacağız
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+
+class Sample {
+	public int x;
+	private static double y;
+	
+	public static void foo(int a)
+	{
+		//...
+	}
+	
+	//...
+	
+	protected int z;
+	
+	//...
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 Sınıf içerisinde aynı isimde birden fazla veri elemanı bildirimi geçersizdir
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+class Sample {
+	public int x; //error
+	private static double y;
+	public static double x; //error
+	
+	public static void foo(int a)
+	{
+		//...
+	}
+	
+	//...
+	
+	protected int z;
+	
+	//...
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 Birden fazla veri elemanı aynı türdense, static veya non-static olma durumları aynı ise ve aymı erişim 
+	 belirliyeciye sahipse virgül ile ayrılarak da bildirim yapılabilir
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+
+class Sample {
+	public int a, b;
+	protected static double x, y;
+	
+	//...
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 Sınıf bildirimi aslında bir tür bildirimidir. Bu şekilde progrmcının bildirdiği türlere "user defined type" da 
+	 denir
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+
+class Device {
+	//...
+}
+
+
+class Student {
+	//...
+}
+
+class Alien {
+	//...
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 Sınıf bildirimi bir tür bildirimi olduğuna göre, sınıf ismi de bir tür ismi olduğuna göre sınıf türünden
+	 değişkenler bildirilebilir
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{
+		Device d;
+		Student s;
+		Alien a;
+		
+		//...
+	}
+}
+
+
+class Device {
+	//...
+}
+
+
+class Student {
+	//...
+}
+
+class Alien {
+	//...
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 Java'da türler kategori olarak iki gruba ayrılır: değer türleri (value types), referans türleri (reference types)
+	  
+	 T bir tür olmak üzere T türden bir değişken içerisinde tutulan değer bir adres ise bu durumda T bir referans
+	 türüdür. Adres değilse T bir değer türüdür. Java'da temel türler değer türleridir. Yani temel türden bir değişken
+	 içerisinde adres tutulmaz. Programcı tarafından bildirilen türler (user defined types) (sınıflar, enum sınıflar,
+	 interface'ler, record'lar vb.) referans türleridir
+-----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 Sınıf türünden bir değişkene (aslında referans türünden bir değşkene) "referans değişken" ya da kısaca "referans"
+	 denir
+	 
+	 Anahtar Notlar: Java'da "referans" sözcüğü "adres" anlamında da kullanılır. Örneğin "bir nesnenin adresi" yerine
+	 "bir nesnenin referansı" da denebilir. Ancak buradaki referans bir değişkeni değil adresi temsil eder. 
+	 "Referans değişken ya da kısace referans", içerisinde adres (referans) tutan bir değişkendir 
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{
+		Device d; //d bir referans (değişken)
+		Student s; //s bir referans (değişken)
+		Alien a; //a bir referans (değişken)
+	
+		
+		//...
+	}
+}
+
+
+class Device {
+	//...
+}
+
+
+class Student {
+	//...
+}
+
+class Alien {
+	//...
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	- Sınıf türünden bellekte ayrılan bir alana o sınıf türünden nesne (object) denir
+	
+	- Nesneler heap'de yaratılırlar. Java'da stack'te nesne yaratılamaz
+	
+	- Java'da nesnenin kendisi değil adresi, aynı türden bir referansta tutulabilir
+	
+	- Bir nesneyi yaratmak için new operatörü kullanılır. new operatörünün genel biçimi şu şekildedir:
+		new <sınıf ismi>([argümanlar]);
+		
+	new operatörü özel amaçlı, tek operandlı ve önek durumda bir operatördür. new operatörü nesne yaratılması 
+	aşamaları tamamlandıktan sonra heap'te yaratılmış olan nesnenin adresini (referansını) üretir. Bu durumda 
+	bu operatörün ürettiği değer yani adres aynı türden bir referansa atanabilir
+	
+	- Bir nesne ilgili sınıf türünden bir örnektir. Buna "instance" da denir
+	 
+	- Aşağıdaki örnekte, nesne yönelimli programlama anlamında d, s ve a birer nesne DEĞİLDİR. Bunlar ilgili sınıflar 
+	türünden referanslardır. * ile belirtilen new operatörüne ilişkin ifade ile birlikte artık "d referansı
+	yaratılan nesneyi gösteriyor duruma gelir. Benzer şekilde s ve a referansları da ** ve *** ile birlikte yaratılmış olan
+	nesneleri gösteriyor duruma gelir.
+	
+	- Referans ve nesne kavramları birbirinden farklıdır. Referans değişken bir nesneyi gösterebilir, nesnenin kendisi
+	değildir
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{
+		Device d; //d bir referans (değişken)
+		Student s; //s bir referans (değişken)
+		Alien a; //a bir referans (değişken)
+	
+		d = new Device(); //*
+		s = new Student(); //**
+		a = new Alien(); //***
+		
+		//...
+	}
+}
+
+
+class Device {
+	//...
+}
+
+
+class Student {
+	//...
+}
+
+class Alien {
+	//...
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Anahtar Notlar: Doğal bir dilde kurulan bir cümle içerisinde özel isimler dışında kalan her kavram soyuttur. Örneğin
+	"Bir araba alacağım" cümlesinde araba soyut bir kavramı temsil eder. Kişi araba aldığında örneğin "ben  ... marka,
+	.. model, ... plakalı ... araba aldım" dediğinde artık bu araba somutlaşmıştır. İşte burada soyut olan araba 
+	nesne yönelimli programlamada bir sınıf, somutlaşmış olan araba ise bir nesnedir
+-----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	19.02.2023
+	Blue
+-----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıfın non-static veri elemanları her nesne için ayrıca yaratılırlar, nesnenin içerisinde bulunurlar. Sınıfın 
+	non-static veri elmanlarına sınıf dışından (yani başka bir sınıfın içinden) referans ve nokta operatörü ile 
+	erişilir. Nokta operatörü özel amaçlı iki operandlı ve araek durumunda bir operatördür. Nokta operatörünün
+	birinci operandı bir referans, ikinci operandı non-static bir veri elemanı ise bu durumda nokta operatörü 
+	o veri elemanına ilişkin değişkeni üretir. Aslında referans ve nokta operatörü ile veri elemanı ismi kullanımı
+	o referansın gösterdiği nesnenin ilgili veri elemanına erişmek anlamına gelir. Her new işlemi yeni bir nesne
+	yaratmak demektir
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{
+		Sample s, k;
+		
+		s = new Sample();
+		k = new Sample();
+		
+		s.x = 10;
+		s.y = true;
+		k.x = 20;
+		k.y = false;
+		
+		System.out.printf("s.x = %d%n", s.x);
+		System.out.printf("s.y = %b%n", s.y);
+		System.out.printf("k.x = %d%n", k.x);
+		System.out.printf("k.y = %b%n", k.y);		
+	}
+}
+
+
+class Sample {
+	public int x;
+	public boolean y;
+	//...
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte s yerel değişkenine değer atanmadan kullanıldığı için error oluşur
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{
+		Sample s;
+		
+		s.x = 10; //error
+		//...
+	}
+}
+
+
+class Sample {
+	public int x;
+	public boolean y;
+	//...
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Farklı türden referanslar birbirlerine explicit olarak bile atanamazlar
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{
+		Sample s;
+		Mample m;
+		
+		s = new Sample();
+		m = (Mample)s; //error
+	}
+}
+
+
+class Sample {
+	public int x;
+	public boolean y;
+	//...
+}
+
+class Mample {
+	public int x;
+	public boolean y;
+	//...
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	non-static veri elemanlarına nesnenin yaratılması aşamasında default değerler atanır. Defeault değer türe özgü
+	mantıksal sıfır değeridir. Örneğin int türü için sıfırken, boolean türü için false değerindedir
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{
+		Sample s, k;
+		
+		s = new Sample();
+		k = new Sample();
+	
+		System.out.printf("s.x = %d%n", s.x);
+		System.out.printf("s.y = %b%n", s.y);
+		System.out.printf("k.x = %d%n", k.x);
+		System.out.printf("k.y = %b%n", k.y);		
+	}
+}
+
+
+class Sample {
+	public int x;
+	public boolean y;
+	//...
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Bir nesnenin uzunluğu yani bellekte kapladığı alan "en az non-static veri elemanlarının toplam uzunluğu kadardır".
+	Bu durumda aynı türden nesneler için aynı uzunlukta yer ayrılır. Farklı türden nesneler için farklı veri elemanları
+	olabileceğinden aynı uzunlukta yer ayrılması gerekmez
+	
+	Türü ne olursa olsun referansların (referans değişkenlerin) uzunlukları aynıdır. Bu da adreselenebilecek sayıları
+	tutabilecek uzunluktur. Örneğin 64 bit sistemlerde referanslar 64bit (8 byte) uzunluğundadır. Benzer şekilde 32 nbit
+	sistemlerde tüm referanslar 32bit (4 byte) uzunluğundadır
+-----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aynı türden iki referansın birbirine atanması durumunda iki referans da artık aynı nesneyi gösterir duruma gelir.
+	Bu durumda hangi referans ile nesneye erişildiğinin bir önemi yoktur. Aşağıdaki örnekte ** ile belirtilen ifadede
+	s referansı, gösterdiği nesneden kopartılmış ve k'nın içerisindeki adres atandığından artık k ve s aynı nesneyi
+	gösterir duruma gelmiştir
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{
+		Sample s, k;
+		
+		s = new Sample();
+		k = new Sample();
+		
+		s.x = 10;
+		s.y = true;
+		k.x = 30;
+	
+		System.out.printf("s.x = %d%n", s.x);
+		System.out.printf("s.y = %b%n", s.y);
+		System.out.printf("k.x = %d%n", k.x);
+		System.out.printf("k.y = %b%n", k.y);
+		System.out.println("----------------------------");
+		
+		s = k; //**
+		
+		System.out.printf("s.x = %d%n", s.x);
+		System.out.printf("s.y = %b%n", s.y);
+		System.out.printf("k.x = %d%n", k.x);
+		System.out.printf("k.y = %b%n", k.y);
+		System.out.println("----------------------------");
+		
+		++s.x;
+		
+		System.out.printf("s.x = %d%n", s.x);
+		System.out.printf("s.y = %b%n", s.y);
+		System.out.printf("k.x = %d%n", k.x);
+		System.out.printf("k.y = %b%n", k.y);
+		System.out.println("----------------------------");
+		
+	}
+}
+
+
+class Sample {
+	public int x;
+	public boolean y;
+	//...
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte değer türü kullanıldığından a'nın değeri artırılmış olmaz
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{
+		int a = 10;
+		int b;
+		
+		b = a;
+		
+		System.out.printf("a= %d%n", a);
+		System.out.printf("b= %d%n", b);
+		
+		++b;
+		System.out.printf("a= %d%n", a);
+		System.out.printf("b= %d%n", b);		
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örneği inceleyiniz
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{
+		Sample s, k;
+		
+		s = new Sample();
+		k = new Sample();
+		
+		s.x = 10;
+		s.y = true;
+		k.x = 30;
+	
+		System.out.printf("s.x = %d%n", s.x);
+		System.out.printf("s.y = %b%n", s.y);
+		System.out.printf("k.x = %d%n", k.x);
+		System.out.printf("k.y = %b%n", k.y);
+		System.out.println("----------------------------");
+		
+		s = k; //**
+		
+		System.out.printf("s.x = %d%n", s.x);
+		System.out.printf("s.y = %b%n", s.y);
+		System.out.printf("k.x = %d%n", k.x);
+		System.out.printf("k.y = %b%n", k.y);
+		System.out.println("----------------------------");
+		
+		++s.x;
+		
+		System.out.printf("s.x = %d%n", s.x);
+		System.out.printf("s.y = %b%n", s.y);
+		System.out.printf("k.x = %d%n", k.x);
+		System.out.printf("k.y = %b%n", k.y);
+		System.out.println("----------------------------");
+		
+		k = new Sample();
+		
+		--k.x;
+		
+		System.out.printf("s.x = %d%n", s.x);
+		System.out.printf("s.y = %b%n", s.y);
+		System.out.printf("k.x = %d%n", k.x);
+		System.out.printf("k.y = %b%n", k.y);
+		System.out.println("----------------------------");
+	}
+}
+
+
+class Sample {
+	public int x;
+	public boolean y;
+	//...
+}
+
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte main içerisindekli yerel değişken olan a'nın değeri metot çağrısından sonra değişmez. Çünkü
+	argümanlardan parametrelere aktarım bir atama işlemidir
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{
+		int a = 10;
+		
+		Sample.foo(a);
+		
+		System.out.printf("a = %d%n", a);
+	}
+}
+
+class Sample {
+	public static void foo(int a)
+	{
+		++a;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Bir metodun parametre değişkeni bir referans olabilir. Bu durumda metot aynı türden bir referans ile çağrılabilir. 
+	Metoda geçilen referans ile metot içerisinde ilgili nesneye erişilmiş olur. Referans parametreli bir metot aldığı
+	referansa ilişkin nesne üzerinde değişiklik yapabilir. Bu durumda bu değişiklik metodu çağrıdan koddaki referans
+	üzerinden aynı nesneye erişildiği için görülebilir. Bir metodun geri dönüş değeri de referans olabilir. Bu durumda
+	metodun geri dönüş değerine ilişkin return deyimine ait ifadenin türünün aynı türden bir referans olması gerekir.
+	
+	Aşağıdaki örnekte createTime metodu, içeride yaratmış olduğu nesnenin referansına geri dönmektedir. printTime
+	metodu parametresi ile aldığı Time türünden referansın gösterdiği nesneye erişip bilgilerini akrana yazdırmaktadır.
+	changeTime metodu aldığı refeeransa ilişkin nesneye erişip hour, minute, second ve millisecond elemanlarının 
+	değerlerini değiştirmektedir. Örneği çalıştırarak durumu gözlemleyiniz
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{
+		Time time;
+		
+		time = TimeUtil.createTime(19, 19, 14, 234);
+		TimeUtil.printTime(time);
+		TimeUtil.changeTime(time, 20, 34, 45, 345);
+		TimeUtil.printTime(time);
+	}
+}
+
+class TimeUtil {
+	public static Time createTime(int hour, int minute, int second, int millisecond)
+	{
+		Time time = new Time();
+		
+		changeTime(time, hour, minute, second, millisecond);
+		
+		return time;
+	}
+	
+	public static void changeTime(Time time, int hour, int minute, int second, int millisecond)
+	{
+		//...
+		time.hour = hour;
+		time.minute = minute;
+		time.second = second;
+		time.millisecond = millisecond;
+	}
+	
+	public static void printTime(Time time)
+	{
+		System.out.printf("%02d:%02d:%02d.%03d%n", time.hour, time.minute, time.second, time.millisecond);
+	}
+}
+
+class Time {
+	public int hour;
+	public int minute;
+	public int second;
+	public int millisecond;
+	//...
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	25.02.2023
+	Blue
+-----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıfın static bir veri elemanı bir tanedir. Bu elemanın kullanılabilmesi için nesne yaratılması gerekmez. Sınıfın
+	static bir veri elemanına sınıf dışından sınıf ismi ve nokta operatörü ile erişilebilir. Sınıfın static veri elemanları
+	sınıfın bir elemanı ilk kez kullanıldığında yaratılır ve programın sonuna kadar yaşarlar. Ayrıntılar ileride
+	ele alınacaktır. Sınıfın static veri elemanları nesne içerisinde olmamalarına karşın heap'de yaratılır.Sınıfın 
+	static veri elemanlarına da yaratıldıklarında default değer atanır.
+	Eflatun
+-----------------------------------------------------------------------------------------------------------------------*/
+
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{
+		System.out.printf("Sample.x = %d%n", Sample.x);
+		System.out.printf("Sample.y = %b%n", Sample.y);
+		
+		Sample.x = 10;
+		Sample.y = true;
+		
+		
+		System.out.printf("Sample.x = %d%n", Sample.x);
+		System.out.printf("Sample.y = %b%n", Sample.y);
+	}
+}
+
+class Sample {
+	public static int x;
+	public static boolean y;
+	//...
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıfın non-static bir veri elemanına sınıf dışından sınıf ismi ve nokta operatörü ile erişilemez. Çünkü non-static
+	bir veri elemanı nesneye özeldir 
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{
+		Sample.x = 20; //error
+		
+		//...
+	}
+}
+
+class Sample {
+	public int x;
+	public boolean y;
+	//...
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıfın static bir veri elemanına sınıf dışından referans ve nokta operatörü ile erişilebilir. Sınıf ismi ile
+	erişmekten farkı yoktur. Sınıfın static veri elemanlarına bu şekilde erişim tercih edilmemelidir.
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{
+		Sample s;
+		
+		s = new Sample();
+		
+		s.x = 10; //Gönlümüzün error'u
+		s.y = true; //Gönlümüzün error'u
+		
+		System.out.printf("Sample.x = %d%n", Sample.x);
+		System.out.printf("Sample.y = %b%n", Sample.y);
+	}
+}
+
+class Sample {
+	public static int x;
+	public static boolean y;
+	//...
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte sayaçlar, sınıfları kullanan kodlar (client codes) içerisinde oluşturulmuştur. Programcı sayacı
+	artırmayı veya azaltmayı unutabilir. Ayrıca başka sınıflar ve dolayısıyla nesneler için de sayaç tutulması gerektiğinde
+	sayaç için kullanılacak değişkenlere isim bulma zorluğu oluşabilir. Üstelik oyun bir çok başka işlem de içerdiğinden
+	programlaması görece karmaşıklaşır.
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{
+		WarGameApp.run();
+	}
+}
+
+class WarGameApp {
+	public static void run()
+	{
+		//...
+		
+		int soldierCount = 0, alienCount = 0;
+		
+		for (int i = 0; i < 10; ++i) {
+			Alien a = new Alien();
+			
+			//...
+			
+			++alienCount;
+		}
+		
+		//...
+		
+		for (int i = 0; i < 20; ++i) {
+			Soldier a = new Soldier();
+			
+			//...
+			
+			++soldierCount;
+		}
+		
+		//...
+		System.out.printf("Number of Soldiers:%d%n", soldierCount);
+		System.out.printf("Number of Aliens:%d%n", alienCount);
+		
+		//...
+	}
+}
+
+class Alien {
+	public int armCount;
+	public int color;
+	//...
+}
+
+class Soldier {
+	public int title;
+	public int gunCount;
+	//...
+}
+
+
+class Civilian {
+	//...
+}
+
+class Building {
+	//...
+}
+
+class Terrain {
+	//...
+}
+
+class Animal {
+	//...
+}
+
+*----------------------------------------------------------------------------------------------------------------------
+	Yukarıdaki örnekte anlatılan problem aşağıdaki gibi statici veri elemanı kullanılarak çözülebilir. Böylece
+	kod karmaşıklığı azaltılmış olur, Şüphesiz örnekte detaylar gözardı edilmiştir. Örnekte ** ile belirtilen kod parçaları
+	şu an için önemsizdir. Anlatılmak istenen yani static bir veri elemanının tek olmasının kullanımına odaklanmanız
+	tavsiye edilir
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{
+		WarGameApp.run();
+	}
+}
+
+class WarGameApp {
+	public static void run()
+	{
+		//...
+		
+		for (int i = 0; i < 10; ++i) {
+			Alien a = new Alien();
+			
+			//...	
+		}
+		
+		//...
+		
+		for (int i = 0; i < 20; ++i) {
+			Soldier a = new Soldier();
+			
+			//...
+			
+		}
+		
+		//...
+		System.out.printf("Number of Soldiers:%d%n", Soldier.count);
+		System.out.printf("Number of Aliens:%d%n", Alien.count);
+		
+		//...
+	}
+}
+
+class Alien {
+	public static int count;
+	public int armCount;
+	public int color;
+	
+	public Alien() //**
+	{
+		++count;
+	}
+	//...
+}
+
+class Soldier {
+	public static int count;
+	public int title;
+	public int gunCount;
+	
+	public Soldier() //**
+	{
+		++count;
+	}
+	//...
+}
+
+
+class Civilian {
+	public static int count;
+	//...
+}
+
+class Building {
+	public static int count;
+	//...
+}
+
+class Terrain {
+	public static int count;
+	//...
+}
+
+class Animal {
+	public static int count;
+	//...
+}
+
+/
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıfın non-static bir metodu sınıf dışından referans ve nokta operatörü ile çağrılabilir.
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{
+		Sample s = new Sample();
+		
+		s.foo();
+	}
+}
+
+
+class Sample {
+	public void foo()
+	{
+		//...
+	}
+	
+	//...
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıfın static bir metodu sınıf dışından sınıf ismi ve nokta operatörü ile çağrılabilir.
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{
+		Sample.foo();
+	}
+}
+
+
+class Sample {
+	public static void foo()
+	{
+		//...
+	}
+	
+	//...
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıfın non-static bir metodu içerisinde o sınıfın non-static bir veri elemanına doğrudan erişilebilir. 
+	Doğrudan erişilen veri elemanı metot çağrısında kullanılan referansın gösterdiği nesnenin veri elemanı olur
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{
+		Sample s1, s2;
+		
+		s1 = new Sample();
+		s2 = new Sample();
+		
+		s1.foo(20);
+		s2.foo(30);
+		
+		System.out.printf("s1.x = %d%n", s1.x);
+		System.out.printf("s2.x = %d%n", s2.x);
+	}
+}
+
+
+class Sample {
+	public int x;
+	
+	public void foo(int a)
+	{
+		x = a;
+	}
+	
+	//...
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıfın non-static bir metodu içerisinde o sınıfın non-static metodu doğrudan çağrılabilir. Doğrudan çağrılan metot,
+	çağıran metodun çağrılmasında kullanılan referans ile çağrılmış olur.
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{
+		Sample s1, s2;
+		
+		s1 = new Sample();
+		s2 = new Sample();
+		
+		s1.foo(20);
+		s2.foo(30);
+		
+		System.out.printf("s1.x = %d%n", s1.x);
+		System.out.printf("s2.x = %d%n", s2.x);
+	}
+}
+
+
+class Sample {
+	public int x; // non static veri elemanı
+	
+	public void foo(int a) // non static veri elemanı
+	{
+		bar(a);
+	}
+	
+	public void bar(int a) // non static veri elemanı
+	{
+		x = a; // non static veri elemanı değildir.Derleyici bunu dorudan bu şekilde anlamaz.
+	}
+	
+
+	//...
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Yukarıdaki iki maddenin özeti olarak şu söylenebilir: Sınıfın non-static bir metodu içerisinde aynı sınıfın non-static
+	elemanlarına (member) doğrudan erişilebilir.
+-----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıfın non-static bir metodu içerisinde o sınıfın static bir veri elamanına doğrudan erişlebilir.
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{
+		Sample s1, s2;
+		
+		s1 = new Sample();
+		s2 = new Sample();
+		
+		s1.foo(20);
+		System.out.printf("s1.x = %d%n", Sample.x);
+		s2.foo(30);
+		System.out.printf("s2.x = %d%n", Sample.x);
+	}
+}
+
+
+class Sample {
+	public static int x;
+	
+	public void foo(int a)
+	{
+		bar(a);
+	}
+	
+	public void bar(int a)
+	{
+		x = a; // x static veri elemanıdır. buna dogrudan bu metod içerisinde erişilir.
+	}
+	
+	//...
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıfın non-static bir metodu içerisinde o sınıfın static bir metodu doğrudan çağrılabilir
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{
+		Sample s1, s2;
+		
+		s1 = new Sample();
+		s2 = new Sample();
+		
+		s1.foo(20);
+		System.out.printf("s1.x = %d%n", Sample.x);
+		s2.foo(30);
+		System.out.printf("s2.x = %d%n", Sample.x);
+	}
+}
+
+
+class Sample {
+	public static int x;
+	
+	public void foo(int a)
+	{
+		x = a;
+		bar(a);
+	}
+	
+	public static void bar(int a)
+	{
+		//...
+	}
+	
+	//...
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Yukarıdaki iki maddenin özeti olarak şu söylenebilir: Sınıfın non-static bir metodu içerisinde aynı sınıfın static
+	elemanlarına (member) doğrudan erişilebilir 
+-----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	Yukarıdaki dört maddenin özeti olarak şu söylenebilir: Sınıfın non-static bir metodu içerisinde aynı sınıfın tüm 
+	elemanlarına doğrudan erişilebilir
+-----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıfın static bir metodu içerisinde o sınıfın non-static bir veri elemanına doğrudan erişilemez
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+
+class Sample {
+	public int x;
+	
+	public static void foo(int a)
+	{
+		x = a; //error // foo metodu statictir. x non statictir. x e erişilemez..
+	}
+	
+	//...
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıfın static bir metodu içerisinde o sınıfın non-static bir metodu doğrudan çağrılamaz
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class Sample {
+	public static void foo(int a)
+	{
+		bar(); //error
+	}
+	
+	public void bar()
+	{
+		//...
+	}
+	
+	//...
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Yukarıdaki iki maddenin özeti olarak şu söylenebilir: Sınıfın static bir metodu içerisinde aynı sınıfın non-static
+	elemanlarına (member) doğrudan erişilemez 
+-----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıfın static bir metodu içerisinde o sınıfın static bir veri elemanına doğrudan erişilebilir
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{
+		Sample.foo(30);
+		
+		System.out.printf("Sample.x = %d%n", Sample.x);
+	}
+}
+
+
+class Sample {
+	public static int x;
+	public static void foo(int a)
+	{
+		x = a;
+	}
+	
+	//...
+}
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıfın static bir metodu içerisinde o sınıfın static bir metodu doğrudan çağrılabilir
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{
+		Sample.foo(30);
+		
+		System.out.printf("Sample.x = %d%n", Sample.x);
+	}
+}
+
+
+class Sample {
+	public static int x;
+	public static void foo(int a)
+	{
+		bar(a);
+	}
+	
+	public static void bar(int a)
+	{
+		x = a;
+	}
+	
+	//...
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Yukarıdaki iki maddenin özeti olarak şu söylenebilir: Sınıfın static bir metodu içerisinde aynı sınıfın static
+	elemanlarına (member) doğrudan erişilebilir
+-----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	Yukarıdaki dört maddenin özeti olarak şu söylenebilir: Sınıfın static bir metodu içerisinde aynı sınıfın yalnızca static
+	elemanlarına (member) doğrudan erişilebilir
+-----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Yukarıdaki sekiz maddenin özeti olarak şu söylenebilir: Sınıfın non-static bir metodu içerisinde aynı sınıfın tüm
+	elemanlarına doğrudan erişilebilirken, static bir metodu içerisinde aynı sınıfın yalnızca static elemanlarına 
+	doğrudan erişilebilir.
+-----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte bar metodunun doğrudan çağrılmadığına dikkat ediniz
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class Sample {
+	public int x;
+	
+	public static void foo(int a)
+	{
+		Sample s = new Sample();
+		
+		s.bar(a);
+	}
+	
+	public void bar(int a)
+	{
+		x = a;
+	}
+	
+	//...
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Soru: Programcı bir sınıfın metodunun static veya non-static olarak mı bildirileceğine nasıl karar verecektir?
+	
+	Cevap: Bu soru için basit bir kural şu şekilde benimsenebilir: Bir metot non-static elemanlara doğrudan erişmeyecekse
+	static yapılmalıdır. Bu durumda "non-static bir metot için kesinlikle non-static bir elemana doğrudan erişiyordur"
+	anlamı çıkar. Bu da okunabilirliği artırır. Yani aslında "Bir sınıfın bir metodunu static yapmak o sınıfın non-static
+	metotların okunabililiğini artırır". Ayrıca non-static metotların sınıf dışından referans ve nokta operatörü ile
+	çağırılması gerektiğinden static yapılabilecek olan ancak non-static yapılan bir metot boşu boşuna referans ile
+	çağrılmış olur.
+-----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Katsayıları klavyeden alınan ikinci dereceden bir denklemin köklerini bulup ekrana yazdıran
+	programı yazınz.
+	
+	Sınıfın aşağıdaki kullanım şekli sınıfların yararı 100 birim düşünülürse %1 civarındadır. Şüphesiz örnek farklı 
+	yaklaşımlarla da yapılabilir. Sınıfın kullanımını göstermek için bu şekilde yazılmıştır. İleride daha iyisi yazılacaktır
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		QuadraticEquationSolverApp.run();
+	}
+}
+
+
+class QuadraticEquationSolverApp {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Katsayıları giriniz:");
+		double a = kb.nextDouble();
+		double b = kb.nextDouble();
+		double c = kb.nextDouble();
+
+		QuadraticEquationRootInfo ri = EquationSolverUtil.findRoots(a, b, c);
+		
+		if (ri.exists)
+			System.out.printf("x1 = %f, x2 = %f%n", ri.x1, ri.x2);
+		else
+			System.out.println("Gerçek kök yok");
+	}
+}
+
+class QuadraticEquationRootInfo {
+	public double x1, x2;
+	public boolean exists;
+}
+
+class EquationSolverUtil {
+	
+	public static double getDelta(double a, double b, double c)
+	{
+		return b * b - 4 * a * c;
+	}
+	
+	public static QuadraticEquationRootInfo findRoots(double a, double b, double c)
+	{
+		double delta = getDelta(a, b, c);
+		QuadraticEquationRootInfo ri = new QuadraticEquationRootInfo();
+		
+		if (delta >= 0) {
+			double sqrtDelta = Math.sqrt(delta);
+			
+			ri.x1 = (-b + sqrtDelta) / (2 * a);
+			ri.x2 = (-b - sqrtDelta) / (2 * a);
+			ri.exists = true;
+		}
+			
+		return ri;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Katsayıları klavyeden alınan ikinci dereceden bir denklemin köklerini bulup ekrana yazdıran
+	programı yazınz.
+	
+	Sınıfın aşağıdaki kullanım şekli sınıfların yararı 100 birim düşünülürse %1 civarındadır. Şüphesiz örnek farklı 
+	yaklaşımlarla da yapılabili. Sınıfın kullanımını göstermek için bu şekilde yazılmıştır. İleride daha iyisi yazılacaktır
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		QuadraticEquationSolverApp.run();
+	}
+}
+
+
+class QuadraticEquationSolverApp {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Katsayıları giriniz:");
+		double a = kb.nextDouble();
+		double b = kb.nextDouble();
+		double c = kb.nextDouble();
+
+		QuadraticEquation equation = new QuadraticEquation();
+		
+		equation.solve(a, b, c);
+		
+		if (equation.rootsExists)
+			System.out.printf("x1 = %f, x2 = %f%n", equation.x1, equation.x2);
+		else
+			System.out.println("Gerçek kök yok");
+	}
+}
+
+class QuadraticEquation {
+	public double x1, x2;
+	public boolean rootsExists;
+	
+	public static double getDelta(double a, double b, double c)
+	{
+		return b * b - 4 * a * c;
+	}
+	
+	public void solve(double a, double b, double c)
+	{
+		double delta = getDelta(a, b, c);
+		
+		if (delta >= 0) {
+			double sqrtDelta = Math.sqrt(delta);
+			
+			x1 = (-b + sqrtDelta) / (2 * a);
+			x2 = (-b - sqrtDelta) / (2 * a);
+			rootsExists = true;
+		}
+	}
+	
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Katsayıları klavyeden alınan ikinci dereceden bir denklemin köklerini bulup ekrana yazdıran
+	programı yazınz.
+	
+	Sınıfın aşağıdaki kullanım şekli sınıfların yararı 100 birim düşünülürse %1 civarındadır. Şüphesiz örnek farklı 
+	yaklaşımlarla da yapılabili. Sınıfın kullanımını göstermek için bu şekilde yazılmıştır. İleride daha iyisi yazılacaktır
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		QuadraticEquationSolverApp.run();
+	}
+}
+
+class QuadraticEquationSolverApp {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Katsayıları giriniz:");
+		double a = kb.nextDouble();
+		double b = kb.nextDouble();
+		double c = kb.nextDouble();
+
+		QuadraticEquation equation = new QuadraticEquation();
+		
+		equation.a = a;
+		equation.b = b;
+		equation.c = c;
+		
+		equation.solve();
+		
+		if (equation.rootsExists)
+			System.out.printf("x1 = %f, x2 = %f%n", equation.x1, equation.x2);
+		else
+			System.out.println("Gerçek kök yok");
+	}
+}
+
+class QuadraticEquation {
+	public double a, b, c;
+	public double x1, x2;
+	public boolean rootsExists;
+	
+	public double getDelta()
+	{
+		return b * b - 4 * a * c;
+	}
+	
+	public void solve()
+	{
+		double delta = getDelta();
+		
+		if (delta >= 0) {
+			double sqrtDelta = Math.sqrt(delta);
+			
+			x1 = (-b + sqrtDelta) / (2 * a);
+			x2 = (-b - sqrtDelta) / (2 * a);
+			rootsExists = true;
+		}
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	26.02.2023
+	Blue
+-----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	Anahtar Notlar: Bir sınıf için genel olarak iki bakış açısından bahsedilebilir: Sınıfı yazan, sınıfı kullanan.
+	Sınıfı yazan sınıfa ilişkin detayları ve sınıfı kullanan bakış açısını da bilmelidir. Sınıfı kullanan ise sınıfın
+	yazılma detaylarını bilmek zorunda değildir. Sınıfı kullanan kodlara "müşteri kod (client code)", sınıfın bildirimine
+	ise "hizmet veren kod (server code)" denir. Bu anlamda sınıfı yazan programcının o sınıfa ilişkin "domain"'i sınıfı
+	kullanana göre daha iyi bilmesi gerekir.
+
+   Aqua
+	domain : senaryo
+
+	Eflatun
+
+-----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	Point sınıfı ve test kodu 
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		Point p1, p2;
+		
+		p1 = new Point();
+		p2 = new Point();
+		
+		p1.x = 100.4;
+		p1.y = -345.89;
+		p2.x = 23.56;
+		
+		p1.print();
+		p2.print();
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Point sınıfı ve test kodu 
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		Point p1, p2;
+		
+		p1 = new Point();
+		p2 = new Point();
+		
+		p1.x = 100.4;
+		p1.y = -345.89;
+		p2.x = 23.56;
+		
+		p1.print();
+		p2.print();
+		p1.offset(100, -20);
+		p2.offset(-30, 10);
+		p1.print();
+		p2.print();
+		p1.offset(20);
+		p2.offset(-10);
+		p1.print();
+		p2.print();
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Point sınıfı ve test kodu 
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		Point p1, p2;
+		
+		p1 = new Point();
+		p2 = new Point();
+		
+		p1.x = 100;
+		p1.y = 200;
+		p2.x = 97;
+		p2.y = 204;
+		
+		
+		p1.print();
+		p2.print();
+		
+		System.out.printf("Distance:%f%n", p1.distance(p2));
+		System.out.printf("Distance:%f%n", p1.distance(97, 204));
+		System.out.printf("Distance:%f%n", p1.distance());
+	}
+}
+
+class Point {
+	public double x, y; 
+	
+	//...
+	
+	public double distance()
+	{
+		return distance(0, 0);
+	}
+	
+	public double distance(double a, double b)
+	{
+		return Math.sqrt(Math.pow(x - a, 2) + Math.pow(y - b, 2));
+	}
+	
+	public double distance(Point other)
+	{
+		return distance(other.x, other.y);
+	}
+	
+	public void offset(double dxy)
+	{
+		offset(dxy, dxy);
+	}
+	
+	public void offset(double dx, double dy)
+	{
+		x += dx;
+		y += dy;
+	}
+	
+	public void print()
+	{
+		System.out.printf("(%.2f, %.2f)%n", x, y);
+	}
+}
+
+//onur
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Rassal Sayı Üretimi: Bilgisayar ortamında rassal sayılar gerçek hayattaki gibi üretilemez. Çünkü gerçek hayatta
+	bir sayının örneğin bir torbadan çekilmesi durumunda çok çok fazla etken çıkacak sayıyı etkiler. Bu sebeple
+	bilgisayarda üretilen rassal sayılara "pseudo random numbers" denilmektedir. Bu sebeple rassal sayı üretiminin
+	kalitesi değişebilir. Rassal sayı üretimi her durumda aynı yöntemle yapıldığından yani kabaca static bir yöntem
+	kullanıldığıundan kalitesi yönteme göre değişebilir. Bu anlamda genel olarak aşırı kalite istenirse matematiksel
+	işlemlerden dolayı yavaşlama olabilir, benzer şekilde hızlandırılmak istenirse de kalite düşebilir. Bu anlamda
+	Java'da kullanılan üretim algoritması orta kalite kabul edilebilir. Bilgisayar ortamında rassal sayı üretiminin
+	kalitesine yönelik bilimsel çalışmalar hala devam etmektedir. JavaSE'de rassal sayı üretimi için kullanılan
+	en temel sınıf java.util paketi içerisindeki Random sınıfıdır. Bu sınıf rassal sayı üretimi için 
+	Donald Knuth'un The Art of Computer Programming serisinin 2. cildinde bulunan "seminumerical algorithm" başlığındaki
+	algoritma kullanmaktadır. Bu algoritma orta kalitede bir algoritmadır. Özel durumlar dışında çoğu zaman işe yarar.
+	
+	Bilgisayar ortamında rassal sayı üretimi, ismine "tohum değeri (seed value)" denilen bir değerin sürekli güncellenmesiyle
+	yapılır. Bu anlamda Random sınıfı türünden nesne tohum değeri vermeden yaratıldığında tohum değerini önceki nesnelerden
+	farklı olarak belirleme eğilimindedir. Bu işlemin içsel olarak nasıl yapılabildiği ileride belirli ölçüde anlatılacaktır 
+-----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 Random sınıfının parametresiz nextInt metodu int türü sınırları içerisinde rasgele üretilmiş bir sayıya 
+	 geri döner
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		java.util.Random r = new java.util.Random();
+
+		System.out.print("Bir sayı giriniz:");
+		int count = kb.nextInt();
+				
+		for (int i = 0; i < count; ++i)
+			System.out.printf("%d ", r.nextInt()); //nextInt metodu parametresiz.ınt sınırları içerisinder andom sayı üretir.
+		
+		System.out.println();
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 Random sınıfının int paremtreli nextInt metodu [0, bound) aralığında rasgele üretilmiş bir sayıya geri döner
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		java.util.Random r = new java.util.Random();
+
+		System.out.print("Bir sayı giriniz:");
+		int count = kb.nextInt();
+				
+		for (int i = 0; i < count; ++i)
+			System.out.printf("%d ", r.nextInt(100)); //[0,99]
+		
+		System.out.println();
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 Random sınıfında Java 17 ile birlikte dolaylı olarak eklenen iki parametreli bir nextInt metodu bulunmaktadır.
+	 Anahtar Notlar: Java 17 ile birlikte RandomGenerator denilen bir arayüz (interface) eklenmiştir. Random sınıfı da
+	 bu arayüzü destekler (implements) biçimde yeniden düzenlenmiştir. Bu arayüzle birlikte bir çok yeni metotta
+	 Random sınıfına eklenebilmiştir. Arayüz kavramı anlatılan kısımların detayları ileride ele alıncaktır. Şu an 
+	 için bu metotların Random sınıfına ait olduğunun bilinmesi yeterlidir 
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		java.util.Random r = new java.util.Random();
+
+		System.out.print("Bir sayı giriniz:");
+		int count = kb.nextInt();
+				
+		for (int i = 0; i < count; ++i)
+			System.out.printf("%d ", r.nextInt(1, 100)); //[1,99] ; iki parametreli olduğuna dikkat edilmeli..
+		
+		System.out.println();
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte [min, bound) aralığında int türden rasgele sayı üretilmiştir
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		java.util.Random r = new java.util.Random();
+
+		System.out.print("Üç tane sayı giriniz(count, min, bound):");
+		int count = kb.nextInt();
+		int min = kb.nextInt();
+		int bound = kb.nextInt();
+				
+		for (int i = 0; i < count; ++i)
+			System.out.printf("%d ", r.nextInt(min, bound));
+		
+		System.out.println();
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Java 17 öncesinde [min, bound) aralığında kalan int türden bir sayı aşağıdaki gibi üretilebilir.
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		java.util.Random r = new java.util.Random();
+
+		System.out.print("Üç tane sayı giriniz(count, min, bound):");
+		int count = kb.nextInt();
+		int min = kb.nextInt();
+		int bound = kb.nextInt();
+				
+		for (int i = 0; i < count; ++i)
+			System.out.printf("%d ", r.nextInt(bound - min) + min);
+		
+		System.out.println();
+	}
+}
+
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Java 17 ile birlikte dolaylı olarak eklenen nextLong metodu
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		java.util.Random r = new java.util.Random();
+
+		System.out.print("Üç tane sayı giriniz(count, min, bound):");
+		int count = kb.nextInt();
+		long min = kb.nextLong();
+		long bound = kb.nextLong();
+				
+		for (int i = 0; i < count; ++i)
+			System.out.printf("%d ", r.nextLong(min, bound));
+		
+		System.out.println();
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Java 17 ile birlikte dolaylı olarak eklenen nextLong metodu
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		java.util.Random r = new java.util.Random();
+
+		System.out.print("İki tane sayı giriniz(count, bound):");
+		int count = kb.nextInt();
+		long bound = kb.nextLong();
+				
+		for (int i = 0; i < count; ++i)
+			System.out.printf("%d ", r.nextLong(bound));
+		
+		System.out.println();
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Random sınıfının nextLong metodu
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		java.util.Random r = new java.util.Random();
+
+		System.out.print("Bir sayı giriniz:");
+		int count = kb.nextInt();
+				
+		for (int i = 0; i < count; ++i)
+			System.out.printf("%d ", r.nextLong()); // long sınırlarında randomsayı üretir.
+		
+		System.out.println();
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Random sınıfının nextDouble metodu [0, 1) aralığında rasgele sayıya geri döner 
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		java.util.Random r = new java.util.Random();
+
+		System.out.print("Bir sayı giriniz:");
+		int count = kb.nextInt();
+				
+		for (int i = 0; i < count; ++i)
+			System.out.printf("%f%n", r.nextDouble());
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Java 17 ile birlikte dolaylı olarak eklenen nextDouble metodu 
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		java.util.Random r = new java.util.Random();
+
+		System.out.print("İki tane sayı giriniz(count, bound):");
+		int count = kb.nextInt();
+		double bound = kb.nextDouble();
+				
+		for (int i = 0; i < count; ++i)
+			System.out.printf("%f%n", r.nextDouble(bound));
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Java 17 ile birlikte dolaylı olarak eklenen nextDouble metodu 
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		java.util.Random r = new java.util.Random();
+
+		System.out.print("Üç tane sayı giriniz(count, min, bound):");
+		int count = kb.nextInt();
+		double min = kb.nextDouble();
+		double bound = kb.nextDouble();
+				
+		for (int i = 0; i < count; ++i)
+			System.out.printf("%f%n", r.nextDouble(min, bound));
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Random sınıfının nextBoolean metodu 
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		java.util.Random r = new java.util.Random();
+
+		System.out.print("Bir sayı giriniz:");
+		int count = kb.nextInt();
+				
+		for (int i = 0; i < count; ++i)
+			System.out.printf("%b%n", r.nextBoolean());
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Hilesiz bir paranın yazı gelme olasılığının yaklaşık olarak 0.5 olduğunu hesaplayan basit bir
+	simulasyon programını yazınız
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		CoinTailProbabilitySimulationApp.run();
+	}
+}
+
+class CoinTailProbabilitySimulationApp {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		for (;;) {
+			System.out.print("Para kaç kez atılsın:");
+			int n = Integer.parseInt(kb.nextLine());
+			
+			if (n <= 0)
+				break;
+			
+			CoinTailProbabilitySimulation simulation = new CoinTailProbabilitySimulation();
+			
+			simulation.run(n);
+			System.out.printf("Yazı gelme olasılığı:%f%n", simulation.p);
+		}
+	}
+}
+
+class CoinTailProbabilitySimulation {
+	public double p;
+	
+	public static int calculateTailCount(int n)
+	{
+		java.util.Random r = new java.util.Random();
+		int count = 0;
+		
+		for (int i = 0; i < n; ++i)
+			count += r.nextInt(2);
+		
+		return count;
+	}
+	
+	
+	public void run(int n)
+	{
+		p = calculateTailCount(n) / (double)n;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Hilesiz bir paranın yazı gelme olasılığının yaklaşık olarak 0.5 olduğunu hesaplayan basit bir
+	simulasyon programını yazınız
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		CoinTailProbabilitySimulationApp.run();
+	}
+}
+
+class CoinTailProbabilitySimulationApp {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		for (;;) {
+			System.out.print("Para kaç kez atılsın:");
+			int n = Integer.parseInt(kb.nextLine());
+			
+			if (n <= 0)
+				break;
+			
+			CoinTailProbabilitySimulation simulation = new CoinTailProbabilitySimulation();
+			
+			simulation.run(n);
+			System.out.printf("Yazı gelme olasılığı:%f%n", simulation.p);
+		}
+	}
+}
+
+class CoinTailProbabilitySimulation {
+	public double p;
+	
+	public static int calculateTailCount(int n)
+	{
+		java.util.Random r = new java.util.Random();
+		int count = 0;
+		
+		for (int i = 0; i < n; ++i)
+			if (r.nextBoolean())
+				++count;
+		
+		return count;
+	}
+	
+	
+	public void run(int n)
+	{
+		p = calculateTailCount(n) / (double)n;
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	04.03.2023
+	eksik
+-----------------------------------------------------------------------------------------------------------------------*/
 
 
 
