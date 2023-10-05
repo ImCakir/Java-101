@@ -9,7 +9,7 @@
 
 
 										Blue --> Ders Başlangıçları..
-										Aqua --> Konuya ilişkin kendimin eklediği detaylar..
+										Aqua --> Konuya ilişkin kendi eklediğim detaylar..
 										Eflatun --> Kendimce önemli gördüğüm noktalar..
 										Violance --> Tekrar bakabileceğimi düşündüğüm konu başlıkları..
 
@@ -17,18 +17,20 @@
 /*----------------------------------------------------------------------------------------------------------------------
 	26.11.2022
 	Blue
-	- 1 -
+	- 1.1.1 -
 -----------------------------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------------
 	Java Ortamının Temel Özellikleri:
 	Arakodlu Çalışma Sistemi: C ve C++ gibi programlama dillerinde çalıştırılabilen bir dosya (executable file) elde 
 	edildiğinde bu dosyanın içerisinde, çalıştırılacak sisteme özgü (genel olarak işletim sistem, donanım vs.) 
 	doğrudan çalışltırılabilecek makine kodları bulunur. Java programlama dili ile yazılmış bir program derlendiğinde 
-	olulşan dosyanın içerisinde hiç bir sistemin dili olmayan yapay bir arakod bulunur. Bu arakoda "byte code" denir. 
+	oluşan dosyanın içerisinde hiç bir sistemin dili olmayan yapay bir arakod bulunur. Bu arakoda "byte code" denir. 
 	"Byte code" doğrudan çalıştırılamaz. Bu byte code başka bir uygulama tarafından çalıştırılır. Çalıştıran program
-	byte code'u makine koduna dönüştürür. Bu işleme "JIT (Just In Time Compilation) denir. Geliştirme ve çalıştırılama
-	anlamında şu temel kavramlar söz konusudur:
-		- JVM (Java Virtual Machine): Byte kodu derleyerek (JIT) sisteme ilişkin aşağı seviye (makine kodf denebilir)
+	byte code'u makine koduna dönüştürür. Bu işleme "JIT (Just In Time Compilation) denir.
+
+	 Geliştirme ve çalıştırılma anlamında şu temel kavramlar söz konusudur:
+
+		- JVM (Java Virtual Machine): Byte kodu derleyerek (JIT) sisteme ilişkin aşağı seviye (makine kodu denebilir)
 		koda dönüştürür. JVM aslında "byte code"'un nasıl yorumlanacağına (interpret) yönelik soyutlanmış bir kavramdır.
 
 		- JRE (Java Runtime Environment): Genel olarak Java ile yazılmış bir uygulamayı çalıştırmak (run) için gereken araçları ve 
@@ -39,9 +41,9 @@
 		Çalıştırma araçları genel olarak yalnızca geliştirme aşamasında kullanılabilir.
 	
 	Ticari kullanımda özellikle Java 11 ile birlikte Oracle firmasına ilişkin bir takım değişiklikler yapılmıştır. Genel olarak
-	şu şekilde özetlenebilir. Java'da geliştirme ortamı ücretsiz, çalıştırma araçlarına kullanılan araca ve firmaya göre ücretlendirilebilir.
+	şu şekilde özetlenebilir. Java'da geliştirme ortamı ücretsiz, çalıştırma araçlarına, kullanılan araca ve firmaya göre ücretlendirilebilir.
 	Tamamen ücretsiz olan OpenJRE denilen ayrı bir ürün de vardır. Bu kavramlar zamanla daha da anlaşılacaktır. Burada sadece genel
-	olarak anlatılmıştır
+	olarak anlatılmıştır.
 
 	Arakodlu çalışmanın en önemli avantajlarından biri, geliştirilen uygulamalar genel olarak sistemden (platformdan) bağımsız
 	olarak çalıştırılabilmesidir. Dolayısıyla platformdan bağımsız olarak yazılır. Bu kavrama "Write Once Run Anywhere (WORA)" 
@@ -53,10 +55,10 @@
 	Geniş bir Sınıf Kütüphanesi: Java'da geniş bir sınıf kütüphanesi bulunur. Veritabanı, web programlama vs. gibi 
 	işlemler için hazır sınıflar.
 
-	Hızlı Uygulama Geliştirme Ortamı: Java hızlı uygulama geliştirme ortamı (rapid application deveopment) sunar. Bu anlamda
+	Hızlı Uygulama Geliştirme Ortamı: Java hızlı uygulama geliştirme ortamı (rapid application development) sunar. Bu anlamda
 	hem öğrenmesi kolaydır. Hem de ürün daha çabuk elde edilir.
 
-	Güvenli Çalışma Ortamı: Java'da yazılmış olan programlaruın sisteme yanlışlıkla zarar verme olasılıkları çok daha 
+	Güvenli Çalışma Ortamı: Java'da yazılmış olan programların sisteme yanlışlıkla zarar verme olasılıkları çok daha 
 	azdır.
 
 	
@@ -65,6 +67,7 @@
 /*----------------------------------------------------------------------------------------------------------------------
 	27.11.2022
 	Blue
+	- 1.1.2 -
 -----------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------
@@ -73,7 +76,7 @@
 	1. Seviyelerine (level) göre sınıflandırma: Seviye programlama dilinin insan algısına yakınlığının bir öçüsüdür.
 	Yüksek seviyeli (high level) diller hem dil özellikleri hem de uygulama geliştirme olarak kolay öğrenilebilen, insan
 	algısına yakın dillerdir. Aşağı seviyeli (low level) diller makinenin doğal çalışmasına daha yakındır. Olabilecek
-	en aşağı seviyeli dil saf makine dilidir
+	en aşağı seviyeli dil saf makine dilidir.
 
 	2. Kullanım alanlarına göre sınıflandırma: Dilin hangi alanlarda kullanılabileceğinin sınıflandırılmasıdır. Bazı diller
 	birden fazla alanda da kullanılabilmektedir. Bu anlamda genel amaçlı diller, bilimsel ve mühendislik diller, oyun ve animasyon 
@@ -94,16 +97,16 @@
 
 /*----------------------------------------------------------------------------------------------------------------------
 	Anahtar Notlar: Buradaki kavramlardan genel olarak bahsedilmiştir. Şüphesiz her birinin detayları vardır. Bu 
-	detaylar kurs içerisinde zamanla anlaşılacaktır
+	detaylar kurs içerisinde zamanla anlaşılacaktır.
 -----------------------------------------------------------------------------------------------------------------------*/
 
 
 /*----------------------------------------------------------------------------------------------------------------------
 	Temel Kavramlar: 
 	Çevirici program, derleyici, yorumlayıcı: Bir programlama dilinde yazılmış olan programı eşdeğer başka bir dile
-	dönüştüren programlamşlara "çevirici programlar (translator)" Çevirici programlarda kaynak dil (source language) ve
+	dönüştüren programlamşlara "çevirici programlar (translator)" denir. Çevirici programlarda kaynak dil (source language) ve
 	hedef dil (target language) söz konusudur. Örneğin Java'dan C#'a dönüştürme yapan program bir çevirici programdır.
-	Bir çevirici programdsa hedef dil aşağı seviyeli bir dil (saf makine dili, sembolik makine dili, arakod vs.) ise
+	Bir çevirici programda hedef dil aşağı seviyeli bir dil (saf makine dili, sembolik makine dili, arakod vs.) ise
 	bu durumda çevirici programa özel olarak "derleyici (compiler)" JVM'in  byte kodu makine koduna dönüştürme 
 	faaliyeti de bir derleme işlemidir. Bu işlem çalıştırma ortamı içerisinde bulunan JIT derleyici (Just In Time Compiler)
 	tarafından yapılmaktadır.
@@ -131,14 +134,14 @@
 	dili ve ortamı vardır. Java programlama dili özellikle Android sistemleri için uygulama geliştirmede kullanılmaktadır.
 
 	Açık Kaynak Yazılım, özgür yazılım mülkiyete sahip yazılım: Özgür yazılım (free software) ve açık kaynak (open source)
-	yazılımım aralarında farklar olsa da genel olarak aşağıdaki özelliklere sahiptir:
+	yazılımın aralarında farklar olsa da genel olarak aşağıdaki özelliklere sahiptir:
 
-		- Bedavadır. Kullanılabilmesi için bir lisans ücreti gerekmez
-		- Kaynak kod sahiplenilemez yani herkezindir. Kayan kod üzerinde değişiklik ya da ekleme yapıldığında kodlar
-		kapatılamaz. Onların da açılması gerekir
-		- Çoğaltılabilirler, izin almadan kullanılabilir
+		- Bedavadır. Kullanılabilmesi için bir lisans ücreti gerekmez.
+		- Kaynak kod sahiplenilemez yani herkesindir. Kaynak kod üzerinde değişiklik ya da ekleme yapıldığında kodlar
+		kapatılamaz. Onların da açılması gerekir.
+		- Çoğaltılabilirler, izin almadan kullanılabilir.
 
-	Bunun tam tersi mülkiyete sahip (propriatery) yazılmımlardır. Bu yazılımlar para verilerek kullanılırlar. Çoğaltılamazlar
+	Bunun tam tersi mülkiyete sahip (propriatery) yazılımlardır. Bu yazılımlar para verilerek kullanılırlar. Çoğaltılamazlar
 	ya da çoğaltılmaları için belirli koşulları olabilir. 
 
 
@@ -155,6 +158,7 @@
 /*----------------------------------------------------------------------------------------------------------------------
 	03.12.2022	
 	Blue
+	- 1.1.3 -
 -----------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------
@@ -164,7 +168,7 @@
 
 	Sentaks doğru yazma ve doğru dizilime ilişkin kurallardır. Örneğin:
 		"I going to will school"
-	cümlesinde sentaks hatası yapılmılmıştır. 
+	cümlesinde sentaks hatası yapılmıştır. 
 		System.out.println("Hello";
 	kodunda Java anlamında sentaks hatası yapılmıştır. 
 
@@ -173,7 +177,7 @@
 	Bilgisayar Dilleri ve Programlama Dilleri: Bilgisayar bilimlerinde kullanılmak üzere tasarlanmış dillere 
 	bilgisayar dilleri (computer languages) denir. Bir bilgisayar dilinde akış da varsa bu durumda 
 	programlama dili (programming language) denir. Örneğin XML, HTML bilgisayar dilleri programlama dili değildir. C, C++,
-	Java C#, Kotlin, Swift, Javascript gibi dillerde akış da olduğundan programlama dilleridir
+	Java C#, Kotlin, Swift, Javascript gibi dillerde akış da olduğundan programlama dilleridir.
 -----------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------
@@ -193,14 +197,14 @@ class App {
 	1. Anahtar Sözcükler (keywords, reserved words): Dil için özel bir anlamı olan yani dil tarafından bilinen ve bir çoğu
 	tek başına değişken ismi olarak kullanılamayan atomlardır. Örneğin: package, class, void gibi
 
-	2. Değişkenler (identifiers, variables): İsmini programcının belirlediği ve çeşitli kurallara isiminin belirlenebildiği
+	2. Değişkenler (identifiers, variables): İsmini programcının belirlediği ve çeşitli kurallarla isiminin belirlenebildiği
 	atomlardır. Örneğin: csd, App, String gibi
 
 	3. Operatörler (operators): Bir işleme yol açan ve bu işlem sonucunda değer üreten atomlardır. Örneğin: a + b 
 	ifadesinde + bir operatördür
 
-	4. Sabitler (literals, constants): Program içerisinbde doğrudan yazılan sayılara denir. Örneğin  a - 3 ifadesinde
-	3 bir sabittir
+	4. Sabitler (literals, constants): Program içerisinde doğrudan yazılan sayılara denir. Örneğin  a - 3 ifadesinde
+	3 bir sabittir.
 
 	5. String'ler (strings, string literals): İki tırnak (double quote) içerisinde bulunan yazılar tırnaklarıyla birlikte
 	string atomudur. Bu atoma string sabiti anlamında "string literal" da denir. Örneğin "Hello, World".
@@ -210,14 +214,14 @@ class App {
 
 /*----------------------------------------------------------------------------------------------------------------------
 	Boşluk karakterleri (whitespaces): Klavyeden basılığında boşluk algısı yaratan karakterlerdir. Klavyden basılan boşluk
-	karakterleri tipik olarak: space, tabi enter
+	karakterleri tipik olarak: space, tab, enter
 -----------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------
 	Java programlama dilindeki kod yazım kuralları şunlardır:
 	1. Atomlar arasında istenildiği kadar boşluk (whitespace) bırakılabilir.
 	2. Anahtar sözcükler ve değişkenler dışında kalan atomlar istenildiği kadar bitişik yazılablir. Anahtar sözcükler ve
-	değişken atomlar arasında en az bir boşluk (whitespace) karakteri olmalıdır
+	değişken atomlar arasında en az bir boşluk (whitespace) karakteri olmalıdır.
 -----------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------
@@ -275,7 +279,7 @@ class App {
 	public static void main(String [] args) 
 	{	
 		//Burası derleyici tarafından dikkate alınmaz
-		System.out.println("Hello, World"); //Burası da derleyici tarafından dikkate alındır
+		System.out.println("Hello, World"); //Burası da derleyici tarafından dikkate alınmaz.
 
 		/*
 			Burası da 
@@ -288,12 +292,13 @@ class App {
 /*----------------------------------------------------------------------------------------------------------------------
 	04.12.2022
 	Blue
+	- 1.2.1 -
 -----------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------
 	Anahtar Notları: Java'da derleme zamanı (compile time) ve çalışma zamanı (run time) denilen birbiriyle dolaylı
 	olarak ilişkili ancak ayrı olan iki kavram vardır. Derleme zamanı, derleme sürecine ilişkin işlemlerdir. Çalışma 
-	zamanı program çalışması sürecine ilişkin işlemlerdir
+	zamanı program çalışması sürecine ilişkin işlemlerdir.
 -----------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------
@@ -309,7 +314,7 @@ class App {
 	mesajlarının hepsinin kaldırılmış olması gerekir.
 
 	3. Ölümcül hatalar (fatal error): Derleme işleminin bile tamamlanmasını engelleyebilecek hatalardır. Bu durumda programcının 
-	yazdığı kod açısından yapğacak bir şeyi yoktur. Çünkü kod henüz derlenmemiştir. Programcının ölümcül hataya yol açan
+	yazdığı kod açısından yapacak bir şeyi yoktur. Çünkü kod henüz derlenmemiştir. Programcının ölümcül hataya yol açan
 	durumu ortadan kaldırması gerekir. Örneğin diskte yer kalmaması, derlenecek dosyanın bulunamaması gibi durumlar 
 	ölümcül hatalara örnek olarak verilebilir
 
@@ -319,8 +324,8 @@ class App {
 -----------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------
-	Bildirim (declaration): Bir ismin derleyiciye tanıtılmasıdır. Derleyici bildirim ile o ismin ne anlama geldiğinianlara
-	ve derleme işlemini ona göre göre yapar 
+	Bildirim (declaration): Bir ismin derleyiciye tanıtılmasıdır. Derleyici bildirim ile o ismin ne anlama geldiğini anlar
+	ve derleme işlemini ona göre göre yapar.
 -----------------------------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------------
 	Bir Java programı genel olarak paketlerden, paketler sınıflardan, sınıflar da metotlardan oluşur. 
@@ -348,7 +353,9 @@ class App {
 	Sınıflar konusu kurs sürecinde detaylandırılacaktır.
 	
 	Java'da alt programlara metot (method) denir. Alt programın ne yapacağının yazılmasına "metot bildirimi (method declaration)"
-	denir. Alt programın çalıştırılmasına ise "method çağırma (method call)" Metot bildiriminin genel biçimi:
+	denir. Alt programın çalıştırılmasına ise "method çağırma (method call)" denir.
+
+	Metot bildiriminin genel biçimi:
 	
 	[erişim belirleyici] [static] <geri dönüş değeri bilgisi> <metot ismi>([parametreler])
 	{
@@ -441,7 +448,7 @@ class App {
 }
 
 /*----------------------------------------------------------------------------------------------------------------------
-	Çağıran metodun (caller) ile ait olduğu sınıf ile çağrılan metodun (callee) at olduğu sınıf aynı paket içerisindeyse 
+	Çağıran metodun (caller) ile ait olduğu sınıf ile çağrılan metodun (callee) ait olduğu sınıf aynı paket içerisindeyse 
 	çağırma sırasında paket ismi yazılmayabilir. Çağıran metot ile çağrılan metot aynı sınıfta ise çağırma sırasında 
 	paket ismi yazılmamışsa sınıf ismi de yazılmayabilir.   
 -----------------------------------------------------------------------------------------------------------------------*/
@@ -481,7 +488,7 @@ class Mample {
 
 /*----------------------------------------------------------------------------------------------------------------------
 	Tür (type): Bir değişken için bellekte ne kadar yer ayrılacağını ve içerisindeki değerin hangi yöntemle tutulacağını
-	belirten kavramdır
+	belirten kavramdır.
 	
 	Java'da türler genel olarak iki gruba ayrılabilir:
 	Temel türler (primitive/built-in/predefined types), programcının tanımladığı türler (user defined types)
@@ -543,32 +550,8 @@ class Mample {
 /*----------------------------------------------------------------------------------------------------------------------
 	10.12.2022
 	Blue
+	- 1.2.2 -
 -----------------------------------------------------------------------------------------------------------------------*/
-
-/*----------------------------------------------------------------------------------------------------------------------
-	Aşağı örneği çalıştırıp yuvarlama hatasını gözlemleyiniz. Örneğin detaylarını şu an önemsemeyiniz. İleri hepsi
-	ele alınacaktır
------------------------------------------------------------------------------------------------------------------------*/
-package csd;
-
-class App {
-	public static void main(String [] args)	
-	{		
-		double a = 0.1, b = 0.2;
-		double c;
-		
-		c = a + b;
-		
-		System.out.printf("a = %.20f%n", a);
-		System.out.printf("b = %.20f%n", b);
-		System.out.printf("c = %.20f%n", c);
-		
-		if (c == 0.3)
-			System.out.println("Eşit");
-		else
-			System.out.println("Eşit değil");		
-	}
-}
 
 /*----------------------------------------------------------------------------------------------------------------------
 	Aşağı örneği çalıştırıp yuvarlama hatasını gözlemleyiniz. Örneğin detaylarını şu an önemsemeyiniz. İleride hepsi
@@ -890,7 +873,7 @@ class App {
 	"deprecated" olmuştur
 	
 	- Java'da değişken isimlendirmede $ karakteri kullanılabilir. Hatta isimler $ karakteri ile başlatılabilir. $ karakteri
-	tek başlına değişken ismi olabilir. Ancak programcı değişken isimlendirmede $ karakteriniş kullanmamalıdır. Derleyici
+	tek başına değişken ismi olabilir. Ancak programcı değişken isimlendirmede $ karakteriniş kullanmamalıdır. Derleyici
 	ismini kendisinin belirlediği durumlarda isimlendirmede bu karakteri kullanır. $ karakterini programcı da kullanırsa
 	isim çakışmaları olabilir. Zaten $ karakterinin değişken isimlendirmede geçerli olmasının nedeni bu tip durumlardan
 	kaynaklanır
@@ -1076,9 +1059,11 @@ class App {
 	Bir metodun geri dönüş değeri bilgisi yerine bir tür ismi yazılırsa bu metodun "geri dönüş değeri vardır" denir.
 	Tersine bir metodun geri dönüş değeri varsa geri dönüş değeri bilgisi yerine bir tür ismi yazılır. Bir metodun
 	geri dönüş değeri varsa metot çağrısı bittikten sonra çağrıldığı noktaya bir değer ile geri döner. Bir metodun 
-	geri dönüş değeri yoksa bu bilgi yerine void yazılır. Bir metodun geri dönüş değeri metot içerisinde metot içerisinde
-	return deyimi ile oluşturulur. return deyiminin genel biçimi şu şekildedir:
+	geri dönüş değeri yoksa bu bilgi yerine void yazılır. Bir metodun geri dönüş değeri metot içerisinde return deyimi ile oluşturulur. 
+
+	return deyiminin genel biçimi şu şekildedir:
 		return [ifade];
+
 	return deyiminin en temel görevi metodu sonlandırmaktır. Yani metot içerisinde akış bu deyime geldiğinde metot sonlanır
 	ve akış çağrılan noktaya geri döner. return deyimine ilişkin ifadenin değeri çağıran metoda aktarılır. Aşağıdaki örnekte 
 	add metodunun geri dönüş değeri 2 ile çarpılmış ve sonuç result değişkenine atanmıştır	
@@ -1143,6 +1128,7 @@ class NumberUtil {
 /*----------------------------------------------------------------------------------------------------------------------
 	11.12.2022	
 	Blue
+	- 1.2.3 -
 -----------------------------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------------
 	Geri dönüş değeri olan metotlarda (void olmayan metotlarda) return tek kullanılamaz
@@ -1315,7 +1301,7 @@ class NumberUtil {
 	Aqua
 
 	Burada programcı metodu çağırıp bir işlem yapmıyor. Mesela bir result değişkenine geri dönüş değerini  atamıyor.
-	MEtodda ekrana basan kodu bize verir. Geri dönüş değerini kullanmadı.Sadece metodu çağırdı.
+	Metodda ekrana basan kodu bize verir. Geri dönüş değerini kullanmadı.Sadece metodu çağırdı.
 	
 	Metot ekrana toplam değerini basmasaydı bu şekilde çağırma işimize yarar mıydı?
 -----------------------------------------------------------------------------------------------------------------------*/
@@ -1715,7 +1701,7 @@ class NumberUtil {
 
 /*----------------------------------------------------------------------------------------------------------------------
 	Aşağıdaki örnekte iki multiply çağrısı arasında argümanlarda bir değişiklik olmamasına karşın programcı iki kere multiply
-	metodunu çağırmıştır. Bu durumda kod hem iki defa çağırmanın gereksizliğiğ hem de okunabilirlik algılanabilirlik
+	metodunu çağırmıştır. Bu durumda kod hem iki defa çağırmanın gereksizliği hem de okunabilirlik algılanabilirlik
 	açısından kötü yazılmıştır. Yani aslında kodu okuyan bir programcı için bu metotların iki defa çağrıldığını gördüğünde
 	akış içerisinde a veya b'nin değiştiği algısı oluşur
 -----------------------------------------------------------------------------------------------------------------------*/
@@ -1731,7 +1717,7 @@ class App {
 		
 		System.out.println(NumberUtil.multiply(a, b));
 		
-		//... (Burada a veya b değişkenlerinin değişmiyor)
+		//... (Burada a veya b değişkenlerinin değeri değişmiyor)
 		
 		System.out.println(NumberUtil.multiply(a, b));
 	}
@@ -1764,7 +1750,7 @@ class App {
 		
 		System.out.println(result);
 		
-		//... (Burada a veya b değişkenlerinin değişmiyor)
+		//... (Burada a veya b değişkenlerinin değeri değişmiyor)
 		
 		System.out.println(result);
 	}
@@ -1784,6 +1770,7 @@ class NumberUtil {
 /*----------------------------------------------------------------------------------------------------------------------
 	17.12.2022	
 	Blue
+	- 1.3.1 -
 -----------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------
@@ -2171,7 +2158,7 @@ class FindGradeApp {
 		printResult(midTermGrade, finalGrade);		
 	}
 }
-
+ 
 /*----------------------------------------------------------------------------------------------------------------------
 	Bölme işlemi tamsayılar ile yapıldığında sonuç her zaman tamsayı çıkar. İşlem sonucunda elde edilen değerin noktadan
 	sonraki kısmı yuvarlanmadan atılır. 
@@ -2240,7 +2227,7 @@ class App {
 	
 	Bu durumda bir Java programcısı çözmesi gereken bir problem için JavaSE'de problemin çözümüne ilişkin metotlar
 	varsa onları kullanmalıdır. Yoksa yazmayı düşünmeye başlamalıdır. Ancak bu durum programcının standart olarak kullandığı
-	metotların nasıl yazıldığını gözardı etmesi anlamına gelmez. Programcı programlama yalamı boyunca hepsini olmasa da
+	metotların nasıl yazıldığını gözardı etmesi anlamına gelmez. Programcı programlama yaşamı boyunca hepsini olmasa da
 	hazır olarak kullandıklarının nasıl yazılacağını da öğrenmelidir. 
 	
 	Anahtar Notlar: Bazı durumlarda programcı JavaSE'de bulunmayan bir metot, kendisini kanıtlamış ve Java uygulamalarında da 
@@ -2300,7 +2287,7 @@ class App {
 /*----------------------------------------------------------------------------------------------------------------------
 	Sınıf Çalışması: Parametresi ile aldığı double türden x1, y1, x2, y2 koordinat bilgilerine göre iki nokta arasındaki
 	((x1, y1) ve (x2, y2) noktaları) Euclid uzaklığına geri dönen distance isimli metodu PointUtil isimli sınıf 
-	içerisinde yazını ve aşağıdaki kod ile test ediniz 
+	içerisinde yazınız ve aşağıdaki kod ile test ediniz 
 	
 	Not: İleride daha iyisi yazılacaktır
 -----------------------------------------------------------------------------------------------------------------------*/
@@ -2378,6 +2365,7 @@ class PointUtil {
 /*----------------------------------------------------------------------------------------------------------------------
 	18.12.2022
 	Blue
+	- 1.3.2 -
 -----------------------------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------------
 	Math sınıfının PI ve E elemanları
@@ -2487,7 +2475,7 @@ class MathUtil {
 
 	log(double a) : e tabanına göre alınan log
 	log10(double a) : 10 tabanına göre log
-	log1p(double x) : log x + 1 dir. bunun sebebi de log0= tanımsızdır. ama sıfır girildiğinde +1 yaparak tanımsız olması
+	log1p(double x) : log x + 1 dir. bunun sebebi de log0 = tanımsızdır. ama sıfır girildiğinde +1 yaparak tanımsız olması
 	nı engeller.log1 = 0.
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
@@ -2886,7 +2874,7 @@ class App {
 }
 
 /*----------------------------------------------------------------------------------------------------------------------
- 	Ters bölü u ile yazılan karakterler değişken isimlendirmede xe kullanılabilir. Şüphesiz hem pratik değildir hem de
+ 	Ters bölü u ile yazılan karakterler değişken isimlendirmede de kullanılabilir. Şüphesiz hem pratik değildir hem de
  	pratikte anlamlı değil. Çünkü zaten biz İngilizce alfabedeki karakterler dışındaki alfabetik karakterleri değişken
  	isimlendirmede tercih etmeyiz. Örnek durumu göstermek için yazılmıştır.
 -----------------------------------------------------------------------------------------------------------------------*/
@@ -3151,29 +3139,9 @@ class App {
 }
 
 /*----------------------------------------------------------------------------------------------------------------------
- 	Yalnızca sabitlerden ve operatörlerden oluşan yani içerisinde değişken olmayan ifadelere "sabit ifadesi (constant expression)"
- 	denir. Bu anlamda tek başına bir sabit de sabit ifadesidir.
- 	
- 	Anahtar Notlar: İleride aslında sabit ifadesi olarak kullanılabilen değişkenler de göreceğiz. Bu tarz değişkenler de 
- 	bir ifade içerisinde sabit olarak ele alınırlar
- 	
- 	Derleyiciler sabit ifadelerinin değerlerini hesaplayarak sonucu "byte code"'a yazarlar. Bu optimizasyona 
- 	"constant folding optimization" denir. Bu sebeple aşağıdaki örnekteki çarpma sonucu arakoda yazılır. Örnekteki
- 	bazı detaylar ileride ele alınacaktır
------------------------------------------------------------------------------------------------------------------------*/
-package csd;
-
-class App {
-	public static void main(String [] args)	
-	{			
-		long divider = 1000L * 60 * 60 * 24 * 365; //byte code -> 31536000000
-		
-		System.out.println(divider);
-	}
-}
-/*----------------------------------------------------------------------------------------------------------------------
 	24.12.2022
 	Blue
+	- 1.3.3 -
 -----------------------------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------------
  	Operatörler: Bir işleme yol açan ve işlem sonucunda bir değer üreten atomlara denir. Operatör ile birlikte işleme
@@ -3235,7 +3203,7 @@ class App {
 /*----------------------------------------------------------------------------------------------------------------------
  	Aritmetik 4 işlem ve mod operatörleri iki operandlı (binary) ve araek (infix) durumunda operatörlerdir. Bu operatörlerin
  	ürettikleri değer işlemin sonnucunda elde edilen değerdir. Bu operatörlerin yan etkisi (side effect) yoktur. Bu
- 	operatörlerin kısıtı operandların türlerine göre işlem yapılıp yapılamacağı ile ilgilidir 
+ 	operatörlerin kısıtı operandların türlerine göre işlem yapılıp yapılamayacağı ile ilgilidir 
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -3258,7 +3226,7 @@ class App {
 /*----------------------------------------------------------------------------------------------------------------------
  	Aritmetik 4 işlem ve mod operatörleri iki operandlı (binary) ve araek (infix) durumunda operatörlerdir. Bu operatörlerin
  	ürettikleri değer işlemin sonnucunda elde edilen değerdir. Bu operatörlerin yan etkisi (side effect) yoktur. Bu
- 	operatörlerin kısıtı operandların türlerine göre işlem yapılıp yapılamacağı ile ilgilidir 
+ 	operatörlerin kısıtı operandların türlerine göre işlem yapılıp yapılamayacağı ile ilgilidir 
 
  	***
  	a + b = c olsun. + burada bir operatördür. a ve b nin değerini değiştirmez,yani bir yan etkisi yoktur. Ama operatör bir
@@ -3907,6 +3875,7 @@ class Sample {
 /*----------------------------------------------------------------------------------------------------------------------
 	25.12.2022	
 	Blue
+	- 1.4.1 -
 -----------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------
@@ -4005,7 +3974,7 @@ class App {
 
 /*----------------------------------------------------------------------------------------------------------------------
 	 Atama (=) operatörü iki operandlı araek durumunda bir operatördür. Bu operatörün birinci operandı değişken olmalıdır.
-	 Operatörün şüphesiz yan etkisi vardır. Bu operatör sağdan sola öncelikli (right assocaitive) gruptadır. Bu 
+	 Operatörün şüphesiz yan etkisi vardır. Bu operatör sağdan sola öncelikli (right associative) gruptadır. Bu 
 	 operatörün ürettiği değer ikinci operandına ilişkin değer yani atanan değerdir
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
@@ -4459,6 +4428,7 @@ class Util {
 	}
 }
 
+?
 
 /*----------------------------------------------------------------------------------------------------------------------
 	if deyiminin koşul ifadesine ilişkin parantezde boolean türden ifadelerin değeri karşılaştırılıyorsa == veya != 
@@ -4932,8 +4902,8 @@ class QuadraticEquationSolver {
 
 /*----------------------------------------------------------------------------------------------------------------------
 	07.01.2023
-
 	Blue
+	- 1.4.2 -
 -----------------------------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------------
 	Döngü Deyimleri (Loop Statements):
@@ -4953,6 +4923,7 @@ class QuadraticEquationSolver {
 /*----------------------------------------------------------------------------------------------------------------------
 	Kontrolün başta yapıldığı while döngü deyiminin genel biçimi:
 	
+
 		while (<koşul ifadesi>)
 		 	<deyim>
 		 	
@@ -5157,7 +5128,7 @@ class App {
 
 /*----------------------------------------------------------------------------------------------------------------------
 	Sınıf Çalışması: Klavyeden sıfır girilene kadar alınan sayıların pozitif ve negatif olanlarının ayrı ayrı toplamlarını
-	bulan proğremı yazınız. Programda hiç negatif veya pozitif sayı girilmemişse uygun mesajlar verilmelidir:
+	bulan programı yazınız. Programda hiç negatif veya pozitif sayı girilmemişse uygun mesajlar verilmelidir:
 	"Hiç pozitif sayı girmediniz" veya "Hiç negatif sayı girmediniz"
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
@@ -5343,7 +5314,7 @@ class SumDigitsTest {
 }
 
 class NumberUtil {
-	public static int countDigits (int a) 
+	public static int sumDigits (int a) 
 	{
 		int sum = 0;
 		while (a != 0) {   // (321 -> 32 --> 3)
@@ -5489,6 +5460,8 @@ class NumberUtil {
 	}
 }
 
+?
+
 /*----------------------------------------------------------------------------------------------------------------------
 	do-while döngü deyimi içerisinde bildirilen bir değişken faaliyet alanı (scope) kuralları gereği koşul ifadesi
 	içerisinde kullanılamaz
@@ -5549,6 +5522,8 @@ class App {
 		}
 	}
 }
+/*----------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------*/
 
 package csd;
 
@@ -5590,6 +5565,7 @@ class NumberUtil {
 		return count;
 	}
 }
+
 /*----------------------------------------------------------------------------------------------------------------------
 	for döngü deyiminin deyiminin genel biçimi:
 	
@@ -5598,7 +5574,7 @@ class NumberUtil {
 		
 	1.kısım: Akış for döngü deyimine geldiğinde yalnızca bir kez yapılacak kısımdır.
 	
-	2.kısım: Koşul ifadesine ilişkin kısımdır. Burada yazılacak ifasdenin boolean türden olması gerekir. Akış for döngü
+	2.kısım: Koşul ifadesine ilişkin kısımdır. Burada yazılacak ifadenin boolean türden olması gerekir. Akış for döngü
 	deyimine geldiğinde 1.kısım yapıldıktan sonra kontrol yapılır
 	
 	3.kısım: Döngünün bir adımı tamamlandığında bir sonraki adıma geçmek için yapılacak kontrolden hemen önce yapılır.
@@ -5834,7 +5810,7 @@ class App {
 
 /*----------------------------------------------------------------------------------------------------------------------
 	for döngü deyiminde yanlışlıkla noktalı virgülün konması durumu. Aşağıdaki örnekte neden error oluşur?
-	for boyunca geçerli olan isi for dışında kullanılmış olundu. Boş deyimle birlikte i nin ismi artık görülemez durumu gelmiştir.
+	for boyunca geçerli olan isim for dışında kullanılmış olundu. Boş deyimle birlikte i nin ismi artık görülemez durumu gelmiştir.
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -5894,6 +5870,7 @@ class App {
 /*----------------------------------------------------------------------------------------------------------------------
 	08.01.2023
 	Blue
+	- 1.4.3 -
 -----------------------------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------------
 	for döngüsünün birinci ve üçüncü kısmında virgül ayracı ile birden fazla ifade yazılabilir 
@@ -6335,7 +6312,7 @@ class NumberUtil {
 
 /*----------------------------------------------------------------------------------------------------------------------
 	Sınıf Çalışması: Parametresi ile aldığı long türden bir sayının asal olup olmadığını test eden isPrime isimli metodu
-	NumberUtil sınıfı içerisinde yazınız ve aşağıdakş kod ile test ediniz
+	NumberUtil sınıfı içerisinde yazınız ve aşağıdaki kod ile test ediniz
 	(Yavaş versiyon)
 -----------------------------------------------------------------------------------------------------------------------*/
 
@@ -6377,7 +6354,7 @@ class NumberUtil {
 
 /*----------------------------------------------------------------------------------------------------------------------
 	Sınıf Çalışması: Parametresi ile aldığı long türden bir sayının asal olup olmadığını test eden isPrime isimli metodu
-	NumberUtil sınıfı içerisinde yazınız ve aşağıdakş kod ile test ediniz
+	NumberUtil sınıfı içerisinde yazınız ve aşağıdaki kod ile test ediniz
 	
 	Kural: Bir sayı karekökünden daha küçük olan asal sayıların hiç bir tanesine bölünmüyorsa asaldır
 	(Hızlı versiyon)
@@ -6443,7 +6420,7 @@ class NumberUtil {
 
 /*----------------------------------------------------------------------------------------------------------------------
 	Yukarıda yazılan isPrime metotlarının basit bir karşılaştırması. isPrime metotlarına sayaçlar durumu göstermek için
-	eklenmiştir. iki kod karşılaştırılmıştır. isprime ime isprimeslow
+	eklenmiştir. iki kod karşılaştırılmıştır. isprime ise isprimeslow
 	aşağıdaki kod tamemen görmek için yazılmıştır.(Count kısmı)
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
@@ -6573,6 +6550,7 @@ class NumberUtil {
 /*----------------------------------------------------------------------------------------------------------------------
 	14.01.2023	
 	Blue
+	- 2.1.1 -
 -----------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------
@@ -6580,7 +6558,7 @@ class NumberUtil {
 	metodu NumberUtil sınıfı içerisinde yazınız ve test ediniz
 	
 	Açıklamalar:
-	- iPrime metodunun hızlı versiyonunu kullanınız
+	- isPrime metodunun hızlı versiyonunu kullanınız
 	- n değerinin poziitf olmaması durumu metot içerisinde kontrol edilmeyecektir
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
@@ -6614,7 +6592,7 @@ class GetPrimeTest {
 
 
 class NumberUtil {
-	public static int getPrime(int n)
+	public static int getPrime(int n)    ?
 	{
 		int val = 2;
 		
@@ -6693,19 +6671,19 @@ class GetPrimeTest {
 
 
 class NumberUtil {
-	public static int getPrime(int n) //1. asal sayıyı istediğimizde n = 1
+	public static int getPrime(int n) 
 	{
 		int val = 2;
 		int count = 0;
 		
 		for (;;) {
-			if (isPrime(val)) //val = 2
-				++count; // 1 arttı
+			if (isPrime(val)) 
+				++count; 
 			
-			if (count == n) // count: 1 ==  n: 1 oldu
-				return val; // return val; den 2 geri döndü
+			if (count == n) 
+				return val; 
 			
-			++val; //burada val 3 mü oldu?
+			++val; 
 		}
 	}
 	
@@ -7577,7 +7555,7 @@ class App {
 }
 
 /*----------------------------------------------------------------------------------------------------------------------
-	switch deyiminde "aşağı düşme (fall through)" özelli vardır. Bir case bölümü veya default bölüm yakalandığında aşağıya 
+	switch deyiminde "aşağı düşme (fall through)" özelliği vardır. Bir case bölümü veya default bölüm yakalandığında aşağıya 
 	doğru engelleyen herhangi bir deyim görülünceye kadar her deyim çalıştırılır. break deyimi switch deyimi sonlandırmak
 	için kullanılır. Sonsuz döngü, return deyimi vb. başka aşağı düşmeyi engelleyici deyimler de olabilir. Aşağıdaki 
 	kod inceleyiniz.
@@ -7770,10 +7748,11 @@ class Menu {
 /*----------------------------------------------------------------------------------------------------------------------
 	15.01.2023
 	Blue
+	- 2.1.2 -
 -----------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------
-	Hangi metot içersinde olusak olalım programı sonlandırmak için System sınıfının exit isimli metodu çağrılabilir. Bu
+	Hangi metot içerisinde olursak olalım programı sonlandırmak için System sınıfının exit isimli metodu çağrılabilir. Bu
 	metot parametre olarak int türden ismine "çıkış kodu (exit code)" denilen ve JVM ve oradan da işletim sistemine iletilen
 	bir değer alır. Bu değerin çoğu zaman önemi olmaz. Bazı durumlarda okunabilirliği artırmak için başarı veya başarısızlığa
 	yönelik belirlenen değerler argüman olarak verilir. main metodu normal olarak sonlandığında JVM ve oradan da işletim
@@ -8144,7 +8123,7 @@ class DateUtil {
 		
 		int totalDays = day;
 		
-		switch (month - 1) {    //12. ayı niçin yazmadık?
+		switch (month - 1) {    
 		case 11:
 			totalDays += 30;
 		case 10:
@@ -8208,12 +8187,12 @@ class DateUtil {
 
 /*----------------------------------------------------------------------------------------------------------------------
 	Sınıf Çalışması: Parametresi ile aldığı int türden gün ay ve yıl bilgisine ilişkin tarihin haftanın hangi gününe 
-	geldiği bilgisini aşağıdaki açıklamalara göre dmndüren getDayOfWeek isimli metodu yazınız ve test ediniz
+	geldiği bilgisini aşağıdaki açıklamalara göre döndüren getDayOfWeek isimli metodu yazınız ve test ediniz
 	Açıklamalar:
 		- Metot geçersiz bir tarih durumunda -1 değerine geri dönecektir
 		- Haftanın günü 01.01.1900 ile verilen tarih arasındaki (verilen tarih dahil) gün sayısının 7 ile bölümünden
 		elde edilen kalan ile belirlenebilir. Buna göre sıfır "pazar, 1 "pazartesi", 2 "salı" ... 6 "cumartesi" günlerine
-		kaşılık gelir
+		karşılık gelir
 		
 		- 01.01.1900 öncesindeki tarihler geçersiz sayılacaktır
 	  	 
@@ -8378,6 +8357,7 @@ class DateUtil {
 /*----------------------------------------------------------------------------------------------------------------------
 	21.01.2023
 	Blue
+	- 2.1.3 -
 -----------------------------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------------
 	switch expression:
@@ -8813,10 +8793,10 @@ class Menu {
 
 /*----------------------------------------------------------------------------------------------------------------------
 	Sınıf Çalışması: Parametresi ile aldığı int türden gün ay ve yıl bilgisine ilişkin tarihin haftanın hangi gününe 
-	geldiği bilgisini aşağıdaki açıklamalara göre dmndüren getDayOfWeek isimli metodu yazınız ve test ediniz
+	geldiği bilgisini aşağıdaki açıklamalara göre döndüren getDayOfWeek isimli metodu yazınız ve test ediniz
 	Açıklamalar:
 		- Metot geçersiz bir tarih durumunda -1 değerine geri dönecektir
-		- Haftanın günü 01.01.1900 ile verilen tarih arasındaki (bverilen tarih dahil) gün sayısının 7 ilem bölümünden
+		- Haftanın günü 01.01.1900 ile verilen tarih arasındaki (verilen tarih dahil) gün sayısının 7 ilem bölümünden
 		elde edilen kalan ile belirlenebilir. Buna göre sıfır "pazar, 1 "pazartesi", 2 "salı" ... 6 "cumartesi" günlerine
 		kaşılık gelir
 		
@@ -8993,7 +8973,7 @@ class DateUtil {
 	Eflatun
 -----------------------------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------------
-	Aşağıdak örnekte long türüne ilişkin değer çalışma zamanında belirlenir. Dolayısıyla derleyici istese de bu değeri bilemez.
+	Aşağıdaki örnekte long türüne ilişkin değer çalışma zamanında belirlenir. Dolayısıyla derleyici istese de bu değeri bilemez.
 	Derleyici açısından kural "long türünden int türüne doğrudan dönüşüm geçersizdir" biçimindedir. Dolayısıyla error
 	oluşur..
 -----------------------------------------------------------------------------------------------------------------------*/
@@ -9037,7 +9017,7 @@ class App {
 	yüksek anlamlı yeni bit değerleri sıfır ile beslenir. Eğer sayı negatifse işaretinin korunabilmesi için yüksek
 	anlamlı bit değerleri 1 ile beslenir.
 
-	onur
+	
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -9211,7 +9191,7 @@ class Sample {
 /*----------------------------------------------------------------------------------------------------------------------
 	char türünden kendisinden uzunluk olarak büyük tüm türlere doğrudan dönüşüm geçerlidir.
 
-	onur
+	
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -9224,6 +9204,10 @@ class App {
 		
 		a = c;
 		b = c;
+
+		System.out.printf("a: %d%n", a);
+		System.out.printf("b: %f%n", b);
+		System.out.printf("c: %c%n", c);
 		
 		//...
 	}
@@ -9366,12 +9350,13 @@ class App {
 	 int 	-> long, float, double
 	 long 	-> float, double
 	 float 	-> double
-	 char 	-> int, long, float, double  onur
+	 char 	-> int, long, float, double  
 -----------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------
 	22.01.2023
 	Blue
+	- 2.2.1 -
 -----------------------------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------------
 	 İşlem Öncesi Otomatik Tür Dönüşümü:
@@ -9621,7 +9606,7 @@ class App {
 	 Bu operatör operandına ilişkin ifadenin hedef türe dönüştürüldükten sonra elde edilen değeri üretir. Tür dönüştürme
 	 operatörü ile yapılan dönüşüme "explicit conversion" ya da "cast" denir. Implicit olarak geçersiz dönüşümler 
 	 genel olarak tür dönüştürme operatörü ile yapılabilir. Şüphesiz bu durumda bilgi kaybı olaşabilir. Bu bilgi kayıplarının da
-	 nasıl olacağı bellidir ve bu konu içerisinde nele alınacaktır. 
+	 nasıl olacağı bellidir ve bu konu içerisinde ele alınacaktır. 
 	 
 	 implicit olarak geçerli olan dönüşümler için de tür dönüştürme operatörü kullanılabilir. Gerekli olabileceği durumlar
 	 vardır.
@@ -9697,8 +9682,6 @@ class App {
 	 Ancak sayı hedef türün sınırları dışındaysa bilgi kaybı oluşur.
 	 
 	 Aşağıdaki örneği çeşitli değerler ile çalıştırarak sonucu gözlemleyiniz.
-
-	 onur..
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -9846,7 +9829,7 @@ class App {
 	 Aqua
 
 	 double --> float yapılırken ; float ile temsıl edilebiecek en yakın değer olarak elde edilir.
-	 sayı float ın sınırları dışındaysa yine aynı şekıdle en yakın değer olarak ele alınır...
+	 sayı float ın sınırları dışındaysa yine aynı şekılde en yakın değer olarak ele alınır...
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -9865,7 +9848,7 @@ class App {
 /*----------------------------------------------------------------------------------------------------------------------
 	04.02.2023
 	Blue
-	- 2 -
+	- 2.2.2 -
 -----------------------------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------------
 	Gerçek sayı türünden tamsayı türüne (veya char türüne) yapılan explicit dönüşüm şu şekilde gerçekleşir:
@@ -9906,21 +9889,6 @@ class App {
 	}
 }
 
-
-package csd;
-
-class App {
-	public static void main(String [] args)
-	{
-		double a = 3.77;
-		byte b;
-		
-		b = (byte)a;
-		
-		System.out.printf("a = %.20f%n", a);
-		System.out.printf("b = %d%n", b);
-	}
-}
 /*-----------------------------------------------------------------------------------------------------------------------
 
 Elde edilen sayı hedef türün sınırları içerisinde kalmıyorsa;
@@ -10008,23 +9976,6 @@ class App {
 	}
 }
 
-//onur: asagıdakı ornek
-package csd;
-
-class App {
-	public static void main(String [] args)
-	{
-		double a = 5_000_000_000.77;
-		byte b;
-		
-		b = (byte)a;
-		
-		System.out.printf("a = %.20f%n", a);
-		System.out.printf("-5_000_000_000 = %08X%n", (int)-5_000_000_000L);
-		System.out.printf("b = %X%n", b);
-		System.out.printf("b = %d%n", b);
-	}
-}
 
 package csd;
 
@@ -10444,31 +10395,6 @@ class App {
 	}
 }
 
-
-/*----------------------------------------------------------------------------------------------------------------------
-	Koşul operatörünün ürettiği değerin bir değişkene atanması durumunda kullanılması if deyimine göre daha 
-	okunabilirdir 
------------------------------------------------------------------------------------------------------------------------*/
-package csd;
-
-class App {
-	public static void main(String [] args)	
-	{	
-		java.util.Scanner kb = new java.util.Scanner(System.in);
-		
-		System.out.print("İki sayı giriniz:");
-		int a = kb.nextInt();
-		int b = kb.nextInt();
-		
-		int result;
-		
-		result = a > b ? a : b;
-		
-		System.out.printf("result = %d%n", result);	
-	}
-}
-
-
 /*----------------------------------------------------------------------------------------------------------------------
 	Koşul operatörünün ürettiği değerin metot çağrısında argüman olarak metoda verilmesi okunabililiği artırır.
 -----------------------------------------------------------------------------------------------------------------------*/
@@ -10776,7 +10702,7 @@ class Sample {
 
 
 /*----------------------------------------------------------------------------------------------------------------------
-	Koşul operatörünün operatörünün bir kullanımı. Örnekte parantez kullanmaya gerek yoktur
+	Koşul operatörünün bir kullanımı. Örnekte parantez kullanmaya gerek yoktur
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -10827,6 +10753,7 @@ class App {
 /*----------------------------------------------------------------------------------------------------------------------
 	05.02.2023
 	Blue
+	- 2.2.3 -
 -----------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------
@@ -11044,7 +10971,7 @@ class Sample {
 		System.out.println("foo, int");
 	}
 	
-	public static void foo(int a, double b) //imza: foo, int, double --> best match. because a and b both they same with type of method arguman.
+	public static void foo(int a, double b) //imza: foo, int, double --> best match. because a and b both they are same with type of method arguman.
 	{
 		System.out.println("foo, int, double");
 	}
@@ -11333,7 +11260,7 @@ class Sample {
 	}
 }
 
-// onur
+
 
 
 
@@ -11541,12 +11468,13 @@ class MyMath {
 /*----------------------------------------------------------------------------------------------------------------------
 	18.02.2023
 	Blue
+	- 2.3.1 -
 -----------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------
-	Nesne Yönelimli Programlama Tekniği (NYPT): Bu tekniği tek bir cümle ilem anlatmak pek mümkün değildir. Ancak bu
+	Nesne Yönelimli Programlama Tekniği (NYPT): Bu tekniği tek bir cümle ile anlatmak pek mümkün değildir. Ancak bu
 	tekniği bilen birisine "sınıflar kullanarak program yazma tekniğidir" şeklinde bir cümle kurulabilir. Aslında
-	NYPT anahtar kavramların birleşiminde oluşur. Bu anahtar kavramlar birbirlerinden tamamen ayrık değildir.
+	NYPT anahtar kavramların birleşiminden oluşur. Bu anahtar kavramlar birbirlerinden tamamen ayrık değildir.
 	Bu kavramlar içiçe geçmiş daireler gibi düşünülmelidir. Tüm bu anahtar kavramların temelinde kodun daha iyi
 	algılanabilir olması ve daha iyi yönetilmesi vardır. Örneğin benzer işi yapan metotlara aynı ismi vermek iyi bir
 	tekniktir. Çünkü bu durumda bu metotları kullanan kişiler "çok şey var" algısından uzaklaşıp "az şey var" gibi bir
@@ -11558,7 +11486,7 @@ class MyMath {
 	
 	NYPT'de artık ağırlıklı olarak fonksiyonlarla (Java'da metot) değil, sınıflarla konuşulur. Böylece yine "çok şey var"
 	algısından uzaklaştırılıp "az şey var" algısı oluşturulur. Bu anlamda aslında kullanan programcı açısından detaylar
-	metotların detayları gizlemesinden daha falzla gizlenebilir. Böylelikle kullanım kolaylaşır. Burada anlatılar kurs içerisinde
+	metotların detayları gizlemesinden daha fazla gizlenebilir. Böylelikle kullanım kolaylaşır. Burada anlatılanlar kurs içerisinde
 	detaylandırılacaktır  
 -----------------------------------------------------------------------------------------------------------------------*/
 
@@ -11576,7 +11504,7 @@ class MyMath {
 	program çalıştırılırken bu alanların uzunlukları belirlenebilir. Belirlenmezse default değerler kullanılır. İşte bu
 	default değerler sistemden sisteme değişebilmektedir.
 	
-	Stack alanında  yaratma ve yok etme işlemi birer makine komutuyla çok hızlı bir biçimde gerçekleşir. Stack alamında değişken
+	Stack alanında  yaratma ve yok etme işlemi birer makine komutuyla çok hızlı bir biçimde gerçekleşir. Stack alanjında değişken
 	yaratılması ve yok edilmesi "stack veri yapısı (stack data structure)" biçiminde gerçekleşir.
 -----------------------------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------------
@@ -11594,12 +11522,12 @@ class MyMath {
 
 /*----------------------------------------------------------------------------------------------------------------------
 	 Yerel değişkenler stack alanında yaratılırlar. Yerel bir değişken, akış bakımında bildirim noktasına gelindiğinde
-	 yaratılır, bildirildiği bloğun sonuna gelindiğinde yok edilir. Zaten yerel değiilkenlere faaliyet alnı bakımından
+	 yaratılır, bildirildiği bloğun sonuna gelindiğinde yok edilir. Zaten yerel değişkenlere faaliyet alanı bakımından
 	 bildirildikleri bloğun sonuna gelindiğinde erişilememesinin nedeni budur. Parametre değişkenleri de stack'te 
 	 metot çağrıldığında yaratılır, metot çağrısı bittiğinde yok edilir.
 	 
 	 Anahtar Notlar: Her ne kadar faaliyet alanı ve ömür farklı zamanlara ilişkin kavramlar olsa da aralarında mantıksal bir
-	 bağ söz konusudurç. Yani aralarında dolaylı da olsa bir ilişki bulunur
+	 bağ söz konusudur. Yani aralarında dolaylı da olsa bir ilişki bulunur
 -----------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------
@@ -11672,8 +11600,8 @@ class Sample {
 }
 
 /*----------------------------------------------------------------------------------------------------------------------
-	 Sınıf bildirimi aslında bir tür bildirimidir. Bu şekilde progrmcının bildirdiği türlere "user defined type" da 
-	 denir
+	 Sınıf bildirimi aslında bir tür bildirimidir. Bu şekilde programcının bildirdiği türlere "user defined type" da 
+	 denir.
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -11732,7 +11660,7 @@ class Alien {
 -----------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------
-	 Sınıf türünden bir değişkene (aslında referans türünden bir değşkene) "referans değişken" ya da kısaca "referans"
+	 Sınıf türünden bir değişkene (aslında referans türünden bir değişkene) "referans değişken" ya da kısaca "referans"
 	 denir
 	 
 	 Anahtar Notlar: Java'da "referans" sözcüğü "adres" anlamında da kullanılır. Örneğin "bir nesnenin adresi" yerine
@@ -11833,6 +11761,7 @@ class Alien {
 /*----------------------------------------------------------------------------------------------------------------------
 	19.02.2023
 	Blue
+	- 2.3.2 -
 -----------------------------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------------
 	Sınıfın non-static veri elemanları her nesne için ayrıca yaratılırlar, nesnenin içerisinde bulunurlar. Sınıfın 
@@ -11958,8 +11887,8 @@ class Sample {
 	olabileceğinden aynı uzunlukta yer ayrılması gerekmez
 	
 	Türü ne olursa olsun referansların (referans değişkenlerin) uzunlukları aynıdır. Bu da adreselenebilecek sayıları
-	tutabilecek uzunluktur. Örneğin 64 bit sistemlerde referanslar 64bit (8 byte) uzunluğundadır. Benzer şekilde 32 nbit
-	sistemlerde tüm referanslar 32bit (4 byte) uzunluğundadır
+	tutabilecek uzunluktur. Örneğin 64 bit sistemlerde referanslar 64 bit (8 byte) uzunluğundadır. Benzer şekilde 32 bit
+	sistemlerde tüm referanslar 32 bit (4 byte) uzunluğundadır
 -----------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------
@@ -12130,8 +12059,8 @@ class Sample {
 	metodun geri dönüş değerine ilişkin return deyimine ait ifadenin türünün aynı türden bir referans olması gerekir.
 	
 	Aşağıdaki örnekte createTime metodu, içeride yaratmış olduğu nesnenin referansına geri dönmektedir. printTime
-	metodu parametresi ile aldığı Time türünden referansın gösterdiği nesneye erişip bilgilerini akrana yazdırmaktadır.
-	changeTime metodu aldığı refeeransa ilişkin nesneye erişip hour, minute, second ve millisecond elemanlarının 
+	metodu parametresi ile aldığı Time türünden referansın gösterdiği nesneye erişip bilgilerini ekrana yazdırmaktadır.
+	changeTime metodu aldığı referansa ilişkin nesneye erişip hour, minute, second ve millisecond elemanlarının 
 	değerlerini değiştirmektedir. Örneği çalıştırarak durumu gözlemleyiniz
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
@@ -12185,6 +12114,7 @@ class Time {
 /*----------------------------------------------------------------------------------------------------------------------
 	25.02.2023
 	Blue
+	- 2.3.3 -
 -----------------------------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------------
 	Sınıfın static bir veri elemanı bir tanedir. Bu elemanın kullanılabilmesi için nesne yaratılması gerekmez. Sınıfın
@@ -12342,8 +12272,7 @@ class Terrain {
 class Animal {
 	//...
 }
-
-*----------------------------------------------------------------------------------------------------------------------
+/*----------------------------------------------------------------------------------------------------------------------
 	Yukarıdaki örnekte anlatılan problem aşağıdaki gibi statici veri elemanı kullanılarak çözülebilir. Böylece
 	kod karmaşıklığı azaltılmış olur, Şüphesiz örnekte detaylar gözardı edilmiştir. Örnekte ** ile belirtilen kod parçaları
 	şu an için önemsizdir. Anlatılmak istenen yani static bir veri elemanının tek olmasının kullanımına odaklanmanız
@@ -12912,7 +12841,7 @@ class QuadraticEquation {
 	programı yazınz.
 	
 	Sınıfın aşağıdaki kullanım şekli sınıfların yararı 100 birim düşünülürse %1 civarındadır. Şüphesiz örnek farklı 
-	yaklaşımlarla da yapılabili. Sınıfın kullanımını göstermek için bu şekilde yazılmıştır. İleride daha iyisi yazılacaktır
+	yaklaşımlarla da yapılabilir. Sınıfın kullanımını göstermek için bu şekilde yazılmıştır. İleride daha iyisi yazılacaktır
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -12975,6 +12904,7 @@ class QuadraticEquation {
 /*----------------------------------------------------------------------------------------------------------------------
 	26.02.2023
 	Blue
+	- 2.4.1 -
 -----------------------------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------------
 	Anahtar Notlar: Bir sınıf için genel olarak iki bakış açısından bahsedilebilir: Sınıfı yazan, sınıfı kullanan.
@@ -13106,14 +13036,12 @@ class Point {
 	}
 }
 
-//onur
-
 /*----------------------------------------------------------------------------------------------------------------------
 	Rassal Sayı Üretimi: Bilgisayar ortamında rassal sayılar gerçek hayattaki gibi üretilemez. Çünkü gerçek hayatta
 	bir sayının örneğin bir torbadan çekilmesi durumunda çok çok fazla etken çıkacak sayıyı etkiler. Bu sebeple
 	bilgisayarda üretilen rassal sayılara "pseudo random numbers" denilmektedir. Bu sebeple rassal sayı üretiminin
 	kalitesi değişebilir. Rassal sayı üretimi her durumda aynı yöntemle yapıldığından yani kabaca static bir yöntem
-	kullanıldığıundan kalitesi yönteme göre değişebilir. Bu anlamda genel olarak aşırı kalite istenirse matematiksel
+	kullanıldığından kalitesi yönteme göre değişebilir. Bu anlamda genel olarak aşırı kalite istenirse matematiksel
 	işlemlerden dolayı yavaşlama olabilir, benzer şekilde hızlandırılmak istenirse de kalite düşebilir. Bu anlamda
 	Java'da kullanılan üretim algoritması orta kalite kabul edilebilir. Bilgisayar ortamında rassal sayı üretiminin
 	kalitesine yönelik bilimsel çalışmalar hala devam etmektedir. JavaSE'de rassal sayı üretimi için kullanılan
@@ -13142,7 +13070,7 @@ class App {
 		int count = kb.nextInt();
 				
 		for (int i = 0; i < count; ++i)
-			System.out.printf("%d ", r.nextInt()); //nextInt metodu parametresiz.ınt sınırları içerisinder andom sayı üretir.
+			System.out.printf("%d ", r.nextInt()); //nextInt metodu parametresiz.ınt sınırları içerisinde random sayı üretir.
 		
 		System.out.println();
 	}
@@ -13413,7 +13341,7 @@ class CoinTailProbabilitySimulationApp {
 			if (n <= 0)
 				break;
 			
-			CoinTailProbabilitySimulation simulation = new CoinTailProbabilitySimulation();
+			CoinTailProbabilitySimulation simulation = new CoinTailProbabilitySimulation(); // -> her simulasyonu bir nesne olarak tutucaz.
 			
 			simulation.run(n);
 			System.out.printf("Yazı gelme olasılığı:%f%n", simulation.p);
@@ -13430,7 +13358,7 @@ class CoinTailProbabilitySimulation {
 		int count = 0;
 		
 		for (int i = 0; i < n; ++i)
-			count += r.nextInt(2);
+			count += r.nextInt(2); // [0, 2) -> yani ya 0 gelir ya da 1.
 		
 		return count;
 	}
@@ -13478,7 +13406,7 @@ class CoinTailProbabilitySimulationApp {
 class CoinTailProbabilitySimulation {
 	public double p;
 	
-	public static int calculateTailCount(int n)
+	public static int calculateTailCount(int n) // burada non-static veri elemanına erişmeyeceğimiz için statictir.
 	{
 		java.util.Random r = new java.util.Random();
 		int count = 0;
@@ -13501,9 +13429,438 @@ class CoinTailProbabilitySimulation {
 
 /*----------------------------------------------------------------------------------------------------------------------
 	04.03.2023
-	eksik
+	- 2.4.2 -
 -----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: İki zar atıldığında zarların çift gelmesi (ikisinin de aynı) olasılığını yaklaşık olarak 
+	hesaplayan simülasyon programını yazınız
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
 
+class App {
+	public static void main(String [] args)	
+	{		
+		SameDiceProbabilitySimulationApp.run();
+	}
+}
+
+class SameDiceProbabilitySimulationApp {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		for (;;) {
+			System.out.print("Para kaç kez atılsın:");
+			int n = Integer.parseInt(kb.nextLine());
+			
+			if (n <= 0)
+				break;
+			
+			SameDiceProbabilitySimulation simulation = new SameDiceProbabilitySimulation();
+			
+			simulation.run(n);
+			System.out.printf("Çift gelme olasılığı:%f%n", simulation.p);
+		}
+	}
+}
+
+class SameDiceProbabilitySimulation {
+	public double p;
+	
+	
+	public static boolean areSame(java.util.Random r)
+	{
+		return r.nextInt(1, 7) == r.nextInt(1, 7); 
+	}
+	
+	public static int calculateTailCount(int n)
+	{
+		java.util.Random r = new java.util.Random();
+		int count = 0;
+		
+		for (int i = 0; i < n; ++i)
+			if (areSame(r))
+				++count;
+		
+		return count;
+	}
+	
+	
+	public void run(int n)
+	{
+		p = calculateTailCount(n) / (double)n;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Tohum değeri setSeed isimli metot ile değiştirilebilir. Aşağıdaki örnek her çalıştırıldığında aynı sayı dizilimi
+	elde edilir
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		java.util.Random r = new java.util.Random();
+		
+		r.setSeed(100);
+		
+		for (int i = 0; i < 10; ++i)
+			System.out.printf("%d ", r.nextInt(100));
+		
+		System.out.println();
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 Aşağıdaki örnekte rasgele üretilen ilk 10 sayının dizilimi her çalıştırmada farklı olur. İlk 10 sayının
+	 diziliminin aynı gelmesi çok çok düşüktür. İkinci üretilen 10 sayı klavyeden alınan tohum değerine göre
+	 üretilir. Bu durumda örneğin her çalıltırmada tohum değeri 200 olarak girilirse ikinci 10 sayının dizilimi
+	 hep aynı olacaktır. Kodu çeşitli değerler ile çalıştırıp sonnuçlarını gözlemleyiniz
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		java.util.Random r = new java.util.Random();
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		long seed = kb.nextLong();
+		
+		for (int i = 0; i < 10; ++i) 
+			System.out.printf("%02d ", r.nextInt(100));
+		
+		
+		System.out.println();
+		
+		r.setSeed(seed);
+		
+		for (int i = 0; i < 10; ++i)
+			System.out.printf("%02d ", r.nextInt(100));
+		
+		System.out.println();		
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 Aşağıdaki örneği inceleyiniz
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		RandomPointGeneratorApp.run();		
+	}
+}
+
+class RandomPointGeneratorApp {
+	public static void run()
+	{
+		java.util.Random r = new java.util.Random();
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Minimum değeri giriniz:");
+		double min = Double.parseDouble(kb.nextLine());
+		
+		System.out.print("Sınır değeri giriniz:");
+		double bound = Double.parseDouble(kb.nextLine());
+		
+		for (;;) {
+			System.out.print("Kaç tane nokta üretmek istersiniz?");
+			int count = Integer.parseInt(kb.nextLine());
+			if (count <= 0)
+				break;
+			
+			System.out.println("-------------------------------");
+			while (count-- > 0) {
+				Point p = RandomPointGenerator.createRandomPoint(r, min, bound);
+				
+				p.print();
+			}
+			
+			System.out.println("-------------------------------");
+		}
+		
+	}
+}
+
+class RandomPointGenerator {
+	//...
+	public static Point createRandomPoint(java.util.Random random, double min, double bound)
+	{
+		Point p = new Point();
+		
+		p.x = random.nextDouble(min, bound);
+		p.y = random.nextDouble(min, bound);
+		
+		return p;
+	}
+}
+
+class Point {
+	public double x, y; 
+	
+	//...
+	
+	public double distance()
+	{
+		return distance(0, 0);
+	}
+	
+	public double distance(double a, double b)
+	{
+		return Math.sqrt(Math.pow(x - a, 2) + Math.pow(y - b, 2));
+	}
+	
+	public double distance(Point other)
+	{
+		return distance(other.x, other.y);
+	}
+	
+	public void offset(double dxy)
+	{
+		offset(dxy, dxy);
+	}
+	
+	public void offset(double dx, double dy)
+	{
+		x += dx;
+		y += dy;
+	}
+	
+	public void print()
+	{
+		System.out.printf("(%.2f, %.2f)%n", x, y);
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örneği inceleyiniz
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		RandomPointGeneratorApp.run();		
+	}
+}
+
+class RandomPointGeneratorApp {
+	public static void run()
+	{
+		java.util.Random r = new java.util.Random();
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Tohum değerini giriniz:");
+		long seed = Long.parseLong(kb.nextLine());
+		
+		r.setSeed(seed);
+		
+		System.out.print("Minimum değeri giriniz:");
+		double min = Double.parseDouble(kb.nextLine());
+		
+		System.out.print("Sınır değeri giriniz:");
+		double bound = Double.parseDouble(kb.nextLine());
+		
+	
+		for (;;) {
+			System.out.print("Kaç tane nokta üretmek istersiniz?");
+			int count = Integer.parseInt(kb.nextLine());
+			if (count <= 0)
+				break;
+			
+			System.out.println("-------------------------------");
+			while (count-- > 0) {
+				Point p = RandomPointGenerator.createRandomPoint(r, min, bound);
+				
+				p.print();
+			}
+			
+			System.out.println("-------------------------------");
+		}
+		
+	}
+}
+
+class RandomPointGenerator {
+	//...
+	public static Point createRandomPoint(java.util.Random random, double min, double bound)
+	{
+		Point p = new Point();
+		
+		p.x = random.nextDouble(min, bound);
+		p.y = random.nextDouble(min, bound);
+		
+		return p;
+	}
+}
+
+class Point {
+	public double x, y; 
+	
+	//...
+	
+	public double distance()
+	{
+		return distance(0, 0);
+	}
+	
+	public double distance(double a, double b)
+	{
+		return Math.sqrt(Math.pow(x - a, 2) + Math.pow(y - b, 2));
+	}
+	
+	public double distance(Point other)
+	{
+		return distance(other.x, other.y);
+	}
+	
+	public void offset(double dxy)
+	{
+		offset(dxy, dxy);
+	}
+	
+	public void offset(double dx, double dy)
+	{
+		x += dx;
+		y += dy;
+	}
+	
+	public void print()
+	{
+		System.out.printf("(%.2f, %.2f)%n", x, y);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Math.random metodu [0, 1) aralığında rasgele üretilmiş double türden bir değere geri döner. Bu metot içsel
+	olarak her çağırmada aynı Random nesnesini kullanır. Bu metot ilk kez çağrıldığında kullandığı Random nesnesi
+	yaratılır ve her çağrıda bu nesne kullanılır. Aşağıdaki örneğin  yaklaşık eşdeğeri şu şekildedir:
+	  java.util.Random r = new java.util.Random();
+	  
+	  for (int i = 0; i < 10; ++i)
+			System.out.println(r.nextDouble());
+	  
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		for (int i = 0; i < 10; ++i)
+			System.out.println(Math.random());			
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Homework-004. sorunun bir çözmü	
+	(Not: Çözüm belirli ölçüde nesne yönelimli programlama tekniği ile yezılmıştır. Konular ilerledikçe daha iyisi yazılabilir)  
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		CalculateSumCountMinMaxAvgApp.run();			
+	}
+}
+
+class CalculateSumCountMinMaxAvgApp {
+	public static int getValue(java.util.Scanner kb)
+	{
+		int val;
+		
+		for (;;) {
+			System.out.print("Bir tamsayı giriniz:");
+			val = Integer.parseInt(kb.nextLine());
+			
+			if (0 <= val && val <= 100)
+				return val;
+			
+			System.out.println("Geçersiz değer girdiniz!...Yeni bir değer giriniz:");
+		}	
+	}
+	
+	public static int getOption(java.util.Scanner kb)
+	{
+		int option;
+		
+		do 
+			option = Integer.parseInt(kb.nextLine());
+		while (option != 0 && option != 1);
+		
+		return option;
+	}
+	
+	public static void printReport(CalculateSumCountMinMaxAvg c)
+	{
+		System.out.printf("Toplam %d değer girildi%n", c.count);
+		System.out.printf("Max = %d%n", c.max);
+		System.out.printf("Min = %d%n", c.min);
+		System.out.printf("Ortalama = %f%n", c.getAverage());
+	}
+	
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		CalculateSumCountMinMaxAvg c = new CalculateSumCountMinMaxAvg();
+		
+		c.max = 0;
+		c.min = 100;
+		
+		for (;;) {	
+			c.calculate(getValue(kb));
+			System.out.println("Yeni bir değer girmek istiyor musunuz? [Evet için 1(bir) Hayır için 0(sıfır) değerlerinden birini giriniz]");
+			
+			if (getOption(kb) == 0)
+				break;
+		}
+		
+		printReport(c);
+	}
+}
+
+class CalculateSumCountMinMaxAvg {
+	public int count;
+	public int sum;
+	public int min;
+	public int max;
+	
+	public void calculate(int val)
+	{
+		++count;
+		sum += val;
+		min = Math.min(min, val);
+		max = Math.max(max, val);
+	}
+	
+	public double getAverage()
+	{
+		return (double)sum / count;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	05.03.2023
+	Blue
+	- 2.4.3 -
+-----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	Nesne Yaratılması Aşamaları:
+	1. Bellekte yer ayrılır
+	2. non-static olan (ancak final olmayan) veri elemanlarına default değerler atanır
+	3. Constructor (ctor) çağrılır
+	
+	Bu üç adımın sonunda new operatörünün ürettiği değer, yani nesnenin adresi (referansı) elde edilir. Bu aşamaların
+	bir tanesi bile tamamlanmazsa nesne yaratılmış olmaz
+-----------------------------------------------------------------------------------------------------------------------*/
 
 
 
