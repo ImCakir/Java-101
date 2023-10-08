@@ -13861,80 +13861,2043 @@ class CalculateSumCountMinMaxAvg {
 	Bu üç adımın sonunda new operatörünün ürettiği değer, yani nesnenin adresi (referansı) elde edilir. Bu aşamaların
 	bir tanesi bile tamamlanmazsa nesne yaratılmış olmaz
 -----------------------------------------------------------------------------------------------------------------------*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/*----------------------------------------------------------------------------------------------------------------------
+	ctor aşağıdaki özelliklere sahip bir metottur:
+	- Sınıfı yazan programcı, sınıfa hiç bir ctor yazmazsa, derleyici parametresiz ctor'u (default ctor) public ve
+	içi boş olarak yazar
+	
+	- Sınıfı yazan programcı en az bir tane ctor yazarsa, default ctor derleyici tarafından yazılmaz. Bu durumda default 
+	ctor'un yazılıp yazılmayacağına programcı karar verecektir
+	
+	- ctor overload edilebilir (constructor overloading)
+	
+	- Sınıfın ctor'u sınıf ismi ile aynı olan ve geri dönüş değeri kavramı olmayan bir metottur. Geri dönüş değeri
+	bilgisi yazılmaz. void da yazılmaz. Sınıf ismi ile aynı isimde bir metot yazılıp geri dönüş değeri bilgisi yazılırsa
+	artık bu metot ctor olmaz. Şüphesiz böyle bir metot yazılmamalıdır
+	
+	- ctor non-static bir metottur
+	
+	- ctor new operatörü ile nesne yaratılması sırasında çağrılır. Hangi ctor'un çağrılacağı derleme zamanında 
+	new operatörü ile kullanımda geçilen argümanlara göre "method overload resolution" kuralları ile belirlenir
+	
+	- Programcı ctor'u çağıramaz. Programcı new operatörü ile ctor'un çağrılacağı kodun derleyici tarafından üretilmesini
+	sağlar
+	
+	- ctor'dan önce non-static ve final olmayan veri elemanlarına default atanmış olur
+	
+	- ctor içerisinde istenirse return deyimi tek başına ctor'u sonlandırmak için kullanılabilir 
+-----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	Hangi ctor'un çağrılacağının tespit edilmesi
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		Sample s1, s2, s3, s4, s5, s6;
+		
+		s1 = new Sample();
+		s2 = new Sample(10);
+		s3 = new Sample(3.4);
+		s4 = new Sample(3.4F);
+		s5 = new Sample(3.4, 12);
+		s6 = new Sample(3, 12);
+		
+		//...
+	}
+}
+
+
+class Sample {
+	public Sample()
+	{
+		System.out.println("I am a default ctor");
+	}
+	
+	public Sample(int a)
+	{
+		System.out.println("I am a ctor with parameter type: int");
+	}
+	
+	public Sample(double a)
+	{
+		System.out.println("I am a ctor with parameter type: double");
+	}
+	
+	public Sample(double a, int b)
+	{
+		System.out.println("I am a ctor with parameter types: double, int");
+	}
+	
+	//...
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte Sample sınıfını yazan programcı hiçbir ctor yazmadığı için default ctor otomatik olarak derleyici
+	tarafından yazılır
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		Sample s;
+		
+		s = new Sample();
+		//...
+	}
+}
+
+
+class Sample {
+	//...
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte Sample sınıfını yazan programcı int parametreli bir ctor yazdığı için derleyici artık default
+	ctor'u yazmaz. Default ctor'un olması artık sınıfı yazan programcının karar vermesi gereken bir durumdur 
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		Sample s;
+		
+		s = new Sample(); //error
+		//...
+	}
+}
+
+
+class Sample {
+	
+	public Sample(int a)
+	{
+		System.out.println("I am a ctor with parameter type: int");
+	}
+	
+	
+	//...
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	ctor'dan önce non-static ve final olmayan veri elemanlarına default atanmış olur 
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		Sample s1, s2, s3, s4, s5, s6;
+		
+		s1 = new Sample();
+		s2 = new Sample(10);
+		s3 = new Sample(3.4);
+		s4 = new Sample(3.4F);
+		s5 = new Sample(3.4, 12);
+		s6 = new Sample(3, 12);
+		
+		//...
+	
+	}
+}
+
+
+class Sample {
+	public int x;
+	public boolean y;
+	
+	public Sample()
+	{
+		System.out.println("I am a default ctor");
+		System.out.printf("x = %d%n", x);
+		System.out.printf("y = %b%n", y);
+	}
+	
+	public Sample(int a)
+	{
+		System.out.println("I am a ctor with parameter type: int");
+		System.out.printf("x = %d%n", x);
+		System.out.printf("y = %b%n", y);
+	}
+	
+	public Sample(double a)
+	{
+		System.out.println("I am a ctor with parameter type: double");
+		System.out.printf("x = %d%n", x);
+		System.out.printf("y = %b%n", y);
+	}
+	
+	public Sample(double a, int b)
+	{
+		System.out.println("I am a ctor with parameter types: double, int");
+		System.out.printf("x = %d%n", x);
+		System.out.printf("y = %b%n", y);
+	}
+	
+	//...
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	ctor içerisinde birçok işlem yapılabilir. ctor'un temel işlevi nesne yaratıldığı noktada bir takım ilk işlemlerin
+	o nesne için yapılmasını sağlamaktır. Bu durumda nesne ilgili işlemler yapılmış bir biçimde yaratılmış olur. Bu ilk
+	işlemlerden en çok karşılaşılanı ctor içerisinde non-static veri elemanlarına değer verilmesidir. Bu durumda nesne 
+	yaratıldığı zaman non-static veri elemanları istenen değer olur 
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		Sample s1, s2, s3;
+		
+		s1 = new Sample();
+		s2 = new Sample(10);
+		s3 = new Sample(20, true);
+		
+		System.out.printf("s1.x = %d%n", s1.x);
+		System.out.printf("s1.y = %b%n", s1.y);
+		System.out.printf("s2.x = %d%n", s2.x);
+		System.out.printf("s2.y = %b%n", s2.y);
+		System.out.printf("s3.x = %d%n", s3.x);
+		System.out.printf("s3.y = %b%n", s3.y);
+	
+		//...
+	}
+}
+
+
+class Sample {
+	public int x;
+	public boolean y;
+	
+	public Sample()
+	{
+		
+	}
+	
+	public Sample(int a)
+	{
+		x = a;
+	}
+	
+	public Sample(int a, boolean b)
+	{
+		x = a;
+		y = b;
+	}
+	
+	//...
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	ctor içerisinde istenirse return deyimi tek başına ctor'u sonlandırmak için kullanılabilir. Örnek durumu 
+	anlatmak için aşağıdaki gibi yazılmıştır
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		Sample s1, s2;
+		
+		
+		s1 = new Sample(10);
+		s2 = new Sample(-10);
+		
+		
+		System.out.printf("s1.x = %d%n", s1.x);
+		System.out.printf("s2.x = %d%n", s2.x);
+	}
+}
+
+
+class Sample {
+	public int x;
+	
+	public Sample(int a)
+	{
+		if (a >= 0)
+			return;
+		
+		x = a;
+	}
+	
+	//...
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Random sınıfının tohum değeri parametreli ctor'u ile tohum değeri nesnenin yaratılması sırasında verilebilir. 
+	Bu işlem yaklaşık olarak şuna eşdeğerdir:
+		java.util.Random r = new java.util.Random();
+		
+		r.setSeed(100);
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		java.util.Random r = new java.util.Random(100);
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		int count = kb.nextInt();
+		
+		for (int i = 0; i < count; ++i)
+			System.out.printf("%d ", r.nextInt(100));
+		
+		System.out.println();
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Anahtar Notlar: Sınıfı yazan programcı default ctor dışında bir ctor yazdığında default ctor'u yazıp yazmayacağına
+	nasıl karar verecektir? Aslında bu, yazılan sınıfa bağlıdır. Ancak başlangıç düzeyinde programcı şu soruyu sorarak
+	buna karar verebilir: Bu sınıf türünden nesnenin default durumu var mı? Örneğin Random sınıfının default 
+	ctor'u bu nesnenin default durumudur. Yani tohum değerini her default ctor çağrısında mümkün olduğunca farklı
+	verecek şekilde bir nesnenin yaratılmasını sağlar. 
+	
+	Ancak bazı özel durumlarda sınıfı kullanan bazı sınıflar ya da ortamlar (framework veya library) default ctor
+	olmasını isteyebilirler. Bu durumda programcı default ctor'u yazar    
+
+	Aqua
+-----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	Point sınıfı
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		RandomPointGeneratorApp.run();		
+	}
+}
+
+class RandomPointGeneratorApp {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Tohum değerini giriniz:");
+		long seed = Long.parseLong(kb.nextLine());
+		
+		java.util.Random r = new java.util.Random(seed);
+		
+		System.out.print("Minimum değeri giriniz:");
+		double min = Double.parseDouble(kb.nextLine());
+		
+		System.out.print("Sınır değeri giriniz:");
+		double bound = Double.parseDouble(kb.nextLine());
+		
+	
+		for (;;) {
+			System.out.print("Kaç tane nokta üretmek istersiniz?");
+			int count = Integer.parseInt(kb.nextLine());
+			if (count <= 0)
+				break;
+			
+			System.out.println("-------------------------------");
+			while (count-- > 0) {
+				Point p = RandomPointGenerator.createRandomPoint(r, min, bound);
+				
+				p.print();
+			}
+			
+			System.out.println("-------------------------------");
+		}
+		
+	}
+}
+
+class RandomPointGenerator {
+	//...
+	public static Point createRandomPoint(java.util.Random random, double min, double bound)
+	{
+		return new Point(random.nextDouble(min, bound), random.nextDouble(min, bound));
+	}
+}
+
+class Point {
+	public double x, y; 
+	
+	public Point()
+	{	
+	}
+	
+	public Point(double a)
+	{
+		x = a;
+	}
+	
+	public Point(double a, double b)
+	{
+		x = a;
+		y = b;
+	}
+	
+	public double distance()
+	{
+		return distance(0, 0);
+	}
+	
+	public double distance(double a, double b)
+	{
+		return Math.sqrt(Math.pow(x - a, 2) + Math.pow(y - b, 2));
+	}
+	
+	public double distance(Point other)
+	{
+		return distance(other.x, other.y);
+	}
+	
+	public void offset(double dxy)
+	{
+		offset(dxy, dxy);
+	}
+	
+	public void offset(double dx, double dy)
+	{
+		x += dx;
+		y += dy;
+	}
+	
+	public void print()
+	{
+		System.out.printf("(%.2f, %.2f)%n", x, y);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Complex sınıfı
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		Complex z1 = new Complex(3.4, 5.6);
+		Complex z2 = new Complex();
+		Complex z3 = new Complex(8.9);
+		
+		z1.print();
+		z2.print();
+		z3.print();
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Complex sınıfı
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		Complex z1 = new Complex(3.4, 5.6);
+		Complex z2 = new Complex(7.8, -9.5);
+		Complex z;
+		
+		double re = 7.8, im  = -9.5;
+		
+		z = z1.add(z2);
+		z.print();
+		
+		z = z1.add(re, im);
+		z.print();
+		
+		z = z1.add(3.4);
+		z.print();
+		
+		z = Complex.add(3.4, z1);
+		z.print();
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Complex sınıfı
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		Complex z1 = new Complex(3.4, 5.6);
+		Complex z2 = new Complex(7.8, -9.5);
+		Complex z;
+		
+		double re = 7.8, im  = -9.5;
+		
+		z = z1.subtract(z2);
+		z.print();
+		
+		z = z1.subtract(re, im);
+		z.print();
+		
+		z = z1.subtract(3.4);
+		z.print();
+		
+		z = Complex.subtract(3.4, z1);
+		z.print();
+	}
+}
+
+
+class Complex {
+	public double real;
+	public double imag;
+	
+	public static Complex add(double re1, double im1, double re2, double im2)
+	{
+		return new Complex(re1 + re2, im1 + im2);
+	}
+	
+	public static Complex subtract(double re1, double im1, double re2, double im2)
+	{
+		return add(re1, im1, -re2, -im2);
+	}
+	
+	public static Complex multiply(double re1, double im1, double re2, double im2)
+	{
+		//TODO:
+		return new Complex();
+	}
+	
+	public Complex()
+	{
+	}
+	
+	public Complex(double re)
+	{
+		real = re;
+	}
+	
+	public Complex(double re, double im)
+	{
+		real = re;
+		imag = im;
+	}
+	
+	public static Complex add(double val, Complex z)
+	{
+		return add(val, 0, z.real, z.imag);
+	}
+	
+	public Complex add(double re, double im)
+	{
+		return add(real, imag, re, im);
+	}
+	
+	public Complex add(double val)
+	{
+		return add(real, imag, val, 0);
+	}
+	
+	public Complex add(Complex other)
+	{
+		return add(other.real, other.imag);
+	}
+	
+	public static Complex subtract(double val, Complex z)
+	{
+		return subtract(val, 0, z.real, z.imag);
+	}
+	
+	public Complex subtract(double re, double im)
+	{
+		return subtract(real, imag, re, im);
+	}
+	
+	public Complex subtract(double val)
+	{
+		return subtract(real, imag, val, 0);
+	}
+	
+	public Complex subtract(Complex other)
+	{
+		return subtract(other.real, other.imag);
+	}
+	
+	public static Complex multiply(double val, Complex z)
+	{
+		return multiply(val, 0, z.real, z.imag);
+	}
+	
+	public Complex multiply(double re, double im)
+	{
+		return multiply(real, imag, re, im);
+	}
+	
+	public Complex multiply(double val)
+	{
+		return multiply(real, imag, val, 0);
+	}
+	
+	public Complex multiply(Complex other)
+	{
+		return multiply(other.real, other.imag);
+	}
+	
+	public Complex getConjugate()
+	{
+		return new Complex(real, -imag);
+	}
+	
+	public double getLength()
+	{
+		return Math.sqrt(real * real + imag * imag);
+	}
+	
+	public double getNorm()
+	{
+		return getLength();
+	}
+	
+	public void print()
+	{
+		System.out.printf("(%.2f, %.2f)%n", real, imag);
+	}	
+}
+/*----------------------------------------------------------------------------------------------------------------------
+	Neredeyse her uygulamada yazılar ile işlem yapılır. Java'da yazılar ile işlem yapmak için kullanılan en temel sınıf
+	String sınıfıdır. String sınıfı java.lang paketi içerisinde olduğundan ismi doğrudan kullanılabilir. String sınıfı
+	JavaSE içersinde bulunur
+-----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	Anahtar Notlar: String terimi Matematik'ten programlamaya aktarılan bir terimdir. "string" dendiğinde yazı akla gelir.
+-----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Derleyici bir String sabitini (string literal) gördüğünde ve bu string sabitini daha önce görmemişse şöyle bir 
+	kod üretir: Çalışma zamanında String türden bir nesne yarat, karakterlerini bu nesneye aktar ve o nesnenin referansını
+	ver"
+	
+	print ve println metotlarının String parametreli overload'ları argüman olarak aldıkları String referansına ilişkin
+	yazıyı ekrana basarlar
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		String s = "ankara";
+		
+		System.out.println(s);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	printf metodunda s format karakteri ile String referansı verildiğinde string referansına ilişkin yazı formatlanarak
+	ekrana basılır
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		String s = "ankara";
+		
+		System.out.printf("Yazı:%s%n", s);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Scanner sınıfının nextLine metodu ile kalvyeden enter girilene kadar alınan karakterleri içeren bir String nesnesinin
+	referansı elde edilebilir
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Bir yazı giriniz:");
+		String s = kb.nextLine();
+		
+		System.out.printf("Yazı:%s%n", s);
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Immutable class: Bir sınıfın non-static veri elemanları, sınıfı kullanan programcı tarafında değiştirilemiyor ise
+	bu tarz sınıflara "immutable class" denir. Immutable sınıfların nasıl yazılabileceği ileride ele alınacaktır.
+	Immutable sınıfların avantajlı ve dezavantajlı olduğu durumlar vardır. Bunlar da zamanla anlaşılacaktır 
+-----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte Point sınıfı türünden bir nesnenin verileri (x ve y) offset metoduyla, hatta doğrudan erişilerek
+	değiştirilebilir. Dolayısıyla Point, "immutable class" değildir. 
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{		
+		Point p = new Point(100, 100);
+		
+		p.offset(20);
+		
+		p.print();
+		++p.x;
+		--p.x;
+		
+		p.print();
+	}
+}
+
+class Point {
+	public double x, y; 
+	
+	public Point()
+	{	
+	}
+	
+	public Point(double a)
+	{
+		x = a;
+	}
+	
+	public Point(double a, double b)
+	{
+		x = a;
+		y = b;
+	}
+	
+	public double distance()
+	{
+		return distance(0, 0);
+	}
+	
+	public double distance(double a, double b)
+	{
+		return Math.sqrt(Math.pow(x - a, 2) + Math.pow(y - b, 2));
+	}
+	
+	public double distance(Point other)
+	{
+		return distance(other.x, other.y);
+	}
+	
+	public void offset(double dxy)
+	{
+		offset(dxy, dxy);
+	}
+	
+	public void offset(double dx, double dy)
+	{
+		x += dx;
+		y += dy;
+	}
+	
+	public void print()
+	{
+		System.out.printf("(%.2f, %.2f)%n", x, y);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	11.03.2023	
+      Blue
+    - 3.1.1 -
+
+-----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	String sınıfı immutable bir sınıftır. Yani String nesnesine ilişkin yazı üzerinde değişiklik yapılamaz. Yazı
+	üzerinde değişiklik yapan metotlar değişiklik yapılmış yazıya ilişkin yeni bir String referansına geri dönerler.
+	Örneğin yazının tamamını büyük harfe çeviren toUpperCase metodu yazı üzerinde değişiklik yapamayacağı için 
+	tamamı büyük harflerden oluşan yazıya ilişkin bir String referansına geri döner   
+
+	Eflatun -> String Sınıfı
+-----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	String sınıfının toUpperCase metodu   
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Bir yazı giriniz:");
+		String s = kb.nextLine();
+	
+		String upper = s.toUpperCase();
+		
+		System.out.println(s);
+		System.out.println(upper);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	String sınıfının toLowerCase metodu   
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Bir yazı giriniz:");
+		String s = kb.nextLine();
+	
+		String lower = s.toLowerCase();
+		
+		System.out.println(s);
+		System.out.println(lower);
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte mantıksal olarak değiştirilmiş bir yazı ile akışın devam ettiği bir kod yazılmıştır. Şüphesiz
+		s = s.toLowerCase()
+	ifadesi toLowerCase metodunun döndürdüğü referansın s'ye atanmasıdır. Bu durumda s artık yeni nesneyi gösterir duruma
+	gelir
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Bir yazı giriniz:");
+		String s = kb.nextLine();
+	
+		s = s.toLowerCase();
+		
+		System.out.println(s);
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	String sınıfının length isimli metodu ile yazının karakter sayısı elde edilebilir
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Bir yazı giriniz:");
+		String s = kb.nextLine();
+		
+		System.out.printf("Yazının Uzunluğu:%d%n", s.length());
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	String sınıfının charAt metodu ile herhangi bir indeksteki karakter elde edilebilir. Indeks numarası sıfır 
+	değerinden başlar
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Bir yazı giriniz:");
+		String s = kb.nextLine();
+		
+		int len = s.length();
+		
+		for (int i = 0; i < len; ++i)
+			System.out.printf("%c ", s.charAt(i));
+		
+		System.out.println();	
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	String sınıfının charAt metoduna pozitif ya da negatif bakımdan sınırlar dışında değer verilirse exception
+	oluşur
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Bir yazı giriniz:");
+		String s = kb.nextLine();
+		
+		System.out.printf("Yazının Uzunluğu:%d%n", s.length());
+		
+		System.out.println(s.charAt(5)); // yazının uzunluğunun 1 eksiği kadar değer almalı. index no 0 dan başlar!!
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aynı türden iki referansın == ve != operatörleri ile karşılaştırılması durumunda, adresler karşılaştırıldığı
+	için mantıksal olarak bu iki referansın aynı nesneyi gösterip göstermedikleri karşılaştırılmış olur. Referanslar
+	== ve != operatörleri dışında kalan temel karşılaştırma operatörleri ile işleme sokulamaz
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		Sample s, k;
+		
+		s = new Sample(10);
+		k = s;//new Sample(10);
+		
+		System.out.println(s == k ? "Aynı nesne" : "Farklı nesneler");
+		System.out.println(s != k ? "Farklı nesneler" : "Aynı nesne");
+	}
+}
+
+class Sample {
+	public int x;
+	
+	public Sample(int a)
+	{
+		x = a;
+	}
+	//...
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Yazıların eşitlik karşılaştırması == ve != operatörleri ile yapılamaz. Çünkü bu operatörler referans karşılaştırması
+	yaparlar
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.println("Birinci yazıyı giriniz:");
+		String s1 = kb.nextLine();
+		
+		System.out.println("İkinci yazıyı giriniz:");
+		String s2 = kb.nextLine();
+		
+		System.out.println(s1 == s2 ? "Aynı yazı" : "Farklı yazılar");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Yazıların eşitlik karşılaştırması equals metodu ile yapılabilir. Bu metot "case-sensitive" karşılaştırma yapar 
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.println("Birinci yazıyı giriniz:");
+		String s1 = kb.nextLine();
+		
+		System.out.println("İkinci yazıyı giriniz:");
+		String s2 = kb.nextLine();
+		
+		System.out.println(s1.equals(s2) ? "Aynı yazı" : "Farklı yazılar");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Yazıların eşitlik karşılaştırması equalsIgnoreCase metodu ile case-insensitive olarak yapılabilir 
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.println("Birinci yazıyı giriniz:");
+		String s1 = kb.nextLine();
+		
+		System.out.println("İkinci yazıyı giriniz:");
+		String s2 = kb.nextLine();
+		
+		System.out.println(s1.equalsIgnoreCase(s2) ? "Aynı yazı" : "Farklı yazılar");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Derleyici özdeş string sabitleri (string literal) için aynı nesnenin referansını verecek bir kod üretir. Yani
+	bir string sabiti ile özdeş kaç tane sabit olursa hepsi için aynı nesnenin referansı verilir. Yeniden nesne 
+	yaratılmaz. Aşağıdaki örnekte yine referans karşılaştırması yapılmıştır. Ancak s1 ve s2'ye atanan adresler 
+	aynı olduğundan ikisi de aynı nesneyi gösterir durumdadır.
+	
+	Anahtar Notlar: Derleyicinin özdeş string sabitleri için aynı adresi verecek kodu üretmesi, String sınıfının
+	immutable olmasındandır. String immutable olmasaydı aynı adres verildiğinde herhangi bir referans üzerinden
+	değişiklik yapıldığında diğer referans da değişiklik yapılmış yazıyı görürdü. Bu durumda bu tasarım programcının
+	hatalı kodlar (bug) yazma olasılığını artırırdı 
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{			
+		String s1 = "ankara";
+		String s2 = "ankara";
+		
+		System.out.println(s1 == s2 ? "Aynı nesne" : "Farklı nesneler");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 String sınıfının yazı içerisinde karakter arayan indexOf metodu. indexOf metotları, bulamamaları durumunda
+	 -1 değerine geri dönerler. 
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{			
+		String s = "İyi bir Java programcısı olmak için çok çalışmak gerekir. Hatta çok çok çalışmak gerekir";
+		char c = 'ç';
+		
+		int index = s.indexOf(c);
+		
+		System.out.printf("İndex:%d%n", index);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 String sınıfının yazı içerisinde yazı arayan indexOf metodu. indexOf metotları, bulamamaları durumunda
+	 -1 değerine geri dönerler. 
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{			
+		String s = "İyi bir Java programcısı olmak için çok çalışmak gerekir. Hatta çok çok çalışmak gerekir";
+		String str = "çok";
+		
+		int index = s.indexOf(str);
+		
+		System.out.printf("İndex:%d%n", index);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 String sınıfının yazı içerisinde belirli bir indeksten başlayarak yazı arayan indexOf metodu. indexOf metotları, 
+	 bulamamaları durumunda -1 değerine geri dönerler. 
+	 onur
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{			
+		String s = "İyi bir Java programcısı olmak için çok çalışmak gerekir. Hatta çok çok çalışmak gerekir";
+		String str = "çok";
+		
+		int index = s.indexOf(str, 37);
+		
+		System.out.printf("İndex:%d%n", index);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 String sınıfının yazı lastIndexOf metotları. lastIndexOf metotları, bulamamaları durumunda -1 değerine geri dönerler. 
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{			
+		String s = "İyi bir Java programcısı olmak için çok çalışmak gerekir. Hatta çok çok çalışmak gerekir";
+		String str = "çok";
+		
+		int index = s.lastIndexOf(str);
+		
+		System.out.printf("İndex:%d%n", index);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 Sınıf Çalışması: Parametresi ile aldığı iki yazıdan birincisi içerisinde ikincisinden kaç tane olduğunu döndüren
+	 countString isimli metodu ve case-insesitive olarak çalışan countStringIgnoreCase isimli metou yazınız ve 
+	 aşağıdaki kod ile test ediniz. 
+	 Örneğin: aaa yazısı içerisinde aa dan 2 tane vardır
+	 onur
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{			
+		CountStringTest.run();
+	}
+}
+
+class CountStringTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		for (;;) {
+			System.out.print("Birinci yazıyı giriniz:");
+			String s1 = kb.nextLine();
+			
+			if ("elma".equals(s1))
+				break;
+			
+			System.out.print("İkinci yazıyı giriniz:");
+			String s2 = kb.nextLine();
+			
+			int count = StringUtil.countString(s1, s2);
+			
+			System.out.printf("Birinci yazı içerisinde ikinci yazıdan %d tane var%n", count);
+			
+			count = StringUtil.countStringIgnoreCase(s1, s2);
+			
+			System.out.printf("Birinci yazı içerisinde ikinci yazıdan büyük-küçük harf duyarsız olarak %d tane var%n", count);
+		}
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+class StringUtil {
+	public static int countString(String s1, String s2)
+	{
+		int count = 0;
+		int index = 0;
+		
+		while ((index = s1.indexOf(s2, index)) != -1) {
+			++count;
+			++index;
+		}
+		
+		return count;
+	}
+	
+	public static int countStringIgnoreCase(String s1, String s2)
+	{
+		return countString(s1.toLowerCase(), s2.toLowerCase());
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 Sınıf Çalışması: Parametresi ile aldığı iki yazıdan birincisi içerisinde ikincisinden kaç tane olduğunu döndüren
+	 countString isimli metodu ve case-insesitive olarak çalışan countStringIgnoreCase isimli metou yazınız ve 
+	 aşağıdaki kod ile test ediniz. 
+	 Örneğin: aaa yazısı içerisinde aa dan 2 tane vardır
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{			
+		CountStringTest.run();
+	}
+}
+
+class CountStringTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		for (;;) {
+			System.out.print("Birinci yazıyı giriniz:");
+			String s1 = kb.nextLine();
+			
+			if ("elma".equals(s1))
+				break;
+			
+			System.out.print("İkinci yazıyı giriniz:");
+			String s2 = kb.nextLine();
+			
+			int count = StringUtil.countString(s1, s2);
+			
+			System.out.printf("Birinci yazı içerisinde ikinci yazıdan %d tane var%n", count);
+			
+			count = StringUtil.countStringIgnoreCase(s1, s2);
+			
+			System.out.printf("Birinci yazı içerisinde ikinci yazıdan büyük-küçük harf duyarsız olarak %d tane var%n", count);
+		}
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+class StringUtil {
+	public static int countString(String s1, String s2)
+	{
+		int count = 0;
+		int index = -1;
+		
+		while ((index = s1.indexOf(s2, index + 1)) != -1)
+			++count;
+		
+		return count;
+	}
+	
+	public static int countStringIgnoreCase(String s1, String s2)
+	{
+		return countString(s1.toLowerCase(), s2.toLowerCase());
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 Sınıf Çalışması: Parametresi ile aldığı iki yazıdan birincisi içerisinde ikincisinden kaç tane olduğunu döndüren
+	 countString isimli metodu ve case-insesitive olarak çalışan countStringIgnoreCase isimli metou yazınız ve 
+	 aşağıdaki kod ile test ediniz. 
+	 Örneğin: aaa yazısı içerisinde aa dan 2 tane vardır
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{			
+		CountStringTest.run();
+	}
+}
+
+class CountStringTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		for (;;) {
+			System.out.print("Birinci yazıyı giriniz:");
+			String s1 = kb.nextLine();
+			
+			if ("elma".equals(s1))
+				break;
+			
+			System.out.print("İkinci yazıyı giriniz:");
+			String s2 = kb.nextLine();
+			
+			int count = StringUtil.countString(s1, s2);
+			
+			System.out.printf("Birinci yazı içerisinde ikinci yazıdan %d tane var%n", count);
+			
+			count = StringUtil.countStringIgnoreCase(s1, s2);
+			
+			System.out.printf("Birinci yazı içerisinde ikinci yazıdan büyük-küçük harf duyarsız olarak %d tane var%n", count);
+		}
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+class StringUtil {
+	public static int countString(String s1, String s2)
+	{
+		int count = 0;
+		
+		for (int index = 0; (index = s1.indexOf(s2, index)) != -1; ++count, ++index)
+			;
+		
+		return count;
+	}
+	
+	public static int countStringIgnoreCase(String s1, String s2)
+	{
+		return countString(s1.toLowerCase(), s2.toLowerCase());
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 Sınıf Çalışması: Parametresi ile aldığı iki yazıdan birincisi içerisinde ikincisinden kaç tane olduğunu döndüren
+	 countString isimli metodu ve case-insesitive olarak çalışan countStringIgnoreCase isimli metou yazınız ve 
+	 aşağıdaki kod ile test ediniz. 
+	 Örneğin: aaa yazısı içerisinde aa dan 2 tane vardır
+
+	 onur
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{			
+		CountStringTest.run();
+	}
+}
+
+class CountStringTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		for (;;) {
+			System.out.print("Birinci yazıyı giriniz:");
+			String s1 = kb.nextLine();
+			
+			if ("elma".equals(s1))
+				break;
+			
+			System.out.print("İkinci yazıyı giriniz:");
+			String s2 = kb.nextLine();
+			
+			int count = StringUtil.countString(s1, s2);
+			
+			System.out.printf("Birinci yazı içerisinde ikinci yazıdan %d tane var%n", count);
+			
+			count = StringUtil.countStringIgnoreCase(s1, s2);
+			
+			System.out.printf("Birinci yazı içerisinde ikinci yazıdan büyük-küçük harf duyarsız olarak %d tane var%n", count);
+		}
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+class StringUtil {
+	public static int countString(String s1, String s2)
+	{
+		int count = 0;
+		
+		for (int index = -1; (index = s1.indexOf(s2, index + 1)) != -1; ++count)
+			;
+		
+		return count;
+	}
+	
+	public static int countStringIgnoreCase(String s1, String s2)
+	{
+		return countString(s1.toLowerCase(), s2.toLowerCase());
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 İçerisinde hiçbir karakter olmayan yani length bilgisi sıfır olan String'lere boş string (empty string) denir
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{			
+		String s = ""; //empty string
+		
+		System.out.printf("Length:%d%n", s.length());
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 Bir string'in boş string olup olmadığının anlaşılması (kötü yöntem)
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{			
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		for (;;) {
+			System.out.print("Birinci yazıyı giriniz:");
+			String s = kb.nextLine();
+			
+			if ("elma".equals(s))
+				break;
+			
+			System.out.println("".equals(s) ? "Boş string" : "Boş string değil");
+		}
+
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 Bir string'in boş string olup olmadığının anlaşılması (kötü yöntem)
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{			
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		for (;;) {
+			System.out.print("Birinci yazıyı giriniz:");
+			String s = kb.nextLine();
+			
+			if ("elma".equals(s))
+				break;
+			
+			System.out.println(s.length() == 0 ? "Boş string" : "Boş string değil");
+		}
+
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 Bir string'in boş string olup olmadığının test edilmesinin isEmpty metodu ile yapılması en iyi tekniktir
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{			
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		for (;;) {
+			System.out.print("Birinci yazıyı giriniz:");
+			String s = kb.nextLine();
+			
+			if ("elma".equals(s))
+				break;
+			
+			System.out.println(s.isEmpty() ? "Boş string" : "Boş string değil");
+		}
+
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 String sınıfının trim metodu baştaki sondaki "whitespace" karakterlerinin atılmış olduğu yeni bir String
+	 referansına geri döner
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{			
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		for (;;) {
+			System.out.print("Birinci yazıyı giriniz:");
+			String s = kb.nextLine();
+			
+			if ("elma".equals(s))
+				break;
+			
+			System.out.printf("(%s)%n", s.trim());
+		}
+
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 Sınıf Çalışması: Klavyeden kullanıcı adı ve şifre isteyen basit bir ATM uygulamasının bir parçasını aşağıdaki
+	 açıklamalara göre yazınız.
+	 Açıklamalar:
+	 	- Kullanıcı adı ve şifresi en fazla 3 kez denenebilecektir
+	 	
+	 	- Denemeler sırasında doğru giriş yapılmışsa "Giriş başarılı", başarısız denemeler için "Giriş başarısız 2 hakkınız kaldı!..."
+	 	gibi mesajlar verilecektir
+	 	
+	 	- En fazla 3 deneme sonunda başarısız olunmuşsa. "Giriş başarısız. Artık deneme hakkınız bitti!..." mesajı
+	 	verilecektir
+	 	
+	 	- Uygulamayı genel düşünerek yazınız
+	 	
+	 	- ATM uygulamasının sürekli çalıştığı varsayımıyla yazılması önerilir
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{			
+		AtmApp.run(3);
+	}
+}
+
+class AtmApp {
+	public static void doSuccess(AtmCard atmCard, java.util.Scanner kb)
+	{
+		System.out.println("-------------------------------");
+		System.out.println("Giriş başarılı");
+		System.out.println("-------------------------------");
+		//...
+	}
+	
+	public static void doFail(AtmCard atmCard, java.util.Scanner kb)
+	{
+		System.out.println("-------------------------------");
+		System.out.println("Giriş başarısız. Artık deneme hakkınız bitti!...");
+		System.out.println("-------------------------------");
+		//...
+	}
+	
+	public static void doWorkFor(AtmCard atmCard, int tryNum, java.util.Scanner kb)
+	{
+		int i = 0;
+		
+		for (; i < tryNum; ++i) {
+			System.out.print("Kullanıcı adını giriniz:");
+			String username = kb.nextLine();
+			
+			System.out.print("Şifreyi giriniz:");
+			String password = kb.nextLine();
+			
+			if (atmCard.isValid(username, password))
+				break;
+			
+			if (i != tryNum - 1)
+				System.out.printf("Giriş başarısız. %d giriş hakkınız kaldı!...%n", tryNum - 1 - i);
+		}
+		
+		if (i != tryNum)
+			doSuccess(atmCard, kb);
+		else
+			doFail(atmCard, kb);
+	}
+	
+	public static void run(int tryNum)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		for (;;) {
+			System.out.println("Hoşgeldiniz:");
+			AtmCard atmCard = new AtmCard(); //Her defasında yeni kart girişi yapılıyor olarak düşününüz
+			
+			doWorkFor(atmCard, tryNum, kb);
+		}
+	}
+}
+
+
+class AtmCard {
+	public String username;
+	public String password;
+	
+	public AtmCard()
+	{
+		//Burada kartın içerisinden bilgiler okunuyor olarak düşününüz
+		username = "csd";
+		password = "1993";
+	}
+	
+	public boolean isValid(String name, String passwd)
+	{
+		return name.equals(username) && passwd.equals(password);
+	}
+	
+	//...
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 Sınıf Çalışması: Klavyeden kullanıcı adı ve şifre isteyen basit bir ATM uygulamasının bir parasını aşağıdaki
+	 açıklamalara göre yazınız.
+	 Açıklamalar:
+	 	- Kullanıcı adı ve şifresi en fazla 3 kez denenebilecektir
+	 	
+	 	- Denemeler sırasında doğru giriş yapılmışsa "Giriş başarılı", başarısız denemeler için "Giriş başarısız 2 hakkınız kaldı!..."
+	 	gibi mesajlar verilecektir
+	 	
+	 	- En fazla 3 deneme sonunda başarısız olunmuşsa. "Giriş başarısız. Artık deneme hakkınız bitti!..." mesajı
+	 	verilecektir
+	 	
+	 	- Uygulamayı genel düşünerek yazınız
+	 	
+	 	- ATM uygulamasının sürekli çalıştığı varsayımıyla yazılması önerilir
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{			
+		AtmApp.run(3);
+	}
+}
+
+class AtmApp {
+	public static void doSuccess(AtmCard atmCard, java.util.Scanner kb)
+	{
+		System.out.println("-------------------------------");
+		System.out.println("Giriş başarılı");
+		System.out.println("-------------------------------");
+		//...
+	}
+	
+	public static void doFail(AtmCard atmCard, java.util.Scanner kb)
+	{
+		System.out.println("-------------------------------");
+		System.out.println("Giriş başarısız. Artık deneme hakkınız bitti!...");
+		System.out.println("-------------------------------");
+		//...
+	}
+	
+	public static void doWorkFor(AtmCard atmCard, int tryNum, java.util.Scanner kb)
+	{
+		int i = 0;
+		
+		for (; i < tryNum; ++i) {
+			System.out.print("Şifreyi giriniz:");
+			String password = kb.nextLine();
+			
+			if (atmCard.isValid(password))
+				break;
+			
+			if (i != tryNum - 1)
+				System.out.printf("Giriş başarısız. %d giriş hakkınız kaldı!...%n", tryNum - 1 - i);
+		}
+		
+		if (i != tryNum)
+			doSuccess(atmCard, kb);
+		else
+			doFail(atmCard, kb);
+	}
+	
+	public static void run(int tryNum)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		for (;;) {
+			
+			AtmCard atmCard = new AtmCard(); //Her defasında yeni kart girişi yapılıyor olarak düşününüz
+			System.out.printf("Hoşgeldiniz %s%n", atmCard.username);
+			
+			doWorkFor(atmCard, tryNum, kb);
+		}
+	}
+}
+
+
+class AtmCard {
+	public String username;
+	public String password;
+	
+	public AtmCard()
+	{
+		//Burada kartın içerisinden bilgiler okunuyor olarak düşününüz
+		username = "Ali Vefa Serçe";
+		password = "1993";
+	}
+	
+	public boolean isValid(String passwd)
+	{
+		return passwd.equals(password);
+	}
+	
+	//...
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	String sınıfının concat metodu ile yazı birleştirmesi (concatenation) yapılabilir  
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{			
+		String firstName = "Oğuz";
+		String lastName = "Karan";
+		String fullName;
+		
+		fullName = firstName.concat(" ").concat(lastName);
+		
+		System.out.println(fullName);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	String sınıfının concat metodu ile yazı birleştirmesi (concatenation) yapılabilir  
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{			
+		String firstName = "Oğuz";
+		String lastName = "Karan";
+		String fullName;
+		
+		fullName = firstName.concat(" ").concat(lastName.toUpperCase());
+		
+		System.out.println(fullName);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	+ operatörünün iki operandı da String türündense bu durumda bu opertör operandlara ilişkin yazıların birleştirilmesi
+	ile elde edilen yeni bir String referansı üretir  
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{			
+		String firstName = "Oğuz";
+		String lastName = "Karan";
+		String fullName;
+		
+		fullName = firstName + " " + lastName;
+		
+		System.out.println(fullName);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	+ operatörünün iki operandı da String türündense bu durumda bu opertör operandlara ilişkin yazıların birleştirilmesi
+	ile elde edilen yeni bir String referansı üretir  
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{			
+		String firstName = "Oğuz";
+		String lastName = "Karan";
+		String fullName;
+		
+		fullName = firstName + " " + lastName.toUpperCase();
+		
+		System.out.println(fullName);
+	}
+}
+/*----------------------------------------------------------------------------------------------------------------------
+	17.03.2023	
+	  Blue
+    - 3.1.2 -
+-----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	+ operatörünün operandlarından biri String türündense diğer operandın String karşılığı elde edilerek 
+	birleştirme yapılır. Bu durumda derleyici bir kod üretir. Dönüşümün yani yazı karşılığının elde edilmesinin
+	detayları ileride ele alınacaktır
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Sınavdan aldığınız notları giriniz: (arasınav final)");
+		int midTermGrade = kb.nextInt();
+		int finalGrade = kb.nextInt();	
+		double grade = 0.4 * midTermGrade + 0.6 * finalGrade;
+		String message = "Geçme notunuz:" + grade + (grade >= 50 ? " Geçti" : " Kaldı");
+		
+		System.out.println(message);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte println metodu birleştirilmiş yazıyı argüman olarak alır ve ekrana basar. Şüphesiz
+	birleştirme işlemini println yapmaz. Çünkü anımsanacağı gibi metot çağrılmadan önce argüma ilşişkin ifade
+	hesaplanır, elde edilen değer ile metot çağrılır 
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Sınavdan aldığınız notları giriniz: (arasınav final)");
+		int midTermGrade = kb.nextInt();
+		int finalGrade = kb.nextInt();	
+		double grade = 0.4 * midTermGrade + 0.6 * finalGrade;
+		
+		System.out.println("Geçme notunuz:" + grade + (grade >= 50 ? " Geçti" : " Kaldı"));
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	18.03.2023
+	  Blue
+	- 3.1.3 - 
+-----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı bir yazının tersini döndüren reverse isimli metodu StringUtil
+	sınıfı içerisinde yazınız ve aşağıdaki kod ile test ediniz  
+	
+	Dikkat: *** ile belirtilen kodda yeni String nesnesi yaratılıp result referansına atanmaktadır. Bu işlem görece
+	olarak performansı olumsuz etkileyebilir. İleride bu şekilde olmayan daha etkin başka çözümleri de göreceğiz
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		ReverseTest.run();
+	}
+}
+
+class ReverseTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		for (;;) {
+			System.out.print("Bir yazı giriniz:");
+			String str = kb.nextLine();
+			
+			if ("elma".equals(str))
+				break;
+			
+			System.out.printf("Yazının tersi:%s%n", StringUtil.reverse(str));
+		}
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+class StringUtil {
+	public static String reverse(String str)
+	{
+		String result = "";
+		
+		for (int i = str.length() - 1; i >= 0; --i)
+			result += str.charAt(i); //***
+		
+		return result;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Klavyeden elma girilene kadar alınan yazıların arasında - karakteri olacak şekilde birleştirilmiş
+	bir String oluşturan programı yazınız
+	Örneğin: ankara istanbul izmir girilirse -> ankara-istanbul-izmir
+	Örneği: ankara girilirse -> ankara
+	Açıklamalar:
+	  - Tamamı whitespace karakterlerden oluşan string ve boş string yazıya eklenmeyecektir
+
+	  onur
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		ConcatWithHyphenApp.run();
+	}
+}
+
+class ConcatWithHyphenApp {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		String str = "";
+		
+		for (;;) {
+			System.out.print("Bir yazı giriniz:");
+			String s = kb.nextLine();
+			
+			if (s.trim().isEmpty())
+				continue;
+			
+			if ("elma".equals(s))
+				break;
+			
+			if (!str.isEmpty())
+				str += "-";
+			
+			str += s;
+		}	
+		
+		System.out.println(str);
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	String sınıfının substring metotları
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		String s = "ankara";
+		
+		System.out.println(s.substring(2)); //kara
+		System.out.println(s.substring(2, 5)); //kar
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	String sınıfının substring metoduna beginIndex olarak yazının uzıunluğu verilirse boş string referansına
+	geri döner. Yazının uzunluğundan daha büyük bir indeks numarası için exception oluşur
+	onur
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		String s = "ankara";
+		
+		System.out.println(s.substring(s.length()).isEmpty() ? "Boş string" : "Boş string değil"); 	
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	String sınıfının substring metoduna beginIndex ve endIndex değerleri, sınırlar içerisinde olması 
+	koşuluyla (length dahil) aynı değer verilirse boş string referansına geri döner
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		String s = "ankara";
+		
+		System.out.println(s.substring(3, 3).isEmpty() ? "Boş string" : "Boş string değil"); 	
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Klavyeden elma girilene kadar alınan yazıların arasında - karakteri olacak şekilde birleştirilmiş
+	bir String oluşturan programı yazınız
+	Örneğin: ankara istanbul izmir girilirse -> ankara-istanbul-izmir
+	Örneği: ankara girilirse -> ankara
+	Açıklamalar:
+	  - Tamamı whitespace karakterlerden oluşan string ve boş string yazıya eklenmeyecektir
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		ConcatWithHyphenApp.run();
+	}
+}
+
+class ConcatWithHyphenApp {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		String str = "";
+		
+		for (;;) {
+			System.out.print("Bir yazı giriniz:");
+			String s = kb.nextLine();
+			
+			if (s.trim().isEmpty())
+				continue;
+			
+			if ("elma".equals(s))
+				break;
+			
+			str += s + "-";
+		}	
+		
+		if (!str.isEmpty())
+			str = str.substring(0, str.length() - 1);
+		
+		System.out.println(str);
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örneği inceleyiniz
+	mülakat sorusu
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		System.out.println("Java" + 10 + 20); //Java1020
+		System.out.println("Java" + (10 + 20)); //Java30
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+    IntegerDecimalOccurence 
+	String pattern matching in decimal representations of ints.
+	
+	Task description
+	Two integers A and B are given. We are interested in positions at which decimal representation of A occurs as a substring 
+	in the decimal representation of B (counting from 0) For example:
+	
+		- 53 occurs in 1953786 at position 2.
+		- 78 occurs in 1953786786 at positions 4 and 7
+		- 57 does not occur in 153786.
+	
+	Decimal representations are assumed to be big-endian and without leading zeros (the only exception being the number 0, whose 
+	decimal representation is "0")
+	
+	Write function
+		
+		class Solution { public int solution(int A, int B); }
+	
+	that, given two integers A and B, returns the leftmost position at which A occurs in B the function should return -1 
+	if A does not occur in B. 
+	For example, given A = 53 and B = 195378653, the function should return 2, as explained above.
+	Assume that:
+		
+		- A and B are integers within the range [0..999,999,999].
+		
+	In your solution, focus on correctness. The performance of your solution will not be the focus of the assessment.
+	onur
+---------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		SolutionTest.run();
+	}
+}
+
+
+class SolutionTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		Solution s = new Solution();
+		
+		for (;;) {
+			System.out.print("Input the first number:");
+			int A = Integer.parseInt(kb.nextLine());
+			
+			System.out.print("Input the second number:");
+			int B = Integer.parseInt(kb.nextLine());
+			
+			System.out.println(s.solution(A, B));
+		}
+	}
+}
+
+class Solution { 
+	public int solution(int A, int B)
+	{
+		String AStr = A + "";
+		String BStr = B + "";
+		
+		return BStr.indexOf(AStr);
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+  	String sınıfının startsWith metodu
+---------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Input the web address:");
+		String address = kb.nextLine();
+		
+		if (!address.startsWith("https://"))
+			address = "https://" + address;
+		
+		System.out.println(address);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+  	String sınıfının endsWith metodu
+---------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Input your email:");
+		String email = kb.nextLine();
+		
+		if (!email.endsWith(".com"))
+			email += ".com";
+		
+		System.out.println(email);
+	}
+}
