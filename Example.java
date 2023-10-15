@@ -15901,3 +15901,32 @@ class App {
 		System.out.println(email);
 	}
 }
+
+/*----------------------------------------------------------------------------------------------------------------------
+  	Aşağıdaki örneği inceleyiniz
+  	onur
+---------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)	
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Input your email:");
+		String email = kb.nextLine();
+		
+		int atIdx = email.indexOf('@');
+		int atIdx2 = email.lastIndexOf('@');
+		
+		if (atIdx != -1 && atIdx == atIdx2 && atIdx != email.length() - 1) {
+			if (email.substring(atIdx + 1).lastIndexOf(".") == -1)
+				email += ".com";
+			
+			System.out.println(email);
+		}
+		else
+			System.out.println("Invalid email");
+	}
+}
+
