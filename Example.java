@@ -9728,7 +9728,7 @@ class App {
 
 /*----------------------------------------------------------------------------------------------------------------------
 	 char türünden short türüne yapılan explicit dönüşümde sayının bit kalıbı değişmez. Sayının yorumlanışı değişir.
-	 onur
+	
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -11075,7 +11075,7 @@ class Sample {
 	{
 		System.out.println("bar, int");
 	}
-}  // onur
+}  
 
 
 
@@ -14884,7 +14884,7 @@ class App {
 /*----------------------------------------------------------------------------------------------------------------------
 	 String sınıfının yazı içerisinde belirli bir indeksten başlayarak yazı arayan indexOf metodu. indexOf metotları, 
 	 bulamamaları durumunda -1 değerine geri dönerler. 
-	 onur
+	
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -14922,7 +14922,7 @@ class App {
 	 countString isimli metodu ve case-insesitive olarak çalışan countStringIgnoreCase isimli metou yazınız ve 
 	 aşağıdaki kod ile test ediniz. 
 	 Örneğin: aaa yazısı içerisinde aa dan 2 tane vardır
-	 onur
+	 
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -15109,7 +15109,7 @@ class StringUtil {
 	 aşağıdaki kod ile test ediniz. 
 	 Örneğin: aaa yazısı içerisinde aa dan 2 tane vardır
 
-	 onur
+	 
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -15650,7 +15650,7 @@ class StringUtil {
 	Açıklamalar:
 	  - Tamamı whitespace karakterlerden oluşan string ve boş string yazıya eklenmeyecektir
 
-	  onur
+	  
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -15706,7 +15706,7 @@ class App {
 /*----------------------------------------------------------------------------------------------------------------------
 	String sınıfının substring metoduna beginIndex olarak yazının uzıunluğu verilirse boş string referansına
 	geri döner. Yazının uzunluğundan daha büyük bir indeks numarası için exception oluşur
-	onur
+	
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -15819,7 +15819,7 @@ class App {
 		- A and B are integers within the range [0..999,999,999].
 		
 	In your solution, focus on correctness. The performance of your solution will not be the focus of the assessment.
-	onur
+	
 ---------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -15904,7 +15904,7 @@ class App {
 
 /*----------------------------------------------------------------------------------------------------------------------
   	Aşağıdaki örneği inceleyiniz
-  	onur
+  
 ---------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -17351,7 +17351,7 @@ class RepeatTest {
 class StringUtil {
 	public static String repeat(char ch, int count)
 	{
-		return String.format("%0" + count + "d", 0).replace('0', ch); //onur
+		return String.format("%0" + count + "d", 0).replace('0', ch); 
 	}
 }
 
@@ -17431,7 +17431,7 @@ class App {
 	ve ilgili temel türden değere çevirmeye çalışır. Boolean sınıfının parseBoolean metodu hariç tüm diğer 
 	parseXXX metotları için çevirememe durumunda exception oluşur. Boolean sınıfının parseBoolean metodu 
 	yazı true değerine caseinsensitive olarak çevrilemezse false değerine geri döner 
-	//onur
+
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -17455,7 +17455,7 @@ class App {
 /*----------------------------------------------------------------------------------------------------------------------
 	Integer sınıfının (aslında tüm tamsayı türlerine ilişkin sarmalayan sınıflarda var) sayı sistemi (radix)
 	parametreli parseInt metodu 
-	//onur
+	
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
