@@ -1587,7 +1587,8 @@ class NumberUtil {
 	 ifadeye "argüman" denir. Bir metodun kaç tane parametresi varsa o kadar sayıda argüman ile çağrılmalıdır.
 	 Argümanlardan parametrelere aktarım da bir atama işlemidir.
     
-     Aqua
+     Aqua - Eflatun
+
 	 Metod çağırılırken parametrelere verilen ifadeler. ARGÜMAN...
 	 Argümanlardan parametrelere aktarım da bir atama işlemidir
 	 
@@ -1916,7 +1917,7 @@ class App {
 	printf metodunda tamsayılar için hizalama (alignment) yapılabilir. Aşağıdaki örnekte %08X yer tutucusu için yazılan
 	karakter sayısı 8'den azsa geri kalanlar sıfır ile beslenir 
 
-	Aqua
+	Eflatun
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -1980,7 +1981,7 @@ class App {
 	printf metodunda f format karakteri ile ondalık kısmın kaç basamak olarak formatlanacağı aşağıdaki gibi % ve f
 	arasında . ve sayı yazılarak yapılabilir. Geri kalan basamaklar bilimsel olarak yuvarlanır
 
-	Aqua
+	Eflatun
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -2169,7 +2170,7 @@ class FindGradeApp {
 	
 	Aşağıdaki örneği çeşitli değer ile çalıştırıp sonuçları gözlemleyiniz
 
-	Aqua
+	Eflatun
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -2197,7 +2198,7 @@ class App {
 	
 	Aşağıdaki örneği çeşitli değer ile çalıştırıp sonuçları gözlemleyiniz
 
-	Aqua
+	Eflatun
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -2471,7 +2472,7 @@ class MathUtil {
 /*----------------------------------------------------------------------------------------------------------------------
 	Math sınıfının logXXX metotları(log için 3 tane method vardır.)
 
-	Aqua
+	Aqua - Eflatun
 
 	log(double a) : e tabanına göre alınan log
 	log10(double a) : 10 tabanına göre log
@@ -2496,7 +2497,7 @@ class App {
 /*----------------------------------------------------------------------------------------------------------------------
 	Aşağıdaki örnekte Math sınıfında olmayan bir metot Math sınıfının metotları kullanılarak yazılmıştır
 
-	Aqua
+	Aqua - Eflatun
 
 	  logb(b, a) = b : taban a: o tabanda istenilen ifade/değer
 -----------------------------------------------------------------------------------------------------------------------*/
@@ -2523,7 +2524,7 @@ class MathUtil {
 /*----------------------------------------------------------------------------------------------------------------------
 	Math sınıfının yuvarlama işlemi yapan bazı önemli metotları
 
-	Aqua
+	Aqua - Eflatun
 
 	round : girilen double ifadenin yuvarlanmadan tam kısmını basar.
 	ceil :  girilen double ifadeyi bir üst sayıya yuvarlar.
@@ -2845,7 +2846,7 @@ class App {
  	o karaktere ilişkin karakter sabiti basılmış olur. Burada hexadecimal sayı kesinlikle iki byte yani 4 tane hex digit 
  	olarak yazılmaldır
 
- 	Aqua
+ 	Eflatun
 
  	4 hex digit = 1 nibble
 
@@ -2892,7 +2893,7 @@ class App {
 /*----------------------------------------------------------------------------------------------------------------------
  	Bir tamsayı sabitinin öneki yoksa bu durumda sabit "decimal" olarak ele alınır.
 
- 	Aqua
+ 	Aqua - Eflatun
 
  	decimal: 10 luk sayı sistemi.
  	10'luk sistemden 2'lik sisteme geçişte her digit 1 bit.
@@ -2912,7 +2913,7 @@ class App {
  	Bir tamsayı önüne bitişik olarak sıfır ve x (büyük veya küçük) yazıldığında bu ekten sonra gelen basamaklar 
  	"hexadecimal" olarak ele alınır.
 
- 	Aqua
+ 	Aqua - Eflatun
 
  	0x__ --> hexedecimal!!!!
  	hexe (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F)
@@ -2947,7 +2948,7 @@ class App {
 /*----------------------------------------------------------------------------------------------------------------------
  	Bir tamsayı önüne bitişik olarak sıfır yazıldığında bu ekten sonra gelen basamaklar "octal" olarak ele alınır.
 
- 	Aqua
+ 	Aqua - Eflatun
 
  	octal: 8 lik sayı sistemi.(0,1,2,3,4,5,6,7)
  	0__ --> octal
@@ -2968,7 +2969,7 @@ class App {
  	Bir tamsayı önüne bitişik olarak sıfır ve b (küçük veya büyük) yazıldığında bu ekten sonra gelen basamaklar
  	"binary" olarak ele alınır. İkilik sistemde sabit yazımı Java 7 ile birlikte eklenmiştir.
 
- 	Aqua
+ 	Aqua - Eflatun
 
  	0b__ --> sonraki basamaklar binary (0,1)
     her digit 1 bit
@@ -3361,7 +3362,7 @@ class App {
  	Aşağıdaki örnekte ifade, işaret - operatörünün seviyesinde bulunan operatörlerin sağdan sola (right associative) 
  	ele alınmasından dolayı geçerlidir.
 
- 	Aqua
+ 	Eflatun
  	Negatif sabit diye bir şey yoktur. Pozitif bir sabite eksi işaret operatörü eklendiğinde oluşan sabit değer vardır 
  	derleyici açısından.
 -----------------------------------------------------------------------------------------------------------------------*/
@@ -3832,7 +3833,7 @@ class Sample {
 	 Aşağıdaki örnekte işlem sırası ile operatörlerin öncelik sırası aynıdır. Yine en soldaki önce yapılır. Yani yine
 	 Matematiksel olarak doğru sonuca en kısa yoldan ulaşılır
 
-	 Aqua
+	 Eflatun
 	 burada da önce bar a bakar. ve operatörü var. bar'ın sonucu false tur. foo'ya bakmasına gerek yok. ama tar'a bakması gerekıyor.
 	 Çünkü tar eğer true ise sonuc True çıkar. Değilse False sonucunu üretir....
 -----------------------------------------------------------------------------------------------------------------------*/
@@ -4353,7 +4354,7 @@ class App {
 /*----------------------------------------------------------------------------------------------------------------------
 	Aşağıdaki örnekte else kısmı içteki if'e ilişkindir (dangling else) 
 
-	Aqua
+	Eflatun
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -6937,7 +6938,7 @@ class App {
 	Violance
 
 
- Aqua
+ Eflatun
  -> Etiket bildirildiği döngüyü sonlandırır.Bu örnekte dıştaki döngünün etiketi vardır. Dolayısıyla o döngü sonlanır..
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
@@ -7645,7 +7646,7 @@ class App {
 /*----------------------------------------------------------------------------------------------------------------------
 	Demo menü uygulaması
 	(İleride daha iyisi yazılacaktır) 
- Aqua
+ Eflatun
  -> Menu uygulamasının switch deyimiyle yapılmış versiyonudur...
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
@@ -8419,7 +8420,7 @@ class App {
 	Aşağıdaki örnekte switch expression, statement biçiminde kullanılmıştır. Klasik switch statement karşılığı şu
 	şekildedir:
 	
-	switch (code) { // Aqua
+	switch (code) { // Eflatun
 		case 212:
 		case 216: // burada ise ayrı ayrı yazılmak zorunda...
 			System.out.println("İstanbul");
@@ -8440,7 +8441,7 @@ class App {
 		System.out.print("Telefon kodunu giriniz:");
 		int code = kb.nextInt();
 
-		switch (code) {										// Aqua
+		switch (code) {										// Aqua - Eflatun
 		case 212, 216 -> System.out.println("İstanbul"); // Burada virgül ile ayırarak, tek bir case ile yazılabiliyor..
 		case 372 -> System.out.println("Zonguldak");
 		default -> System.out.println("Geçersiz telefon kodu");
@@ -8479,7 +8480,7 @@ class App {
 		int code = kb.nextInt();
 		int plate;
 		
-		plate = switch (code) {			// Aqua
+		plate = switch (code) {			// Aqua - Eflatun
 				case 212, 216 -> 34; // expression da bir ok ile üretilen değer yazılabilir..
 				case 372 -> 67;
 				case 312 -> 6;
@@ -8538,7 +8539,7 @@ class App {
 		java.util.Scanner kb = new java.util.Scanner(System.in);
 		System.out.print("Telefon kodunu giriniz:");
 		int code = kb.nextInt();
-										 // Aqua
+										 // Aqua - Eflatun
 		Util.doForPlate(switch (code) { // metod çağrılmış. ve ifade metoda arguman olarak gelmiş
 				case 212, 216 -> 34;
 				case 372 -> 67;
@@ -8553,7 +8554,7 @@ class App {
 }
 
 
-class Util {								 // Aqua
+class Util {								 // Aqua - Eflatun
 	public static void doForPlate(int plate) // metod patametresi
 	{
 		if (plate != -1)
@@ -8607,7 +8608,7 @@ class Util {
 
 	Eflatun
 
-	Aqua
+	Aqua - Eflatun
 	yield kullanım 1.
 -----------------------------------------------------------------------------------------------------------------------*/
 
@@ -9491,7 +9492,7 @@ class App {
 	 tamsayı türünden çıkar. 
 	 Dikkat: Integral promotim bu kuralın dışındadır..
 
-	 Aqua: integral promotin
+	 Eflatun: integral promotin
 	  byte, short, char , bunlar direkt int e yükseliyorr...
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
@@ -14164,7 +14165,7 @@ class App {
 	Ancak bazı özel durumlarda sınıfı kullanan bazı sınıflar ya da ortamlar (framework veya library) default ctor
 	olmasını isteyebilirler. Bu durumda programcı default ctor'u yazar    
 
-	Aqua
+	Eflatun
 -----------------------------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------------
 	Point sınıfı
@@ -16045,7 +16046,7 @@ class StringUtil {
   	sonundaki boşluk karakterlerini atan trimTrailing isimli metotları StringUtil sınıfı içerisinde yazınız ve 
   	aşağıdaki kod ile test ediniz.
 
-  	Aqua
+  	Eflatun
 ---------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -16106,7 +16107,7 @@ class StringUtil {
 
   	// baştaki ve sondaki boşlujları siler..
 
-  	Aqua
+  	Eflatun
 --------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -16510,7 +16511,7 @@ class StringUtil {
 	Karşılaştırma default olarak karakter tablosundaki sıra numaraları kullanılarak, "lexicographically" olarak
 	yapılır. Bu metot case sensitive olarak çalışır
 
-	Aqua
+	Eflatun
 -----------------------------------------------------------------------------------------------------------------------*/
 
 package csd;
@@ -16992,7 +16993,7 @@ class StringUtil {
 	String sınıfının format metodu ile formatlanmış yazı elde edilebilir. Bu metodun kullanımı printf ile 
 	aynıdır. Yalnızca printf gibi ekrana basmak yerine formatlanmış yazıya ilişkin String referansına geri döner 
 
-	Aqua
+	Eflatun
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -17752,3 +17753,681 @@ public class Complex {
 	- Blue -
 	 3.2.3
 -----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------
+	FILE			: StringUtil.java
+	AUTHOR			: Java-Nov-2022 Group
+	LAST UPDATE		: 26.03.2023
+	
+	Utility class for string operations
+	
+	Copyleft (c) 1993 C and System Programmers Association 
+	All Rights Free
+------------------------------------------------------------*/
+package org.csystem.util.string;
+
+public class StringUtil {
+	public static String capitalize(String s)
+	{
+		return s.isEmpty() ? "" : Character.toUpperCase(s.charAt(0)) + s.substring(1).toLowerCase();
+	}
+
+	public static int countString(String s1, String s2) 
+	{
+		int count = 0;
+
+		for (int index = -1; (index = s1.indexOf(s2, index + 1)) != -1; ++count)
+			;
+
+		return count;
+	}
+
+	public static int countStringIgnoreCase(String s1, String s2)
+	{
+		return countString(s1.toLowerCase(), s2.toLowerCase());
+	}
+
+	public static String getRandomText(java.util.Random r, int n, String text) 
+	{
+		String str = "";
+		int len = text.length();
+
+		for (int i = 0; i < n; ++i)
+			str += text.charAt(r.nextInt(len));
+
+		return str;
+	}
+
+	public static String getRandomTextEN(int n) 
+	{
+		return getRandomTextEN(new java.util.Random(), n);
+	}
+
+	public static String getRandomTextEN(java.util.Random r, int n) 
+	{
+		return getRandomText(r, n, "abcdefghijklmnopqrstuwxvyzABCDEFGHIJKLMNOPQRSTUWXYZ");
+	}
+
+	public static String getRandomTextTR(int n) 
+	{
+		return getRandomTextTR(new java.util.Random(), n);
+	}
+
+	public static String getRandomTextTR(java.util.Random r, int n) 
+	{
+		return getRandomText(r, n, "abcçdefgğhıijklmnoöprsştuüvyzABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ");
+	}
+
+	public static boolean isPalindrome(String s) 
+	{
+		int left = 0;
+		int right = s.length() - 1;
+
+		while (left < right) {
+			char cLeft = Character.toLowerCase(s.charAt(left));
+
+			if (!Character.isLetter(cLeft)) {
+				++left;
+				continue;
+			}
+
+			char cRight = Character.toLowerCase(s.charAt(right));
+
+			if (!Character.isLetter(cRight)) {
+				--right;
+				continue;
+			}
+
+			if (cLeft != cRight)
+				return false;
+
+			++left;
+			--right;
+		}
+
+		return true;
+	}
+
+	public static boolean isPangram(String s, String alphabet) 
+	{
+		int len = alphabet.length();
+
+		for (int i = 0; i < len; ++i)
+			if (!s.contains(alphabet.charAt(i) + ""))
+				return false;
+
+		return true;
+	}
+
+	public static boolean isPangramEN(String s)
+	{
+		return isPangram(s.toLowerCase(), "abcdefghijklmnopqrstuwxvyz");
+	}
+
+	public static boolean isPangramTR(String s) 
+	{
+		return isPangram(s.toLowerCase(), "abcçdefgğhıijklmnoöprsştuüvyz");
+	}
+
+	public static String padLeading(String s, int len) 
+	{
+		return padLeading(s, len, ' ');
+	}
+
+	public static String padLeading(String s, int len, char ch)
+	{
+		int length = s.length();
+
+		return len <= length ? s : (ch + "").repeat(len - length) + s;
+	}
+
+	public static String padTrailing(String s, int len) 
+	{
+		return padTrailing(s, len, ' ');
+	}
+
+	public static String padTrailing(String s, int len, char ch) 
+	{
+		int length = s.length();
+
+		return len <= length ? s : s + (ch + "").repeat(len - length);
+	}
+	
+	public static String reverse(String str)
+	{
+		String result = "";
+
+		for (int i = str.length() - 1; i >= 0; --i)
+			result += str.charAt(i); // ***
+
+		return result;
+	}
+}
+
+
+/*----------------------------------------------------------
+	FILE			: NumberUtil.java
+	AUTHOR			: Java-Nov-2022 Group
+	LAST UPDATE		: 26.03.2023
+	
+	Utility class for numeric operations
+	
+	Copyleft (c) 1993 C and System Programmers Association 
+	All Rights Free
+------------------------------------------------------------*/
+package org.csystem.util.numeric;
+
+
+public class NumberUtil {
+	public static boolean areFriends(int a, int b)
+	{
+		return sumFactors(a) == b && sumFactors(b) == a;
+	}
+
+	public static int calculateDigitalRoot(int a)
+	{
+		int root = Math.abs(a);
+
+		while (root > 9)
+			root = sumDigits(root);
+
+		return root;
+	}
+
+	public static int calculateDigitsPowSum(int a)
+	{
+		int n = countDigits(a);
+
+		int total = 0;
+
+		while (a != 0) {
+			total += Math.pow(a % 10, n);
+
+			a /= 10;
+		}
+
+		return total;
+
+	}
+
+	public static int countDigits(int a)
+	{	
+		return a == 0 ? 1 : (int)Math.log10(Math.abs(a)) + 1;
+	}
+
+	public static int factorial(int n)
+	{
+		int result = 1;
+
+		for (int i = 2; i <= n; ++i)
+			result *= i;
+		
+		return result;
+	}
+
+	public static int fibonacciNumber(int n)
+	{
+
+		if (n <= 2)
+			return n - 1;
+
+		int prev1 = 1, prev2 = 0, val = 0;
+
+		for (int i = 2; i < n; ++i) {
+			val = prev1 + prev2;
+			prev2 = prev1;
+			prev1 = val;
+		}
+
+		return val;
+	}
+	
+	public static int getHardyRamanujanCount(int n)
+	{
+		int count = 0;
+
+		EXIT_LOOP:
+
+		for (int a = 1; a * a * a < n; ++a)
+			for (int b = a + 1; a * a * a + b * b * b <= n; ++b)
+				if (a * a * a + b * b * b == n) {
+					if (++count == 2)
+						break EXIT_LOOP;
+
+					++a;
+				}
+
+		return count;
+	}
+
+	public static int getPrime(int n)
+	{
+		int val = 2;
+		int count = 0;
+
+		for (;;) {
+			if (isPrime(val))
+				++count;
+
+			if (count == n)
+				return val;
+
+			++val;
+		}
+	}
+	
+	public static int indexOfPrime(long a)
+	{
+		int i = 1;
+		long val = 2;
+
+		for (;;) {
+			if (val == a)
+				return i;
+
+			if (isPrime(val))
+				++i;
+			
+			++val;
+		}
+	}
+
+
+	public static boolean isArmstrong(int a)
+	{
+		return a >= 0 && calculateDigitsPowSum(a) == a;
+	}
+
+	public static boolean isDecimalHarshad(int val)
+	{
+		return val > 0 && val % sumDigits(val) == 0; 
+	}
+	
+	public static boolean isEven(int a)
+	{
+		return a % 2 == 0;
+	}
+	
+	public static boolean isFactorian(int n)
+	{
+		return n > 0 && sumFactorialDigits(n) == n;
+	}
+
+	public static boolean isHardyRamanujan(int n)
+	{
+		return n > 0 && getHardyRamanujanCount(n) == 2;
+	}
+
+	public static boolean isOdd(int a)
+	{
+		return !isEven(a);
+	}
+
+	public static boolean isPerfect(int val)
+	{
+		return sumFactors(val) == val;
+	}
+	
+	public static boolean isPrime(long a)
+	{
+		if (a <= 1)
+			return false;
+
+		if (a % 2 == 0)
+			return a == 2;
+
+		if (a % 3 == 0)
+			return a == 3;
+
+		if (a % 5 == 0)
+			return a == 5;
+
+		if (a % 7 == 0)
+			return a == 7;
+
+		for (long i = 11; i * i <= a; i += 2)
+			if (a % i == 0)
+				return false;
+		
+		return true;
+	}		
+
+	public static boolean isPrimeX(long a)
+	{
+		boolean result;
+		
+		for (long sum = a; (result = isPrime(sum)) && sum > 9; sum = sumDigits(sum))
+			;
+		
+		return result;
+	}
+
+	public static boolean isSuperPrime(long a)
+	{
+		return isPrime(a) && isPrime(indexOfPrime(a));
+	}
+
+	public static int mid(int a, int b, int c)
+	{
+		if (a <= b && b <= c || c <= b && b <= a)
+			return b;
+
+		if (b <= a && a <= c || c <= a && a <= b)
+			return a;
+
+		return c;
+	}
+
+	public static int multiply(int a, int b)
+	{
+		return a * b;
+	}
+	
+	public static int nextFibonacciNumber(int val)
+	{
+		if (val < 0)
+			return 0;
+
+		int prev1 = 1, prev2 = 0, next;
+		
+		for (;;) {
+			next = prev1 + prev2;
+			
+			if (next > val)
+				return next;
+
+			prev2 = prev1;
+			prev1 = next;
+		}
+	}
+
+	public static int pow(int a, int b)
+	{
+		int result = 1;
+
+		while (b-- > 0)
+			result *= a;
+		
+		return result;
+	}
+	
+	public static int reversed(int a)
+	{
+		int result = 0;
+
+		while (a != 0) {
+			result = result * 10 + a % 10;
+			a /= 10;
+		}
+
+		return result;
+	}
+	
+	public static int sumDigits(long a)
+	{
+		int sum = 0;
+
+		while (a != 0) {
+			sum += a % 10;
+			a /= 10;
+		}
+
+		return Math.abs(sum);
+
+	}
+
+	public static int sumFactorialDigits(int n)
+	{
+		int sum = 0;
+		
+		while (n != 0) {
+			sum += factorial(n % 10);
+			n /= 10;
+		}
+
+		return sum;
+	}
+
+	public static long sumFactors(long val)
+	{
+		long result = 1;
+
+		for (long i = 2; i * i <= val; ++i)
+			if (val % i == 0)
+				result += (i == val / i) ? i : (i + val / i); 
+
+		return result;
+	}
+
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	İsim arama (name lookup): Derleyici kullanılan bir ismi önce arar. Eğer bulursa erişim kontrolü yapar yani doğru
+	bir şekilde kullanılıp kullanılmadığına bakar.Derleyici isim aramayı belirli kurallara göre yapar. Burada anlatılacak 
+	genel kurallar dışında başka detaylar da vardır. Bu detaylar da isim aramanın bir parçasıdır. Özel durumlar olarak
+	düşünülmelidir. Yani önce genel kurallar sonra özel durumlar için kurallar anlatılacaktır. Hatta ileride bazı konular
+	için yine bazı özel durumlar olacaktır
+-----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	Derleyici bildirimi yapılan isimleri bildirim noktasında aramaz
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		int a; // a aranmaz
+	
+		//...
+	}
+}
+
+class Sample { //Sample aranmaz
+	public void foo() //foo aranmaz
+	{
+		
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Bir isim kod içerisinde iki şekilde kullanılabilir: nitelikli (qualified), niteliksiz (unqualified)
+	Bir isim nokta operatörünün sağında kalıyorsa nitelikli, kalmıyorsa niteliksiz kullanılmış olur
+	
+	Niteliksiz kullanılan isimler "niteliksiz isim arama (unqualified name lookup) kurallarına göre, niteliklli
+	kullanılan isimler ise "nitelikli isim arama (qualified name lookup)" kurallarına göre aranır. 
+	 
+	Anahtar Notlar: Yukarıdaki tanımlarda nitelikli ve niteliksiz olmak olumlu veya olumsuız bir anlamda düşünülmemelidir
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App { //App aranmaz
+	public static void main(String [] args) //main aranmaz
+	{	
+		int a; // a aranmaz
+		
+		a = 10; // a niteliksiz aranır
+		
+		Sample s; //Sample niteliksiz aranır
+		
+		s = new Sample(); //s ve Sample niteliksiz aranır 
+		
+		s.foo(a); //s niteliksiz aranır , foo nitelikli aranır 
+	
+		//...
+	}
+}
+
+class Sample { //Sample aranmaz
+	public void foo(int x) //foo ve x aranmaz
+	{
+		++x; //x niteliksiz aranır
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Derleyici bir ismi bulduktan sonra erişim kontrolü yapar. Aşağıdaki örneği inceliyiniz
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App { //App aranmaz
+	public static void main(String [] args) //main aranmaz
+	{	
+		int a; // a aranmaz
+		
+		++a; //error message Eclipse: The local variable a may not have been initialized
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Niteliksiz isim arama genel kuralları (else if biçiminde değerlendiriniz):
+	1. Bir isim metot içerisinde kullanılmışsa, kullanıldığı yerden yukarıya doğru metot içerisinde aranır. Burada
+	kullanılan isimden önce bildirilen yerel değişkenler ve parametre değişken isimlerine bakılır 
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{	
+		int x;
+		
+		x = 10;
+		++x;
+	}
+}
+
+class Sample {
+	public void foo(int a)
+	{
+		int x;
+		
+		x = a; 
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Niteliksiz isim arama genel kuralları (else if biçiminde değerlendiriniz):
+	2. İsim metodun ait olduğu sınıfın tamamında ancak tüm metotların dışında aranır. Burada sınıf içerisinde
+	bulamazsa sırasıyla "doğrudan taban sınıf (direct super class)" ve "dolaylı taban sınıflara (indirect super class)"
+	da bakılır. Taban sınıf kavramı ileride detaylı olarak ele alınacaktır
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{	
+		Sample s = new Sample();
+		
+		s.foo(67);
+		
+		System.out.printf("s.x = %d%n", s.x);
+	}
+}
+
+class Sample {
+	public void foo(int a)
+	{
+		x = a; 
+	}
+	
+	public int x;
+	
+	public void bar(int x)
+	{
+		//...
+	}
+	
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Yukarıdaki iki kurala göre bir sınıfın veri elemanı ile aynı isimde metot parametre değişkeni veya yerel değişken
+	bildirimi yapılabilir 
+
+	Aşağıdan yukarı çıkarken metod içerisinde bulumazsa sınıf içerisinde bulunabildiği için aynı değişken ismi verilebilir..
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{	
+		Sample s = new Sample();
+		
+		s.foo(67);
+		
+		System.out.printf("s.x = %d%n", s.x);
+	}
+}
+
+class Sample {
+	public int x;
+	
+	public void foo(int a)
+	{
+		int x; //shadowing, masking, hiding  //onur
+		
+		x = a; 
+	}
+	
+	public void bar(int a)
+	{
+		x = a; 
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Niteliksiz isim arama genel kuralları (else if biçiminde değerlendiriniz):
+	3. İsim sınıfın ait olduğu paket içerisinde aranır. Burada alt ya da üst paketlere bakılmaz. Sadece ait olduğu 
+	pakete bakılır 
+
+	Eflatun
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{	
+		Sample s = new Sample();
+		
+		s.foo(67);
+		
+		System.out.printf("s.x = %d%n", s.x);
+	}
+}
+
+class Sample {
+	public int x;
+	
+	public void foo(int a)
+	{
+		
+		x = a; 
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Niteliksiz isim arama genel kuralları (else if biçiminde değerlendiriniz):
+	3. İsim sınıfın ait olduğu paket içerisinde aranır. Burada alt ya da üst paketlere bakılmaz. Sadece ait olduğu 
+	pakete bakılır 
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app; // Sample bu pakette değildir..
+
+class App {
+	public static void main(String [] args)
+	{	
+		Sample s; //error
+
+	}
+}
+
+
+package org.csystem; // Sample bu paketin içerisindedir...
+
+public class Sample {
+	public int x;
+	
+	public void foo(int a)
+	{
+		
+		x = a; 
+	}
+}
+
+
