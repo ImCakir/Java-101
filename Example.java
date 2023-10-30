@@ -17216,8 +17216,8 @@ class Complex {
 
 /*----------------------------------------------------------------------------------------------------------------------
 	25.03.2023
-	- Blue -
-      3.2.2
+	  Blue 
+    - 3.2.2 -
 -----------------------------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------------
 	Java 7 ile birlikte switch deyiminde String de kullanılabilmektedir. Bu durumda case bölümlerinin "String
@@ -17487,7 +17487,7 @@ class App {
 	sınıf düşünülebilir. Anımsanacağı gibi ileride başka UDT'ler de göreceğiz.
 	
 	Java kodlarını içeren ve gennelikle ".java" uzantılı olan bir dosyaya (derlenen dosyaya)
-	"derleme birimi (compilation/translation unit)" denir. Eğer .java uzantılı dosyada birden fazla UFT söz konusu
+	"derleme birimi (compilation/translation unit)" denir. Eğer .java uzantılı dosyada birden fazla UDT söz konusu
 	ise her bir UDT bir derleme birimi olarak düşünülebilir
 	
 	Paketlere ilişkin detaylar:
@@ -17506,7 +17506,7 @@ class App {
 	
 	- Bir paket içerisinde bildirilen bir UDT'nin farklı paketlerden kullanılabilmesi için public olarak bildirilmesi
 	gerekir. public olarak bildirilmeyen bir UDT ancak aynı paketteki diğer UDT'ler tarafıdan kullanılabilir. public
-	olmayana UDT'leer için için genel olarak "friendly" ya da daha nadir de olsa "internal" terimi kullanılır
+	olmayana UDT'ler için için genel olarak "friendly" ya da daha nadir de olsa "internal" terimi kullanılır.
 	
 	- Farklı paketlerde UDT'ler için byte code'larının da uygun yerde olması gerekir. Uygulamanın başlatıldığı dizin
 	tüm paketlere ilişkin dizinlerin kök dizinidir. Bu durumun da bazı ayrıntıları ve istisnaları vardır.
@@ -17557,6 +17557,8 @@ class App {
 	- java.lang paketi altında bulunan tüm UDT'ler her yerde görülebilirdir (visible). Yani buradaki UDT isimleri
 	paket ismi ile kombine etmeden de kullanılabilir. İleride ele alacağımız "import bildirimi" yapılmasına da gerek
 	yoktur
+
+	Violance
 -----------------------------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------
 	FILE			: Point.java
@@ -17750,8 +17752,8 @@ public class Complex {
 
 /*----------------------------------------------------------------------------------------------------------------------
 	26.03.2023
-	- Blue -
-	 3.2.3
+	  Blue
+	- 3.2.3 -
 -----------------------------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------
 	FILE			: StringUtil.java
@@ -18206,6 +18208,8 @@ public class NumberUtil {
 	genel kurallar dışında başka detaylar da vardır. Bu detaylar da isim aramanın bir parçasıdır. Özel durumlar olarak
 	düşünülmelidir. Yani önce genel kurallar sonra özel durumlar için kurallar anlatılacaktır. Hatta ileride bazı konular
 	için yine bazı özel durumlar olacaktır
+
+	Violance
 -----------------------------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------------
 	Derleyici bildirimi yapılan isimleri bildirim noktasında aramaz
@@ -18429,5 +18433,2171 @@ public class Sample {
 		x = a; 
 	}
 }
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Niteliksiz isim arama genel kuralları (else if biçiminde değerlendiriniz):
+	3. İsim sınıfın ait olduğu paket içerisinde aranır. Burada alt ya da üst paketlere bakılmaz. Sadece ait olduğu 
+	pakete bakılır 
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{	
+		Sample s; //error
+
+	}
+}
+
+
+package org.csystem.app.test;
+
+public class Sample {
+	public int x;
+	
+	public void foo(int a)
+	{
+		
+		x = a; 
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Niteliksiz isim arama genel kuralları (else if biçiminde değerlendiriniz):
+	4. "import on demand declaration" varsa o pakete de bakılır. Bu konu ileride ele alınacaktır  
+-----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Yukarıdaki isim arama işlemi sonucunda isim bulunamazsa error oluşur
+-----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Yukarıdaki kurallara göre isimsiz paket altında bulunan bir UDT'ye bir paket içerisinden erişilemez. Nitelikli
+	olarak da erişilemez. Yalnızca bu sebepten bile bir projede isimsiz paket altında UDT bildirilmemelidir
+
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{	
+		Sample s;
+	}
+}
+
+
+public class Sample {
+	public int x;
+	
+	public void foo(int a)
+	{
+		
+		x = a; 
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Nitelikli isim arama genel kuralları (else if biçiminde değerlendiriniz):
+	1. Aranacak ismin solunda bir UDT ismi varsa, ilgili UDT içerisinde aranır. Bulunamazsa taban sınıflara da bakılır 
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{	
+		Sample.x = 10;
+		Sample.foo();
+		
+		System.out.printf("Sample.x = %d%n", Sample.x);
+	}
+}
+
+class Sample {
+	public static int x;
+	public static void foo()
+	{
+		System.out.println("Sample.foo");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Nitelikli isim arama genel kuralları (else if biçiminde değerlendiriniz):
+	2. Aranacak ismin solunda bir referans ismi varsa, isim o referansa ilişkin sınıf içerisinde aranır. Bulunamazsa 
+	taban sınıflara da bakılır 
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{	
+		Sample s = new Sample();
+		
+		s.x = 10;
+		s.foo();
+				
+		System.out.printf("s.x = %d%n", s.x);
+	}
+}
+
+class Sample {
+	public int x;
+	public void foo()
+	{
+		System.out.println("Sample.foo");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Nitelikli isim arama genel kuralları (else if biçiminde değerlendiriniz):
+	3. Aranacak ismin solunda bir paket ismi varsa, isim o paket içerisinde aranır. Alt ya da üst paketlere bakılmaz 
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{	
+		test.Sample s;
+	}
+}
+
+class Sample {
+	public int x;
+	
+	public void foo()
+	{
+		System.out.println("Sample.foo");
+	}
+}
+
+package test;
+
+public class Sample {
+	//...
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Alt paket isimleri niteliksiz isim aramaya dahil değildir. Yani aşağıdaki örnekte test ismi aranırken org.csystem.app
+	içerisindeki test paketinin ismi dikkate alınmaz. Niteliksiz kullanılan bir ismin paket ismi olarak bulunabilmesi 
+	için uygulamaya ilişkin dizin içerisinde bulunması gerekir. 
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{	
+		test.Sample s; //error
+	}
+}
+
+
+package org.csystem.app.test;
+
+public class Sample {
+	//...
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	import bildirimleri genel olarak niteliklendirmeyi azaltmak için, dolayısıyla daha yalın ve açık (clean) kod
+	yazımı için kullanılır. 
+	
+	Anahtar Notlar: import bildirimi bir kütüphaneyi "import etmek" anlamına GELMEZ
+	
+	import bildirimleri iki şekilde kullanılabilir:
+	1. Yıldızlı import bildirimi (import on demand declaration)
+	2. Yıldızsız import bildirimi (import single type declaration)
+	
+	import bildirimleri ".java" dosyasında paket bildiriminden sonra tüm diğer bildirimlerden önce yazılmalıdır. 
+	import bildirimleri istenildiği sayıda olabilir ve yazılış sırasının önemi yoktur. import bildirimi bildirildiği
+	".java" dosyasına özgüdür. Diğer derleme birimlerini etkilemez. import bildirimleri niteliksiz isim arama 
+	kurallarına ilişkindir. Nitelikli isim aramada bir etkisi yoktur.
+	
+	Anahtar Notlar: "Yıldızlı ve yıldızsız import bildirimi" terimleri kolay anlatmak için Oğuz Karan tarafından 
+	uydurulmuştur. Teknik olarak "import with asterisk" veya "import without asterisk" DENİLMEMELİDİR 
+
+	Violance
+-----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	Yıldızlı import bildiriminin (import on demand declaration) genel biçimi:
+	import <paket ismi>[.alt paketler].*;
+	
+	Bu bildirim niteliksiz isim arama genel kurallarına göre aranan ismin paket içerisinde de bulunamaması durumunda 
+	arama için bakılacak paketi temsil eder. Yani adeta bir paketin başka paket içerisine isim arama anlamında dahil
+	edilmesidir. Daha açık olarak söylemek gerekirse bu import bildirimleri derleyiciye "eğer niteliksiz bir ismi
+	pakette de bulamazsa yıldızlı import bildirimlerine ilişkin paketlere de bak" demektir.
+
+	Violance 
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+import java.util.*;
+import org.csystem.math.geometry.*;
+import org.csystem.util.string.*;
+
+class App {
+	public static void main(String [] args)
+	{	
+		Random r = new Random();
+		Scanner kb = new Scanner(System.in);
+		
+		Point p = new Point();
+		System.out.println(StringUtil.getRandomTextTR(r, 10));
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Yıldızlı import bildirimlerine ilişkin paketlerin hepsine bakılır. Birden fazla paket içerisinde isim bulunursa
+	iki anlamlılık (ambiguity) hatası oluşur 
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+import test.*;
+import mest.*;
+
+class App {
+	public static void main(String [] args)
+	{	
+		Sample s; // error: ambiguity
+		Mample m;
+	}
+}
+
+
+
+package test;
+
+public class Sample {
+	//...
+}
+
+package mest;
+
+public class Mample {
+	//...
+}
+
+package mest;
+
+public class Sample {
+	//...
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Yıldızlı import bildiriminin kullanımı 
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+import java.util.*;
+import org.csystem.math.geometry.*;
+
+class App {
+	public static void main(String [] args)
+	{	
+		Scanner kb = new Scanner(System.in);
+		Random r = new Random();
+		
+		System.out.print("Bir sayı giriniz:");
+		int count = kb.nextInt();
+		
+		while (count-- > 0) {
+			Point p = new Point(r.nextDouble(-100, 100), r.nextDouble(-100, 100));
+			
+			System.out.println(p.toString());
+		}
+	}
+}
+
+/*----------------------------------------------------------
+	FILE			: StringUtil.java
+	AUTHOR			: Java-Nov-2022 Group
+	LAST UPDATE		: 26.03.2023
+	
+	Utility class for string operations
+	
+	Copyleft (c) 1993 C and System Programmers Association 
+	All Rights Free
+------------------------------------------------------------*/
+package org.csystem.util.string;
+
+import java.util.*;
+
+public class StringUtil {
+	public static String capitalize(String s)
+	{
+		return s.isEmpty() ? "" : Character.toUpperCase(s.charAt(0)) + s.substring(1).toLowerCase();
+	}
+
+	public static int countString(String s1, String s2) 
+	{
+		int count = 0;
+
+		for (int index = -1; (index = s1.indexOf(s2, index + 1)) != -1; ++count)
+			;
+
+		return count;
+	}
+
+	public static int countStringIgnoreCase(String s1, String s2)
+	{
+		return countString(s1.toLowerCase(), s2.toLowerCase());
+	}
+
+	public static String getRandomText(Random r, int n, String text) 
+	{
+		String str = "";
+		int len = text.length();
+
+		for (int i = 0; i < n; ++i)
+			str += text.charAt(r.nextInt(len));
+
+		return str;
+	}
+
+	public static String getRandomTextEN(int n) 
+	{
+		return getRandomTextEN(new Random(), n);
+	}
+
+	public static String getRandomTextEN(Random r, int n) 
+	{
+		return getRandomText(r, n, "abcdefghijklmnopqrstuwxvyzABCDEFGHIJKLMNOPQRSTUWXYZ");
+	}
+
+	public static String getRandomTextTR(int n) 
+	{
+		return getRandomTextTR(new Random(), n);
+	}
+
+	public static String getRandomTextTR(Random r, int n) 
+	{
+		return getRandomText(r, n, "abcçdefgğhıijklmnoöprsştuüvyzABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ");
+	}
+
+	public static boolean isPalindrome(String s) 
+	{
+		int left = 0;
+		int right = s.length() - 1;
+
+		while (left < right) {
+			char cLeft = Character.toLowerCase(s.charAt(left));
+
+			if (!Character.isLetter(cLeft)) {
+				++left;
+				continue;
+			}
+
+			char cRight = Character.toLowerCase(s.charAt(right));
+
+			if (!Character.isLetter(cRight)) {
+				--right;
+				continue;
+			}
+
+			if (cLeft != cRight)
+				return false;
+
+			++left;
+			--right;
+		}
+
+		return true;
+	}
+
+	public static boolean isPangram(String s, String alphabet) 
+	{
+		int len = alphabet.length();
+
+		for (int i = 0; i < len; ++i)
+			if (!s.contains(alphabet.charAt(i) + ""))
+				return false;
+
+		return true;
+	}
+
+	public static boolean isPangramEN(String s)
+	{
+		return isPangram(s.toLowerCase(), "abcdefghijklmnopqrstuwxvyz");
+	}
+
+	public static boolean isPangramTR(String s) 
+	{
+		return isPangram(s.toLowerCase(), "abcçdefgğhıijklmnoöprsştuüvyz");
+	}
+
+	public static String padLeading(String s, int len) 
+	{
+		return padLeading(s, len, ' ');
+	}
+
+	public static String padLeading(String s, int len, char ch)
+	{
+		int length = s.length();
+
+		return len <= length ? s : (ch + "").repeat(len - length) + s;
+	}
+
+	public static String padTrailing(String s, int len) 
+	{
+		return padTrailing(s, len, ' ');
+	}
+
+	public static String padTrailing(String s, int len, char ch) 
+	{
+		int length = s.length();
+
+		return len <= length ? s : s + (ch + "").repeat(len - length);
+	}
+	
+	public static String reverse(String str)
+	{
+		String result = "";
+
+		for (int i = str.length() - 1; i >= 0; --i)
+			result += str.charAt(i); // ***
+
+		return result;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Yıldızsız import bildiriminin (import single type declaration) genel biçimi:
+	import <paket ismi>[.alt paketler].<UDT ismi>;
+	
+	Bu bildirim UDT isminin doğrudan kullanılabileceğini belirtir. Bu bildirimin yazılabildiği durumda bu UDT ismi
+	için niteliksiz isim arama genel kuralları uygulanmaz. Programcı mümkün olduğunca bu import
+	bildirimini tercih etmelidir.Zaten bir çok IDE de programcıyı mümkün olduğunca bu bildirime
+	yönlendirir
+-----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte 
+		import org.csystem.math.geometry.Point;
+	bildirimi "bu derleme biriminde Point ismi doğrudan kullanılabilir ve bu isim org.csystem.math.geometry.Point sınıfıdır"
+	anlamına gelir
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+import java.util.Random;
+import java.util.Scanner;
+import org.csystem.math.geometry.Point;
+
+class App {
+	public static void main(String [] args)
+	{	
+		Scanner kb = new Scanner(System.in);
+		Random r = new Random();
+		
+		System.out.print("Bir sayı giriniz:");
+		int count = kb.nextInt();
+		
+		while (count-- > 0) {
+			Point p = new Point(r.nextDouble(-100, 100), r.nextDouble(-100, 100));
+			
+			System.out.println(p.toString());
+		}
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte Sample sınıfının niteliksiz kullanımına ilişkin birden fazla yıldızsız import bildirimi yapılamaya
+	çalışılmıştır. Bu da anlamsız olduğundan error oluşur. Örnekte Sample ismi kullanılmasa bile error oluşur
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+import mest.Sample;
+import test.Sample; //error
+
+class App {
+	public static void main(String [] args)
+	{	
+		Sample s;
+	}    
+}
+
+
+package test;
+
+public class Sample {
+	//...
+}
+
+package mest;
+
+public class Sample {
+	//...
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	01.04.2023
+	  Blue
+	- 3.3.1 -
+
+-----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte Sample ismi "import single type declaration" biçiminde bulunduğundan niteliksiz isim arama
+	genel kuralları devreye girmez. Böylece test paketindeki Sample sınıfının foo metodu çağrılır
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+import test.Sample;
+
+class App {
+	public static void main(String [] args)
+	{	
+		Sample.foo();
+	}
+}
+
+
+package test;
+
+public class Sample {
+	public static void foo()
+	{
+		System.out.println("test.sample.foo");
+	}
+}
+
+
+package org.csystem.app;
+
+public class Sample {
+	public static void foo()
+	{
+		System.out.println("org.csystem.app.sample.foo");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte import bildirimine ilişkin java dosyasında Sample isminde bir sınıf bildirimi olduğundan 
+	import single type declaration geçersizdir
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+import test.Sample; //error
+
+class App {
+	public static void main(String [] args)
+	{	
+		Sample.foo();
+	}
+}
+
+class Sample {
+	public static void foo()
+	{
+		System.out.println("org.csystem.app.sample.foo");
+	}
+}
+
+
+/*----------------------------------------------------------
+	FILE			: StringUtil.java
+	AUTHOR			: Java-Nov-2022 Group
+	LAST UPDATE		: 01.04.2023
+	
+	Utility class for string operations
+	
+	Copyleft (c) 1993 C and System Programmers Association 
+	All Rights Free
+------------------------------------------------------------*/
+package org.csystem.util.string;
+
+import java.util.Random;
+
+public class StringUtil {
+	public static String capitalize(String s)
+	{
+		return s.isEmpty() ? "" : Character.toUpperCase(s.charAt(0)) + s.substring(1).toLowerCase();
+	}
+
+	public static int countString(String s1, String s2) 
+	{
+		int count = 0;
+
+		for (int index = -1; (index = s1.indexOf(s2, index + 1)) != -1; ++count)
+			;
+
+		return count;
+	}
+
+	public static int countStringIgnoreCase(String s1, String s2)
+	{
+		return countString(s1.toLowerCase(), s2.toLowerCase());
+	}
+
+	public static String getRandomText(Random r, int n, String text) 
+	{
+		String str = "";
+		int len = text.length();
+
+		for (int i = 0; i < n; ++i)
+			str += text.charAt(r.nextInt(len));
+
+		return str;
+	}
+
+	public static String getRandomTextEN(int n) 
+	{
+		return getRandomTextEN(new Random(), n);
+	}
+
+	public static String getRandomTextEN(Random r, int n) 
+	{
+		return getRandomText(r, n, "abcdefghijklmnopqrstuwxvyzABCDEFGHIJKLMNOPQRSTUWXYZ");
+	}
+
+	public static String getRandomTextTR(int n) 
+	{
+		return getRandomTextTR(new Random(), n);
+	}
+
+	public static String getRandomTextTR(Random r, int n) 
+	{
+		return getRandomText(r, n, "abcçdefgğhıijklmnoöprsştuüvyzABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ");
+	}
+
+	public static boolean isPalindrome(String s) 
+	{
+		int left = 0;
+		int right = s.length() - 1;
+
+		while (left < right) {
+			char cLeft = Character.toLowerCase(s.charAt(left));
+
+			if (!Character.isLetter(cLeft)) {
+				++left;
+				continue;
+			}
+
+			char cRight = Character.toLowerCase(s.charAt(right));
+
+			if (!Character.isLetter(cRight)) {
+				--right;
+				continue;
+			}
+
+			if (cLeft != cRight)
+				return false;
+
+			++left;
+			--right;
+		}
+
+		return true;
+	}
+
+	public static boolean isPangram(String s, String alphabet) 
+	{
+		int len = alphabet.length();
+
+		for (int i = 0; i < len; ++i)
+			if (!s.contains(alphabet.charAt(i) + ""))
+				return false;
+
+		return true;
+	}
+
+	public static boolean isPangramEN(String s)
+	{
+		return isPangram(s.toLowerCase(), "abcdefghijklmnopqrstuwxvyz");
+	}
+
+	public static boolean isPangramTR(String s) 
+	{
+		return isPangram(s.toLowerCase(), "abcçdefgğhıijklmnoöprsştuüvyz");
+	}
+
+	public static String padLeading(String s, int len) 
+	{
+		return padLeading(s, len, ' ');
+	}
+
+	public static String padLeading(String s, int len, char ch)
+	{
+		int length = s.length();
+
+		return len <= length ? s : (ch + "").repeat(len - length) + s;
+	}
+
+	public static String padTrailing(String s, int len) 
+	{
+		return padTrailing(s, len, ' ');
+	}
+
+	public static String padTrailing(String s, int len, char ch) 
+	{
+		int length = s.length();
+
+		return len <= length ? s : s + (ch + "").repeat(len - length);
+	}
+	
+	public static String reverse(String str)
+	{
+		String result = "";
+
+		for (int i = str.length() - 1; i >= 0; --i)
+			result += str.charAt(i); // ***
+
+		return result;
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Java 5 ile birlikte import static bildirimleri dile eklenmiştir. import static bildiriminin de
+	iki biçimi vardır:
+	1. Yıldızlı import static bildirimi (import static on demand declaration)
+	2. Yıldızsız import static bildirimi (import static single name declaration)
+	
+	import static bildirimleri okunabilirliği/algılanabilirliği etkilemedikten sonra kodu 
+	yalınlaştırır. Okunabilirliği/algılanabilirliği etkilememesine dikkat edilmelidir. import 
+	static bildirimleri de diğer import bildirimleri ile aynı yere yazılır ve yine sıranın önemi yoktur
+-----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Yıldızlı import static bildiriminin (import static on demand declaration) genel biçimi:
+		import static <paket ismi>[.alt paketler].<UDT ismi>.*;
+	
+	Bu bildirim ile bildirimin yapıldığı derleme biriminde bildirime ilişkin türün static elemanları niteliksiz isim
+	arama genel kurallarına göre burada da arama yapılır.  
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+import java.util.Scanner;
+import static java.lang.Math.*;
+
+class App {
+	public static void main(String [] args)
+	{	
+		Scanner kb = new Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		double val = kb.nextDouble();
+		
+		System.out.printf("sqrt(%f) = %f%n", val, sqrt(val));
+		System.out.printf("log10(%f) = %f%n", val, log10(val));
+		System.out.printf("PI = %f%n", PI);
+	}
+}
+
+
+
+/*----------------------------------------------------------
+	FILE			: Point.java
+	AUTHOR			: Java-Nov-2022 Group
+	LAST UPDATE		: 01.04.2023
+	
+	Point class that represents a point in cartesian plane
+	
+	Copyleft (c) 1993 C and System Programmers Association 
+	All Rights Free
+------------------------------------------------------------*/
+package org.csystem.math.geometry;
+
+import static java.lang.Math.*;
+
+public class Point {
+	public double x, y; 
+	
+	public Point()
+	{	
+	}
+	
+	public Point(double a)
+	{
+		x = a;
+	}
+	
+	public Point(double a, double b)
+	{
+		x = a;
+		y = b;
+	}
+	
+	public double distance()
+	{
+		return distance(0, 0);
+	}
+	
+	public double distance(double a, double b)
+	{
+		return sqrt(pow(x - a, 2) + pow(y - b, 2));
+	}
+	
+	public double distance(Point other)
+	{
+		return distance(other.x, other.y);
+	}
+	
+	public void offset(double dxy)
+	{
+		offset(dxy, dxy);
+	}
+	
+	public void offset(double dx, double dy)
+	{
+		x += dx;
+		y += dy;
+	}
+	
+	public String toString()
+	{
+		return String.format("(%.2f, %.2f)", x, y);
+	}
+}
+
+/*----------------------------------------------------------
+	FILE			: Complex.java
+	AUTHOR			: Java-Nov-2022 Group
+	LAST UPDATE		: 01.04.2023
+	
+	Complex class that represents a complex number
+	
+	Copyleft (c) 1993 C and System Programmers Association 
+	All Rights Free
+------------------------------------------------------------*/
+package org.csystem.math;
+
+import static java.lang.Math.*;
+
+public class Complex {
+	public double real;
+	public double imag;
+	
+	public static Complex add(double re1, double im1, double re2, double im2)
+	{
+		return new Complex(re1 + re2, im1 + im2);
+	}
+	
+	public static Complex subtract(double re1, double im1, double re2, double im2)
+	{
+		return add(re1, im1, -re2, -im2);
+	}
+	
+	public static Complex multiply(double re1, double im1, double re2, double im2)
+	{
+		//TODO:
+		return new Complex();
+	}
+	
+	public Complex()
+	{
+	}
+	
+	public Complex(double re)
+	{
+		real = re;
+	}
+	
+	public Complex(double re, double im)
+	{
+		real = re;
+		imag = im;
+	}
+	
+	public static Complex add(double val, Complex z)
+	{
+		return add(val, 0, z.real, z.imag);
+	}
+	
+	public Complex add(double re, double im)
+	{
+		return add(real, imag, re, im);
+	}
+	
+	public Complex add(double val)
+	{
+		return add(real, imag, val, 0);
+	}
+	
+	public Complex add(Complex other)
+	{
+		return add(other.real, other.imag);
+	}
+	
+	public static Complex subtract(double val, Complex z)
+	{
+		return subtract(val, 0, z.real, z.imag);
+	}
+	
+	public Complex subtract(double re, double im)
+	{
+		return subtract(real, imag, re, im);
+	}
+	
+	public Complex subtract(double val)
+	{
+		return subtract(real, imag, val, 0);
+	}
+	
+	public Complex subtract(Complex other)
+	{
+		return subtract(other.real, other.imag);
+	}
+	
+	public static Complex multiply(double val, Complex z)
+	{
+		return multiply(val, 0, z.real, z.imag);
+	}
+	
+	public Complex multiply(double re, double im)
+	{
+		return multiply(real, imag, re, im);
+	}
+	
+	public Complex multiply(double val)
+	{
+		return multiply(real, imag, val, 0);
+	}
+	
+	public Complex multiply(Complex other)
+	{
+		return multiply(other.real, other.imag);
+	}
+	
+	public Complex getConjugate()
+	{
+		return new Complex(real, -imag);
+	}
+	
+	public double getLength()
+	{
+		return sqrt(real * real + imag * imag);
+	}
+	
+	public double getNorm()
+	{
+		return getLength();
+	}
+	
+	public String toString()
+	{
+		return String.format("(%.2f, %.2f)", real, imag);
+	}	
+}
+
+
+/*----------------------------------------------------------
+	FILE			: NumberUtil.java
+	AUTHOR			: Java-Nov-2022 Group
+	LAST UPDATE		: 01.04.2023
+	
+	Utility class for numeric operations
+	
+	Copyleft (c) 1993 C and System Programmers Association 
+	All Rights Free
+------------------------------------------------------------*/
+package org.csystem.util.numeric;
+
+import static java.lang.Math.*;
+
+public class NumberUtil {
+	public static boolean areFriends(int a, int b)
+	{
+		return sumFactors(a) == b && sumFactors(b) == a;
+	}
+
+	public static int calculateDigitalRoot(int a)
+	{
+		int root = abs(a);
+
+		while (root > 9)
+			root = sumDigits(root);
+
+		return root;
+	}
+
+	public static int calculateDigitsPowSum(int a)
+	{
+		int n = countDigits(a);
+
+		int total = 0;
+
+		while (a != 0) {
+			total += pow(a % 10, n);
+
+			a /= 10;
+		}
+
+		return total;
+
+	}
+
+	public static int countDigits(int a)
+	{	
+		return a == 0 ? 1 : (int)log10(abs(a)) + 1;
+	}
+
+	public static int factorial(int n)
+	{
+		int result = 1;
+
+		for (int i = 2; i <= n; ++i)
+			result *= i;
+		
+		return result;
+	}
+
+	public static int fibonacciNumber(int n)
+	{
+
+		if (n <= 2)
+			return n - 1;
+
+		int prev1 = 1, prev2 = 0, val = 0;
+
+		for (int i = 2; i < n; ++i) {
+			val = prev1 + prev2;
+			prev2 = prev1;
+			prev1 = val;
+		}
+
+		return val;
+	}
+	
+	public static int getHardyRamanujanCount(int n)
+	{
+		int count = 0;
+
+		EXIT_LOOP:
+
+		for (int a = 1; a * a * a < n; ++a)
+			for (int b = a + 1; a * a * a + b * b * b <= n; ++b)
+				if (a * a * a + b * b * b == n) {
+					if (++count == 2)
+						break EXIT_LOOP;
+
+					++a;
+				}
+
+		return count;
+	}
+
+	public static int getPrime(int n)
+	{
+		int val = 2;
+		int count = 0;
+
+		for (;;) {
+			if (isPrime(val))
+				++count;
+
+			if (count == n)
+				return val;
+
+			++val;
+		}
+	}
+	
+	public static int indexOfPrime(long a)
+	{
+		int i = 1;
+		long val = 2;
+
+		for (;;) {
+			if (val == a)
+				return i;
+
+			if (isPrime(val))
+				++i;
+			
+			++val;
+		}
+	}
+
+
+	public static boolean isArmstrong(int a)
+	{
+		return a >= 0 && calculateDigitsPowSum(a) == a;
+	}
+
+	public static boolean isDecimalHarshad(int val)
+	{
+		return val > 0 && val % sumDigits(val) == 0; 
+	}
+	
+	public static boolean isEven(int a)
+	{
+		return a % 2 == 0;
+	}
+	
+	public static boolean isFactorian(int n)
+	{
+		return n > 0 && sumFactorialDigits(n) == n;
+	}
+
+	public static boolean isHardyRamanujan(int n)
+	{
+		return n > 0 && getHardyRamanujanCount(n) == 2;
+	}
+
+	public static boolean isOdd(int a)
+	{
+		return !isEven(a);
+	}
+
+	public static boolean isPerfect(int val)
+	{
+		return sumFactors(val) == val;
+	}
+	
+	public static boolean isPrime(long a)
+	{
+		if (a <= 1)
+			return false;
+
+		if (a % 2 == 0)
+			return a == 2;
+
+		if (a % 3 == 0)
+			return a == 3;
+
+		if (a % 5 == 0)
+			return a == 5;
+
+		if (a % 7 == 0)
+			return a == 7;
+
+		for (long i = 11; i * i <= a; i += 2)
+			if (a % i == 0)
+				return false;
+		
+		return true;
+	}		
+
+	public static boolean isPrimeX(long a)
+	{
+		boolean result;
+		
+		for (long sum = a; (result = isPrime(sum)) && sum > 9; sum = sumDigits(sum))
+			;
+		
+		return result;
+	}
+
+	public static boolean isSuperPrime(long a)
+	{
+		return isPrime(a) && isPrime(indexOfPrime(a));
+	}
+
+	public static int mid(int a, int b, int c)
+	{
+		if (a <= b && b <= c || c <= b && b <= a)
+			return b;
+
+		if (b <= a && a <= c || c <= a && a <= b)
+			return a;
+
+		return c;
+	}
+
+	public static int multiply(int a, int b)
+	{
+		return a * b;
+	}
+	
+	public static int nextFibonacciNumber(int val)
+	{
+		if (val < 0)
+			return 0;
+
+		int prev1 = 1, prev2 = 0, next;
+		
+		for (;;) {
+			next = prev1 + prev2;
+			
+			if (next > val)
+				return next;
+
+			prev2 = prev1;
+			prev1 = next;
+		}
+	}
+
+	public static int pow(int a, int b)
+	{
+		int result = 1;
+
+		while (b-- > 0)
+			result *= a;
+		
+		return result;
+	}
+	
+	public static int reversed(int a)
+	{
+		int result = 0;
+
+		while (a != 0) {
+			result = result * 10 + a % 10;
+			a /= 10;
+		}
+
+		return result;
+	}
+	
+	public static int sumDigits(long a)
+	{
+		int sum = 0;
+
+		while (a != 0) {
+			sum += a % 10;
+			a /= 10;
+		}
+
+		return abs(sum);
+
+	}
+
+	public static int sumFactorialDigits(int n)
+	{
+		int sum = 0;
+		
+		while (n != 0) {
+			sum += factorial(n % 10);
+			n /= 10;
+		}
+
+		return sum;
+	}
+
+	public static long sumFactors(long val)
+	{
+		long result = 1;
+
+		for (long i = 2; i * i <= val; ++i)
+			if (val % i == 0)
+				result += (i == val / i) ? i : (i + val / i); 
+
+		return result;
+	}
+
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Yıldızsız import static bildiriminin (import static single name declaration) genel biçimi:
+		import static <paket ismi>[.alt paketler].<UDT ismi>.<static eleman ismi>;
+	
+	Bu bildirim ile belirtilen static eleman ilgili derleme biriminde doğrudan kullanılabilir.  
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+import java.util.Scanner;
+import static java.lang.Math.sqrt;
+import static java.lang.Math.log10;
+import static java.lang.Math.PI;
+
+class App {
+	public static void main(String [] args)
+	{	
+		Scanner kb = new Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		double val = kb.nextDouble();
+		
+		System.out.printf("sqrt(%f) = %f%n", val, sqrt(val));
+		System.out.printf("log10(%f) = %f%n", val, log10(val));
+		System.out.printf("PI = %f%n", PI);
+	}
+}
+
+
+
+/*----------------------------------------------------------
+	FILE			: NumberUtil.java
+	AUTHOR			: Java-Nov-2022 Group
+	LAST UPDATE		: 01.04.2023
+	
+	Utility class for numeric operations
+	
+	Copyleft (c) 1993 C and System Programmers Association 
+	All Rights Free
+------------------------------------------------------------*/
+package org.csystem.util.numeric;
+
+import static java.lang.Math.log10;
+import static java.lang.Math.abs;
+
+public class NumberUtil {
+	public static boolean areFriends(int a, int b)
+	{
+		return sumFactors(a) == b && sumFactors(b) == a;
+	}
+
+	public static int calculateDigitalRoot(int a)
+	{
+		int root = abs(a);
+
+		while (root > 9)
+			root = sumDigits(root);
+
+		return root;
+	}
+
+	public static int calculateDigitsPowSum(int a)
+	{
+		int n = countDigits(a);
+
+		int total = 0;
+
+		while (a != 0) {
+			total += pow(a % 10, n);
+
+			a /= 10;
+		}
+
+		return total;
+
+	}
+
+	public static int countDigits(int a)
+	{	
+		return a == 0 ? 1 : (int)log10(abs(a)) + 1;
+	}
+
+	public static int factorial(int n)
+	{
+		int result = 1;
+
+		for (int i = 2; i <= n; ++i)
+			result *= i;
+		
+		return result;
+	}
+
+	public static int fibonacciNumber(int n)
+	{
+
+		if (n <= 2)
+			return n - 1;
+
+		int prev1 = 1, prev2 = 0, val = 0;
+
+		for (int i = 2; i < n; ++i) {
+			val = prev1 + prev2;
+			prev2 = prev1;
+			prev1 = val;
+		}
+
+		return val;
+	}
+	
+	public static int getHardyRamanujanCount(int n)
+	{
+		int count = 0;
+
+		EXIT_LOOP:
+
+		for (int a = 1; a * a * a < n; ++a)
+			for (int b = a + 1; a * a * a + b * b * b <= n; ++b)
+				if (a * a * a + b * b * b == n) {
+					if (++count == 2)
+						break EXIT_LOOP;
+
+					++a;
+				}
+
+		return count;
+	}
+
+	public static int getPrime(int n)
+	{
+		int val = 2;
+		int count = 0;
+
+		for (;;) {
+			if (isPrime(val))
+				++count;
+
+			if (count == n)
+				return val;
+
+			++val;
+		}
+	}
+	
+	public static int indexOfPrime(long a)
+	{
+		int i = 1;
+		long val = 2;
+
+		for (;;) {
+			if (val == a)
+				return i;
+
+			if (isPrime(val))
+				++i;
+			
+			++val;
+		}
+	}
+
+
+	public static boolean isArmstrong(int a)
+	{
+		return a >= 0 && calculateDigitsPowSum(a) == a;
+	}
+
+	public static boolean isDecimalHarshad(int val)
+	{
+		return val > 0 && val % sumDigits(val) == 0; 
+	}
+	
+	public static boolean isEven(int a)
+	{
+		return a % 2 == 0;
+	}
+	
+	public static boolean isFactorian(int n)
+	{
+		return n > 0 && sumFactorialDigits(n) == n;
+	}
+
+	public static boolean isHardyRamanujan(int n)
+	{
+		return n > 0 && getHardyRamanujanCount(n) == 2;
+	}
+
+	public static boolean isOdd(int a)
+	{
+		return !isEven(a);
+	}
+
+	public static boolean isPerfect(int val)
+	{
+		return sumFactors(val) == val;
+	}
+	
+	public static boolean isPrime(long a)
+	{
+		if (a <= 1)
+			return false;
+
+		if (a % 2 == 0)
+			return a == 2;
+
+		if (a % 3 == 0)
+			return a == 3;
+
+		if (a % 5 == 0)
+			return a == 5;
+
+		if (a % 7 == 0)
+			return a == 7;
+
+		for (long i = 11; i * i <= a; i += 2)
+			if (a % i == 0)
+				return false;
+		
+		return true;
+	}		
+
+	public static boolean isPrimeX(long a)
+	{
+		boolean result;
+		
+		for (long sum = a; (result = isPrime(sum)) && sum > 9; sum = sumDigits(sum))
+			;
+		
+		return result;
+	}
+
+	public static boolean isSuperPrime(long a)
+	{
+		return isPrime(a) && isPrime(indexOfPrime(a));
+	}
+
+	public static int mid(int a, int b, int c)
+	{
+		if (a <= b && b <= c || c <= b && b <= a)
+			return b;
+
+		if (b <= a && a <= c || c <= a && a <= b)
+			return a;
+
+		return c;
+	}
+
+	public static int multiply(int a, int b)
+	{
+		return a * b;
+	}
+	
+	public static int nextFibonacciNumber(int val)
+	{
+		if (val < 0)
+			return 0;
+
+		int prev1 = 1, prev2 = 0, next;
+		
+		for (;;) {
+			next = prev1 + prev2;
+			
+			if (next > val)
+				return next;
+
+			prev2 = prev1;
+			prev1 = next;
+		}
+	}
+
+	public static int pow(int a, int b)
+	{
+		int result = 1;
+
+		while (b-- > 0)
+			result *= a;
+		
+		return result;
+	}
+	
+	public static int reversed(int a)
+	{
+		int result = 0;
+
+		while (a != 0) {
+			result = result * 10 + a % 10;
+			a /= 10;
+		}
+
+		return result;
+	}
+	
+	public static int sumDigits(long a)
+	{
+		int sum = 0;
+
+		while (a != 0) {
+			sum += a % 10;
+			a /= 10;
+		}
+
+		return abs(sum);
+
+	}
+
+	public static int sumFactorialDigits(int n)
+	{
+		int sum = 0;
+		
+		while (n != 0) {
+			sum += factorial(n % 10);
+			n /= 10;
+		}
+
+		return sum;
+	}
+
+	public static long sumFactors(long val)
+	{
+		long result = 1;
+
+		for (long i = 2; i * i <= val; ++i)
+			if (val % i == 0)
+				result += (i == val / i) ? i : (i + val / i); 
+
+		return result;
+	}
+
+}
+
+/*----------------------------------------------------------
+	FILE			: Point.java
+	AUTHOR			: Java-Nov-2022 Group
+	LAST UPDATE		: 01.04.2023
+	
+	Point class that represents a point in cartesian plane
+	
+	Copyleft (c) 1993 C and System Programmers Association 
+	All Rights Free
+------------------------------------------------------------*/
+package org.csystem.math.geometry;
+
+import static java.lang.Math.sqrt;
+import static java.lang.Math.pow;
+
+public class Point {
+	public double x, y; 
+	
+	public Point()
+	{	
+	}
+	
+	public Point(double a)
+	{
+		x = a;
+	}
+	
+	public Point(double a, double b)
+	{
+		x = a;
+		y = b;
+	}
+	
+	public double distance()
+	{
+		return distance(0, 0);
+	}
+	
+	public double distance(double a, double b)
+	{
+		return sqrt(pow(x - a, 2) + pow(y - b, 2));
+	}
+	
+	public double distance(Point other)
+	{
+		return distance(other.x, other.y);
+	}
+	
+	public void offset(double dxy)
+	{
+		offset(dxy, dxy);
+	}
+	
+	public void offset(double dx, double dy)
+	{
+		x += dx;
+		y += dy;
+	}
+	
+	public String toString()
+	{
+		return String.format("(%.2f, %.2f)", x, y);
+	}
+}
+
+/*----------------------------------------------------------
+	FILE			: Complex.java
+	AUTHOR			: Java-Nov-2022 Group
+	LAST UPDATE		: 01.04.2023
+	
+	Complex class that represents a complex number
+	
+	Copyleft (c) 1993 C and System Programmers Association 
+	All Rights Free
+------------------------------------------------------------*/
+package org.csystem.math;
+
+import static java.lang.Math.sqrt;
+
+public class Complex {
+	public double real;
+	public double imag;
+	
+	public static Complex add(double re1, double im1, double re2, double im2)
+	{
+		return new Complex(re1 + re2, im1 + im2);
+	}
+	
+	public static Complex subtract(double re1, double im1, double re2, double im2)
+	{
+		return add(re1, im1, -re2, -im2);
+	}
+	
+	public static Complex multiply(double re1, double im1, double re2, double im2)
+	{
+		//TODO:
+		return new Complex();
+	}
+	
+	public Complex()
+	{
+	}
+	
+	public Complex(double re)
+	{
+		real = re;
+	}
+	
+	public Complex(double re, double im)
+	{
+		real = re;
+		imag = im;
+	}
+	
+	public static Complex add(double val, Complex z)
+	{
+		return add(val, 0, z.real, z.imag);
+	}
+	
+	public Complex add(double re, double im)
+	{
+		return add(real, imag, re, im);
+	}
+	
+	public Complex add(double val)
+	{
+		return add(real, imag, val, 0);
+	}
+	
+	public Complex add(Complex other)
+	{
+		return add(other.real, other.imag);
+	}
+	
+	public static Complex subtract(double val, Complex z)
+	{
+		return subtract(val, 0, z.real, z.imag);
+	}
+	
+	public Complex subtract(double re, double im)
+	{
+		return subtract(real, imag, re, im);
+	}
+	
+	public Complex subtract(double val)
+	{
+		return subtract(real, imag, val, 0);
+	}
+	
+	public Complex subtract(Complex other)
+	{
+		return subtract(other.real, other.imag);
+	}
+	
+	public static Complex multiply(double val, Complex z)
+	{
+		return multiply(val, 0, z.real, z.imag);
+	}
+	
+	public Complex multiply(double re, double im)
+	{
+		return multiply(real, imag, re, im);
+	}
+	
+	public Complex multiply(double val)
+	{
+		return multiply(real, imag, val, 0);
+	}
+	
+	public Complex multiply(Complex other)
+	{
+		return multiply(other.real, other.imag);
+	}
+	
+	public Complex getConjugate()
+	{
+		return new Complex(real, -imag);
+	}
+	
+	public double getLength()
+	{
+		return sqrt(real * real + imag * imag);
+	}
+	
+	public double getNorm()
+	{
+		return getLength();
+	}
+	
+	public String toString()
+	{
+		return String.format("(%.2f, %.2f)", real, imag);
+	}	
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte doğrudan çağrılan sqrt çağrısı için int parametreli sqrt metodu bulunur. Bu durumda uygun metot
+	bulunamayacağı için error oluşur. Anımsanacağı gibi isim bulunduktan sonra erişim kontrolü yapılır
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+import java.util.Scanner;
+import static java.lang.Math.sqrt;
+import static java.lang.Math.log10;
+import static java.lang.Math.PI;
+
+class App {
+	public static void main(String [] args)
+	{	
+		Scanner kb = new Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		double val = kb.nextDouble();
+		
+		System.out.printf("sqrt(%f) = %f%n", val, sqrt(val)); //error
+		System.out.printf("log10(%f) = %f%n", val, log10(val));
+		System.out.printf("PI = %f%n", PI);
+	}
+	
+	public static double sqrt(int a)
+	{
+		return Math.sqrt(a);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Diziler (Arrays): Elemanları aynı türden olan ve elemanların bellekte ardışıl olacak şekilde tutulduğu veri yapılarıdır.
+	Java'da diizler sınıfsal olarak temsil edilmiştir. Diziler bir referans türüdür. Öyleyse dizi türünden bir değişken
+	bir referans değişkendir. Diziler heap'de yaratılırlar. Şüphesiz dizi referansları stack'de olabilir
+-----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	T bir tür ismi olmak üzere T türden bir dizi referansı bildirimi Java'da iki şekilde yapılabilir:
+	1. T [] a;
+	2. T a[]
+
+	Biz birinci biçimi tercih edeceğiz
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{
+		int [] a; // Dizi referansı bildirimi
+		int b[]; // Dizi referansı bildirimi
+		boolean [] c; /// Dizi referansı bildirimi
+
+		//...
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	[]'in referans bildiriminde bulunduğu yere göre farkı
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{
+		int [] a, b, c;
+		int d[], e, f;
+
+		a = 10; //error
+		b = 20; //error
+		c = 30; //error
+		d = 40; //error
+		e = 50;
+		f = 67;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Dizi yaratmak için new operatörü kullanılır. Dizi yaratmanın genel biçimi:
+	new <tür>[<negatif olmayan int türüne dönüşebilen türden eleman sayısı>];
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{
+		int [] a;
+
+		a = new int[10];
+
+		//...
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Dizinin eleman sayısının sabit ifadesi olması gerekmez. Dizinin eleman sayısı negatif değer olarak verildiğinde
+	exception oluşur
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+import java.util.Scanner;
+
+class App {
+	public static void main(String [] args)
+	{
+		Scanner kb = new Scanner(System.in);
+
+		System.out.print("Bir sayı giriniz:");
+		int count = kb.nextInt();
+		int [] a;
+
+		a = new int[count];
+
+		//
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Dizinin eleman sayısı length isimli veri elemanı ile alde edilebilir
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+import java.util.Scanner;
+
+class App {
+	public static void main(String [] args)
+	{
+		Scanner kb = new Scanner(System.in);
+
+		System.out.print("Bir sayı giriniz:");
+		int count = kb.nextInt();
+		int [] a;
+
+		a = new int[count];
+
+		System.out.printf("Dizinin eleman sayısı:%d%n", a.length);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Dizinin length veri elemanı değiştirilemez. Aslında yaratılmış olan bir dizinin eleman sayısı değiştirilemediğinden
+	length veri elemanı da değiştirilemez
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+import java.util.Scanner;
+
+class App {
+	public static void main(String [] args)
+	{
+		Scanner kb = new Scanner(System.in);
+
+		System.out.print("Bir sayı giriniz:");
+		int count = kb.nextInt();
+		int [] a;
+
+		a = new int[count];
+
+		System.out.printf("Dizinin eleman sayısı:%d%n", a.length);
+
+		a.length = 23; //error
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Dizinin elemanlarına [] operatörü ile erişilir. Bu operatör özel amaçlı, iki operandlı (binary) ve araek (infix) durumunda
+	bir operatördür. Operatör birinci operandı ile aldığı dizi referansının gösterdiği dizi nesnesinin, ikinci operandına
+	ilişkin indeks numarasında bulunan elemanına ilişkin değişkeni üretir. Indeks numarası int türüne dönüşebilen türden olmalıdır
+	ve sıfırdan başlar
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+import java.util.Scanner;
+
+class App {
+	public static void main(String [] args)
+	{
+		Scanner kb = new Scanner(System.in);
+
+		System.out.print("Bir sayı giriniz:");
+		int count = kb.nextInt();
+		int [] a = new int[count];
+
+		for (int i = 0; i < a.length; ++i)
+			a[i] = i * 10;
+
+		for (int i = 0; i < a.length; ++i)
+			System.out.printf("%d ", a[i]);
+
+		System.out.println();
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Dizinin elemanlarına erişim
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+import java.util.Random;
+import java.util.Scanner;
+
+class App {
+	public static void main(String [] args)
+	{
+		Scanner kb = new Scanner(System.in);
+		Random r = new Random();
+
+		System.out.print("Bir sayı giriniz:");
+		int count = kb.nextInt();
+		int [] a = new int[count];
+
+		for (int i = 0; i < a.length; ++i)
+			a[i] = r.nextInt(100);
+
+		for (int i = 0; i < a.length; ++i)
+			System.out.printf("%02d ", a[i]);
+
+		System.out.println();
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	[] operatörüne pozitif ya da negatif bakımdan sınırlar dışında bir indeks numarası verildiğinde exception oluşur
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+import java.util.Random;
+import java.util.Scanner;
+
+class App {
+	public static void main(String [] args)
+	{
+		Scanner kb = new Scanner(System.in);
+		Random r = new Random();
+
+		System.out.print("Bir sayı giriniz:");
+		int count = kb.nextInt();
+		int [] a = new int[count];
+
+		for (int i = 0; i < a.length; ++i)
+			a[i] = r.nextInt(100);
+
+		for (int i = 0; i < a.length; ++i)
+			System.out.printf("%02d ", a[i]);
+
+		System.out.println();
+
+		System.out.printf("value : %d%n", a[7]);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Bir dizi yaratıldığında tüm elemanlarına default değerler atanır
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+import java.util.Scanner;
+
+class App {
+	public static void main(String [] args)
+	{
+		Scanner kb = new Scanner(System.in);
+
+		System.out.print("Bir sayı giriniz:");
+		int count = kb.nextInt();
+
+		int [] a = new int[count];
+		boolean [] b = new boolean[count];
+
+		for (int i = 0; i < a.length; ++i)
+			System.out.printf("%d ", a[i]);
+
+		System.out.println();
+
+		for (int i = 0; i < b.length; ++i)
+			System.out.printf("%b ", b[i]);
+
+		System.out.println();
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Dizilere ilk değer verilmesi (initialization) küme parantezi ile yapılır. Buraada  [] içerisinin boş olması gerekir
+	Dikkat edilirse aşağıdaki örnekte diziye ilkdeğer verilmiştir ancak diziyi gösteren referansa ilkdeğer verilmemiştir.
+	Atama yapılmıştır
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{
+		int [] a;
+
+		a = new int[]{1, 2, 5, 9, 3};
+		for (int i = 0; i < a.length; ++i)
+			System.out.printf("%d ", a[i]);
+
+		System.out.println();
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Diziye ilkdeğer verilirken adresini tutan referansa da ilkdeğer veriliyorsa new operatörü kullanılmayabilir
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{
+		int [] a = {1, 2, 5, 9, 3};
+
+		for (int i = 0; i < a.length; ++i)
+			System.out.printf("%d ", a[i]);
+
+		System.out.println();
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte referansa ilkdeğer verilmediği için new operatörü zorunludur
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{
+		int [] a;
+		a = {1, 2, 5, 9, 3}; //error
+
+		for (int i = 0; i < a.length; ++i)
+			System.out.printf("%d ", a[i]);
+
+		System.out.println();
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Diziye ilkdeğer olarak verilen ifadelerin sabit ifadesi olması gerekmez
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+import java.util.Scanner;
+
+class App {
+	public static void main(String [] args)
+	{
+		Scanner kb = new Scanner(System.in);
+		System.out.print("Bir sayı giriniz:");
+		int x = kb.nextInt();
+		int [] a = {x, x + 2, x + 4, x + 6};
+
+		for (int i = 0; i < a.length; ++i)
+			System.out.printf("%d ", a[i]);
+
+		System.out.println();
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Bir metodun parametresi dizi referansı olabilir
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+import org.csystem.util.array.ArrayUtil;
+
+import java.util.Scanner;
+
+class App {
+	public static void main(String [] args)
+	{
+		Scanner kb = new Scanner(System.in);
+		System.out.print("Bir sayı giriniz:");
+		int x = kb.nextInt();
+		int [] a = {x, x + 2, x + 4, x + 6};
+
+		ArrayUtil.print(a);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Bir metodun parametresi dizi referansı olabilir
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+import org.csystem.util.array.ArrayUtil;
+
+class App {
+	public static void main(String [] args)
+	{
+		int [] a = {1, 2, 3, 4, 5};
+
+		ArrayUtil.print(a);
+		ArrayUtil.swap(a, 1, 3);
+		ArrayUtil.print(a);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+    02.04.2023
+      Blue
+    - 3.3.2 -
+-----------------------------------------------------------------------------------------------------------------------*/
 
 
