@@ -11771,7 +11771,7 @@ class Alien {
 	birinci operandı bir referans, ikinci operandı non-static bir veri elemanı ise bu durumda nokta operatörü 
 	o veri elemanına ilişkin değişkeni üretir. Aslında referans ve nokta operatörü ile veri elemanı ismi kullanımı
 	o referansın gösterdiği nesnenin ilgili veri elemanına erişmek anlamına gelir. Her new işlemi yeni bir nesne
-	yaratmak demektir
+	yaratmak demektir.
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -11887,7 +11887,7 @@ class Sample {
 	Bu durumda aynı türden nesneler için aynı uzunlukta yer ayrılır. Farklı türden nesneler için farklı veri elemanları
 	olabileceğinden aynı uzunlukta yer ayrılması gerekmez
 	
-	Türü ne olursa olsun referansların (referans değişkenlerin) uzunlukları aynıdır. Bu da adreselenebilecek sayıları
+	Türü ne olursa olsun referansların (referans değişkenlerin) uzunlukları aynıdır. Bu da adreslenebilecek sayıları
 	tutabilecek uzunluktur. Örneğin 64 bit sistemlerde referanslar 64 bit (8 byte) uzunluğundadır. Benzer şekilde 32 bit
 	sistemlerde tüm referanslar 32 bit (4 byte) uzunluğundadır
 -----------------------------------------------------------------------------------------------------------------------*/
@@ -11927,12 +11927,12 @@ class App {
 		System.out.println("----------------------------");
 		
 		++s.x;
-		
 		System.out.printf("s.x = %d%n", s.x);
 		System.out.printf("s.y = %b%n", s.y);
 		System.out.printf("k.x = %d%n", k.x);
 		System.out.printf("k.y = %b%n", k.y);
 		System.out.println("----------------------------");
+		
 		
 	}
 }
@@ -12274,7 +12274,7 @@ class Animal {
 	//...
 }
 /*----------------------------------------------------------------------------------------------------------------------
-	Yukarıdaki örnekte anlatılan problem aşağıdaki gibi statici veri elemanı kullanılarak çözülebilir. Böylece
+	Yukarıdaki örnekte anlatılan problem aşağıdaki gibi static veri elemanı kullanılarak çözülebilir. Böylece
 	kod karmaşıklığı azaltılmış olur, Şüphesiz örnekte detaylar gözardı edilmiştir. Örnekte ** ile belirtilen kod parçaları
 	şu an için önemsizdir. Anlatılmak istenen yani static bir veri elemanının tek olmasının kullanımına odaklanmanız
 	tavsiye edilir
@@ -12465,15 +12465,15 @@ class App {
 }
 
 
-class Sample {
+class Sample {  // sınıf içerisinde yer alan veri elemanları ve metodlar birer memberlardır.
 	public int x; // non static veri elemanı
 	
-	public void foo(int a) // non static veri elemanı
+	public void foo(int a) // non static metod
 	{
 		bar(a);
 	}
 	
-	public void bar(int a) // non static veri elemanı
+	public void bar(int a) // non static metod
 	{
 		x = a; // non static veri elemanı değildir.Derleyici bunu dorudan bu şekilde anlamaz.
 	}
@@ -20599,5 +20599,111 @@ class App {
       Blue
     - 3.3.2 -
 -----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	Bir metodun geri dönüş değeri bir dizi referansı olabilir.
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+import java.util.Random;
+import java.util.Scanner;
+
+import static org.csystem.util.array.ArrayUtil.getRandomArray;
+import static org.csystem.util.array.ArrayUtil.print;
+
+class App {
+	public static void main(String [] args)
+	{
+		Scanner kb = new Scanner(System.in);
+		Random random = new Random();
+
+		for (;;) {
+			System.out.print("Bir sayı giriniz:");
+			int count = Integer.parseInt(kb.nextLine());
+
+			if (count <= 0)
+				break;
+			int[] a = getRandomArray(random, count, 0, 99);
+
+			System.out.println("--------------------------------------------------------------------------------------");
+			print(a);
+			System.out.println("--------------------------------------------------------------------------------------");
+		}
+
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı int türden bir dizinin elemanlarının toplamına geri dönen sum isimli
+	metodu ArrayUtil sınıfı içerisinde yazınız ve aşağıdaki kod ile test ediniz
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.util.array.test;
+
+import java.util.Random;
+import java.util.Scanner;
+
+import static org.csystem.util.array.ArrayUtil.*;
+public class SumTest {
+    public static void run()
+    {
+        Scanner kb = new Scanner(System.in);
+        Random random = new Random();
+
+        System.out.print("Bir sayı giriniz:");
+        int count = kb.nextInt();
+
+        while (count-- > 0) {
+            System.out.println("--------------------------------------------------------------");
+            int [] a = getRandomArray(random, random.nextInt(5, 15), 0, 99);
+
+            print(a);
+            System.out.printf("Toplam:%d%n", sum(a));
+            System.out.println("--------------------------------------------------------------");
+        }
+    }
+
+    public static void main(String[] args)
+    {
+        run();
+    }
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	ArrayUtil sınıfının sumLong metodu
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.util.array.test;
+
+import java.util.Random;
+import java.util.Scanner;
+
+import static org.csystem.util.array.ArrayUtil.*;
+
+public class SumLongTest {
+    public static void run()
+    {
+        Scanner kb = new Scanner(System.in);
+        Random random = new Random();
+
+        System.out.print("Bir sayı giriniz:");
+        int count = kb.nextInt();
+
+        while (count-- > 0) {
+            System.out.println("--------------------------------------------------------------");
+            int [] a = getRandomArray(random, random.nextInt(500, 1000), Integer.MIN_VALUE, Integer.MAX_VALUE);
+
+            print(a);
+            System.out.printf("Toplam:%d%n", sumLong(a));
+            System.out.println("--------------------------------------------------------------");
+        }
+    }
+
+    public static void main(String[] args)
+    {
+        run();
+    }
+}
+
+
 
 
