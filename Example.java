@@ -20926,4 +20926,3305 @@ class Util {
 	yinelemede en büyük eleman daraltılmış dizinin sonuna gider. Böylece her yinelemede eskisinden bir geriye kadar
 	gitmek yeterli olur
 -----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.util.array.test;
 
+import org.csystem.util.array.ArrayUtil;
+
+import java.util.Random;
+import java.util.Scanner;
+
+import static org.csystem.util.array.ArrayUtil.*;
+
+public class BubbleSortTest {
+    public static void run()
+    {
+        Scanner kb = new Scanner(System.in);
+        Random random = new Random();
+
+        for (;;) {
+            System.out.print("Dizinin eleman sayısını giriniz:");
+            int n = Integer.parseInt(kb.nextLine());
+
+            if (n <= 0)
+                break;
+
+            int [] a = ArrayUtil.getRandomArray(random, n, 0, 100);
+
+            ArrayUtil.print(2, a);
+
+            boolean desc = random.nextBoolean();
+
+            ArrayUtil.bubbleSort(a, desc);
+
+            System.out.printf("%s sıralanmış dizi:%n", desc ? "Büyükten küçüğe" : "Küçükten büyüğe");
+            ArrayUtil.print(2, a);
+        }
+
+        System.out.println("Tekrar yapıyor musunuz?");
+    }
+
+    public static void main(String[] args)
+    {
+        run();
+    }
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Seçerek sıralama algoritmasında en küçük eleman bulunur, ilk eleman ile yer değiştirilir. Dizi bir daraltılır, aynı şey
+	daraltılmış dizi için de yapılır. Böylece ilerlenir
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.util.array.test;
+
+import org.csystem.util.array.ArrayUtil;
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class SelectionSortTest {
+    public static void run()
+    {
+        Scanner kb = new Scanner(System.in);
+        Random random = new Random();
+
+        for (;;) {
+            System.out.print("Dizinin eleman sayısını giriniz:");
+            int n = Integer.parseInt(kb.nextLine());
+
+            if (n <= 0)
+                break;
+
+            int [] a = ArrayUtil.getRandomArray(random, n, 0, 100);
+
+            ArrayUtil.print(2, a);
+
+            boolean desc = random.nextBoolean();
+
+            ArrayUtil.selectionSort(a, desc);
+
+            System.out.printf("%s sıralanmış dizi:%n", desc ? "Büyükten küçüğe" : "Küçükten büyüğe");
+            ArrayUtil.print(2, a);
+        }
+
+        System.out.println("Tekrar yapıyor musunuz?");
+    }
+
+    public static void main(String[] args)
+    {
+        run();
+    }
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: 6 tane [1, 49] aralığın tekrarlanmayan sayılardan oluşan bir sayısal loto kuponu üreten programı
+	yazınız
+	Not: İleride daha iyisi yazılacaktır
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+import org.csystem.app.lottery.numericlottery.NumericLotteryApp;
+
+class App {
+	public static void main(String [] args)
+	{
+		NumericLotteryApp.run();
+	}
+}
+
+package org.csystem.app.lottery.numericlottery;
+
+import org.csystem.random.lottery.numericlottery.NumericLottery;
+import org.csystem.util.array.ArrayUtil;
+
+import java.util.Scanner;
+
+public class NumericLotteryApp {
+    public static void run()
+    {
+        Scanner kb = new Scanner(System.in);
+        NumericLottery lottery = new NumericLottery();
+
+        for (;;) {
+            System.out.print("Kaç tane kupon oynamak istiyorsunuz?");
+            int n = Integer.parseInt(kb.nextLine());
+
+            if (n <= 0)
+                break;
+
+            while (n-- > 0)
+                ArrayUtil.print(2, lottery.getNumbers());
+        }
+    }
+}
+
+package org.csystem.random.lottery.numericlottery;
+
+import org.csystem.util.array.ArrayUtil;
+
+import java.util.Random;
+
+public class NumericLottery {
+    public Random random;
+
+    public NumericLottery()
+    {
+        random = new Random();
+    }
+
+    public NumericLottery(Random r)
+    {
+        random = r;
+    }
+
+    public int [] getNumbers()
+    {
+        int [] numbers = new int[6];
+
+        for (int i = 0; i  < 6; ++i) {
+            boolean repeat;
+
+            do {
+                repeat = false;
+                numbers[i] = random.nextInt(1, 50);
+
+                for (int k = 0; k < i; ++k)
+                    if (numbers[i] == numbers[k]) {
+                        repeat = true;
+                        break;
+                    }
+            } while (repeat);
+        }
+
+        ArrayUtil.bubbleSort(numbers);
+
+        return numbers;
+    }
+}
+
+
+package org.csystem.random.lottery.numericlottery;
+
+import java.util.Random;
+
+public class NumericLottery {
+    public Random random;
+
+    public static int [] getNumbers(boolean [] flags)
+    {
+        int [] numbers = new int[6];
+        int index = 0;
+
+        for (int i = 1; i < 50; ++i)
+            if (flags[i])
+                numbers[index++] = i;
+
+        return numbers;
+    }
+
+    public boolean [] getFlags()
+    {
+        boolean [] flags = new boolean[50];
+
+        for (int i = 0; i < 6; ++i) {
+            int val;
+
+            for (;;) {
+                val = random.nextInt(1, 50);
+                if (!flags[val])
+                    break;
+            }
+            flags[val] = true;
+        }
+
+        return flags;
+    }
+
+    public NumericLottery()
+    {
+        random = new Random();
+    }
+
+    public NumericLottery(Random r)
+    {
+        random = r;
+    }
+
+    public int [] getNumbers()
+    {
+        return getNumbers(getFlags());
+    }
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	images dizininde bulunan firstNotRepeatingCharacter.jpeg dosyasında bulunun bir mülakat sorunun bir çözümü
+	İleride daha iyisi yazılacaktır
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+import java.util.Scanner;
+
+class App {
+	public static void main(String [] args)
+	{
+		FirstNotRepeatingCharacterTest.run();
+	}
+}
+
+class FirstNotRepeatingCharacterTest {
+	public static void run()
+	{
+		Scanner kb = new Scanner(System.in);
+
+		FirstNotRepeatingCharacterKeyboardTest.run(kb);
+	}
+}
+
+class FirstNotRepeatingCharacterKeyboardTest {
+	public static void run(Scanner kb)
+	{
+		for (;;) {
+			System.out.print("Input a text:");
+			String s = kb.nextLine();
+
+			System.out.printf("First not repeatingCharacter is '%c'%n", Solution.firstNotRepeatingCharacter(s));
+
+			if ("quit".equals(s))
+				break;
+		}
+	}
+}
+
+class Solution {
+	public static char firstNotRepeatingCharacter(String s)
+	{
+		int [] counts = new int[26];
+		int len = s.length();
+
+		for (int i = 0; i < len; ++i)
+			++counts[s.charAt(i) - 'a'];
+
+		for (int i = 0; i < len; ++i) {
+			char ch = s.charAt(i);
+
+			if (counts[ch - 'a'] == 1)
+				return ch;
+		}
+
+		return '_';
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+    16.04.2023
+-----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Aşağıdaki prototipi ve açıklaması verilen metodu ArrayUtil sınıfı içerisinde yazınız ve aşağıdaki
+	kod ediniz:
+		int [] getHistogramData(int [] a, n)
+	Açıklamalar:
+		- Metodun aldığı dizi içerisinde [0, n] aralığında sayılar olacaktır
+		- Metot [0, n] aralığındaki sayıların sıklık sayısını içeren diziye geri dönecektir. Yani her bir elamandan
+		kaç tane olduğunu tutan bir diziye dönecektir. Geri döndüğü dizinin sıfır numaralı indekteki elemanı sıfır sayısının,
+		1 numaralı indekteki elemanı 1 sayısının, ...,  n numaralı indekteki elemanı n sayısının kaç tane olduğu bilgisini
+		içerecektir
+-----------------------------------------------------------------------------------------------------------------------*/
+
+package org.csystem.util.array.test;
+
+import org.csystem.util.array.ArrayUtil;
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class GetHistogramDataTest {
+    public static void run()
+    {
+        Scanner kb = new Scanner(System.in);
+        Random random = new Random();
+
+        for (;;) {
+            System.out.print("Bir sayı giriniz:");
+            int n = Integer.parseInt(kb.nextLine());
+
+            if (n <= 0)
+                break;
+
+            int [] a = ArrayUtil.getRandomArray(random, n, 0, 11);
+
+            ArrayUtil.print(a);
+
+            int [] data = ArrayUtil.getHistogramData(a, 10);
+
+            ArrayUtil.print(data);
+        }
+
+        System.out.println("Tekrar yapıyor musunuz?");
+    }
+
+    public static void main(String[] args)
+    {
+        run();
+    }
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	ArrayUtil sınıfının drawHistogram metodu. Homework-011'deki merkezi limit teoremi için önce bu metodu kullanınız. Daha
+	sonra drawHistogram metodunu çalışma sorusunda istendiği gibi yazınız
+-----------------------------------------------------------------------------------------------------------------------*/
+
+package org.csystem.util.array.test;
+
+import org.csystem.util.array.ArrayUtil;
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class DrawHistogramTest {
+    public static void run()
+    {
+        Scanner kb = new Scanner(System.in);
+        Random random = new Random();
+
+        for (;;) {
+            System.out.print("Bir sayı giriniz:");
+            int n = Integer.parseInt(kb.nextLine());
+
+            if (n <= 0)
+                break;
+
+            int [] a = ArrayUtil.getRandomArray(random, n, 0, 11);
+
+            //ArrayUtil.print(a);
+
+            int [] data = ArrayUtil.getHistogramData(a, 10);
+
+            ArrayUtil.print(data);
+
+            System.out.println("Histogram:");
+            ArrayUtil.drawHistogram(data, 10, 'X');
+        }
+
+        System.out.println("Tekrar yapıyor musunuz?");
+    }
+
+    public static void main(String[] args)
+    {
+        run();
+    }
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	char türden diziler String sınıfına benzetilebilse de örneğin dizi elemanları değiştirilebildiğinden String'den farklıdır
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{
+		char [] c = {'a', 'n', 'k', 'a', 'r', 'a'};
+
+		c[0] = Character.toUpperCase(c[0]);
+
+		for (int i = 0; i < c.length; ++i)
+			System.out.printf("%c", c[i]);
+
+		System.out.println();
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	String sınıfının char türden dizi parametreli ctor'ları ile char türden bir dizi içerisindeki karakterlerden bir String
+	elde edilebilir
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{
+		char [] c = {'a', 'n', 'k', 'a', 'r', 'a'};
+
+		String s1 = new String(c);
+		String s2 = new String(c, 2, 3);
+
+		System.out.println(s1);
+		System.out.println(s2);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	String sınıfının char türden dizi parametreli valueOf ile char türden bir dizi içerisindeki karakterlerden bir String
+	elde edilebilir
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{
+		char [] c = {'a', 'n', 'k', 'a', 'r', 'a'};
+
+		String s1 = String.valueOf(c);
+		String s2 = String.valueOf(c, 2, 3);
+
+		System.out.println(s1);
+		System.out.println(s2);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	String sınıfının toCharArray metodu ile bir String'in karakterlerinden oluşan char türden bir dizi elde edilebilir
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{
+		String s = "ankara";
+
+		char [] c = s.toCharArray();
+
+		for (int i = 0; i < c.length; ++i)
+			System.out.printf("%c ", c[i]);
+
+		System.out.println();
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	StringUtil sınıfının reverse metodu char türden dizi kullanılarak daha etkin bir biçimde yazılabilir
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.util.string.test;
+
+import org.csystem.util.string.StringUtil;
+
+import java.util.Scanner;
+
+public class ReverseTest {
+    public static void run()
+    {
+        Scanner kb = new Scanner(System.in);
+
+        for (;;) {
+            System.out.print("Bir yazı giriniz:");
+            String str = kb.nextLine();
+
+            if ("elma".equals(str))
+                break;
+
+            System.out.printf("Yazının tersi:%s%n", StringUtil.reverse(str));
+        }
+
+        System.out.println("Tekrar yapıyor musunuz?");
+    }
+
+    public static void main(String[] args)
+    {
+        run();
+    }
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	StringUtil sınıfının getRandomText metodu char türden dizi kullanılarak daha etkin bir biçimde yazılabilir
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.util.string.test;
+
+import org.csystem.util.string.StringUtil;
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class GetRandomTextTRENTest {
+    public static void run()
+    {
+        Scanner kb = new Scanner(System.in);
+        Random r = new Random();
+
+        for (;;) {
+            System.out.print("Bir sayı giriniz:");
+            int n = Integer.parseInt(kb.nextLine());
+
+            if (n <= 0)
+                break;
+
+            System.out.printf("Şifre:%s%n", StringUtil.getRandomTextTR(r, n));
+            System.out.printf("Password:%s%n", StringUtil.getRandomTextEN(r, n));
+        }
+    }
+
+    public static void main(String[] args)
+    {
+        run();
+    }
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+    Sınıf Çalışması: Parametresi ile aldığı yazının içerisindeki küçük harfleri büyük harfe, büyük harfleri ise
+    küçük harfe çevirip yeni bir String ile geri dönen changeCase isimli metodu StringUtil sınıfı içerisinde yazınız ve
+    aşağıdaki kod ile test ediniz
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.util.string.test;
+
+import org.csystem.util.string.StringUtil;
+
+import java.util.Scanner;
+
+public class ChangeCaseTest {
+    public static void run()
+    {
+        Scanner kb = new Scanner(System.in);
+
+        for (;;) {
+            System.out.print("Bir yazı giriniz:");
+            String str = kb.nextLine();
+
+            if ("elma".equals(str))
+                break;
+
+            System.out.printf("%s%n", StringUtil.changeCase(str));
+        }
+
+        System.out.println("Tekrar yapıyor musunuz?");
+    }
+
+    public static void main(String[] args)
+    {
+        run();
+    }
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Referans dizilerinde dizinin yaratılması dizinin elemanlarına ilişkin referansların gösterdiği nesnelerin de
+	yaratılması anlamına gelmez. Bu durumda programcının referans dizisinin elemanları olan referanslara da uygun nesnelerin
+	adreslerini vermesi gerekir. Aşağıdaki örnekte referans dizisi yaratılmıştır ancak referansların gösterdiği nesneler
+	olmadığı için nesneye erişmek exception oluşturur
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{
+		Sample [] samples = new Sample[10];
+
+		for (int i = 0; i < samples.length; ++i)
+			samples[i].a = i * 10;
+
+		for (int i = 0; i < samples.length; ++i)
+			System.out.printf("%d ", samples[i].a);
+
+		System.out.println();
+	}
+}
+
+class Sample {
+	public int a;
+
+	public Sample(int x)
+	{
+		a = x;
+	}
+	//...
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Yukarıdaki problemin bir çözümü aşağıdaki gibi olabilir. Şüphesiz çözüm senaryoya bağlıdır
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{
+		Sample [] samples = new Sample[10];
+
+		for (int i = 0; i < samples.length; ++i)
+			samples[i] = new Sample(i * 10);
+
+		for (int i = 0; i < samples.length; ++i)
+			System.out.printf("%d ", samples[i].a);
+
+		System.out.println();
+	}
+}
+
+class Sample {
+	public int a;
+
+	public Sample(int x)
+	{
+		a = x;
+	}
+	//...
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Referans dizilerine ilkdeğer verilmesi
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{
+		Sample s  = new Sample(10);
+		Sample k  = new Sample(34);
+		Sample [] samples = {s, new Sample(45), k, new Sample(67), s};
+
+		for (int i = 0; i < samples.length; ++i)
+			System.out.printf("%d ", samples[i].a);
+
+		System.out.println();
+	}
+}
+
+class Sample {
+	public int a;
+
+	public Sample(int x)
+	{
+		a = x;
+	}
+	//...
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	String dizileri pratikte çok karşılaştığımız referans dizileridir
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{
+		String [] countries = {"Turkey", "England", "Swiss", "Sweden"};
+
+		for (int i = 0; i < countries.length; ++i)
+			System.out.println(countries[i]);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı int türden gün ay ve yıl bilgisine ilişkin tarihin haftanın hangi gününe
+	geldiği bilgisini aşağıdaki açıklamalara göre dmndüren getDayOfWeek isimli metodu yazınız ve test ediniz
+	Açıklamalar:
+		- Metot geçersiz bir tarih durumunda -1 değerine geri dönecektir
+		- Haftanın günü 01.01.1900 ile verilen tarih arasındaki (bverilen tarih dahil) gün sayısının 7 ilem bölümünden
+		elde edilen kalan ile belirlenebilir. Buna göre sıfır "pazar, 1 "pazartesi", 2 "salı" ... 6 "cumartesi" günlerine
+		kaşılık gelir
+
+		- 01.01.1900 öncesindeki tarihler geçersiz sayılacaktır
+
+	(İleride daha iyisi yazılacaktır)
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app.datetime;
+
+import java.util.Scanner;
+
+public class DateApp {
+    public static void run()
+    {
+        Scanner kb = new Scanner(System.in);
+
+        for (;;) {
+            System.out.print("Gün ay ve yıl bilgilerini giriniz:");
+            int day = kb.nextInt();
+            int month = kb.nextInt();
+            int year = kb.nextInt();
+
+            if (day == 0)
+                break;
+
+            DateUtil.printDateTR(day, month, year);
+            DateUtil.printDateEN(day, month, year);
+        }
+    }
+
+    public static void main(String[] args)
+    {
+        run();
+    }
+}
+package org.csystem.app.datetime;
+
+public class DateUtil {
+    public static int [] daysOfMonths = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    public static String [] monthsTR = {"", "Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz",
+                                        "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"};
+
+    public static String [] daysOfWeekTR = {"Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi"};
+
+    public static String [] monthsEN = {"", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+
+    public static String [] daysOfWeekEN = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
+
+    public static void printDateTR(int day, int month, int year)
+    {
+        int dayOfWeek = getDayOfWeek(day, month, year);
+
+        if (dayOfWeek == -1) {
+            System.out.println("Geçeriz tarih!...");
+            return;
+        }
+
+        System.out.printf("%d %s %d %s%n", day, monthsTR[month], year, daysOfWeekTR[dayOfWeek]);
+    }
+
+    public static void printDateEN(int day, int month, int year)
+    {
+        int dayOfWeek = getDayOfWeek(day, month, year);
+
+        if (dayOfWeek == -1) {
+            System.out.println("Invalid date!...");
+            return;
+        }
+
+        System.out.printf("%d%s %s %d %s%n", day, getDaySuffix(day), monthsEN[month], year, daysOfWeekEN[dayOfWeek]);
+    }
+
+    public static String getDaySuffix(int day)
+    {
+        return switch (day) {
+            case 1, 21, 31 -> "st";
+            case 2, 22 -> "nd";
+            case 3, 23 -> "rd";
+            default -> "th";
+        };
+    }
+
+    public static int getDayOfWeek(int day, int month, int year)
+    {
+        int totalDays;
+
+        if (year < 1900 || (totalDays = getDayOfYear(day, month, year)) == -1)
+            return -1;
+
+        return (totalDays + getTotalDays(year)) % 7;
+    }
+
+    public static int getTotalDays(int year)
+    {
+        int totalDays = 0;
+
+        for (int y = 1900; y < year; ++y)
+            totalDays += isLeapYear(y) ? 366 : 365;
+
+        return totalDays;
+    }
+
+    public static int getDayOfYear(int day, int month, int year)
+    {
+        return isValidDate(day, month, year) ? day + getTotalDaysByMonth(month, year) : -1;
+    }
+
+    public static int getTotalDaysByMonth(int month, int year)
+    {
+        int totalDays = 0;
+
+        for (int m = month - 1; m >= 1; --m)
+            totalDays += daysOfMonths[m];
+
+        return month > 2 && isLeapYear(year) ? totalDays + 1 : totalDays;
+    }
+
+    public static boolean isValidDate(int day, int month, int year)
+    {
+        return 1 <= day && day <= 31 && 1 <= month && month <= 12 && day <= getDays(month, year);
+    }
+
+    public static int getDays(int month, int year)
+    {
+        return month == 2 && isLeapYear(year) ? 29 : daysOfMonths[month];
+    }
+
+    public static boolean isLeapYear(int year)
+    {
+        return year % 4 == 0 && year % 100 != 0 || year % 400 == 0;
+    }
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı long bir sayının en fazla üç basamaklı ayrılmış sayılarından olıuşan diziyi
+	döndüren getDigitsInThrees metodunu NumberUtil sınıfı içerisinde yazınız ve aşağıdaki kod ile test ediniz.
+	Örnek: 1234567 -> 1 234 567
+	Örnek: 345 -> 345
+	Örnek: 234567 -> 234 567
+	Örnek: 1234 -> 1 234
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.util.numeric.test;
+
+import java.util.Random;
+import java.util.Scanner;
+
+import static org.csystem.util.array.ArrayUtil.print;
+import static org.csystem.util.numeric.NumberUtil.getDigitsInThrees;
+
+public class GetDigitsInThreesTest {
+    public static void run()
+    {
+        Scanner kb = new Scanner(System.in);
+        Random random = new Random();
+
+        System.out.print("Bir sayı giriniz:");
+        int count = kb.nextInt();
+
+        while (count-- > 0) {
+            System.out.println("--------------------------------------------------------------");
+            long val = random.nextLong();
+            int [] digits = getDigitsInThrees(val);
+            System.out.printf("Value:%d -> ", val);
+            print(digits);
+            System.out.println("--------------------------------------------------------------");
+        }
+    }
+
+    public static void main(String[] args)
+    {
+        run();
+    }
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+    29.04.2023
+-----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+    Sınıf Çalışması: parametresi ile aldığı bir String dizisinin elemanlarını, yine parametresi ile aldığı bir ayraç ile
+    birleştirilmiş bir String'e geri dönen join isimli metodu StringUtil sınıfı içerisinde yazınız ve aşağıdaki kod
+    ile test ediniz
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.util.string.test;
+
+import org.csystem.util.string.StringUtil;
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class JoinTest {
+    public static void run()
+    {
+        Scanner kb = new Scanner(System.in);
+        Random r = new Random();
+
+        System.out.print("Bir sayı giriniz:");
+        int n = kb.nextInt();
+
+        String [] str = new String[n];
+
+        for (int i = 0; i < n; ++i)
+            str[i] = StringUtil.getRandomTextEN(r, r.nextInt(5, 21));
+
+        System.out.println(StringUtil.join(str, '-'));
+
+        System.out.println("Tekrar yapıyor musunuz?");
+    }
+
+    public static void main(String[] args)
+    {
+        run();
+    }
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+    Sınıf Çalışması: parametresi ile aldığı bir String dizisinin elemanlarından blank olmayan, yine parametresi ile aldığı
+    bir ayraç ile birleştirilmiş bir String'e geri dönen join isimli metodu StringUtil sınıfı içerisinde yazınız ve
+    aşağıdaki kod ile test ediniz
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.util.string.test;
+
+import org.csystem.util.string.StringUtil;
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class JoinSkipBlanksTest {
+    public static void run()
+    {
+        Scanner kb = new Scanner(System.in);
+        Random r = new Random();
+
+        System.out.print("Bir sayı giriniz:");
+        int n = kb.nextInt();
+
+        String [] str = new String[n];
+
+        for (int i = 0; i < n; ++i)
+            str[i] = r.nextBoolean() ? "      " : StringUtil.getRandomTextEN(r, r.nextInt(0, 21));
+
+        System.out.println(StringUtil.join(str, '-', true));
+
+        System.out.println("Tekrar yapıyor musunuz?");
+    }
+
+    public static void main(String[] args)
+    {
+        run();
+    }
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+    String sınıfının split metodu aldığı ayraç veya ayraçlara göre yazıyı ayırır ve ayırdığı paraçaları String türden
+    bir diziye vererek o dizinin referansına geri döner. Ancak split metodu "regex (regular expression)" kullanır. Maalesef
+    regex pattern'i yazmak şu noktada biraz karmaşık gelebilir. Bu sebeple aşağıda split metoduna ayraç olarak geçilebilecek
+    en çok rastlanan durumları kalıp biçiminde ele alacağız. Regex'in her detayı burada ele alınmayacaktır
+-----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+    Aşağıdaki örnekte split metodu space karakterini ayraç olarak kabul ederek yazıyı ayrıştırmıştır. Ayraç olarak regex
+    için farklı anlam ifade eden bir karakter (meta character) verildiğinde aynı sonuç elde edilemez. Örneği split metoduna
+    "." argümanını geçerek ve yazıdaki space karakterlerini . karakteri yaparak çalıştırıp sonucu gözlemleyiniz
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{
+		String s = "İyi birJava programcısı olmak için çok çalışmak gerekir";
+		String [] words = s.split(" ");
+
+		for (int i = 0; i < words.length; ++i)
+			System.out.println(words[i]);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+    split metodunda kullanılacak ayraç(lar) [ ile ] arasında yazılmalıdır. split metodu aşağıdaki gibi kullanıldığında
+    ayraçların yanyan gelmesi durumunda boş string de diziye eklenir
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{
+		String s = "İyi birJava programcısı olmak için çok çalışmak gerekir. Çok  çalışmak gerekir";
+		String [] words = s.split("[ .]");
+
+		for (int i = 0; i < words.length; ++i)
+			System.out.println(words[i].isEmpty() ? "<<Empty>>" : words[i]);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+    split metodunda boş string eklenmesi istenmiyorsa ]'den sonra + işareti konmalıdır
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{
+		String s = "İyi bir Java programcısı olmak için çok çalışmak gerekir. Çok  çalışmak gerekir";
+		String [] words = s.split("[ .]+");
+
+		for (int i = 0; i < words.length; ++i)
+			System.out.println(words[i].isEmpty() ? "<<Empty>>" : words[i]);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+    [ ve ] karakterlerinin ayraç olarak verilebilmesi için ters bölü ile yazılması gerekir. Anımsanacağı gibi bir
+    "string literal" içerisinde ters bölü karakteri iki tane ters bölü yazılabilir. Aşağıdaki örneği inceleyiniz
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{
+		String s = "İyi bir [Java] programcısı olmak için [çok] çalışmak gerekir";
+		String [] words = s.split("[\\[\\] .]+");
+
+		for (int i = 0; i < words.length; ++i)
+			System.out.println(words[i].isEmpty() ? "<<Empty>>" : words[i]);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+    Sınıf Çalışması: Klavyden aşağıdaki formatta alınan bilgiyi ayrıştırarak ekrana açıklamalarda belirtilen sonuçları
+    yazdıran programı yazınız:
+    	<ad soyad>:<ders adı>:<gg/aa/yyyy>:<gg/aa/yyyy>:<arasınav notu>:<final notu>
+    	Alican Keçici:Evrim:29/04/2021:23/06/2022:78:97
+    	Baturhan Şahin:Matematik:19/07/2023:31/12/2023:79:97
+    	Oğuz Karan:Fonksiyonel Analiz:23/05/1997:26/06/1997:45:55
+    	Bartu Çankaya:Termodinamik:15/01/2017:25/05/2017:04:21
+
+    Açıklamalar:
+    	- Format geçerlilik kontrolü yapılmayacaktır
+
+    	- Arasınav ve final notlarına göre, arasınav * 0.4 + final * 0.6 formülü ile geçme notu hesapğlanacak ve sınav
+    	tarihleri hangi güne geldiği bilgisi ile Türkçe olarak yazdırılacaktır
+
+    	- Notu 50+ olan öğrenciler geçmiş olacaklardır
+
+    	- Geçme notu ceil metodu ile tamsayı olarak elde edilecektir
+
+    	- Örnek çıktı aşağıdaki gibi olacaktır
+    		----------------------------------------------------------------
+    		Adı Soyadı: Alican Keçici
+    		Ders Adı: Evrim
+    		Arasınav Tarihi: 29 Nisan 2021 Perşembe
+    		Final Tarihi: 23 Haziran 2022 Perşembe
+    		Arasınav Notu: 78
+    		Final Notu: 97
+    		Geçme Notu: 90
+    		Sonuç: Geçti
+    		----------------------------------------------------------------
+    	Not: İleride daha iyisi yazılacaktır
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app.university;
+
+import java.util.Scanner;
+
+public class GradeInfoApp {
+    public static void printReport(GradeInfo gradeInfo)
+    {
+        int grade = gradeInfo.getTotalGrade();
+
+        System.out.println("----------------------------------------------------------------");
+        System.out.printf("Adı Soyadı: %s%n", gradeInfo.studentName);
+        System.out.printf("Ders Adı: %s%n", gradeInfo.lectureName);
+        System.out.printf("Arasınav Tarihi: %s%n", gradeInfo.midtermDate);
+        System.out.printf("Final Tarihi: %s%n", gradeInfo.finalDate);
+        System.out.printf("Arasınav Notu: %d%n", gradeInfo.midtermGrade);
+        System.out.printf("Final Notu: %d%n", gradeInfo.finalGrade);
+        System.out.printf("Geçme Notu: %d%n", grade);
+        System.out.printf("Sonuç:%s%n", grade >= 50 ? "Geçti" : "Kaldı");
+        System.out.println("----------------------------------------------------------------");
+    }
+
+    public static void run()
+    {
+        Scanner kb = new Scanner(System.in);
+
+        while (true) {
+            System.out.print("Formatlı yazıyı giriniz:");
+            String str = kb.nextLine().strip();
+
+            if ("elma".equals(str))
+                break;
+
+            GradeInfoParser parser = new GradeInfoParser(str);
+
+            printReport(parser.gradeInfo);
+        }
+    }
+
+    public static void main(String[] args)
+    {
+        run();
+    }
+}
+package org.csystem.app.university;
+
+import org.csystem.app.datetime.DateUtil;
+
+public class GradeInfoParser {
+    public GradeInfo gradeInfo;
+
+    public static String getDateStr(String str)
+    {
+        String [] dateInfo = str.split("[/]");
+
+        int day = Integer.parseInt(dateInfo[0]);
+        int month = Integer.parseInt(dateInfo[1]);
+        int year = Integer.parseInt(dateInfo[2]);
+
+        return DateUtil.getDateStrTR(day, month, year);
+    }
+
+    public GradeInfoParser(String dataStr)
+    {
+        //...
+        String [] gradeInfoStr = dataStr.split("[:]+");
+
+        //...
+
+        gradeInfo = new GradeInfo();
+
+        gradeInfo.studentName = gradeInfoStr[0];
+        gradeInfo.lectureName = gradeInfoStr[1];
+        gradeInfo.midtermDate = getDateStr(gradeInfoStr[2]);
+        gradeInfo.finalDate = getDateStr(gradeInfoStr[3]);
+        gradeInfo.midtermGrade = Integer.parseInt(gradeInfoStr[4]);
+        gradeInfo.finalGrade = Integer.parseInt(gradeInfoStr[5]);
+    }
+}
+package org.csystem.app.university;
+
+public class GradeInfo {
+    public String studentName;
+    public String lectureName;
+    public String midtermDate;
+    public String finalDate;
+
+    public int midtermGrade;
+    public int finalGrade;
+
+    //...
+
+    public int getTotalGrade()
+    {
+        return (int)Math.ceil(midtermGrade * 0.4 + finalGrade * 0.6);
+    }
+
+    //...
+}
+
+package org.csystem.app.datetime;
+
+public class DateUtil {
+    public static int [] daysOfMonths = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    public static String [] monthsTR = {"", "Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz",
+                                        "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"};
+
+    public static String [] daysOfWeekTR = {"Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi"};
+
+    public static String [] monthsEN = {"", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+
+    public static String [] daysOfWeekEN = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
+
+    public static void printDateTR(int day, int month, int year)
+    {
+        int dayOfWeek = getDayOfWeek(day, month, year);
+
+        if (dayOfWeek == -1) {
+            System.out.println("Geçeriz tarih!...");
+            return;
+        }
+
+        System.out.printf("%d %s %d %s%n", day, monthsTR[month], year, daysOfWeekTR[dayOfWeek]);
+    }
+
+    public static void printDateEN(int day, int month, int year)
+    {
+        int dayOfWeek = getDayOfWeek(day, month, year);
+
+        if (dayOfWeek == -1) {
+            System.out.println("Invalid date!...");
+            return;
+        }
+
+        System.out.printf("%d%s %s %d %s%n", day, getDaySuffix(day), monthsEN[month], year, daysOfWeekEN[dayOfWeek]);
+    }
+
+    public static String getDateStrTR(int day, int month, int year)
+    {
+        int dayOfWeek = getDayOfWeek(day, month, year);
+
+        return String.format("%d %s %d %s", day, monthsTR[month], year, daysOfWeekTR[dayOfWeek]);
+    }
+
+    public static String getDaySuffix(int day)
+    {
+        return switch (day) {
+            case 1, 21, 31 -> "st";
+            case 2, 22 -> "nd";
+            case 3, 23 -> "rd";
+            default -> "th";
+        };
+    }
+
+    public static int getDayOfWeek(int day, int month, int year)
+    {
+        int totalDays;
+
+        if (year < 1900 || (totalDays = getDayOfYear(day, month, year)) == -1)
+            return -1;
+
+        return (totalDays + getTotalDays(year)) % 7;
+    }
+
+    public static int getTotalDays(int year)
+    {
+        int totalDays = 0;
+
+        for (int y = 1900; y < year; ++y)
+            totalDays += isLeapYear(y) ? 366 : 365;
+
+        return totalDays;
+    }
+
+    public static int getDayOfYear(int day, int month, int year)
+    {
+        return isValidDate(day, month, year) ? day + getTotalDaysByMonth(month, year) : -1;
+    }
+
+    public static int getTotalDaysByMonth(int month, int year)
+    {
+        int totalDays = 0;
+
+        for (int m = month - 1; m >= 1; --m)
+            totalDays += daysOfMonths[m];
+
+        return month > 2 && isLeapYear(year) ? totalDays + 1 : totalDays;
+    }
+
+    public static boolean isValidDate(int day, int month, int year)
+    {
+        return 1 <= day && day <= 31 && 1 <= month && month <= 12 && day <= getDays(month, year);
+    }
+
+    public static int getDays(int month, int year)
+    {
+        return month == 2 && isLeapYear(year) ? 29 : daysOfMonths[month];
+    }
+
+    public static boolean isLeapYear(int year)
+    {
+        return year % 4 == 0 && year % 100 != 0 || year % 400 == 0;
+    }
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+    Sınıf Çalışması: Parametresi ile aldığı 3 basamaklı bir tamsayının Türkçe okunuşunu döndüren numToText3DigitsTR
+    metodunu NumberUtil sınıfı içerisinde yazınız ve aşağıdaki kod ile test ediniz.
+    Açıklamalar:
+    	- Metot aldığı sayının 3 basamaktan büyük olup olmadığını kontrol etmeyecektir
+    	- Negatif sayıları için yazının başında eksi olacaktır. Örneğin. -234 -> eksiikiyüzotuzdört
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.util.numeric.test;
+
+import org.csystem.util.numeric.NumberUtil;
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class NumToTextTRTest {
+    public static void run()
+    {
+        Scanner kb = new Scanner(System.in);
+        Random random = new Random();
+
+        System.out.print("Bir sayı giriniz:");
+        int count = kb.nextInt();
+
+        while (count-- > 0) {
+            int val = random.nextInt(-999, 1000);
+
+            System.out.printf("%d: %s%n", val, NumberUtil.numToText3DigitsTR(val));
+        }
+    }
+
+    public static void main(String[] args)
+    {
+        run();
+    }
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+    30.04.2023
+-----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	Anımsanacağı gibi, T bir tür ismi olmak üzere T [] a ifadesi a'nın gösterdiği dizinin herbir elemanının T türden olduğu
+	anlamına gelir. Örneğin int [][] a ifadesi a'nın gösterdiği dizinin her bir elemanının int türden bir dizi referansı
+	olduğu anlamına gelir. Bu durumda mantıksal olarak bu referansın gösterdiği dizi bir "dizi dizisidir (array of arrays)".
+
+	Dizi dizisi yaratılırken kullanılan new operatörüne ilişkin ifadede tür isminden sonra referans bildiriminmde
+	kullanılan [] kadar [] kullanılmalıdır. Bu köşeli parantezlerden ilki ana dizinin uzunluğudur., boş bırakılamaz.
+	int [][] türden bir dizinin herbir elemanı olan dizi referenslarının gösterdiği dizilerin herbiri eşit uzunluktaysa
+	bu durumda bu dizi mantıksal olarak int türden değerler içeren matrisi temsil eder. Bu anlamda bu diziye kısaca
+	matris de denebilir. Bu durumda ana dizinin uzunluğu satır sayısını, içerisinde tuttuğu dizi referanslarının
+	gösterdiği dizilerin uzunluğu sütun sayısını temsil eder. Dizi içerisindeki dizi referanslarının göstediği dizilerin
+	bir tanesinin bile eleman sayısı diğerlerden farklı ise bu durumda artık matris belirtmez. Java'da "çok boyutlu dizi
+	(multi imensional array) yoktur. Bu sebeple "iki boyutlu dizi matris belirtir" cümlesi yanlıştır. Aslında matrisler de
+	dizi dizileridir
+-----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte m * n'lik bir matris yaratılmıştır. Şüphesiz bu mantıksal olarak bir matristir. Elemanlarına
+	rasgele değerler verilmiştir
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+import java.util.Random;
+import java.util.Scanner;
+
+class App {
+	public static void main(String [] args)
+	{
+		Scanner kb = new Scanner(System.in);
+		Random r = new Random();
+
+		System.out.print("Matrisin satır ve sütun sayısını giriniz:");
+		int m = kb.nextInt();
+		int n = kb.nextInt();
+
+		int [][] a = new int[m][];
+
+		for (int i = 0; i < m; ++i)
+			a[i] = new int[n];
+
+		for (int i = 0; i < m; ++i)
+			for (int j = 0; j < n; ++j)
+				a[i][j] = r.nextInt(100);
+
+		for (int i = 0; i < m; ++i) {
+			for (int j = 0; j < n; ++j)
+				System.out.printf("%02d ", a[i][j]);
+
+			System.out.println();
+		}
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Java 5 ile birlikte aşağıdaki gibi ikinci köşeli parantezi içerisine yazıılan uzunluk bilgisi matrisin sütun sayısı
+	anlamına gelir. Bu durumda dizi dizisinin elemanı olan her bir referansın gösterdiği diziler yaratılmış olur ve hepsi
+	verilen uzunluk kadar elemana sahip olur
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+import java.util.Random;
+import java.util.Scanner;
+
+class App {
+	public static void main(String [] args)
+	{
+		Scanner kb = new Scanner(System.in);
+		Random r = new Random();
+
+		System.out.print("Matrisin satır ve sütun sayısını giriniz:");
+		int m = kb.nextInt();
+		int n = kb.nextInt();
+
+		int [][] a = new int[m][n];
+
+		for (int i = 0; i < m; ++i)
+			for (int j = 0; j < n; ++j)
+				a[i][j] = r.nextInt(100);
+
+		for (int i = 0; i < m; ++i) {
+			for (int j = 0; j < n; ++j)
+				System.out.printf("%02d ", a[i][j]);
+
+			System.out.println();
+		}
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Dizi dizilerine ilk değer verilmesi
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{
+		int [][] a = {{1, 3, 4}, {3, 5, 8}};
+
+		for (int i = 0; i < a.length; ++i) {
+			for (int j = 0; j < a[i].length; ++j)
+				System.out.printf("%02d ", a[i][j]);
+
+			System.out.println();
+		}
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Dizi dizilerine ilkdeğer verilmesi
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{
+		int [][] a;
+
+		a = new int[][]{{1, 3, 4}, {3, 5, 8}};
+
+		for (int i = 0; i < a.length; ++i) {
+			for (int j = 0; j < a[i].length; ++j)
+				System.out.printf("%02d ", a[i][j]);
+
+			System.out.println();
+		}
+	}
+}
+/*----------------------------------------------------------------------------------------------------------------------
+	Dizi dizilerine ilkdeğer verilmesi
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{
+		int [][] a = {{1, 3, 4, 7}, {3, 5, 8}};
+
+		for (int i = 0; i < a.length; ++i) {
+			for (int j = 0; j < a[i].length; ++j)
+				System.out.printf("%02d ", a[i][j]);
+
+			System.out.println();
+		}
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Bir metodun değişkeni ve/veya geri dönüş değeri bir dizi dizisi referansı olabilir
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.util.matrix.test;
+
+import org.csystem.util.array.ArrayUtil;
+import org.csystem.util.matrix.MatrixUtil;
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class GetRandomMatrixTest {
+    public static void run()
+    {
+        Scanner kb = new Scanner(System.in);
+        Random random = new Random();
+
+        System.out.print("Üretilecek matris sayısını giriniz:");
+        int count = kb.nextInt();
+
+        while (count-- > 0) {
+            System.out.println("---------------------------------");
+            int m = random.nextInt(2, 10);
+            int n = random.nextInt(2, 10);
+            int[][] a = MatrixUtil.getRandomMatrix(random, m, n, 0, 100);
+
+            System.out.printf("%d * %d%n", m, n);
+            ArrayUtil.print(2, a);
+            System.out.println("---------------------------------");
+        }
+    }
+
+    public static void main(String[] args)
+    {
+        run();
+    }
+}
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı bir dizi dizisi referansının bir matris olup olmadığını test eden
+	isMatrix metodunu MatrixUtil isimli sınıf içerisinde yazınız ve aşağıdaki kod ile test ediniz
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.util.matrix.test;
+
+import org.csystem.util.matrix.MatrixUtil;
+
+public class IsMatrixTest {
+    public static void run()
+    {
+        int [][] a = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}, {10, 11, 12}};
+        int [][] b = {{1, 2, 3}, {4, 5, 6, 0}, {7, 8, 9}, {10, 11, 12}};
+
+        System.out.println(MatrixUtil.isMatrix(a) ? "Matris" : "Matris değil");
+        System.out.println(MatrixUtil.isMatrix(b) ? "Matris" : "Matris değil");
+    }
+
+    public static void main(String[] args)
+    {
+        run();
+    }
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı bir matrisin devriğini (transpose) döndüren transposed isimli metodu
+	MatrixUtil sınıfı içerisinde yazınız ve aşağıdaki kod ile test ediniz.
+	Açıklamalar:
+		- Metot matris olup olmama kontrolü yapmayacaktır
+		- Matrisin devriği satırların sütun, sütunların da satır olduğu matristir
+			1 2 3
+			4 5 6
+		matrisinin devriği
+			1 4
+			2 5
+			3 6
+-----------------------------------------------------------------------------------------------------------------------*/
+
+package org.csystem.util.matrix.test;
+
+import org.csystem.util.array.ArrayUtil;
+import org.csystem.util.matrix.MatrixUtil;
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class TransposedTest {
+    public static void run()
+    {
+        Scanner kb = new Scanner(System.in);
+        Random random = new Random();
+
+        System.out.print("Üretilecek matris sayısını giriniz:");
+        int count = kb.nextInt();
+
+        while (count-- > 0) {
+            System.out.println("---------------------------------");
+            int[][] a = MatrixUtil.getRandomMatrix(random, random.nextInt(2, 10), random.nextInt(2, 10), 0, 100);
+
+            ArrayUtil.print(2, a);
+            System.out.println();
+            ArrayUtil.print(2, MatrixUtil.transposed(a));
+            System.out.println("---------------------------------");
+        }
+    }
+
+    public static void main(String[] args)
+    {
+        run();
+    }
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+    Sayısal Loto kupon üreten uygulama
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app.lottery.numericlottery;
+
+import org.csystem.random.lottery.numericlottery.NumericLottery;
+import org.csystem.util.array.ArrayUtil;
+
+import java.util.Scanner;
+
+public class NumericLotteryApp {
+    public static void run()
+    {
+        Scanner kb = new Scanner(System.in);
+        NumericLottery lottery = new NumericLottery();
+
+        for (;;) {
+            System.out.print("Kaç tane kupon oynamak istiyorsunuz?");
+            int n = Integer.parseInt(kb.nextLine());
+
+            if (n <= 0)
+                break;
+
+            ArrayUtil.print(2, lottery.getNumbers(n));
+        }
+    }
+
+    public static void main(String[] args)
+    {
+        run();
+    }
+}
+
+package org.csystem.random.lottery.numericlottery;
+
+import java.util.Random;
+
+public class NumericLottery {
+    public Random random;
+
+    public static int [] getNumbers(boolean [] flags)
+    {
+        int [] numbers = new int[6];
+        int index = 0;
+
+        for (int i = 1; i < 50; ++i)
+            if (flags[i])
+                numbers[index++] = i;
+
+        return numbers;
+    }
+
+    public boolean [] getFlags()
+    {
+        boolean [] flags = new boolean[50];
+
+        for (int i = 0; i < 6; ++i) {
+            int val;
+
+            for (;;) {
+                val = random.nextInt(1, 50);
+                if (!flags[val])
+                    break;
+            }
+            flags[val] = true;
+        }
+
+        return flags;
+    }
+
+    public NumericLottery()
+    {
+        random = new Random();
+    }
+
+    public NumericLottery(Random r)
+    {
+        random = r;
+    }
+
+    public int [] getNumbers()
+    {
+        return getNumbers(getFlags());
+    }
+
+    public int [][] getNumbers(int count)
+    {
+        int [][] numbers = new int[count][];
+
+        for (int i = 0; i < count; ++i)
+            numbers[i] = getNumbers();
+
+        return numbers;
+    }
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	06.05.2023
+-----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı int türden bir kare matrisin esas köşegeni üzerindeki sayıların
+	toplamını döndüren sumDiagonal isimli metodu MatrixUtil sınıfı içerisinde yazınız ve aşağıdaki kod ile test ediniz.
+	Açıklamalar:
+		- Metot kare matris kontrolü yapmayacaktır
+		- Bir kare matrisin esas köşegeni, örneğin,
+			1 2 3
+			4 5 6
+			7 8 9
+		matrisi için 1, 5 ve 9 sayılarıdır
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.util.matrix.test;
+
+import org.csystem.util.array.ArrayUtil;
+import org.csystem.util.matrix.MatrixUtil;
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class SumDiagonalTest {
+    public static void run()
+    {
+        Scanner kb = new Scanner(System.in);
+        Random random = new Random();
+
+        System.out.print("Üretilecek matris sayısını giriniz:");
+        int count = kb.nextInt();
+
+        while (count-- > 0) {
+            System.out.println("---------------------------------");
+            int[][] a = MatrixUtil.getRandomSquareMatrix(random, random.nextInt(2, 10), 0, 11);
+
+            ArrayUtil.print(2, a);
+            System.out.printf("Toplam:%d%n", MatrixUtil.sumDiagonal(a));
+            System.out.println("---------------------------------");
+        }
+    }
+
+    public static void main(String[] args)
+    {
+        run();
+    }
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı int türden iki matrisin toplamından oluşan matrise geri dönen addMatrices
+	metodunu MatrixUtil sınıfı içerisinde yazınız ve aşağıdaki kod ile test ediniz.
+	Açıklamalar:
+		- Metot, matris kontrolü ve matrislerin toplanıp toplanmayacağı kontrolünü yapmayacaktır
+-----------------------------------------------------------------------------------------------------------------------*/
+
+package org.csystem.util.matrix.test;
+
+import org.csystem.util.array.ArrayUtil;
+import org.csystem.util.matrix.MatrixUtil;
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class AddMatricesTest {
+    public static void run()
+    {
+        Scanner kb = new Scanner(System.in);
+        Random random = new Random();
+
+        System.out.print("Üretilecek matris sayısını giriniz:");
+        int count = kb.nextInt();
+
+        while (count-- > 0) {
+            System.out.println("---------------------------------");
+            int m = random.nextInt(2, 10);
+            int n = random.nextInt(2, 10);
+            int[][] a = MatrixUtil.getRandomMatrix(random, m, n, 0, 100);
+            int[][] b = MatrixUtil.getRandomMatrix(random, m, n, 0, 100);
+
+            ArrayUtil.print(2, a);
+            System.out.println("+");
+            ArrayUtil.print(2, b);
+            System.out.println("=");
+            ArrayUtil.print(3, MatrixUtil.addMatrices(a, b));
+            System.out.println("---------------------------------");
+        }
+    }
+
+    public static void main(String[] args)
+    {
+        run();
+    }
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı int türden iki matrisin toplamından oluşan matrise geri dönen subtractMatrices
+	metodunu MatrixUtil sınıfı içerisinde yazınız ve aşağıdaki kod ile test ediniz.
+	Açıklamalar:
+		- Metot, matris kontrolü ve matrislerin çıkartılıp toplanmayacağı kontrolünü yapmayacaktır
+-----------------------------------------------------------------------------------------------------------------------*/
+
+package org.csystem.util.matrix.test;
+
+import org.csystem.util.array.ArrayUtil;
+import org.csystem.util.matrix.MatrixUtil;
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class SubtractMatricesTest {
+    public static void run()
+    {
+        Scanner kb = new Scanner(System.in);
+        Random random = new Random();
+
+        System.out.print("Üretilecek matris sayısını giriniz:");
+        int count = kb.nextInt();
+
+        while (count-- > 0) {
+            System.out.println("---------------------------------");
+            int m = random.nextInt(2, 10);
+            int n = random.nextInt(2, 10);
+            int[][] a = MatrixUtil.getRandomMatrix(random, m, n, 0, 100);
+            int[][] b = MatrixUtil.getRandomMatrix(random, m, n, 0, 100);
+
+            ArrayUtil.print(2, a);
+            System.out.println("-");
+            ArrayUtil.print(2, b);
+            System.out.println("=");
+            ArrayUtil.print(4, MatrixUtil.subtractMatrices(a, b));
+            System.out.println("---------------------------------");
+        }
+    }
+
+    public static void main(String[] args)
+    {
+        run();
+    }
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı int türden bir matrisin tüm elemanlarını ikinci parametresi ile aldığı int
+	türden sayı ile toplayan addMatrixWithValue metodunu yazınız ve aşağıdaki kod ile test ediniz
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.util.matrix.test;
+
+import org.csystem.util.array.ArrayUtil;
+import org.csystem.util.matrix.MatrixUtil;
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class AddMatrixWithValueTest {
+    public static void run()
+    {
+        Scanner kb = new Scanner(System.in);
+        Random random = new Random();
+
+        System.out.print("Üretilecek matris sayısını giriniz:");
+        int count = kb.nextInt();
+
+        while (count-- > 0) {
+            System.out.println("---------------------------------");
+            int m = random.nextInt(2, 10);
+            int n = random.nextInt(2, 10);
+            int value = random.nextInt(-10, 11);
+            int[][] a = MatrixUtil.getRandomMatrix(random, m, n, 0, 100);
+
+            ArrayUtil.print(2, a);
+            System.out.printf("Value:%d%n", value);
+            MatrixUtil.addMatrixWithValue(a, value);
+            ArrayUtil.print(a);
+            System.out.println("---------------------------------");
+        }
+    }
+
+    public static void main(String[] args)
+    {
+        run();
+    }
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı int türden bir matrisin tüm elemanlarını ikinci parametresi ile aldığı int
+	türden sayı ile çıkartma işlemi subtractMatrixWithValue metodunu yazınız ve aşağıdaki kod ile test ediniz
+-----------------------------------------------------------------------------------------------------------------------*/
+
+package org.csystem.util.matrix.test;
+
+import org.csystem.util.array.ArrayUtil;
+import org.csystem.util.matrix.MatrixUtil;
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class MultiplyMatrixWithValueTest {
+    public static void run()
+    {
+        Scanner kb = new Scanner(System.in);
+        Random random = new Random();
+
+        System.out.print("Üretilecek matris sayısını giriniz:");
+        int count = kb.nextInt();
+
+        while (count-- > 0) {
+            System.out.println("---------------------------------");
+            int m = random.nextInt(2, 10);
+            int n = random.nextInt(2, 10);
+            int value = random.nextInt(-10, 11);
+            int[][] a = MatrixUtil.getRandomMatrix(random, m, n, 0, 100);
+
+            ArrayUtil.print(2, a);
+            System.out.printf("Value:%d%n", value);
+            MatrixUtil.multiplyMatrixWithValue(a, value);
+            ArrayUtil.print(a);
+
+            System.out.println("---------------------------------");
+        }
+    }
+
+    public static void main(String[] args)
+    {
+        run();
+    }
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı int türden bir matrisin tüm elemanlarını ikinci parametresi ile aldığı intü
+	türden sayı ile çarpan multiplyMatrixWithValue metodunu yazınız ve aşağıdaki kod ile test ediniz
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.util.matrix.test;
+
+import org.csystem.util.array.ArrayUtil;
+import org.csystem.util.matrix.MatrixUtil;
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class SubtractMatrixWithValueTest {
+    public static void run()
+    {
+        Scanner kb = new Scanner(System.in);
+        Random random = new Random();
+
+        System.out.print("Üretilecek matris sayısını giriniz:");
+        int count = kb.nextInt();
+
+        while (count-- > 0) {
+            System.out.println("---------------------------------");
+            int m = random.nextInt(2, 10);
+            int n = random.nextInt(2, 10);
+            int value = random.nextInt(-10, 11);
+            int[][] a = MatrixUtil.getRandomMatrix(random, m, n, 0, 100);
+
+            ArrayUtil.print(2, a);
+            System.out.printf("Value:%d%n", value);
+            MatrixUtil.subtractMatrixWithValue(a, value);
+            ArrayUtil.print(a);
+
+            System.out.println("---------------------------------");
+        }
+    }
+
+    public static void main(String[] args)
+    {
+        run();
+    }
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+    Sınıf Çalışması: Parametresi ile aldığı int türden iki matrisin toplamından oluşan matrise geri dönen multiplyMatrices
+    metodunu MatrixUtil sınıfı içerisinde yazınız ve aşağıdaki kod ile test ediniz.
+    Açıklamalar:
+        - Metot, matris kontrolü ve matrislerin toplanıp toplanmayacağı kontrolünü yapmayacaktır
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.util.matrix.test;
+
+import org.csystem.util.array.ArrayUtil;
+import org.csystem.util.matrix.MatrixUtil;
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class MultiplyMatricesTest {
+    public static void run()
+    {
+        Scanner kb = new Scanner(System.in);
+        Random random = new Random();
+
+        System.out.print("Üretilecek matris sayısını giriniz:");
+        int count = kb.nextInt();
+
+        while (count-- > 0) {
+            System.out.println("---------------------------------");
+            int m = random.nextInt(2, 6);
+            int n = random.nextInt(2, 6);
+            int k = random.nextInt(2, 6);
+            int[][] a = MatrixUtil.getRandomMatrix(random, m, n, 0, 11);
+            int[][] b = MatrixUtil.getRandomMatrix(random, n, k, 0, 11);
+
+            ArrayUtil.print(2, a);
+            System.out.println("+");
+            ArrayUtil.print(2, b);
+            System.out.println("=");
+            ArrayUtil.print(3, MatrixUtil.multiplyMatrices(a, b));
+            System.out.println("---------------------------------");
+        }
+    }
+
+    public static void main(String[] args)
+    {
+        run();
+    }
+}
+
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+/*----------------------------------------------------------------------------------------------------------------------
+	Given a 4 x 4 matrix mat, the initial energy is 100. The task is to reach the last row of the matrix with the maximum possible energy left.
+
+	The matrix can be traversed in the following way:
+
+	1. Start with any cell in the first row.
+	2. In each move, traverse from cell (i, j) of the i'th row and j'th column to any existing cell out of (i + 1, j - 1), (i + 1, j) or (i + 1, j + 1).
+	3. Finish the traversal in the last row.
+
+	After stepping on a cell (i, j) energy decreases by mat[i][i] units. Find the maximum possible energy left at the end of the traversal.
+
+	Note: The final energy can be negative.
+
+	Example:
+
+		10 20 30 40
+		60 50 20 80
+		10 10 10 10
+		60 50 60 50
+
+	Possible paths:
+	0 - based indexing is used.
+
+	(0, 0) - (1, 1) - (2, 2) - (3, 3)
+	(0, 1) - (1, 2) - (2, 2) - (3, 2)
+
+	For the first path, energy left = 100 - 10 - 50 - 10 - 50 = -20
+	For the second path, energy left = 100 - 20 - 20 - 10 - 60 = -10
+
+	It can be proven that 0 is the maximum energy possible at the end of the traversal so return 0.
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------
+	FILE			: ArrayUtil.java
+	AUTHOR			: Java-Nov-2022 Group
+	LAST UPDATE		: 06.05.2023
+
+	Utility class for array operations
+
+	Copyleft (c) 1993 C and System Programmers Association
+	All Rights Free
+------------------------------------------------------------*/
+package org.csystem.util.array;
+
+import java.util.Random;
+
+public class ArrayUtil {
+    public static void bubbleSortAscending(int [] a)
+    {
+        for (int i = 0; i < a.length - 1; ++i)
+            for (int k = 0; k < a.length - 1 - i; ++k)
+                if (a[k + 1] < a[k])
+                    swap(a, k, k + 1);
+    }
+
+    public static void bubbleSortDescending(int [] a)
+    {
+        for (int i = 0; i < a.length - 1; ++i)
+            for (int k = 0; k < a.length - 1 - i; ++k)
+                if (a[k] < a[k + 1])
+                    swap(a, k, k + 1);
+    }
+
+    public static void selectionSortAscending(int [] a)
+    {
+        int min, minIndex;
+
+        for (int i = 0; i < a.length - 1; ++i) {
+            min = a[i];
+            minIndex = i;
+
+            for (int k = i + 1; k < a.length; ++k)
+                if (a[k] < min) {
+                    min = a[k];
+                    minIndex = k;
+                }
+
+            a[minIndex] = a[i];
+            a[i] = min;
+        }
+    }
+
+    public static void selectionSortDescending(int [] a)
+    {
+        int max, maxIndex;
+
+        for (int i = 0; i < a.length - 1; ++i) {
+            max = a[i];
+            maxIndex = i;
+
+            for (int k = i + 1; k < a.length; ++k)
+                if (max < a[k]) {
+                    max = a[k];
+                    maxIndex = k;
+                }
+
+            a[maxIndex] = a[i];
+            a[i] = max;
+        }
+    }
+
+    public static void addBy(int [][] a, int value)
+    {
+        for (int i = 0; i < a.length; ++i)
+            for (int k = 0; k < a[i].length; ++k)
+                a[i][k] += value;
+    }
+
+    public static void bubbleSort(int [] a)
+    {
+        bubbleSort(a, false);
+    }
+
+    public static void bubbleSort(int [] a, boolean descending)
+    {
+        if (descending)
+            bubbleSortDescending(a);
+        else
+            bubbleSortAscending(a);
+    }
+
+    public static void drawHistogram(int [] data, int n, char ch)
+    {
+        int maxVal = max(data);
+
+        for (int i = 0; i < data.length; ++i) {
+            int count = data[i] * n / maxVal;
+
+            while (count-- > 0)
+                System.out.print(ch);
+
+            System.out.println();
+        }
+    }
+
+    public static void fillRandomArray(Random random, int [] a, int min, int bound)
+    {
+        for (int i = 0; i < a.length; ++i)
+            a[i] = random.nextInt(min, bound);
+    }
+
+    public static int [] getHistogramData(int [] a, int n)
+    {
+        int [] counts = new int[n + 1];
+
+        for (int i = 0; i < a.length; ++i)
+            ++counts[a[i]];
+
+        return counts;
+    }
+
+    public static int [] getRandomArray(Random random, int count, int min, int bound)
+    {
+        int [] a = new int[count];
+
+        fillRandomArray(random, a, min, bound);
+
+        return a;
+    }
+
+    public static int max(int [] a)
+    {
+        int result = a[0];
+
+        for (int i = 1; i < a.length; ++i)
+            result = Math.max(result, a[i]);
+
+        return result;
+    }
+
+    public static int min(int [] a)
+    {
+        int result = a[0];
+
+        for (int i = 1; i < a.length; ++i)
+            result = Math.min(result, a[i]);
+
+        return result;
+    }
+
+    public static void multiplyBy(int [][] a, int value)
+    {
+        for (int i = 0; i < a.length; ++i)
+            for (int k = 0; k < a[i].length; ++k)
+                a[i][k] *= value;
+    }
+
+    public static void print(int [] a)
+    {
+        print(1, a);
+    }
+
+    public static void print(int n, int [] a)
+    {
+        String fmt = String.format("%%0%dd ", n);
+
+        for (int i = 0; i < a.length; ++i)
+            System.out.printf(fmt, a[i]);
+
+        System.out.println();
+    }
+
+    public static void print(int [][] a)
+    {
+        print(1, a);
+    }
+
+    public static void print(int n, int [][] a)
+    {
+        for (int i = 0; i < a.length; ++i)
+            print(n, a[i]);
+    }
+
+    public static void reverse(int [] a)
+    {
+        int left = 0;
+        int right = a.length - 1;
+
+        while (left < right)
+            swap(a, left++, right--);
+    }
+
+    public static void reverse(char [] a)
+    {
+        int left = 0;
+        int right = a.length - 1;
+
+        while (left < right)
+            swap(a, left++, right--);
+    }
+
+    public static void selectionSort(int [] a)
+    {
+        selectionSort(a, false);
+    }
+
+    public static void selectionSort(int [] a, boolean descending)
+    {
+        if (descending)
+            selectionSortDescending(a);
+        else
+            selectionSortAscending(a);
+    }
+
+    public static void subtractBy(int [][] a, int value)
+    {
+        addBy(a, -value);
+    }
+
+    public static int sum(int [] a)
+    {
+        int total = 0;
+
+        for (int i = 0; i < a.length; ++i)
+            total += a[i];
+
+        return total;
+    }
+
+    public static long sumLong(int [] a)
+    {
+        long total = 0;
+
+        for (int i = 0; i < a.length; ++i)
+            total += a[i];
+
+        return total;
+    }
+
+    public static void swap(int [] a, int i, int k)
+    {
+        int temp = a[i];
+
+        a[i] = a[k];
+        a[k] = temp;
+    }
+
+    public static void swap(char [] a, int i, int k)
+    {
+        char temp = a[i];
+
+        a[i] = a[k];
+        a[k] = temp;
+    }
+}
+
+/*----------------------------------------------------------
+	FILE			: NumberUtil.java
+	AUTHOR			: Java-Nov-2022 Group
+	LAST UPDATE		: 29.04.2023
+
+	Utility class for numeric operations
+
+	Copyleft (c) 1993 C and System Programmers Association
+	All Rights Free
+------------------------------------------------------------*/
+package org.csystem.util.numeric;
+
+import static java.lang.Math.abs;
+import static java.lang.Math.log10;
+
+public class NumberUtil {
+	public static String [] ones = {"", "bir", "iki", "üç", "dört", "beş", "altı", "yedi", "sekiz", "dokuz"};
+	public static String [] tens = {"", "on", "yirmi", "otuz", "kırk", "elli", "altmış", "yetmiş", "seksen", "doksan"};
+
+	public static int [] getDigits(long val, int n)
+	{
+		int [] digits = new int[val == 0 ? 1 : (int)(Math.log10(Math.abs(val)) / n) + 1];
+		int powOfTen = (int)pow(10, n);
+
+		val = abs(val);
+
+		for (int i = digits.length - 1; i >= 0; digits[i] = (int)(val % powOfTen), val /= powOfTen, --i)
+			;
+
+		return digits;
+	}
+
+	public static String numToText3DigitsTR(int a, int b, int c)
+	{
+		String str = "";
+
+		if (a != 0) {
+			if (a != 1)
+				str += ones[a];
+
+			str += "yüz";
+		}
+
+		return str  + tens[b] + ones[c];
+	}
+
+	public static String numToText3DigitsTR(int val)
+	{
+		if (val == 0)
+			return "sıfır";
+
+		String str = val < 0 ? "eksi" : "";
+
+		val = Math.abs(val);
+
+		int a = val / 100;
+		int b = val / 10 % 10;
+		int c = val % 10;
+
+		return str + numToText3DigitsTR(a, b, c);
+	}
+
+	public static boolean areFriends(int a, int b)
+	{
+		return sumFactors(a) == b && sumFactors(b) == a;
+	}
+
+	public static int calculateDigitalRoot(int a)
+	{
+		int root = abs(a);
+
+		while (root > 9)
+			root = sumDigits(root);
+
+		return root;
+	}
+
+	public static int calculateDigitsPowSum(int a)
+	{
+		int n = countDigits(a);
+
+		int total = 0;
+
+		while (a != 0) {
+			total += pow(a % 10, n);
+
+			a /= 10;
+		}
+
+		return total;
+
+	}
+
+	public static int countDigits(long a)
+	{
+		return a == 0 ? 1 : (int)log10(abs(a)) + 1;
+	}
+
+	public static int factorial(int n)
+	{
+		int result = 1;
+
+		for (int i = 2; i <= n; ++i)
+			result *= i;
+
+		return result;
+	}
+
+	public static int fibonacciNumber(int n)
+	{
+		if (n <= 2)
+			return n - 1;
+
+		int prev1 = 1, prev2 = 0, val = 0;
+
+		for (int i = 2; i < n; ++i) {
+			val = prev1 + prev2;
+			prev2 = prev1;
+			prev1 = val;
+		}
+
+		return val;
+	}
+
+	public static int [] getDigits(long val)
+	{
+		return getDigits(val, 1);
+	}
+
+	public static int [] getDigitsInTwos(long val)
+	{
+		return getDigits(val, 2);
+	}
+
+	public static int [] getDigitsInThrees(long val)
+	{
+		return getDigits(val, 3);
+	}
+
+	public static int getHardyRamanujanCount(int n)
+	{
+		int count = 0;
+
+		EXIT_LOOP:
+
+		for (int a = 1; a * a * a < n; ++a)
+			for (int b = a + 1; a * a * a + b * b * b <= n; ++b)
+				if (a * a * a + b * b * b == n) {
+					if (++count == 2)
+						break EXIT_LOOP;
+
+					++a;
+				}
+
+		return count;
+	}
+
+	public static int getPrime(int n)
+	{
+		int val = 2;
+		int count = 0;
+
+		for (;;) {
+			if (isPrime(val))
+				++count;
+
+			if (count == n)
+				return val;
+
+			++val;
+		}
+	}
+
+	public static int indexOfPrime(long a)
+	{
+		int i = 1;
+		long val = 2;
+
+		for (;;) {
+			if (val == a)
+				return i;
+
+			if (isPrime(val))
+				++i;
+
+			++val;
+		}
+	}
+
+
+	public static boolean isArmstrong(int a)
+	{
+		return a >= 0 && calculateDigitsPowSum(a) == a;
+	}
+
+	public static boolean isDecimalHarshad(int val)
+	{
+		return val > 0 && val % sumDigits(val) == 0;
+	}
+
+	public static boolean isEven(int a)
+	{
+		return a % 2 == 0;
+	}
+
+	public static boolean isFactorian(int n)
+	{
+		return n > 0 && sumFactorialDigits(n) == n;
+	}
+
+	public static boolean isHardyRamanujan(int n)
+	{
+		return n > 0 && getHardyRamanujanCount(n) == 2;
+	}
+
+	public static boolean isOdd(int a)
+	{
+		return !isEven(a);
+	}
+
+	public static boolean isPerfect(int val)
+	{
+		return sumFactors(val) == val;
+	}
+
+	public static boolean isPrime(long a)
+	{
+		if (a <= 1)
+			return false;
+
+		if (a % 2 == 0)
+			return a == 2;
+
+		if (a % 3 == 0)
+			return a == 3;
+
+		if (a % 5 == 0)
+			return a == 5;
+
+		if (a % 7 == 0)
+			return a == 7;
+
+		for (long i = 11; i * i <= a; i += 2)
+			if (a % i == 0)
+				return false;
+
+		return true;
+	}
+
+	public static boolean isPrimeX(long a)
+	{
+		boolean result;
+
+		for (long sum = a; (result = isPrime(sum)) && sum > 9; sum = sumDigits(sum))
+			;
+
+		return result;
+	}
+
+	public static boolean isSuperPrime(long a)
+	{
+		return isPrime(a) && isPrime(indexOfPrime(a));
+	}
+
+	public static int mid(int a, int b, int c)
+	{
+		if (a <= b && b <= c || c <= b && b <= a)
+			return b;
+
+		if (b <= a && a <= c || c <= a && a <= b)
+			return a;
+
+		return c;
+	}
+
+	public static int multiply(int a, int b)
+	{
+		return a * b;
+	}
+
+	public static int nextFibonacciNumber(int val)
+	{
+		if (val < 0)
+			return 0;
+
+		int prev1 = 1, prev2 = 0, next;
+
+		for (;;) {
+			next = prev1 + prev2;
+
+			if (next > val)
+				return next;
+
+			prev2 = prev1;
+			prev1 = next;
+		}
+	}
+
+	public static int pow(int a, int b)
+	{
+		int result = 1;
+
+		while (b-- > 0)
+			result *= a;
+
+		return result;
+	}
+
+	public static int reversed(int a)
+	{
+		int result = 0;
+
+		while (a != 0) {
+			result = result * 10 + a % 10;
+			a /= 10;
+		}
+
+		return result;
+	}
+
+	public static int sumDigits(long a)
+	{
+		int sum = 0;
+
+		while (a != 0) {
+			sum += a % 10;
+			a /= 10;
+		}
+
+		return abs(sum);
+
+	}
+
+	public static int sumFactorialDigits(int n)
+	{
+		int sum = 0;
+
+		while (n != 0) {
+			sum += factorial(n % 10);
+			n /= 10;
+		}
+
+		return sum;
+	}
+
+	public static long sumFactors(long val)
+	{
+		long result = 1;
+
+		for (long i = 2; i * i <= val; ++i)
+			if (val % i == 0)
+				result += (i == val / i) ? i : (i + val / i);
+
+		return result;
+	}
+}
+
+/*----------------------------------------------------------
+	FILE			: StringUtil.java
+	AUTHOR			: Java-Nov-2022 Group
+	LAST UPDATE		: 29.04.2023
+
+	Utility class for string operations
+
+	Copyleft (c) 1993 C and System Programmers Association
+	All Rights Free
+------------------------------------------------------------*/
+package org.csystem.util.string;
+
+import org.csystem.util.array.ArrayUtil;
+
+import java.util.Random;
+
+public class StringUtil {
+	public static String capitalize(String s)
+	{
+		return s.isEmpty() ? "" : Character.toUpperCase(s.charAt(0)) + s.substring(1).toLowerCase();
+	}
+
+	public static String changeCase(String s)
+	{
+		char [] c = s.toCharArray();
+
+		for (int i = 0; i < c.length; ++i)
+			c[i] = Character.isUpperCase(c[i]) ? Character.toLowerCase(c[i]) : Character.toUpperCase(c[i]);
+
+		return String.valueOf(c);
+	}
+
+	public static int countString(String s1, String s2)
+	{
+		int count = 0;
+
+		for (int index = -1; (index = s1.indexOf(s2, index + 1)) != -1; ++count)
+			;
+
+		return count;
+	}
+
+	public static int countStringIgnoreCase(String s1, String s2)
+	{
+		return countString(s1.toLowerCase(), s2.toLowerCase());
+	}
+
+	public static String getRandomText(Random r, int n, String text)
+	{
+		char [] c = new char[n];
+		int len = text.length();
+
+		for (int i = 0; i < n; ++i)
+			c[i] = text.charAt(r.nextInt(len));
+
+		return String.valueOf(c);
+	}
+
+	public static String getRandomTextEN(int n)
+	{
+		return getRandomTextEN(new Random(), n);
+	}
+
+	public static String getRandomTextEN(Random r, int n)
+	{
+		return getRandomText(r, n, "abcdefghijklmnopqrstuwxvyzABCDEFGHIJKLMNOPQRSTUWXYZ");
+	}
+
+	public static String getRandomTextTR(int n)
+	{
+		return getRandomTextTR(new Random(), n);
+	}
+
+	public static String getRandomTextTR(Random r, int n)
+	{
+		return getRandomText(r, n, "abcçdefgğhıijklmnoöprsştuüvyzABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ");
+	}
+
+	public static boolean isPalindrome(String s)
+	{
+		int left = 0;
+		int right = s.length() - 1;
+
+		while (left < right) {
+			char cLeft = Character.toLowerCase(s.charAt(left));
+
+			if (!Character.isLetter(cLeft)) {
+				++left;
+				continue;
+			}
+
+			char cRight = Character.toLowerCase(s.charAt(right));
+
+			if (!Character.isLetter(cRight)) {
+				--right;
+				continue;
+			}
+
+			if (cLeft != cRight)
+				return false;
+
+			++left;
+			--right;
+		}
+
+		return true;
+	}
+
+	public static boolean isPangram(String s, String alphabet)
+	{
+		int len = alphabet.length();
+
+		for (int i = 0; i < len; ++i)
+			if (!s.contains(alphabet.charAt(i) + ""))
+				return false;
+
+		return true;
+	}
+
+	public static boolean isPangramEN(String s)
+	{
+		return isPangram(s.toLowerCase(), "abcdefghijklmnopqrstuwxvyz");
+	}
+
+	public static boolean isPangramTR(String s)
+	{
+		return isPangram(s.toLowerCase(), "abcçdefgğhıijklmnoöprsştuüvyz");
+	}
+
+	public static String join(String [] str, String delimiter, boolean skipBlanks)
+	{
+		String result = "";
+
+		for (int i = 0; i < str.length; ++i) {
+			if (skipBlanks && str[i].isBlank())
+				continue;
+			result += str[i] + delimiter;
+		}
+
+		return result.substring(0, result.length() - delimiter.length());
+	}
+	public static String join(String [] str, String delimiter)
+	{
+		return join(str, delimiter, false);
+	}
+
+	public static String join(String [] str, char delimiter)
+	{
+		return join(str, String.valueOf(delimiter));
+	}
+
+	public static String join(String [] str, char delimiter, boolean skipBlanks)
+	{
+		return join(str, String.valueOf(delimiter), skipBlanks);
+	}
+
+	public static String padLeading(String s, int len)
+	{
+		return padLeading(s, len, ' ');
+	}
+
+	public static String padLeading(String s, int len, char ch)
+	{
+		int length = s.length();
+
+		return len <= length ? s : (ch + "").repeat(len - length) + s;
+	}
+
+	public static String padTrailing(String s, int len)
+	{
+		return padTrailing(s, len, ' ');
+	}
+
+	public static String padTrailing(String s, int len, char ch)
+	{
+		int length = s.length();
+
+		return len <= length ? s : s + (ch + "").repeat(len - length);
+	}
+
+	public static String reverse(String str)
+	{
+		char [] c = str.toCharArray();
+
+		ArrayUtil.reverse(c);
+
+		return String.valueOf(c);
+	}
+}
+
+/*----------------------------------------------------------
+	FILE			: MatrixUtil.java
+	AUTHOR			: Java-Nov-2022 Group
+	LAST UPDATE		: 06.05.2023
+
+	Utility class for matrix operations
+
+	Copyleft (c) 1993 C and System Programmers Association
+	All Rights Free
+------------------------------------------------------------*/
+package org.csystem.util.matrix;
+
+import org.csystem.util.array.ArrayUtil;
+
+import java.util.Random;
+
+public class MatrixUtil {
+    public static int [][] addMatrices(int [][] a, int [][] b)
+    {
+        int row = a.length;
+        int col = a[0].length;
+        int [][] result = new int[row][col];
+
+        for (int i = 0; i < row; ++i)
+            for (int j = 0; j < col; ++j)
+                result[i][j] = a[i][j] + b[i][j];
+
+        return result;
+    }
+
+    public static void addMatrixWithValue(int [][] a, int value)
+    {
+        ArrayUtil.addBy(a, value);
+    }
+
+    public static void fillRandomMatrix(Random random, int [][] a, int min, int bound)
+    {
+        for (int i = 0; i < a.length; ++i)
+            ArrayUtil.fillRandomArray(random, a[i], min, bound);
+    }
+
+    public static boolean isSquareMatrix(int [][] a)
+    {
+        return isMatrix(a) && a.length == a[0].length;
+    }
+
+    public static int [][] getRandomMatrix(Random random, int m, int n, int min, int bound)
+    {
+        int [][] a = new int[m][n];
+
+        fillRandomMatrix(random, a, min, bound);
+
+        return a;
+    }
+
+    public static int [][] getRandomSquareMatrix(Random random, int n, int min, int bound)
+    {
+        return getRandomMatrix(random, n, n, min, bound);
+    }
+
+    public static boolean isMatrix(int [][] a)
+    {
+        for (int i = 1; i < a.length; ++i)
+            if (a[0].length != a[i].length)
+                return false;
+
+        return true;
+    }
+
+    public static int [][] multiplyMatrices(int [][] a, int [][] b)
+    {
+        int row1 = a.length;
+        int col2 = b[0].length;
+        int row2 = b.length;
+        int [][] result = new int[row1][col2];
+
+        for (int i = 0; i < row1; ++i)
+            for (int j = 0; j < col2; ++j)
+                for (int k = 0; k < row2; ++k)
+                    result[i][j] += a[i][k] * b[k][j];
+
+        return result;
+    }
+
+    public static void multiplyMatrixWithValue(int [][] a, int value)
+    {
+        ArrayUtil.multiplyBy(a, value);
+    }
+
+    public static int [][] subtractMatrices(int [][] a, int [][] b)
+    {
+        int row = a.length;
+        int col = a[0].length;
+        int [][] result = new int[row][col];
+
+        for (int i = 0; i < row; ++i)
+            for (int j = 0; j < col; ++j)
+                result[i][j] = a[i][j] - b[i][j];
+
+        return result;
+    }
+
+    public static void subtractMatrixWithValue(int [][] a, int value)
+    {
+        addMatrixWithValue(a, -value);
+    }
+
+    public static int sumDiagonal(int [][] a)
+    {
+        int total = 0;
+
+        for (int i = 0; i < a.length; ++i)
+            total += a[i][i];
+
+        return total;
+    }
+
+    public static int [] [] transposed(int [][] a)
+    {
+        int [][] t = new int[a[0].length][a.length];
+
+        for (int i = 0; i < a.length; ++i)
+            for (int j = 0; j < a[i].length; ++j)
+                t[j][i] = a[i][j];
+
+        return t;
+    }
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	for-each döngü deyimi (enhanced for loop):
+	Bu döngü deyiminin genel biçimi:
+		for (<tür> <değişken> : <dolaşılabilir türe ilişkin referans>)
+			<deyim>
+	Dolaşılabilir (iterable) tür kavramının detayları burada ele alınmayacaktır. Diziler de dolaşılabilir türler olduğundan
+	bu deyimi diziler ile kullanılabilir.
+
+	Bu döngü deyiminin temel amacı kodun okunabilirliğini/algılanabilirliğini kodu yalınlaştırarak artırmaktır.
+
+	Bu durumda kodu okuyan kişi örneğin bir dizi için klasik for döngüsü görürse "for-each döngü deyimini kullanmamasının
+	bir gerekçesi (rationale) olmalı, aksi durumda for-each döngüsü kullanırdı" biçiminde anlar. Bu bir convention olarak
+	düşünülmelidir
+-----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	for-each döngü deyiminin dizi ile kullanımında döngü değişkenine her adımda o anki elemanın değeri atanır. Bu işlem
+	dizinin başından sonuna kadar yinelenir. Aşağıdaki for-each döngü deyiminin yaklaşık karşılığı şu şekildedir:
+
+	{
+		int val;
+
+		for (int i = 0; i < a.length; ++i) {
+			val = a[i];
+			System.out.printf("%d ", val);
+		}
+	}
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{
+		int [] a = {1, 2, 3, 4, 5, 6};
+
+		for (int val : a)
+			System.out.printf("%d ", val);
+
+		System.out.println();
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	for-each döngü deyiminde döngü değişkenine atama doğrudan (implicit) yapılır. Aşağıdaki for döngü deyimi geçerlidir
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{
+		int [] a = {1, 2, 3, 4, 5, 6};
+
+		for (long val : a)
+			System.out.printf("%d ", val);
+
+		System.out.println();
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	for-each döngü deyiminde döngü değişkenine atama doğrudan (implicit) yapılır. Aşağıdaki for döngü deyimi geçersizdir
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{
+		int [] a = {1, 2, 3, 4, 5, 6};
+
+		for (short val : a)
+			System.out.printf("%d ", val);
+
+		System.out.println();
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	for-each döngü deyiminde :'den sonraki ifade bir kez yapılır
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{
+
+		for (int val : Sample.getArray())
+			System.out.printf("%d ", val);
+
+		System.out.println();
+	}
+}
+
+class Sample {
+	public static int [] getArray()
+	{
+		System.out.println("getArray");
+
+		return new int[]{1, 2, 3, 4 ,5, 6};
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte dizinin elemanları değiştirilirken for-each kullanılmış olsa da kod okunabilir olmaz. Bu durumda
+	programcının klasik for döngüsünü kullanması daha uygun olur
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{
+		int [] a = {1, 2, 3, 4, 5, 6};
+
+		int i = 0;
+
+		for (int val : a)
+			++a[i++];
+
+		for (int val : a)
+			System.out.printf("%d ", val);
+
+		System.out.println();
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte dizinin elemanları yarısına kadar dolaşılırken for-each kullanılmış olsa da kod okunabilir olmaz.
+	Bu durumda programcının klasik for döngüsünü kullanması daha uygun olur
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{
+		int [] a = {1, 2, 3, 4, 5, 6};
+
+		int count = 0;
+
+		for (int val : a) {
+			System.out.printf("%d ", val);
+			if (++count == a.length / 2)
+				break;
+		}
+
+		System.out.println();
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte dizinin elemanları sondan başa doğru dolaşılırken for-each kullanılmış olsa da kod okunabilir olmaz.
+	Bu durumda programcının klasik for döngüsünü kullanması daha uygun olur
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{
+		int [] a = {1, 2, 3, 4, 5, 6};
+
+		int i = a.length - 1;
+
+		for (int val : a)
+			System.out.printf("%d ", a[i--]);
+
+		System.out.println();
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Anahtar Notlar: Genel olarak, dizi dolaşılırken indeks numarasının kullanılması gerektiği durumlarda ve dizinin baştan
+	sona dolaşılmadığı durumlarda klasik for döngüsü kullanılması ya da başka bir deyişle for-each döngüsünün kullanılmaması
+	daha iyi bir tekniktir. Diğer durumlarda for-each döngü deyimi kullanılabilir, kullanılmalıdır
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{
+		int [] a = {1, 2, 3, 4, 5, 6};
+
+		int i = a.length - 1;
+
+		for (int val : a)
+			System.out.printf("%d ", a[i--]);
+
+		System.out.println();
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	String sınıfı for-each döngü deyimi ile kullanılamaz. Teknik olarak söylersek, String sınıfı "iterable" bir sınıf
+	değildir
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{
+		String s = "ankara";
+
+		for (char c : s) //error
+			System.out.printf("%c ", c );
+
+		System.out.println();
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	İstenirse toCharArray metodu ile elde edilen dizideki tüm karakterler for-each ile dolaşılabilir. toCharArray metodunun
+	yeni bir dizi yaratığı da unutulmamalıdır. Bu durumun dezavantaj olup olmadığı yine yazılacak koda bağlıdır
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{
+		String s = "ankara";
+
+		for (char c : s.toCharArray())
+			System.out.printf("%c ", c );
+
+		System.out.println();
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	for-each döngü deyimi ile dizi dizilerinin dolaşılması
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{
+		int [][] a = {{1, 2}, {3, 4, 5}, {6, 7}};
+
+		for (int [] array : a) {
+			for (int val : array)
+				System.out.printf("%d ", val);
+
+			System.out.println();
+		}
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte her adımda String dizisinin elemanı olan String referansları elde edilmektedir
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{
+		String [] cities = {"ankara", "istanbul", "izmir", "zonguldak"};
+
+		for (String city : cities)
+			System.out.println(city);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+    07.05.2023
+-----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Bir okulda Matematik sınavı ortak olarak yapılıyor olsun. Kaç şubenin sınava gireceği ve herbir
+	şubedeki öğrenci sayısı klavyeden alınsın. Öğrencilerin notları rasgele olarak belirlensin. Bu işlemlerden sonra
+	tüm şubelerin ayrı ayrı not ortalamaları, en yüksek not ve en düşük ile tüm okulun ortalamasını hesaplayan
+	programı (simülasyon) yazınız
+	Açıklamalar:
+		- Mümkün olduğunca "Nesne Yönelimli" olarak yazmaya gayret gösteriniz.
+		//onur ile bak tekrardan..
+-----------------------------------------------------------------------------------------------------------------------*/
+
+package org.csystem.app.simulation.exam;
+
+import org.csystem.simulation.exam.ExamSimulation;
+
+import java.util.Random;
+
+public class ExamSimulationApp {
+    public static void run()
+    {
+        Random r = new Random();
+
+        ExamSimulation mathSimulation = new ExamSimulation("Matematik", r);
+        ExamSimulation physSimulation = new ExamSimulation("Fizik", r);
+
+        mathSimulation.run();
+        physSimulation.run();
+
+        mathSimulation.displayReport();
+        physSimulation.displayReport();
+    }
+
+    public static void main(String[] args)
+    {
+        run();
+    }
+}
+
+package org.csystem.simulation.exam;
+
+import org.csystem.util.array.ArrayUtil;
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class ExamSimulation {
+    public String lectureName;
+    public int [][] grades;
+    public double average;
+    public double [] averages;
+    public int [] minGrades;
+    public int [] maxGrades;
+
+    public Random random;
+
+    public void fillGrades()
+    {
+        Scanner kb = new Scanner(System.in);
+        System.out.printf("%s dersi için şube sayısını giriniz:", lectureName);
+        grades = new int[Integer.parseInt(kb.nextLine())][];
+
+        for (int i = 0; i < grades.length; ++i) {
+            System.out.printf("%d.şubenin öğrenci sayısını giriniz:", i + 1);
+            grades[i] = ArrayUtil.getRandomArray(random, Integer.parseInt(kb.nextLine()), 0, 101);
+        }
+
+        averages = new double[grades.length];
+        minGrades = new int[grades.length];
+        maxGrades = new int[grades.length];
+    }
+
+    public void findAverages()
+    {
+        int numberOfAllStudents = 0;
+        int totalGrades = 0;
+
+        for (int i = 0; i < grades.length; ++i) {
+            int total = ArrayUtil.sum(grades[i]);
+
+            numberOfAllStudents += grades[i].length;
+            totalGrades += total;
+            averages[i] = (double)total / grades[i].length;
+            minGrades[i] = ArrayUtil.min(grades[i]);
+            maxGrades[i] = ArrayUtil.max(grades[i]);
+        }
+
+        average = (double)totalGrades / numberOfAllStudents;
+    }
+
+    public ExamSimulation(String name, Random r)
+    {
+        lectureName = name;
+        random = r;
+    }
+
+    public void run()
+    {
+        fillGrades();
+        findAverages();
+    }
+
+    public void displayGrades()
+    {
+        System.out.println("----------------------------------------------------------------------");
+        System.out.printf("%s dersinin şubelere göre notları:%n", lectureName);
+        for (int i = 0; i < grades.length; ++i) {
+            System.out.printf("%d.şube notları:", i + 1);
+            ArrayUtil.print(grades[i]);
+        }
+        System.out.println("----------------------------------------------------------------------");
+    }
+
+    public void displayReport()
+    {
+        System.out.println("#########################################################################");
+        displayGrades();
+        int n = grades.length;
+
+        for (int i = 0; i < n; ++i) {
+            System.out.printf("%d.şube:%n", i + 1);
+            System.out.printf("Not Ortalaması:%f%n", averages[i]);
+            System.out.printf("En yüksek Not:%d%n", maxGrades[i]);
+            System.out.printf("En düşük Not:%d%n", minGrades[i]);
+        }
+        System.out.printf("Okul Ortalaması:%f%n", average);
+        System.out.println("#########################################################################");
+    }
+}
