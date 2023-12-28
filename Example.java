@@ -8175,7 +8175,7 @@ class DateUtil {
 			days = 28;
 			if (isLeapYear(year))
 				++days;
-		}
+		}  
 		
 		return days;
 	}
@@ -13517,7 +13517,7 @@ class App {
 /*----------------------------------------------------------------------------------------------------------------------
 	 Aşağıdaki örnekte rasgele üretilen ilk 10 sayının dizilimi her çalıştırmada farklı olur. İlk 10 sayının
 	 diziliminin aynı gelmesi çok çok düşüktür. İkinci üretilen 10 sayı klavyeden alınan tohum değerine göre
-	 üretilir. Bu durumda örneğin her çalıltırmada tohum değeri 200 olarak girilirse ikinci 10 sayının dizilimi
+	 üretilir. Bu durumda örneğin her çalıştırmada tohum değeri 200 olarak girilirse ikinci 10 sayının dizilimi
 	 hep aynı olacaktır. Kodu çeşitli değerler ile çalıştırıp sonnuçlarını gözlemleyiniz
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
@@ -13743,6 +13743,7 @@ class Point {
 	Math.random metodu [0, 1) aralığında rasgele üretilmiş double türden bir değere geri döner. Bu metot içsel
 	olarak her çağırmada aynı Random nesnesini kullanır. Bu metot ilk kez çağrıldığında kullandığı Random nesnesi
 	yaratılır ve her çağrıda bu nesne kullanılır. Aşağıdaki örneğin  yaklaşık eşdeğeri şu şekildedir:
+	
 	  java.util.Random r = new java.util.Random();
 	  
 	  for (int i = 0; i < 10; ++i)
@@ -14895,7 +14896,7 @@ class App {
 		String s = "İyi bir Java programcısı olmak için çok çalışmak gerekir. Hatta çok çok çalışmak gerekir";
 		String str = "çok";
 		
-		int index = s.indexOf(str, 37);
+		int index = s.indexOf(str, 37); // bu indexten başla aramaya.. yanı 37. indexten başla
 		
 		System.out.printf("İndex:%d%n", index);
 	}
@@ -15573,7 +15574,7 @@ class App {
 
 /*----------------------------------------------------------------------------------------------------------------------
 	Aşağıdaki örnekte println metodu birleştirilmiş yazıyı argüman olarak alır ve ekrana basar. Şüphesiz
-	birleştirme işlemini println yapmaz. Çünkü anımsanacağı gibi metot çağrılmadan önce argüma ilşişkin ifade
+	birleştirme işlemini println yapmaz. Çünkü anımsanacağı gibi metot çağrılmadan önce argümana ilişkin ifade
 	hesaplanır, elde edilen değer ile metot çağrılır 
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
@@ -15585,7 +15586,7 @@ class App {
 		System.out.print("Sınavdan aldığınız notları giriniz: (arasınav final)");
 		int midTermGrade = kb.nextInt();
 		int finalGrade = kb.nextInt();	
-		double grade = 0.4 * midTermGrade + 0.6 * finalGrade;
+		double grade = 0.4 * midTermGrade + 0.6 * finalGrade; // hesaplanır, println e arguman olarak hesaplanmış halı geçer.
 		
 		System.out.println("Geçme notunuz:" + grade + (grade >= 50 ? " Geçti" : " Kaldı"));
 	}
@@ -15672,13 +15673,13 @@ class ConcatWithHyphenApp {
 			System.out.print("Bir yazı giriniz:");
 			String s = kb.nextLine();
 			
-			if (s.trim().isEmpty())
+			if (s.trim().isEmpty())  //boşlukları sil boş mu : trim metodu metnin başında ve sonunda yer alan boşlukları siler
 				continue;
 			
 			if ("elma".equals(s))
 				break;
 			
-			if (!str.isEmpty())
+			if (!str.isEmpty()) // str boş mu?
 				str += "-";
 			
 			str += s;
@@ -15915,10 +15916,10 @@ class App {
 		java.util.Scanner kb = new java.util.Scanner(System.in);
 		
 		System.out.print("Input your email:");
-		String email = kb.nextLine();
+		String email = kb.nextLine(); //caglaccakir@gmail
 		
-		int atIdx = email.indexOf('@');
-		int atIdx2 = email.lastIndexOf('@');
+		int atIdx = email.indexOf('@'); //11
+		int atIdx2 = email.lastIndexOf('@'); //5
 		
 		if (atIdx != -1 && atIdx == atIdx2 && atIdx != email.length() - 1) {
 			if (email.substring(atIdx + 1).lastIndexOf(".") == -1)
@@ -16105,7 +16106,7 @@ class StringUtil {
 /*----------------------------------------------------------------------------------------------------------------------
   	Java 11 ile birlikte String sınıfına strip, stripLeading ve stripTrailing metotları eklenmiştir
 
-  	// baştaki ve sondaki boşlujları siler..
+  	// baştaki ve sondaki boşlukları siler..
 
   	Eflatun
 --------------------------------------------------------------------------------------------------------------------*/
@@ -16131,9 +16132,9 @@ class StripLeadingTrailingTest {
 				break;
 			
 			System.out.printf("(%s)%n", s);
-			System.out.printf("(%s)%n", s.strip());
-			System.out.printf("(%s)%n", s.stripTrailing());
-			System.out.printf("(%s)%n", s.stripLeading());
+			System.out.printf("(%s)%n", s.strip()); // başatakı sondakı boşluklar silinir..
+			System.out.printf("(%s)%n", s.stripTrailing());  // sondaki boşlukları atar..
+			System.out.printf("(%s)%n", s.stripLeading()); // baştaki boşlukları atar..
 		}
 		
 		System.out.println("Tekrar yapıyor musunuz?");
@@ -16834,7 +16835,7 @@ class IsPangramENTest {
 			
 			System.out.println(StringUtil.isPangramEN(s) ? "Pangram" : "Not a Pangram");
 		}
-	}
+	} 
 }
 
 
@@ -17007,7 +17008,7 @@ class App {
 		System.out.print("İkinci sayıyı giriniz");
 		double b = kb.nextDouble();
 		
-		String str = String.format("a = %d, b = %.10f", a, b);
+		String str = String.format("a = %d, b = %.10f", a, b); //yazı karsılıgı ıstenılen yerde kullanılanılır
 		
 		System.out.println(str);	
 	}
@@ -17519,19 +17520,19 @@ class App {
 	
 	- public olarak bildirilen bir UDT'nin kendi ismiyle aynı isimde bir .java uzantılı dosya içerisinde 
 	bildirilmesi zorunludur. Bu durumda bir .java dosyasında yalnızca o dosya ismi ile aynı isimde bir UDT public
-	olarak bildirilebilir
+	olarak bildirilebilir.
 	
 	- Bir .java dosyasında public bir UDT olmak zorunda değildir
 	
 	- Bir .java dosyası içerisinde dosya ismi ile aynı isimde bir UDT olmak zorunda değildir. Ancak pratikte bunu pek
-	tercih etmeyiz
+	tercih etmeyiz.
 	
 	- Bir .java dosyası içerisinde public olmayan istenildiği kadar UDT bildirilebilir. Bu UDT'lerin hepsi
-	aynı pakette bildirilmiş olurlar
+	aynı pakette bildirilmiş olurlar.
 	
 	- Aynı paket içerisinde aynı isimde birden fazla UDT bildirimi geçersizdir
 	
-	- Farklı paketlerde aynı isimde UDT'ler bildirilebilir
+	- Farklı paketler de aynı isimde UDT'ler bildirilebilir
 	
 	- Bir .java dosyasında birden fazla paket bildirimi geçersizdir
 
@@ -18450,7 +18451,7 @@ class App {
 }
 
 
-package org.csystem.app.test;
+package org.csystem.app.test; 
 
 public class Sample {
 	public int x;
@@ -20314,7 +20315,7 @@ class App {
 }
 
 /*----------------------------------------------------------------------------------------------------------------------
-	Dizinin eleman sayısı length isimli veri elemanı ile alde edilebilir
+	Dizinin eleman sayısı length isimli veri elemanı ile elde edilebilir
 -----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app;
 
@@ -20704,6 +20705,225 @@ public class SumLongTest {
     }
 }
 
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı int türden bir dizinin elemanlarını ters yüz eden reverse isimli metodu
+	başka bir dizi kullanmadan yazınız ve aşağıdaki kod ile test ediniz
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.util.array.test;
+
+import java.util.Random;
+import java.util.Scanner;
+
+import static org.csystem.util.array.ArrayUtil.*;
+
+public class ReverseTest {
+    public static void run()
+    {
+        Scanner kb = new Scanner(System.in);
+        Random random = new Random();
+
+        System.out.print("Bir sayı giriniz:");
+        int count = kb.nextInt();
+
+        while (count-- > 0) {
+            System.out.println("--------------------------------------------------------------");
+            int [] a = getRandomArray(random, random.nextInt(3, 10), 0, 99);
+
+            print(2, a);
+            reverse(a);
+            print(2, a);
+            System.out.println("--------------------------------------------------------------");
+        }
+    }
+
+    public static void main(String[] args)
+    {
+        run();
+    }
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı int türden bir dizinin elemanlarını ters yüz eden reverse isimli metodu
+	başka bir dizi kullanmadan yazınız ve aşağıdaki kod ile test ediniz
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+import java.util.Random;
+import java.util.Scanner;
+
+import static org.csystem.util.array.ArrayUtil.*;
+
+class App {
+	public static void main(String [] args)
+	{
+		ReverseTest.run();
+	}
+}
+
+class ReverseTest {
+	public static void run()
+	{
+		Scanner kb = new Scanner(System.in);
+		Random random = new Random();
+
+		System.out.print("Bir sayı giriniz:");
+		int count = kb.nextInt();
+
+		while (count-- > 0) {
+			System.out.println("--------------------------------------------------------------");
+			int [] a = getRandomArray(random, random.nextInt(3, 10), 0, 99);
+
+			print(2, a);
+			reverse(a);
+			print(2, a);
+			System.out.println("--------------------------------------------------------------");
+		}
+	}
+}
 
 
+class Util {
+	public static void reverse(int [] a)
+	{
+		for (int i = 0; i < a.length / 2; ++i)
+			swap(a, i, a.length - 1 - i);
+	}
+
+	public static void swap(int [] a, int i, int k)
+	{
+		int temp = a[i];
+
+		a[i] = a[k];
+		a[k] = temp;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı long türden bir sayının basamaklarından oluşan diziyi döndüren getDigits
+	isimli metodu NumberUtil sınıfı içerisinde yazınız ve test ediniz:
+	Açıklamalar:
+		- Metot negatif sayılar için basamak değerlerini pozitif olarak diziye yerleştirecektir
+
+
+		sor...
+-----------------------------------------------------------------------------------------------------------------------*/
+
+package org.csystem.util.numeric.test;
+
+import java.util.Random;
+import java.util.Scanner;
+
+import static org.csystem.util.array.ArrayUtil.print;
+import static org.csystem.util.numeric.NumberUtil.getDigits;
+
+public class GetDigitsTest {
+    public static void run()
+    {
+        Scanner kb = new Scanner(System.in);
+        Random random = new Random();
+
+        System.out.print("Bir sayı giriniz:");
+        int count = kb.nextInt();
+
+        while (count-- > 0) {
+            System.out.println("--------------------------------------------------------------");
+            long val = random.nextLong();
+            int [] digits = getDigits(val);
+            System.out.printf("Value:%d -> ", val);
+            print(digits);
+            System.out.println("--------------------------------------------------------------");
+        }
+    }
+
+    public static void main(String[] args)
+    {
+        run();
+    }
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	15.04.2023
+-----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Uzunluğu sıfır olan bir dizi yaratılabilir
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{
+		int [] a = new int[0];
+		int [] b = {};
+
+		System.out.printf("Length:%d%n", a.length);
+		System.out.printf("Length:%d%n", b.length);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Uzunluğu sıfır olan bir dizi bazı durumlarda kontrol amaçlı kullanılabilir
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+import org.csystem.util.array.ArrayUtil;
+
+import java.util.Random;
+import java.util.Scanner;
+
+class App {
+	public static void main(String [] args)
+	{
+		Scanner kb = new Scanner(System.in);
+		Random r = new Random();
+
+		for (;;) {
+			System.out.print("Dizinin eleman sayısını giriniz:");
+			int n = Integer.parseInt(kb.nextLine());
+			if (n == 0)
+				break;
+			System.out.print("Minimum değeri giriniz:");
+			int min = Integer.parseInt(kb.nextLine());
+
+			System.out.print("Sınır değeri değeri giriniz:");
+			int bound = Integer.parseInt(kb.nextLine());
+
+			int [] a = Util.getRandomIntArray(r, n, min, bound);
+
+			if (a.length != 0)
+				ArrayUtil.print(a);
+			else
+				System.out.println("Geçersiz değerler girdiniz!...");
+		}
+	}
+}
+
+class Util {
+	public static int [] getRandomIntArray(Random r, int n, int min, int bound)
+	{
+		if (n <= 0 || min >= bound)
+			return new int[0];
+
+		int [] a = new int[n];
+
+		for (int i = 0; i < n; ++i)
+			a[i] = r.nextInt(min, bound);
+
+		return a;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Dizilerin Sıraya Dizilmesi (Sorting):
+	Dizilerin sıraya dizilmesine yönelik pek çok algoritma vardır. Sıralama işleminin küçükten büyüğe yani artan sırada
+	(ascending order) yapılmasına doğal sıralama (natural sort order) denir. Biz burda "kabarcık sıralama (bubble sort)"
+	ve "seçerek sıralama (selection sort)" algoritmalarını implemente edeğiz
+-----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Kabarcık sıralama algoritmasında dizinin yan yana iki elemanı karşılaştırılır, duruma göre yer değiştirilir. Her
+	yinelemede en büyük eleman daraltılmış dizinin sonuna gider. Böylece her yinelemede eskisinden bir geriye kadar
+	gitmek yeterli olur
+-----------------------------------------------------------------------------------------------------------------------*/
 
