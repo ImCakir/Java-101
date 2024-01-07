@@ -24228,3 +24228,2430 @@ public class ExamSimulation {
         System.out.println("#########################################################################");
     }
 }
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Elemanlarının Temel Erişim Belirleyicileri:
+	Sınıf elemanlarının erişim belirleyicileri 4 tanedir ve bir eleman bunlardan yalnızca biri ile bildirilebilir:
+	public, protected, no-modifier, private
+
+	Erişim belirleyici anlamında sınıfı 4 bölüme ayrılmıştır. Yani örneğin public bir eleman public bölüme ait olur. Erişim
+	belirleyiciler sınıf dışından erişimde anlamlıdır. Sınıfın dışı başka bir sınıfın içi demektir. Sınıfın içinde
+	erişim belirleyici anlamında bir kısıt yoktur. Yani sınıf içerisinde her bölüme eirşlilebilir.
+
+	Anahtar Notlar: Sınıfın no-modifer bölümü yani hiç bir erişim belirleyici yazılmamış elemanların oluşturduğu bölüm
+	Java'da erişim belirleyici anlamında diğerlerinden farklıdır. Bu durumun "enum class"'larda bir istisnası vardır.
+	İleride ele alınacaktır
+
+	Sınıfın no-modifier ve protected bölümlerinin anlamları erişen sınıfların aynı pakette olmaları (friendly) veya farklı
+	paketlerde olmalarına göre değişmektedir. public ve private bölümlerin anlamları erişen sınıfın aynı parkette veya
+	farklı pakette olmasına göre değişiklik göstermez
+-----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıfın public bölümüne sınıf dışından erişilebilir
+-----------------------------------------------------------------------------------------------------------------------*/
+package test;
+
+public class A {
+    public int x;
+    public A()
+    {
+        //...
+    }
+
+    public void foo()
+    {
+        //...
+    }
+}
+
+package test;
+
+public class B { 
+    public void bar()
+    {
+        A a = new A();
+
+        a.x = 10;
+        a.foo();
+    }
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıfın public bölümüne sınıf dışından erişilebilir
+-----------------------------------------------------------------------------------------------------------------------*/
+
+package test;
+
+public class A {
+    public int x;
+    public A()
+    {
+        //...
+    }
+
+    public void foo()
+    {
+        //...
+    }
+}
+
+package mest;
+
+import test.A;
+
+public class B {
+    public void bar()
+    {
+        A a = new A();
+
+        a.x = 10;
+        a.foo();
+    }
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıfın private bölümüne sınıf dışından erişilemez
+	sor..
+-----------------------------------------------------------------------------------------------------------------------*/
+
+package test;
+
+public class B {
+    public void bar()
+    {
+        A a = new A(); //error
+
+        a.x = 10; //error
+        a.foo(); //error
+    }
+}
+
+package test;
+
+public class B {
+    public void bar()
+    {
+        A a = new A(); //error
+
+        a.x = 10; //error
+        a.foo(); //error
+    }
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıfın private bölümüne sınıf dışından erişilemez
+-----------------------------------------------------------------------------------------------------------------------*/
+package test;
+
+public class A {
+    private int x;
+    private A()
+    {
+        //...
+    }
+
+    private void foo()
+    {
+        //...
+    }
+}
+
+package mest;
+
+import test.A;
+
+public class B {
+    public void bar()
+    {
+        A a = new A(); //error
+
+        a.x = 10; //error
+        a.foo(); //error
+    }
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+    Görüldüğü gibi sınıfın private ve public bölümlerinin anlamları aynı pakette olmak ve farklı pakette olmak anlamında
+    değişiklik göstermemektedir.
+-----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+    Sınıfın no-mdifier bölümü aynı paketteki diğer sınıflar için public anlamındadır.
+-----------------------------------------------------------------------------------------------------------------------*/
+package test;
+
+public class A {
+    int x;
+    A()
+    {
+        //...
+    }
+
+    void foo()
+    {
+        //...
+    }
+}
+
+package test;
+
+import test.A;
+
+public class B {
+    public void bar()
+    {
+        A a = new A();
+ 
+        a.x = 10;
+        a.foo();
+    }
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+    Sınıfın no-mdifier bölümü farklı paketlerdeki diğer sınıflar için private anlamındadır
+-----------------------------------------------------------------------------------------------------------------------*/
+package test;
+
+public class A {
+    int x;
+    A()
+    {
+        //...
+    }
+
+    void foo()
+    {
+        //...
+    }
+}
+
+package mest;
+
+import test.A;
+
+public class B {
+    public void bar()
+    {
+        A a = new A(); //error
+
+        a.x = 10; //error
+        a.foo(); //error
+    }
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+    Sınıfın no-mdifier bölümü farklı paketlerdeki diğer sınıflar için private anlamındadır
+-----------------------------------------------------------------------------------------------------------------------*/
+package test;
+
+public class A {
+    int x;
+    A()
+    {
+        //...
+    }
+
+    void foo()
+    {
+        //...
+    }
+}
+
+package mest;
+
+import test.A;
+
+public class B {
+    public void bar()
+    {
+        A a = new A(); //error
+
+        a.x = 10; //error
+        a.foo(); //error
+    }
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+    Sınıfın protected bölümü aynı paketteki diğer sınıflar için public anlamındadır
+-----------------------------------------------------------------------------------------------------------------------*/
+package test;
+
+public class A {
+    protected int x;
+    protected A()
+    {
+        //...
+    }
+
+    protected void foo()
+    {
+        //...
+    }
+}
+
+package test;
+
+import test.A;
+
+public class B {
+    public void bar()
+    {
+        A a = new A();
+
+        a.x = 10;
+        a.foo();
+    }
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+    Sınıfın protected bölümü farklı paketlerdeki diğer sınıflar için "türetme/kalıtım (inheritance)" söz konusu değilse
+    private anlamındadır. Faklı pakette ancak "türemiş sınıf (derived/sub class)" kendisine ait protected bölüme
+    erişebilir. Türetme ve protected bölümün anlamı ileride detaylı olarak ele alınacaktır
+-----------------------------------------------------------------------------------------------------------------------*/
+package test;
+
+public class A {
+    protected int x;
+    protected A()
+    {
+        //...
+    }
+
+    protected void foo()
+    {
+        //...
+    }
+}
+
+package mest;
+
+import test.A;
+
+public class B {
+    public void bar()
+    {
+        A a = new A(); //error
+
+        a.x = 10; //error
+        a.foo(); //error
+    }
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	  Sınıfın bölümlerine erişim tablosu
+	  Erişim Belirleyici        Kendisi     Friendly Sınıflar       Farklı paketlerdeki sınıflar        Türemiş Sınıf
+	  public                        T               T                           T                             T
+	  protected                     T               T                           F                             T
+	  no-modifier                   T               T                           F                             F
+	  private                       T               F                           F                             F
+-----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıfların özellikle veri elemanlarının gizlenmesine yani diğer sınıflardan erişiminin engellenmesine nesne yönelimli
+	programlama tekniğinde "kapsülleme/sınıfsal temsil (encapsulation)" denir. Bu kavramın geneline de
+	"veri/bilgi gizleme (data/information hiding)" denir. Burada temel amaç dışarıyı yani sınıf dışını ilgilendirmeyecek
+	verilerin/bilgilerin dışarıya doğrudan verilmemesidir. Bu kavram, diğer birçok kavramda olduğu gibi gerçek hayattan
+	programlamaya aktarılmıştır. Örneğin, bir kişi muhtardan ikametgah senedi almak isterse, muhtarlık kanunu bilmesi
+	gerekmez. Ya da araba kullanırken vites değişiminin aşağı seviyede nasıl yapıldığı kullanan için önemsizdir. Bilse de
+	bilmese de arabayı kullanabilir.
+
+	Bu anlamda sınıfı yazan (server) ve sınıfı kullanan (client) bakış açıları farklıdır. Şüphesiz sınıfı yazan için
+	iki bakış açısı da önemlidir. Bu durumda programcı buna göre düşünerek sınıfı yazar. Sınıfı kullanan bakış açısı
+	için (müşteri kodları) içsel detayların önemi yoktur
+-----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	13.05.2023
+-----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	Anahtar Notlar: Programlamada isimlendirmeye yönelik bazı teknikler kullanılabilmektedir. Bu teknikler dışında da isimlendirme
+	yapılabilir. Burada anlatılanlar çok kullanılan ve bilinen tekniklerden bazılardır:
+	1. Unix stili (snake case): Bu isimlendirmede karakterlerin tamamı küçük harf ile yazılır ve isim birden fazla kelimeden
+	oluşuyorsa aralarına alttire karakteri yerleştirilir. Örneğin:
+		number_of_devices usb_port
+	Bu isimlendirme Java'da doğrudan tercih edilmez.
+
+	2. Camel case (lower camel case): Bu isimlendirmede kelimeler bitişik olarak yazılır. İlk kelimenin baş harfi küçük
+	diğer kelimelerin baş harfleri büyük olarak, geri kalan tüm karakterler küçük harf olacak şekilde yazılır. Örneğin:
+		numberOfDevices usbPort parseInt, nextInt, changeCase
+	Bu isimlendirme genel olarak Java'da metot isimleri, yerel değişken isimleri ve parametre değişken isimlerinde tercih edilir.
+
+	3. Pascal case (upper camel case): Bu isimlendirmede kelimeler bitişik olarak yazılır. Tüm kelimelerin baş harfleri
+	büyük, geri kalan tüm karakterler küçük harf olacak şekilde yazılır. Örneğin:
+		Random, String, System, StringUtil, DataBindingUtil, TimeUnit
+	Bu isimlerndirme Java'da genel olarak UDT'lerde tercih edilir.
+
+	İsimlendirmede bunlardan biri ya da birden fazlası kullanılabilir. Kullanılmak zorunda da değildir.  Örneğin Java'da
+	paket isimlerinin tamamı küçük harf olacak şekilde isimlendirme yapılır ve kelimeler bitişik olarak yazılır. Örneğin
+	    java.util, org.csystem.util.math, com.springframework
+    Burada anlatılan teknikler tamamen geneldir ve bir şekilde isimlendirilmiştir. Hatta bazen bir ya da birden fazla
+	teknik biraz değiştirilerek de kullanılabilir
+-----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Nesne yönelimli programlamada sınıfın özellikle private bölümündeki veri elemanlarının isimlendirilmesine yönelik bazı
+	teknikler kullanılabilmektedir. Örneğin bazı programcılar private veri elemanları için "m_", "d_", "_", "m" gibi
+	önekler kullanabilirler. Bazı programcılar hiçbir önek ya da sonek kullanmazlar. Bu da bir tekniktir.
+
+	Biz sınıfın private ve non-static veri elemanları için "m_" önekini kullanacağız. Eğer veri elemanı static ise
+	(ve final değilse) "ms_" önekini kullanacağız
+-----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Bir veri elemanı gizlendiğinde sınıfın müşteri kodlarının bu elemanın değerini değiştirmesi veya bu elemanın
+	değerini elde etmesi (yani kullanması) gerekebilir. Bu durumda sınıfın bu veri elemanlarına erişen public metotları
+	yazılır. Veri elemanlarına erişip değerlere geri dönen metotlar "get metotları (getters)" denir. Veri elemanlarına
+	erişip değerlerini değiştiren metotlara da "set metotları (setters)" denir. get veya set metotlarının ayrı birer veri
+	elemanına karşılık gelmesi gerekmez. Ancak müşteri kodlar bakış açısıyla bunlar getter ve setter metotlardır. Bu durum
+	ileride	ele alınacaktır.
+
+	Sınıfın set metotları genel olarak "set" ismi başlatılır. get metotları ise "get" ismi ile başlatılır. Eğer bir
+	get metodunun geri dönüş değeri boolean ise getter metodun ismi genel olarak "is" ile başlatılır. Sınıfı yazan programcı
+	özel durumlar yoksa bu convention'a uymalıdır. Uygulamada kullanılan bazı ortamlar (framework) ve kütüphaneler (library)
+	programcı tarafından yazılmış olan sınıflar bu metotları çağırırlar
+-----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte Date sınıfının veri elemanları gizlenmiş ve onlara erişen get ve set metotları yazılmıştır. Bu
+	sınıf ileride detaylı olarak yazılacaktır. Şu an bazı detaylar gözardı edilmiştir
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{
+		Date date = new Date(11, 7, 1983);
+
+		System.out.printf("%02d/%02d/%04d%n", date.getDay(), date.getMonth(), date.getYear());
+
+		date.setDay(6);
+		date.setMonth(9);
+		date.setYear(2021);
+
+		System.out.printf("%02d/%02d/%04d%n", date.getDay(), date.getMonth(), date.getYear());
+	}
+}
+
+class Date {
+	private int m_day, m_month, m_year;
+
+	public Date(int day, int month, int year)
+	{
+		//...
+		m_day = day;
+		m_month = month;
+		m_year = year;
+	}
+
+	public void setDay(int day)
+	{
+		//...
+		m_day = day;
+	}
+
+	public void setMonth(int month)
+	{
+		//...
+		m_month = month;
+	}
+
+	public void setYear(int year)
+	{
+		//...
+		m_year = year;
+	}
+
+	public int getDay()
+	{
+		return m_day;
+	}
+
+	public int getMonth()
+	{
+		return m_month;
+	}
+
+	public int getYear()
+	{
+		return m_year;
+	}
+	//...
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte Sensor sınıfının m_active veri elemanı için get metodu "is" ile başlatılmıştır
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class Sensor {
+	private String m_name;
+	private String m_host;
+	private int m_port;
+	private boolean m_active;
+
+	public String getName()
+	{
+		return m_name;
+	}
+
+	public void setName(String name)
+	{
+		//...
+		m_name = name;
+	}
+
+	public String getHost()
+	{
+		return m_host;
+	}
+
+	public void setHost(String host)
+	{
+		//...
+		m_host = host;
+	}
+
+	public int getPort()
+	{
+		return m_port;
+	}
+
+	public void setPort(int port)
+	{
+		//...
+		m_port = port;
+	}
+
+	public boolean isActive()
+	{
+		return m_active;
+	}
+
+	public void setActive(boolean active)
+	{
+		//...
+		m_active = active;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki durumlardan en az biri varsa veri elemanının gizlenmesi gerekir:
+	- Sınıfın geliştirilmesi aşamalarında versiyon ilerledikçe bir veri elemanının isminin hatta türünün değişmesi durumu
+	ile çok fazla karşılaşılır. Bu durumda daha önce yazılmış olan kodların bu değişimden etkilenmemsi için veri elemanı
+	gizlenmelidir.
+
+	- Bir veri elemanının değeri değiştiğinde başka bir veri elemanının değerinin, değişen veri elemanının değerine göre
+	yeniden belirlenmesi gerekebilir. Bu durumda veri elemanları gizlenmelidir.
+
+	- Bir veri elemanının değeri değiştiğinde yeni değere göre bazı işlemlerin yapılması gerekebilir. Örneğin bir
+	veri elemanı uzak (remote) makinedeki bir veritabanına bağlantı için gereken bilgileri tutuyor olabilir. Bu durumda
+	bu veri elemanı değiştiğinde eski bilgilere ilişkin bağlantı kopartılıp, yeni bilgilere göre bağlantı sağlanması
+	gerekebilir. Bu durumda da veri elemanları gizlenmelidir
+
+	- Bazı veri elemanlarının sınır değerleri olabilir. Bu değerlerin kontrol edilip değiştirilebilmesi için
+	veri elemanı gizlenmelidir.
+
+	Anahtar Notlar: Bazen buradaki durumlar dşında kalan özel durumlarda da gizleme yapılabilir. Bu tarz durumlar örnekler
+	ile ele alınadcaktır
+
+	Yukarıdaki durumlar dışında (%3 ile % 5 arası) sınıfın veri elemanları public yapılabilir
+-----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte Date sınıfının içsel tasarımı ve algoritması değişmesine rağmen daha önce yazılmış olan müşteri
+	kodlar bundan etkilenmemiştir. Detayları gözardı ederek değiştikten sonra müşteri kodların etkilenmemesine
+	odaklanınız.
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{
+		Date date = new Date(11, 7, 1983);
+
+		System.out.printf("%02d/%02d/%04d%n", date.getDay(), date.getMonth(), date.getYear());
+
+		date.setDay(6);
+		date.setMonth(9);
+		date.setYear(2021);
+
+		System.out.printf("%02d/%02d/%04d%n", date.getDay(), date.getMonth(), date.getYear());
+	}
+}
+
+class Date {
+	private String m_dateStr;
+
+	public Date(int day, int month, int year)
+	{
+		//...
+		m_dateStr = String.format("%02d/%02d/%04d", day, month, year);
+	}
+
+	public void setDay(int day)
+	{
+		//...
+		m_dateStr = String.format("%02d/%02d/%04d", day, getMonth(), getYear());
+	}
+
+	public void setMonth(int month)
+	{
+		//...
+		m_dateStr = String.format("%02d/%02d/%04d", getDay(), month, getYear());
+	}
+
+	public void setYear(int year)
+	{
+		//...
+		m_dateStr = String.format("%02d/%02d/%04d", getDay(), getMonth(), year);
+	}
+
+	public int getDay()
+	{
+		return Integer.parseInt(m_dateStr.substring(0, 2));
+	}
+
+	public int getMonth()
+	{
+		return Integer.parseInt(m_dateStr.substring(3, 5));
+	}
+
+	public int getYear()
+	{
+		return Integer.parseInt(m_dateStr.substring(6));
+	}
+	//...
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Anahtar Notlar: Bazı durumlarda sınıfın public metotlarının isimlerinin hatta yapısının da değiştirilmesi gerekbilir.
+	Bu durumda sınıfı yazan programcı eski metodu hemen devre dışı bırakmaz. Belki de hiç devre dışı bırakmaz. Metodu
+	"deprecated" duruma getirir ve bunu dökumantosayona da yansıtır. Hatta bazı araçlar yardımıyla derleyicinin de deprecated
+	metodun çağrılması durumunda "warning" vermesini sağlar. Bu durumda eski kodlar yine derlenir. Ancak duruma göre
+	müşteri kodlarda değişiklik yapılabilir. Anımsanacağı gibi deprecated olmanın pekçok gerekçesi olabilir
+-----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	Circle sınıfı
+	sor..
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.math.geometry.test;
+
+import org.csystem.math.geometry.Circle;
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class CircleGetterSetterTest {
+    private static void printCircle(Circle c)
+    {
+        System.out.println("Daire/çember bilgileri:");
+        System.out.printf("Yarıçap:%f%n", c.getRadius());
+        System.out.printf("Alan:%f%n", c.getArea());
+        System.out.printf("Çevre:%f%n", c.getCircumference());
+    }
+
+    private static void run()
+    {
+        Scanner kb = new Scanner(System.in);
+        Random random = new Random();
+
+        System.out.print("Bir sayı giriniz:");
+        int count = kb.nextInt();
+
+        Circle c = new Circle(); //ctor için nesne yarattı. nokta çember için
+
+        printCircle(c);
+
+        while (count-- > 0) {
+            double radius = random.nextDouble(-10, 10);
+
+            System.out.println("--------------------------------------------------------------");
+            System.out.printf("Üretilen yarıçap değeri:%f%n", radius);
+            c.setRadius(radius);
+            printCircle(c);
+            System.out.println("--------------------------------------------------------------");
+        }
+    }
+
+    public static void main(String[] args)
+    {
+        run();
+    }
+}
+
+package org.csystem.math.geometry.test;
+
+import org.csystem.math.geometry.Circle;
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class CircleToStringTest {
+    private static void printCircle(Circle c)
+    {
+        System.out.println("Daire/çember bilgileri:");
+        System.out.println(c.toString());
+    }
+
+    private static void run()
+    {
+        Scanner kb = new Scanner(System.in);
+        Random random = new Random();
+
+        System.out.print("Bir sayı giriniz:");
+        int count = kb.nextInt();
+
+        Circle c = new Circle();
+
+        printCircle(c);
+
+        while (count-- > 0) {
+            double radius = random.nextDouble(-10, 10);
+
+            System.out.println("--------------------------------------------------------------");
+            System.out.printf("Üretilen yarıçap değeri:%f%n", radius);
+            c.setRadius(radius);
+            printCircle(c);
+            System.out.println("--------------------------------------------------------------");
+        }
+    }
+
+    public static void main(String[] args)
+    {
+        run();
+    }
+}
+
+/*----------------------------------------------------------
+	FILE			: Circle.java
+	AUTHOR			: Java-Nov-2022 Group
+	LAST UPDATE		: 13.05.2023
+
+	Circle class that represents a circle
+
+	Copyleft (c) 1993 C and System Programmers Association
+	All Rights Free
+------------------------------------------------------------*/
+package org.csystem.math.geometry;
+
+import static java.lang.Math.*;
+
+public class Circle {
+    private double m_radius;
+    private double m_area, m_circumference;
+
+    private void calculateArea()
+    {
+        m_area = PI * m_radius * m_radius;
+    }
+
+    private void calculateCircumference()
+    {
+        m_circumference = 2 * PI * m_radius;
+    }
+
+    public Circle() // 0 çember/ nokta çember.bunun içindefault ctor yaratılır 
+    {
+    }
+
+    public Circle(double radius)
+    {
+        setRadius(radius);
+    }
+
+    public double getRadius()
+    {
+        return m_radius;
+    }
+
+    public void setRadius(double radius)
+    {
+        m_radius = Math.abs(radius);
+        calculateArea();
+        calculateCircumference();
+    }
+
+    public double getArea()
+    {
+        return m_area;
+    }
+
+    public double getCircumference()
+    {
+        return m_circumference;
+    }
+
+    public String toString()
+    {
+        return String.format("Radius:%f, Area:%f, Circumference:%f", m_radius, m_area, m_circumference);
+    }
+}
+
+
+/*----------------------------------------------------------
+	FILE			: Circle.java
+	AUTHOR			: Java-Nov-2022 Group
+	LAST UPDATE		: 13.05.2023
+
+	Circle class that represents a circle
+
+	Copyleft (c) 1993 C and System Programmers Association
+	All Rights Free
+------------------------------------------------------------*/
+package org.csystem.math.geometry;
+
+import static java.lang.Math.*;
+
+public class Circle {
+    private double m_radius;
+
+    public Circle()
+    {
+    }
+
+    public Circle(double radius)
+    {
+        setRadius(radius);
+    }
+
+    public double getRadius()
+    {
+        return m_radius;
+    }
+
+    public void setRadius(double radius)
+    {
+        m_radius = Math.abs(radius);
+    }
+
+    public double getArea()
+    {
+        return PI * m_radius * m_radius;
+    }
+
+    public double getCircumference()
+    {
+        return 2 * PI * m_radius;
+    }
+
+    public String toString()
+    {
+        return String.format("Radius:%f, Area:%f, Circumference:%f", m_radius, getArea(), getCircumference());
+    }
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Point sınıfı
+-----------------------------------------------------------------------------------------------------------------------*/
+
+package org.csystem.math.geometry.test;
+
+import org.csystem.math.geometry.Point;
+
+public class PointTest {
+    private static void run()
+    {
+        java.util.Scanner kb = new java.util.Scanner(System.in);
+
+        System.out.print("Tohum değerini giriniz:");
+        long seed = Long.parseLong(kb.nextLine());
+
+        java.util.Random r = new java.util.Random(seed);
+
+        System.out.print("Minimum değeri giriniz:");
+        double min = Double.parseDouble(kb.nextLine());
+
+        System.out.print("Sınır değeri giriniz:");
+        double bound = Double.parseDouble(kb.nextLine());
+
+
+        for (; ; ) {
+            System.out.print("Kaç tane nokta üretmek istersiniz?");
+            int count = Integer.parseInt(kb.nextLine());
+            if (count <= 0)
+                break;
+
+            System.out.println("-------------------------------");
+            while (count-- > 0) {
+                Point p = RandomPointGenerator.createRandomPoint(r, min, bound);
+
+                System.out.printf("(%f, %f)%n", p.getX(), p.getY());
+            }
+
+            System.out.println("-------------------------------");
+        }
+
+    }
+
+    public static void main(String[] args)
+    {
+        run();
+    }
+}
+
+package org.csystem.math.geometry.test;
+
+import org.csystem.math.geometry.Point;
+
+class RandomPointGenerator {
+	//...
+	public static Point createRandomPoint(java.util.Random random, double min, double bound)
+	{
+		return new Point(random.nextDouble(min, bound), random.nextDouble(min, bound));
+	}
+}
+
+/*----------------------------------------------------------
+	FILE			: Point.java
+	AUTHOR			: Java-Nov-2022 Group
+	LAST UPDATE		: 13.05.2023
+
+	Point class that represents a point in cartesian plane
+
+	Copyleft (c) 1993 C and System Programmers Association
+	All Rights Free
+------------------------------------------------------------*/
+package org.csystem.math.geometry;
+
+import static java.lang.Math.sqrt;
+import static java.lang.Math.pow;
+
+public class Point {
+	private double m_x, m_y;
+
+	public Point()
+	{
+	}
+
+	public Point(double x)
+	{
+		m_x = x;
+	}
+
+	public Point(double x, double y)
+	{
+		m_x = x;
+		m_y = y;
+	}
+
+	public double getX()
+	{
+		return m_x;
+	}
+
+	public void setX(double x)
+	{
+		m_x = x;
+	}
+
+	public double getY()
+	{
+		return m_y;
+	}
+
+	public void setY(double y)
+	{
+		m_y = y;
+	}
+
+	public double distance()
+	{
+		return distance(0, 0);
+	}
+
+	public double distance(double x, double y)
+	{
+		return sqrt(pow(m_x - x, 2) + pow(m_y - y, 2));
+	}
+
+	public double distance(Point other)
+	{
+		return distance(other.m_x, other.m_y);
+	}
+
+	public void offset(double dxy)
+	{
+		offset(dxy, dxy);
+	}
+
+	public void offset(double dx, double dy)
+	{
+		m_x += dx;
+		m_y += dy;
+	}
+
+	public String toString()
+	{
+		return String.format("(%.2f, %.2f)", m_x, m_y);
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	20.05.2023
+-----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte dizinin elemanlarının değiştirilmesi engellenememiştir. Burada gizlenen dizinin adresini tutan
+	m_numbers referans değişkenidir. Dizinin adresi getNumbers metodu ile dışarıya verildiğinden artık sınıf dışından da
+	dizi nesnesine erişilip elemanları değiştirilebilir. Aynı durum tüm referans türleri için geçerlidir
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+import org.csystem.util.array.ArrayUtil;
+import org.csystem.util.generator.random.RandomIntArrayGenerator;
+
+import java.util.Random;
+
+class App {
+	public static void main(String [] args)
+	{
+		RandomIntArrayGenerator generator = new RandomIntArrayGenerator(new Random(), 10, 10, 21);
+		int [] a = generator.getNumbers();
+		ArrayUtil.print(a);
+
+		ArrayUtil.addBy(a, 3);
+		ArrayUtil.print(a);
+		ArrayUtil.print(generator.getNumbers());
+	}
+}
+
+/*----------------------------------------------------------
+	FILE			: RandomIntArrayGenerator.java
+	AUTHOR			: Java-Nov-2022 Group
+	LAST UPDATE		: 06.05.2023
+
+	RandomIntArrayGenerator class that creates a randomly
+	generated array once per object
+
+	Copyleft (c) 1993 C and System Programmers Association
+	All Rights Free
+------------------------------------------------------------*/
+package org.csystem.util.generator.random;
+
+import org.csystem.util.array.ArrayUtil;
+
+import java.util.Random;
+
+public class RandomIntArrayGenerator {
+    private int [] m_numbers; // dizinin adresini tutan m_numbers referans değişkeni gizlendi
+
+    public RandomIntArrayGenerator(Random random, int count, int min, int bound)
+    {
+        m_numbers = ArrayUtil.getRandomArray(random, count, min, bound);
+    }
+
+    public int [] getNumbers() //ama burada dizinin adresi dışarıya verildiğinden dışarıdan değiştirilmesine izin verilmiştir
+    {
+        return m_numbers;
+    }
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte getNumbers metodu içsel olarak tutulan dizinin elemanlarından oluşan yeni bir dizi (newly allocated)
+	referansı döndürmektedir. Bu durumda içsel olarak tutulan dizinin elemanları dışarıdan değiştirilemez.
+
+	Anahtar Notlar: java.util paketi içerisindeki Arrays sınıfının copyOf metotları birinci parametresi ile aldığı dizinin,
+	ikinci parametresi ile aldığı uzunluk kadar elemanlarından oluşan yeni bir dizinin referansına geri döner. Buna göre
+	ikinci parametreye dizinin uzunluğu geçilirse dizinin tamamının kopyası çıkartılmış olur
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+import org.csystem.util.array.ArrayUtil;
+import org.csystem.util.generator.random.RandomIntArrayGenerator;
+
+import java.util.Random;
+
+class App {
+	public static void main(String [] args)
+	{
+		RandomIntArrayGenerator generator = new RandomIntArrayGenerator(new Random(), 10, 10, 21);
+		int [] a = generator.getNumbers();
+		ArrayUtil.print(a);
+
+		ArrayUtil.addBy(a, 3);
+		ArrayUtil.print(a);
+		ArrayUtil.print(generator.getNumbers());
+	}
+}
+
+/*----------------------------------------------------------
+	FILE			: RandomIntArrayGenerator.java
+	AUTHOR			: Java-Nov-2022 Group
+	LAST UPDATE		: 06.05.2023
+
+	RandomIntArrayGenerator class that creates a randomly
+	generated array once per object
+
+	Copyleft (c) 1993 C and System Programmers Association
+	All Rights Free
+------------------------------------------------------------*/
+package org.csystem.util.generator.random;
+
+import org.csystem.util.array.ArrayUtil;
+
+import java.util.Arrays;
+import java.util.Random;
+
+public class RandomIntArrayGenerator {
+    private int [] m_numbers;
+
+    public RandomIntArrayGenerator(Random random, int count, int min, int bound)
+    {
+        m_numbers = ArrayUtil.getRandomArray(random, count, min, bound);
+    }
+
+    public int [] getNumbers()
+    {
+        return Arrays.copyOf(m_numbers, m_numbers.length); //dizinin kopyasına erişilir.
+    }
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aaşağıdaki örnekte hem dizi referansı gizlenmiş hem de mantıksal olarak dizi nesnesi de gizlenmiştir. Bu duruma göre
+	içsel olarak tutulan dizide değişiklik yapılamaz. Dikkat edilirse müşteri kodlar açısından içeride dizi tutulup
+	tutulmadığının da bir önemi yoktur
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+import org.csystem.util.generator.random.RandomIntArrayGenerator;
+
+import java.util.Random;
+
+class App {
+	public static void main(String [] args)
+	{
+		RandomIntArrayGenerator generator = new RandomIntArrayGenerator(new Random(), 10, 10, 21);
+		int count = generator.count();
+
+		for (int i = 0; i < count; ++i)
+			System.out.printf("%d ", generator.get(i));
+
+		System.out.println();
+	}
+}
+
+/*----------------------------------------------------------
+	FILE			: RandomIntArrayGenerator.java
+	AUTHOR			: Java-Nov-2022 Group
+	LAST UPDATE		: 06.05.2023
+
+	RandomIntArrayGenerator class that creates a randomly
+	generated array once per object
+
+	Copyleft (c) 1993 C and System Programmers Association
+	All Rights Free
+------------------------------------------------------------*/
+package org.csystem.util.generator.random;
+
+import org.csystem.util.array.ArrayUtil;
+
+import java.util.Arrays;
+import java.util.Random;
+
+public class RandomIntArrayGenerator {
+    private int [] m_numbers;
+
+    public RandomIntArrayGenerator(Random random, int count, int min, int bound)
+    {
+        m_numbers = ArrayUtil.getRandomArray(random, count, min, bound);
+    }
+
+    public int count()
+    {
+        return m_numbers.length;
+    }
+
+    public int get(int i)
+    {
+        return m_numbers[i];
+    }
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte Line sınfının noktalarının Point referansı üzerinden dışarıdan değiştirilmesi engellenmiştir.
+	Çünkü sınıf içerisinde tutulan Point nesnelerinin referansları getPoint1 ve getPoint2 metotları ile verilmemiştir.
+	Bu nesnelerin koplayalarına ilişkin yeni nesnelerin referanslarına geri dönülmüştür Bu durum şüphesiz sınıfın
+	dokümantasyonunda belirtir
+-----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------
+	FILE			: Line.java
+	AUTHOR			: Java-Nov-2022 Group
+	LAST UPDATE		: 20.05.2023
+
+	Line class that represents a line in cartesian plane
+
+	Copyleft (c) 1993 C and System Programmers Association
+	All Rights Free
+------------------------------------------------------------*/
+package org.csystem.math.geometry;
+
+public class Line {
+    private Point m_p1, m_p2;
+
+    //...
+
+    public Line(double x1, double y1, double x2, double y2)
+    {
+        m_p1 = new Point(x1, y1);
+        m_p2 = new Point(x2, y2);
+    }
+
+    public Point getPoint1()
+    {
+        return new Point(m_p1.getX(), m_p1.getY());
+    }
+
+    public Point getPoint2()
+    {
+        return new Point(m_p2.getX(), m_p2.getY());
+    }
+
+    public double getX1()
+    {
+        return m_p1.getX();
+    }
+
+    public void setX1(int x1)
+    {
+        m_p1.setX(x1);
+    }
+
+    public double getY1()
+    {
+        return m_p1.getY();
+    }
+
+    public void setY1(int y1)
+    {
+        m_p1.setY(y1);
+    }
+
+    public double getX2()
+    {
+        return m_p2.getX();
+    }
+
+    public void setX2(int x2)
+    {
+        m_p2.setX(x2);
+    }
+
+    public void setY2(int y2)
+    {
+        m_p1.setY(y2);
+    }
+
+    public double getY2()
+    {
+        return m_p2.getY();
+    }
+
+    public String toString()
+    {
+        return String.format("%s, %s", m_p1.toString(), m_p2.toString());
+    }
+}
+
+/*----------------------------------------------------------
+	FILE			: Point.java
+	AUTHOR			: Java-Nov-2022 Group
+	LAST UPDATE		: 13.05.2023
+
+	Point class that represents a point in cartesian plane
+
+	Copyleft (c) 1993 C and System Programmers Association
+	All Rights Free
+------------------------------------------------------------*/
+package org.csystem.math.geometry;
+
+import static java.lang.Math.sqrt;
+import static java.lang.Math.pow;
+
+public class Point {
+	private double m_x, m_y;
+
+	public Point()
+	{
+	}
+
+	public Point(double x)
+	{
+		m_x = x;
+	}
+
+	public Point(double x, double y)
+	{
+		m_x = x;
+		m_y = y;
+	}
+
+	public double getX()
+	{
+		return m_x;
+	}
+
+	public void setX(double x)
+	{
+		m_x = x;
+	}
+
+	public double getY()
+	{
+		return m_y;
+	}
+
+	public void setY(double y)
+	{
+		m_y = y;
+	}
+
+	public double distance()
+	{
+		return distance(0, 0);
+	}
+
+	public double distance(double x, double y)
+	{
+		return sqrt(pow(m_x - x, 2) + pow(m_y - y, 2));
+	}
+
+	public double distance(Point other)
+	{
+		return distance(other.m_x, other.m_y);
+	}
+
+	public void offset(double dxy)
+	{
+		offset(dxy, dxy);
+	}
+
+	public void offset(double dx, double dy)
+	{
+		m_x += dx;
+		m_y += dy;
+	}
+
+	public String toString()
+	{
+		return String.format("(%.2f, %.2f)", m_x, m_y);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Tüm elemanları static olarak bildirilmiş sınıflar türünden nesnelerin anlamı yoktur. Bu tarz sınıflara genel olarak
+	"utility class" denir. Utility class'ların ctor'ları okunabilirlik/algılanabilirlik açısından private yapılır. Bu
+	tip sınıflarda bu convention'a uyulur. JavaSE içerisinde de uyulmuştur
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+import org.csystem.util.array.ArrayUtil;
+
+import java.util.Arrays;
+
+class App {
+	public static void main(String [] args)
+	{
+		Math m;
+		Arrays a;
+		ArrayUtil au;
+
+
+		m = new Math(); //error
+		a = new Arrays(); //error
+		au = new ArrayUtil(); //error
+	}
+}
+
+/*----------------------------------------------------------
+	FILE			: ArrayUtil.java
+	AUTHOR			: Java-Nov-2022 Group
+	LAST UPDATE		: 20.05.2023
+
+	Utility class for array operations
+
+	Copyleft (c) 1993 C and System Programmers Association
+	All Rights Free
+------------------------------------------------------------*/
+package org.csystem.util.array;
+
+import java.util.Random;
+
+public class ArrayUtil {
+    private ArrayUtil()
+    {
+    }
+
+    private static void bubbleSortAscending(int [] a)
+    {
+        for (int i = 0; i < a.length - 1; ++i)
+            for (int k = 0; k < a.length - 1 - i; ++k)
+                if (a[k + 1] < a[k])
+                    swap(a, k, k + 1);
+    }
+
+    private static void bubbleSortDescending(int [] a)
+    {
+        for (int i = 0; i < a.length - 1; ++i)
+            for (int k = 0; k < a.length - 1 - i; ++k)
+                if (a[k] < a[k + 1])
+                    swap(a, k, k + 1);
+    }
+
+    private static void selectionSortAscending(int [] a)
+    {
+        int min, minIndex;
+
+        for (int i = 0; i < a.length - 1; ++i) {
+            min = a[i];
+            minIndex = i;
+
+            for (int k = i + 1; k < a.length; ++k)
+                if (a[k] < min) {
+                    min = a[k];
+                    minIndex = k;
+                }
+
+            a[minIndex] = a[i];
+            a[i] = min;
+        }
+    }
+
+    private static void selectionSortDescending(int [] a)
+    {
+        int max, maxIndex;
+
+        for (int i = 0; i < a.length - 1; ++i) {
+            max = a[i];
+            maxIndex = i;
+
+            for (int k = i + 1; k < a.length; ++k)
+                if (max < a[k]) {
+                    max = a[k];
+                    maxIndex = k;
+                }
+
+            a[maxIndex] = a[i];
+            a[i] = max;
+        }
+    }
+
+
+
+
+    public static void addBy(int [][] a, int value)
+    {
+        for (int [] array : a)
+            addBy(array, value);
+    }
+
+    public static void addBy(int [] a, int value)
+    {
+        for (int i = 0; i < a.length; ++i)
+                a[i] += value;
+    }
+
+    public static void bubbleSort(int [] a)
+    {
+        bubbleSort(a, false);
+    }
+
+    public static void bubbleSort(int [] a, boolean descending)
+    {
+        if (descending)
+            bubbleSortDescending(a);
+        else
+            bubbleSortAscending(a);
+    }
+
+    public static void drawHistogram(int [] data, int n, char ch)
+    {
+        int maxVal = max(data);
+
+        for (int val : data) {
+            int count = val * n / maxVal;
+
+            while (count-- > 0)
+                System.out.print(ch);
+
+            System.out.println();
+        }
+    }
+
+    public static void fillRandomArray(Random random, int [] a, int min, int bound)
+    {
+        for (int i = 0; i < a.length; ++i)
+            a[i] = random.nextInt(min, bound);
+    }
+
+    public static int [] getHistogramData(int [] a, int n)
+    {
+        int [] counts = new int[n + 1];
+
+        for (int val : a)
+            ++counts[val];
+
+        return counts;
+    }
+
+    public static int [] getRandomArray(Random random, int count, int min, int bound)
+    {
+        int [] a = new int[count];
+
+        fillRandomArray(random, a, min, bound);
+
+        return a;
+    }
+
+    public static int max(int [] a)
+    {
+        int result = a[0];
+
+        for (int i = 1; i < a.length; ++i)
+            result = Math.max(result, a[i]);
+
+        return result;
+    }
+
+    public static int min(int [] a)
+    {
+        int result = a[0];
+
+        for (int i = 1; i < a.length; ++i)
+            result = Math.min(result, a[i]);
+
+        return result;
+    }
+
+    public static void multiplyBy(int [][] a, int value)
+    {
+        for (int i = 0; i < a.length; ++i)
+            for (int k = 0; k < a[i].length; ++k)
+                a[i][k] *= value;
+    }
+
+    public static void print(int [] a)
+    {
+        print(1, a);
+    }
+
+    public static void print(int n, int [] a)
+    {
+        String fmt = String.format("%%0%dd ", n);
+
+        for (int val : a)
+            System.out.printf(fmt, val);
+
+        System.out.println();
+    }
+
+    public static void print(int [][] a)
+    {
+        print(1, a);
+    }
+
+    public static void print(int n, int [][] a)
+    {
+        for (int [] array : a)
+            print(n, array);
+    }
+
+    public static void reverse(int [] a)
+    {
+        int left = 0;
+        int right = a.length - 1;
+
+        while (left < right)
+            swap(a, left++, right--);
+    }
+
+    public static void reverse(char [] a)
+    {
+        int left = 0;
+        int right = a.length - 1;
+
+        while (left < right)
+            swap(a, left++, right--);
+    }
+
+    public static void selectionSort(int [] a)
+    {
+        selectionSort(a, false);
+    }
+
+    public static void selectionSort(int [] a, boolean descending)
+    {
+        if (descending)
+            selectionSortDescending(a);
+        else
+            selectionSortAscending(a);
+    }
+
+    public static void subtractBy(int [][] a, int value)
+    {
+        addBy(a, -value);
+    }
+
+    public static int sum(int [] a)
+    {
+        int total = 0;
+
+        for (int val : a)
+            total += val;
+
+        return total;
+    }
+
+    public static long sumLong(int [] a)
+    {
+        long total = 0;
+
+        for (int val : a)
+            total += val;
+
+        return total;
+    }
+
+    public static void swap(int [] a, int i, int k)
+    {
+        int temp = a[i];
+
+        a[i] = a[k];
+        a[k] = temp;
+    }
+
+    public static void swap(char [] a, int i, int k)
+    {
+        char temp = a[i];
+
+        a[i] = a[k];
+        a[k] = temp;
+    }
+}
+
+
+/*----------------------------------------------------------
+	FILE			: MatrixUtil.java
+	AUTHOR			: Java-Nov-2022 Group
+	LAST UPDATE		: 20.05.2023
+
+	Utility class for matrix operations
+
+	Copyleft (c) 1993 C and System Programmers Association
+	All Rights Free
+------------------------------------------------------------*/
+package org.csystem.util.matrix;
+
+import org.csystem.util.array.ArrayUtil;
+
+import java.util.Random;
+
+public class MatrixUtil {
+    private MatrixUtil()
+    {
+    }
+
+    public static int [][] addMatrices(int [][] a, int [][] b)
+    {
+        int row = a.length;
+        int col = a[0].length;
+        int [][] result = new int[row][col];
+
+        for (int i = 0; i < row; ++i)
+            for (int j = 0; j < col; ++j)
+                result[i][j] = a[i][j] + b[i][j];
+
+        return result;
+    }
+
+    public static void addMatrixWithValue(int [][] a, int value)
+    {
+        ArrayUtil.addBy(a, value);
+    }
+
+    public static void fillRandomMatrix(Random random, int [][] a, int min, int bound)
+    {
+        for (int[] array : a)
+            ArrayUtil.fillRandomArray(random, array, min, bound);
+    }
+
+    public static boolean isSquareMatrix(int [][] a)
+    {
+        return isMatrix(a) && a.length == a[0].length;
+    }
+
+    public static int [][] getRandomMatrix(Random random, int m, int n, int min, int bound)
+    {
+        int [][] a = new int[m][n];
+
+        fillRandomMatrix(random, a, min, bound);
+
+        return a;
+    }
+
+    public static int [][] getRandomSquareMatrix(Random random, int n, int min, int bound)
+    {
+        return getRandomMatrix(random, n, n, min, bound);
+    }
+
+    public static boolean isMatrix(int [][] a)
+    {
+        for (int i = 1; i < a.length; ++i)
+            if (a[0].length != a[i].length)
+                return false;
+
+        return true;
+    }
+
+    public static int [][] multiplyMatrices(int [][] a, int [][] b)
+    {
+        int row1 = a.length;
+        int col2 = b[0].length;
+        int row2 = b.length;
+        int [][] result = new int[row1][col2];
+
+        for (int i = 0; i < row1; ++i)
+            for (int j = 0; j < col2; ++j)
+                for (int k = 0; k < row2; ++k)
+                    result[i][j] += a[i][k] * b[k][j];
+
+        return result;
+    }
+
+    public static void multiplyMatrixWithValue(int [][] a, int value)
+    {
+        ArrayUtil.multiplyBy(a, value);
+    }
+
+    public static int [][] subtractMatrices(int [][] a, int [][] b)
+    {
+        int row = a.length;
+        int col = a[0].length;
+        int [][] result = new int[row][col];
+
+        for (int i = 0; i < row; ++i)
+            for (int j = 0; j < col; ++j)
+                result[i][j] = a[i][j] - b[i][j];
+
+        return result;
+    }
+
+    public static void subtractMatrixWithValue(int [][] a, int value)
+    {
+        addMatrixWithValue(a, -value);
+    }
+
+    public static int sumDiagonal(int [][] a)
+    {
+        int total = 0;
+
+        for (int i = 0; i < a.length; ++i)
+            total += a[i][i];
+
+        return total;
+    }
+
+    public static int [] [] transposed(int [][] a)
+    {
+        int [][] t = new int[a[0].length][a.length];
+
+        for (int i = 0; i < a.length; ++i)
+            for (int j = 0; j < a[i].length; ++j)
+                t[j][i] = a[i][j];
+
+        return t;
+    }
+}
+
+/*----------------------------------------------------------
+	FILE			: NumberUtil.java
+	AUTHOR			: Java-Nov-2022 Group
+	LAST UPDATE		: 20.05.2023
+
+	Utility class for numeric operations
+
+	Copyleft (c) 1993 C and System Programmers Association
+	All Rights Free
+------------------------------------------------------------*/
+package org.csystem.util.numeric;
+
+import static java.lang.Math.abs;
+import static java.lang.Math.log10;
+
+public class NumberUtil {
+	private NumberUtil()
+	{
+	}
+
+	private static String [] ms_ones = {"", "bir", "iki", "üç", "dört", "beş", "altı", "yedi", "sekiz", "dokuz"};
+	private static String [] ms_tens = {"", "on", "yirmi", "otuz", "kırk", "elli", "altmış", "yetmiş", "seksen", "doksan"};
+
+	private static int [] getDigits(long val, int n)
+	{
+		int [] digits = new int[val == 0 ? 1 : (int)(Math.log10(Math.abs(val)) / n) + 1];
+		int powOfTen = (int)pow(10, n);
+
+		val = abs(val);
+
+		for (int i = digits.length - 1; i >= 0; digits[i] = (int)(val % powOfTen), val /= powOfTen, --i)
+			;
+
+		return digits;
+	}
+
+	private static String numToText3DigitsTR(int a, int b, int c)
+	{
+		String str = "";
+
+		if (a != 0) {
+			if (a != 1)
+				str += ms_ones[a];
+
+			str += "yüz";
+		}
+
+		return str  + ms_tens[b] + ms_ones[c];
+	}
+
+	private static String numToText3DigitsTR(int val)
+	{
+		if (val == 0)
+			return "sıfır";
+
+		String str = val < 0 ? "eksi" : "";
+
+		val = Math.abs(val);
+
+		int a = val / 100;
+		int b = val / 10 % 10;
+		int c = val % 10;
+
+		return str + numToText3DigitsTR(a, b, c);
+	}
+
+	public static boolean areFriends(int a, int b)
+	{
+		return sumFactors(a) == b && sumFactors(b) == a;
+	}
+
+	public static int calculateDigitalRoot(int a)
+	{
+		int root = abs(a);
+
+		while (root > 9)
+			root = sumDigits(root);
+
+		return root;
+	}
+
+	public static int calculateDigitsPowSum(int a)
+	{
+		int n = countDigits(a);
+
+		int total = 0;
+
+		while (a != 0) {
+			total += pow(a % 10, n);
+
+			a /= 10;
+		}
+
+		return total;
+
+	}
+
+	public static int countDigits(long a)
+	{
+		return a == 0 ? 1 : (int)log10(abs(a)) + 1;
+	}
+
+	public static int factorial(int n)
+	{
+		int result = 1;
+
+		for (int i = 2; i <= n; ++i)
+			result *= i;
+
+		return result;
+	}
+
+	public static int fibonacciNumber(int n)
+	{
+		if (n <= 2)
+			return n - 1;
+
+		int prev1 = 1, prev2 = 0, val = 0;
+
+		for (int i = 2; i < n; ++i) {
+			val = prev1 + prev2;
+			prev2 = prev1;
+			prev1 = val;
+		}
+
+		return val;
+	}
+
+	public static int [] getDigits(long val)
+	{
+		return getDigits(val, 1);
+	}
+
+	public static int [] getDigitsInTwos(long val)
+	{
+		return getDigits(val, 2);
+	}
+
+	public static int [] getDigitsInThrees(long val)
+	{
+		return getDigits(val, 3);
+	}
+
+	public static int getHardyRamanujanCount(int n)
+	{
+		int count = 0;
+
+		EXIT_LOOP:
+
+		for (int a = 1; a * a * a < n; ++a)
+			for (int b = a + 1; a * a * a + b * b * b <= n; ++b)
+				if (a * a * a + b * b * b == n) {
+					if (++count == 2)
+						break EXIT_LOOP;
+
+					++a;
+				}
+
+		return count;
+	}
+
+	public static int getPrime(int n)
+	{
+		int val = 2;
+		int count = 0;
+
+		for (;;) {
+			if (isPrime(val))
+				++count;
+
+			if (count == n)
+				return val;
+
+			++val;
+		}
+	}
+
+	public static int indexOfPrime(long a)
+	{
+		int i = 1;
+		long val = 2;
+
+		for (;;) {
+			if (val == a)
+				return i;
+
+			if (isPrime(val))
+				++i;
+
+			++val;
+		}
+	}
+
+	public static boolean isArmstrong(int a)
+	{
+		return a >= 0 && calculateDigitsPowSum(a) == a;
+	}
+
+	public static boolean isDecimalHarshad(int val)
+	{
+		return val > 0 && val % sumDigits(val) == 0;
+	}
+
+	public static boolean isEven(int a)
+	{
+		return a % 2 == 0;
+	}
+
+	public static boolean isFactorian(int n)
+	{
+		return n > 0 && sumFactorialDigits(n) == n;
+	}
+
+	public static boolean isHardyRamanujan(int n)
+	{
+		return n > 0 && getHardyRamanujanCount(n) == 2;
+	}
+
+	public static boolean isOdd(int a)
+	{
+		return !isEven(a);
+	}
+
+	public static boolean isPerfect(int val)
+	{
+		return sumFactors(val) == val;
+	}
+
+	public static boolean isPrime(long a)
+	{
+		if (a <= 1)
+			return false;
+
+		if (a % 2 == 0)
+			return a == 2;
+
+		if (a % 3 == 0)
+			return a == 3;
+
+		if (a % 5 == 0)
+			return a == 5;
+
+		if (a % 7 == 0)
+			return a == 7;
+
+		for (long i = 11; i * i <= a; i += 2)
+			if (a % i == 0)
+				return false;
+
+		return true;
+	}
+
+	public static boolean isPrimeX(long a)
+	{
+		boolean result;
+
+		for (long sum = a; (result = isPrime(sum)) && sum > 9; sum = sumDigits(sum))
+			;
+
+		return result;
+	}
+
+	public static boolean isSuperPrime(long a)
+	{
+		return isPrime(a) && isPrime(indexOfPrime(a));
+	}
+
+	public static int mid(int a, int b, int c)
+	{
+		if (a <= b && b <= c || c <= b && b <= a)
+			return b;
+
+		if (b <= a && a <= c || c <= a && a <= b)
+			return a;
+
+		return c;
+	}
+
+	public static int multiply(int a, int b)
+	{
+		return a * b;
+	}
+
+	public static int nextFibonacciNumber(int val)
+	{
+		if (val < 0)
+			return 0;
+
+		int prev1 = 1, prev2 = 0, next;
+
+		for (;;) {
+			next = prev1 + prev2;
+
+			if (next > val)
+				return next;
+
+			prev2 = prev1;
+			prev1 = next;
+		}
+	}
+
+	public static int pow(int a, int b)
+	{
+		int result = 1;
+
+		while (b-- > 0)
+			result *= a;
+
+		return result;
+	}
+
+	public static int reversed(int a)
+	{
+		int result = 0;
+
+		while (a != 0) {
+			result = result * 10 + a % 10;
+			a /= 10;
+		}
+
+		return result;
+	}
+
+	public static int sumDigits(long a)
+	{
+		int sum = 0;
+
+		while (a != 0) {
+			sum += a % 10;
+			a /= 10;
+		}
+
+		return abs(sum);
+
+	}
+
+	public static int sumFactorialDigits(int n)
+	{
+		int sum = 0;
+
+		while (n != 0) {
+			sum += factorial(n % 10);
+			n /= 10;
+		}
+
+		return sum;
+	}
+
+	public static long sumFactors(long val)
+	{
+		long result = 1;
+
+		for (long i = 2; i * i <= val; ++i)
+			if (val % i == 0)
+				result += (i == val / i) ? i : (i + val / i);
+
+		return result;
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	BallFall sınıfı
+-----------------------------------------------------------------------------------------------------------------------*/
+
+package org.csystem.app.game.ballfall;
+
+import org.csystem.game.ballfall.BallFall;
+
+import java.util.Scanner;
+
+class BallFallConsoleApp {
+	public static void run()
+	{
+		Scanner kb = new Scanner(System.in);
+		BallFall ballFall = new BallFall();
+
+		for (;;) {
+			System.out.print("Input width and height:");
+			int width = kb.nextInt();
+			int height = kb.nextInt();
+
+			if (width == 0)
+				break;
+
+			ballFall.play(width, height);
+			System.out.println(ballFall.getShape());
+		}
+	}
+
+	public static void main(String[] args)
+	{
+		run();
+	}
+}
+
+package org.csystem.game.ballfall;
+
+public class BallFall {
+	private String m_shape;
+
+	private static boolean calculateRightFlag(boolean isRight, int ballIndex, int width)
+	{
+		if (ballIndex == 0)
+			isRight = true;
+		else if (ballIndex == width - 1)
+			isRight = false;
+
+		return isRight;
+	}
+
+	private static int calculateBallIndex(int ballIndex, boolean isRight)
+	{
+		if (isRight)
+			return ballIndex + 1;
+
+		return ballIndex - 1;
+	}
+
+	private void fillSpace(int begin, int end)
+	{
+		for (int i = begin; i < end; ++i)
+			m_shape += ' ';
+	}
+
+	private void fillBall(int ballIndex, int end)
+	{
+		fillSpace(0, ballIndex);
+		m_shape += '*';
+		fillSpace(ballIndex + 1, end);
+	}
+
+	public BallFall()
+	{
+		m_shape = "";
+	}
+
+	public String getShape()
+	{
+		return m_shape;
+	}
+
+	public void play(int width, int height)
+	{
+		int ballIndex = 0;
+		boolean isRight = false;
+
+		m_shape = "";
+		for (int i = 1; i <= height; ++i) {
+			m_shape += '|';
+			fillBall(ballIndex, width);
+			if (width != 1) {
+				isRight = calculateRightFlag(isRight, ballIndex, width);
+				ballIndex = calculateBallIndex(ballIndex, isRight);
+			}
+			m_shape += "|\r\n";
+		}
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki Point sınıfının inceleyiniz
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.math.geometry.test;
+
+import org.csystem.math.geometry.Point;
+
+public class PointTest {
+    private static void run()
+    {
+        java.util.Scanner kb = new java.util.Scanner(System.in);
+
+        System.out.print("Tohum değerini giriniz:");
+        long seed = Long.parseLong(kb.nextLine());
+
+        java.util.Random r = new java.util.Random(seed);
+
+        System.out.print("Minimum değeri giriniz:");
+        double min = Double.parseDouble(kb.nextLine());
+
+        System.out.print("Sınır değeri giriniz:");
+        double bound = Double.parseDouble(kb.nextLine());
+
+
+        for (; ; ) {
+            System.out.print("Kaç tane nokta üretmek istersiniz?");
+            int count = Integer.parseInt(kb.nextLine());
+            if (count <= 0)
+                break;
+
+            System.out.println("-------------------------------");
+            while (count-- > 0) {
+                double x = r.nextDouble(min, bound);
+                double y = r.nextDouble(min, bound);
+                Point p = Point.createCartesian(x, y);
+
+                System.out.printf("x = %f, y = %f%n", x, y);
+                System.out.printf("(%f, %f)%n", p.getX(), p.getY());
+            }
+
+            System.out.println("-------------------------------");
+        }
+    }
+
+    public static void main(String[] args)
+    {
+        run();
+    }
+}
+
+package org.csystem.math.geometry.test;
+
+import org.csystem.math.geometry.Point;
+
+public class PointPolarTest {
+    private static void run()
+    {
+        java.util.Scanner kb = new java.util.Scanner(System.in);
+
+        System.out.print("Tohum değerini giriniz:");
+        long seed = Long.parseLong(kb.nextLine());
+
+        java.util.Random r = new java.util.Random(seed);
+
+        System.out.print("Minimum değeri giriniz:");
+        double min = Double.parseDouble(kb.nextLine());
+
+        System.out.print("Sınır değeri giriniz:");
+        double bound = Double.parseDouble(kb.nextLine());
+
+
+        for (; ; ) {
+            System.out.print("Kaç tane nokta üretmek istersiniz?");
+            int count = Integer.parseInt(kb.nextLine());
+            if (count <= 0)
+                break;
+
+            System.out.println("-------------------------------");
+            while (count-- > 0) {
+                double radius = r.nextDouble(min, bound);
+                double theta = r.nextDouble(min, bound);
+                Point p = Point.createPolar(radius, theta);
+
+                System.out.printf("Radius = %f, Theta = %f%n", radius, theta);
+                System.out.printf("(%f, %f)%n", p.getX(), p.getY());
+            }
+
+            System.out.println("-------------------------------");
+        }
+
+    }
+
+    public static void main(String[] args)
+    {
+        run();
+    }
+}
+
+
+
+/*----------------------------------------------------------
+	FILE			: Point.java
+	AUTHOR			: Java-Nov-2022 Group
+	LAST UPDATE		: 20.05.2023
+
+	Point class that represents a point in cartesian plane
+
+	Copyleft (c) 1993 C and System Programmers Association
+	All Rights Free
+------------------------------------------------------------*/
+package org.csystem.math.geometry;
+
+import static java.lang.Math.*;
+
+public class Point {
+	private double m_x, m_y;
+
+	private Point(double a, double b, boolean polar)
+	{
+		if (polar) {
+			m_x = a * cos(a);
+			m_y = a * sin(a);
+		}
+		else {
+			m_x = a;
+			m_y = b;
+		}
+	}
+
+	public static Point createCartesian()
+	{
+		return createCartesian(0);
+	}
+
+	public static Point createCartesian(double x)
+	{
+		return createCartesian(x, 0);
+	}
+
+	public static Point createCartesian(double x, double y)
+	{
+		return new Point(x, y, false);
+	}
+
+	public static Point createPolar(double radius, double theta)
+	{
+		return new Point(radius, theta, true);
+	}
+
+	public double getX()
+	{
+		return m_x;
+	}
+
+	public void setX(double x)
+	{
+		m_x = x;
+	}
+
+	public double getY()
+	{
+		return m_y;
+	}
+
+	public void setY(double y)
+	{
+		m_y = y;
+	}
+
+	public double distance()
+	{
+		return distance(0, 0);
+	}
+
+	public double distance(double x, double y)
+	{
+		return sqrt(pow(m_x - x, 2) + pow(m_y - y, 2));
+	}
+
+	public double distance(Point other)
+	{
+		return distance(other.m_x, other.m_y);
+	}
+
+	public void offset(double dxy)
+	{
+		offset(dxy, dxy);
+	}
+
+	public void offset(double dx, double dy)
+	{
+		m_x += dx;
+		m_y += dy;
+	}
+
+	public String toString()
+	{
+		return String.format("(%.2f, %.2f)", m_x, m_y);
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Özellikle NYPT'de daha anlamlı olan bir takım ilkeler (principles) söz konusudur. Programcı özel durumlar
+	dışında bu ilkelere uyar. Bu ilkelere genel olarak "Object Oriented Design Principles" denir. Bu ilkeler şunlardır.
+	- Single Responsibility Principle (SRP)
+	- Open Closed Principle (OCP)
+	- Liskov Substitution Principle (LSP)
+	- Interface Segregation Principle (ISP)
+	- Dependency Inversion Principle (DIP)
+
+	- Bu ilkeler kısaca SOLID olarak da bilinir.
+	- Bu ilkeler kurs ve uygulama kurslarında zaman içerisinde anlaşılacaktır
+	- Bu ilkeler tamamen birbirinden ayrı değildir
+-----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	NYPT ilerledikçe bir takım genel problemlere yine bir takım genel çözümler öneren ve başlangıçta 4 kişi tarafından
+	"Gang of Four (GoF)" hazırlanan kalıplar tasarlanmıştır. Bu problemlere ve çözümlerine "design patterns" denir. Bu
+	kalıplar, 3 kategoriye ayrılmış toplam 23 tane olarak belirlenmiştir. Bu kalıplardan önce ve sonra da birçok kalıp
+	önerilmiştir. Bu kalıpların bazıları JavaSE içerisindeki sınıflarda da kullanılmıştır. Ayrıca programcılar da
+	uygulamalar içerisinde bazı kalıpları yazarlar
+-----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	Anahtar Notlar: Programlamada çalışma zamanında herhangi bir nesne ya da değişken için ayrılmayan, genel olarak
+	1 byte'lık bölgenin adresine "null address" denir. Java'da bu adres "null" sabiti ile temsil edilir. null, bir referansa
+	atanabilir. Bu durumda referansın içerisinde bir adres vardır ancak bu adreste bir nesne yoktur. Ya da daha genel
+	olarak null adres çalışma zamanında yer ayırma anlamında kullanılmayan adrestir. Modern sistemlerin hemen hepsinde
+	"null address" sıfır numaralı gözeneğin (hole) adresidir. Ancak böyle olmak zorunda değildir. Hangi adres numarası olursa
+	olsun Java programcısı açısından bu adresin sayısal değerinin bir önemi yoktur. Zaten "null" sabiti de bunu temsil eder.
+	Bir referansın default değeri null'dır. "null address/reference/pointer" için diğer detaylar ileride ele alınacaktır.
+-----------------------------------------------------------------------------------------------------------------------*/
+
